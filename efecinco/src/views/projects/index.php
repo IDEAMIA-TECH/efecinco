@@ -1,6 +1,5 @@
 <?php
-// Iniciar el buffer de salida
-ob_start();
+// El buffer y el layout se manejan en main.php
 ?>
 
 <div class="bg-white">
@@ -132,12 +131,4 @@ ob_start();
             </a>
         </div>
     </section>
-</div>
-
-<?php
-// Obtener el contenido del buffer y limpiarlo
-$content = ob_get_clean();
-
-// Incluir el layout principal
-require_once VIEWS_PATH . '/layouts/main.php';
-?> 
+</div> 
