@@ -121,6 +121,17 @@ try {
         }
     });
     
+    // Cargar BaseController primero
+    $baseControllerPath = CONTROLLERS_PATH . '/BaseController.php';
+    if (file_exists($baseControllerPath)) {
+        require_once $baseControllerPath;
+        logMessage("BaseController cargado desde: $baseControllerPath");
+    } else {
+        $error = "BaseController no encontrado en: $baseControllerPath";
+        logMessage($error, 'ERROR');
+        throw new \Exception($error);
+    }
+    
     // Manejo de errores mejorado
     set_error_handler(function($errno, $errstr, $errfile, $errline) {
         $errorMessage = "Error [$errno]: $errstr in $errfile on line $errline";
