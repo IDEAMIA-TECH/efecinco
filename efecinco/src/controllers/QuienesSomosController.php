@@ -67,6 +67,7 @@ class QuienesSomosController extends BaseController {
                 ]
             ];
 
+            // Preparar los datos para la vista
             $data = [
                 'title' => '¿Quiénes Somos? - ' . SITE_NAME,
                 'description' => 'Conoce más sobre Efecinco, nuestra misión, visión y valores',
@@ -74,7 +75,12 @@ class QuienesSomosController extends BaseController {
                 'empresa' => $empresa
             ];
 
+            // Extraer los datos para que estén disponibles en la vista
+            extract($data);
+
+            // Renderizar la vista
             $this->render('quienes-somos/index', $data);
+
         } catch (\Exception $e) {
             error_log($e->getMessage());
             $this->error();

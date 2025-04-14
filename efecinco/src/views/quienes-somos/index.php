@@ -1,4 +1,6 @@
-<?php ob_start(); ?>
+<?php
+ob_start();
+?>
 
 <div class="bg-white">
     <!-- Hero Section -->
@@ -119,5 +121,5 @@
 
 <?php 
 $content = ob_get_clean();
-include VIEWS_PATH . '/layout/main.php';
+return $content;
 ?> 
