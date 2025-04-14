@@ -198,7 +198,7 @@
     <section class="py-5">
         <div class="container">
             <h2 class="text-center mb-4">Nuestros Clientes</h2>
-            <div class="row">
+            <div class="row justify-content-center">
                 <?php
                 $logos = [
                     'Walmart' => 'https://upload.wikimedia.org/wikipedia/commons/c/ca/Walmart_logo.svg',
@@ -211,10 +211,12 @@
                 <div class="col-md-2 col-4 mb-4">
                     <div class="card h-100 shadow-sm">
                         <div class="card-body d-flex align-items-center justify-content-center p-3">
-                            <img src="<?= $logos[$cliente] ?>" 
-                                 alt="<?= htmlspecialchars($cliente) ?>" 
-                                 class="img-fluid"
-                                 style="max-height: 60px; filter: grayscale(100%) brightness(90%);">
+                            <div class="logo-container" style="width: 120px; height: 80px; display: flex; align-items: center; justify-content: center;">
+                                <img src="<?= $logos[$cliente] ?>" 
+                                     alt="<?= htmlspecialchars($cliente) ?>" 
+                                     class="img-fluid"
+                                     style="max-width: 100%; max-height: 100%; object-fit: contain; filter: grayscale(100%) brightness(90%);">
+                            </div>
                         </div>
                     </div>
                 </div>
