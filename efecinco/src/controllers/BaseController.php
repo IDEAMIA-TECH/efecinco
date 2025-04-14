@@ -27,23 +27,24 @@ class BaseController {
                 throw new \Exception("Vista no encontrada: $viewFile");
             }
             
+            // Extraer los datos para que estén disponibles en la vista
+            extract($data);
+            
             // Incluir la vista y obtener su contenido
             ob_start();
-            $content = include $viewFile;
-            
-            // Si hay contenido en el buffer, usarlo
-            if (ob_get_length() > 0) {
-                $content = ob_get_clean();
-            }
+            include $viewFile;
+            $content = ob_get_clean();
             
             // Iniciar un nuevo buffer para el layout
             ob_start();
             
-            // Renderizar el layout con el contenido
+            // Renderizar el layout con el contenido y los datos
             require_once VIEWS_PATH . '/layout/main.php';
             
             // Enviar todo el contenido
-            ob_end_flush();
+            if (ob_get_level() > 0) {
+                ob_end_flush();
+            }
             
         } catch (\Exception $e) {
             // Limpiar cualquier buffer pendiente en caso de error

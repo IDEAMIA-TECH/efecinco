@@ -1,5 +1,5 @@
 <?php
-ob_start();
+// El contenido se capturará automáticamente por el buffer
 ?>
 
 <div class="bg-white">
@@ -117,9 +117,4 @@ ob_start();
             </div>
         </div>
     </div>
-</div>
-
-<?php 
-$content = ob_get_clean();
-return $content;
-?> 
+</div> 
