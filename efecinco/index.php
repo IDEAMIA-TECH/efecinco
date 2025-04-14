@@ -84,9 +84,26 @@ try {
     logMessage("CONTROLLERS_PATH existe: " . (is_dir(CONTROLLERS_PATH) ? 'Sí' : 'No'));
     logMessage("VIEWS_PATH existe: " . (is_dir(VIEWS_PATH) ? 'Sí' : 'No'));
     
+    // Listar contenido de directorios de forma segura
+    function safeScandir($path) {
+        if (!is_dir($path)) {
+            logMessage("Directorio no existe: $path", 'WARNING');
+            return [];
+        }
+        $result = scandir($path);
+        if ($result === false) {
+            logMessage("Error al escanear directorio: $path", 'WARNING');
+            return [];
+        }
+        return $result;
+    }
+    
     // Listar contenido de directorios
-    logMessage("Contenido de ROOT_PATH: " . implode(', ', scandir(ROOT_PATH)));
-    logMessage("Contenido de SRC_PATH: " . implode(', ', scandir(SRC_PATH)));
+    $rootContent = safeScandir(ROOT_PATH);
+    logMessage("Contenido de ROOT_PATH: " . implode(', ', $rootContent));
+    
+    $srcContent = safeScandir(SRC_PATH);
+    logMessage("Contenido de SRC_PATH: " . implode(', ', $srcContent));
     
     // Verificar que los directorios existan
     if (!is_dir(CONTROLLERS_PATH)) {
