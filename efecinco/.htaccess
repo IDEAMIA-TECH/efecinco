@@ -1,22 +1,29 @@
 RewriteEngine On
 
-# Redirigir todo al index.php excepto archivos y directorios existentes
+# Establecer el directorio base
+RewriteBase /
+
+# Si el archivo o directorio no existe, redirigir a index.php
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ index.php [QSA,L]
 
-# Proteger archivos sensibles
+# Prevenir el acceso a archivos ocultos
 <FilesMatch "^\.">
     Order allow,deny
     Deny from all
 </FilesMatch>
 
-# Proteger directorios
-<IfModule mod_autoindex.c>
-    Options -Indexes
-</IfModule>
+# Prevenir el acceso a archivos de configuración
+<FilesMatch "^(config\.php|database\.php|\.htaccess)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
 
-# Configuración de seguridad básica
+# Prevenir el acceso a directorios
+Options -Indexes
+
+# Configuración de seguridad adicional
 <IfModule mod_headers.c>
     Header set X-Content-Type-Options "nosniff"
     Header set X-XSS-Protection "1; mode=block"
@@ -27,12 +34,12 @@ RewriteRule ^(.*)$ index.php [QSA,L]
 # Configuración de PHP
 <IfModule mod_php.c>
     php_value upload_max_filesize 5M
-    php_value post_max_size 5M
+    php_value post_max_size 6M
     php_value max_execution_time 300
     php_value max_input_time 300
 </IfModule>
 
-# Comprimir archivos
+# Compresión GZIP
 <IfModule mod_deflate.c>
     AddOutputFilterByType DEFLATE text/plain
     AddOutputFilterByType DEFLATE text/html
@@ -53,5 +60,11 @@ RewriteRule ^(.*)$ index.php [QSA,L]
     ExpiresByType image/gif "access plus 1 year"
     ExpiresByType image/png "access plus 1 year"
     ExpiresByType text/css "access plus 1 month"
+    ExpiresByType application/pdf "access plus 1 month"
+    ExpiresByType text/javascript "access plus 1 month"
     ExpiresByType application/javascript "access plus 1 month"
+    ExpiresByType application/x-javascript "access plus 1 month"
+    ExpiresByType application/x-shockwave-flash "access plus 1 month"
+    ExpiresByType image/x-icon "access plus 1 year"
+    ExpiresDefault "access plus 2 days"
 </IfModule> 
