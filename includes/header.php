@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once __DIR__ . '/db.php';
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -160,7 +161,5 @@ session_start();
             });
         });
     </script>
-<?php include 'includes/footer.php'; ?>
-<?php include 'includes/whatsapp-button.php'; ?>
 </body>
 </html> 

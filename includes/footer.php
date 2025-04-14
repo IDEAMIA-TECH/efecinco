@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/db.php';
+
 // Conexión a la base de datos
 $conexion = conectarDB();
 
