@@ -18,7 +18,7 @@
 </head>
 <body>
     <!-- Header -->
-    <header class="navbar navbar-expand-lg navbar-light bg-light">
+    <header class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
         <div class="container">
             <a class="navbar-brand" href="<?php echo SITE_URL; ?>">
                 <img src="<?php echo SITE_URL; ?>/assets/images/logo.png" alt="<?php echo SITE_NAME; ?>" height="50">
@@ -49,7 +49,7 @@
     </header>
 
     <!-- Main Content -->
-    <main>
+    <main class="pt-5">
         <?php echo $content; ?>
     </main>
 

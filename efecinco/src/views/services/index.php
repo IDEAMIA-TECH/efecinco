@@ -5,7 +5,7 @@ ob_start();
 
 <div class="bg-white">
     <!-- Hero Section -->
-    <section class="hero bg-gradient-primary text-white py-5">
+    <section class="hero bg-gradient-primary text-white py-5 mt-5">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-6">
