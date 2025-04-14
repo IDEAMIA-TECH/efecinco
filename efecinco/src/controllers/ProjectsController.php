@@ -1,6 +1,9 @@
 <?php
 namespace controllers;
 
+use models\Project;
+use Exception;
+
 class ProjectsController extends BaseController {
     private $projectModel;
     
