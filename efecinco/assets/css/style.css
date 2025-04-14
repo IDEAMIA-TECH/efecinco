@@ -1,0 +1,144 @@
+/* General Styles */
+:root {
+    --primary-color: #0056b3;
+    --secondary-color: #6c757d;
+    --light-color: #f8f9fa;
+    --dark-color: #343a40;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: var(--dark-color);
+}
+
+/* Hero Section */
+.hero-section {
+    background: linear-gradient(135deg, var(--primary-color), #003366);
+    padding: 4rem 0;
+}
+
+/* About Page Specific Styles */
+.history-section {
+    background-color: #fff;
+}
+
+.timeline {
+    position: relative;
+    padding: 2rem 0;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 2px;
+    height: 100%;
+    background-color: var(--primary-color);
+}
+
+.mission-vision-section .card {
+    border: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.mission-vision-section .card:hover {
+    transform: translateY(-5px);
+}
+
+.values-section .card {
+    border: none;
+    background-color: var(--light-color);
+    transition: all 0.3s ease;
+}
+
+.values-section .card:hover {
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.values-section .fa-3x {
+    color: var(--primary-color);
+}
+
+/* Clients Section */
+.clients-section .card {
+    border: none;
+    background-color: #fff;
+    transition: transform 0.3s ease;
+}
+
+.clients-section .card:hover {
+    transform: scale(1.05);
+}
+
+.client-logo {
+    max-height: 80px;
+    width: auto;
+    object-fit: contain;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero-section {
+        padding: 2rem 0;
+    }
+
+    .timeline::before {
+        left: 20px;
+    }
+
+    .values-section .card {
+        margin-bottom: 1rem;
+    }
+}
+
+/* General Components */
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+    background-color: #004494;
+    border-color: #004494;
+}
+
+.card {
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.section-title {
+    position: relative;
+    margin-bottom: 3rem;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 3px;
+    background-color: var(--primary-color);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in {
+    animation: fadeIn 1s ease-out;
+} 

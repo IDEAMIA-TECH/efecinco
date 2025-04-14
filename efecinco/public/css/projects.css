@@ -1,0 +1,179 @@
+/* Hero Section */
+.hero-section {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    padding: 100px 0;
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1;
+}
+
+.hero-section .container {
+    position: relative;
+    z-index: 2;
+}
+
+.project-icon-large {
+    font-size: 5rem;
+    color: #fff;
+    margin: 20px 0;
+}
+
+/* Project Cards */
+.project-card {
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    height: 100%;
+}
+
+.project-card:hover {
+    transform: translateY(-10px);
+}
+
+.project-image {
+    position: relative;
+    padding-top: 56.25%; /* 16:9 Aspect Ratio */
+    overflow: hidden;
+}
+
+.project-image img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.project-content {
+    padding: 20px;
+}
+
+.project-title {
+    font-size: 1.25rem;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.project-client,
+.project-solution {
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.project-description {
+    color: #666;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+/* Project Details */
+.project-details-section {
+    padding: 60px 0;
+}
+
+.project-content h2 {
+    color: #333;
+    margin-bottom: 30px;
+}
+
+.project-description {
+    line-height: 1.8;
+    color: #666;
+}
+
+.project-meta {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.meta-item h4 {
+    color: #333;
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+}
+
+.meta-item p {
+    color: #666;
+    margin-bottom: 0;
+}
+
+/* Project Sidebar */
+.project-sidebar .card {
+    border: none;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+}
+
+.project-sidebar .card-title {
+    color: #333;
+    font-size: 1.2rem;
+}
+
+.project-gallery img {
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+/* Related Projects */
+.related-projects-section {
+    padding: 60px 0;
+}
+
+.related-projects-section .project-card {
+    margin-bottom: 30px;
+}
+
+/* CTA Section */
+.cta-section {
+    background: #f8f9fa;
+    padding: 60px 0;
+    text-align: center;
+}
+
+.cta-section h2 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.cta-section .btn {
+    padding: 12px 30px;
+    font-size: 1.1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero-section {
+        padding: 60px 0;
+    }
+
+    .project-icon-large {
+        font-size: 3rem;
+    }
+
+    .project-content {
+        padding: 15px;
+    }
+
+    .project-title {
+        font-size: 1.1rem;
+    }
+
+    .project-meta {
+        padding: 15px;
+    }
+} 
