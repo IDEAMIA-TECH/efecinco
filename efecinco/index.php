@@ -73,7 +73,7 @@ try {
     }
     
     if (!defined('CONTROLLERS_PATH')) {
-        define('CONTROLLERS_PATH', SRC_PATH . '/controllers');
+        define('CONTROLLERS_PATH','/controllers');
         logMessage("CONTROLLERS_PATH definido como: " . CONTROLLERS_PATH);
     }
     
