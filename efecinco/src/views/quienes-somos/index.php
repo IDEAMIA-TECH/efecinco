@@ -230,8 +230,8 @@
                 $logos = [
                     'Walmart' => 'https://upload.wikimedia.org/wikipedia/commons/c/ca/Walmart_logo.svg',
                     'Importex Green' => 'https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?auto=format&fit=crop&w=100&h=100&q=80',
-                    'Banco Azteca' => 'https://upload.wikimedia.org/wikipedia/commons/8/86/Banco_Azteca_logo.svg',
-                    'Henkel' => 'https://upload.wikimedia.org/wikipedia/commons/2/23/Henkel-Logo.svg',
+                    'Banco Azteca' => 'https://1000marcas.net/wp-content/uploads/2021/08/Banco-Azteca-Logo.png',
+                    'Henkel' => 'https://1000marcas.net/wp-content/uploads/2020/03/Henkel-Logo.png',
                     'Otros clientes destacados' => 'https://images.unsplash.com/photo-1557426272-fc759fdf7a8d?auto=format&fit=crop&w=100&h=100&q=80'
                 ];
                 foreach ($empresa['clientes'] as $cliente): ?>
