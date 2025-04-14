@@ -63,7 +63,7 @@ try {
     }
     
     if (!defined('SRC_PATH')) {
-        define('SRC_PATH', ROOT_PATH . '/src');
+        define('SRC_PATH', ROOT_PATH);
         logMessage("SRC_PATH definido como: " . SRC_PATH);
     }
     
