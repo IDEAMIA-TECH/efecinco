@@ -1,5 +1,5 @@
 <?php
-// El contenido se capturará automáticamente por el buffer
+ob_start();
 ?>
 
 <div class="bg-white">
