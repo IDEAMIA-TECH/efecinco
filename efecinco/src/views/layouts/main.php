@@ -3,6 +3,11 @@
 if (!isset($config)) {
     $config = require_once CONFIG_PATH . '/config.php';
 }
+
+// Asegurarse de que la configuración esté disponible
+if (!isset($config['contact_info']) || !isset($config['social_media'])) {
+    error_log('Configuración incompleta en main.php');
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
