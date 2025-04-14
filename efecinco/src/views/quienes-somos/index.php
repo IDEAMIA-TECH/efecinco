@@ -2,6 +2,100 @@
 // El contenido se capturará automáticamente por el buffer
 ?>
 
+<style>
+/* Estilos para la línea de tiempo */
+.timeline {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 0;
+}
+
+.timeline::after {
+    content: '';
+    position: absolute;
+    width: 2px;
+    background: #e9ecef;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    margin-left: -1px;
+}
+
+.timeline-item {
+    padding: 10px 40px;
+    position: relative;
+    width: 50%;
+    box-sizing: border-box;
+}
+
+.timeline-item-left {
+    left: 0;
+}
+
+.timeline-item-right {
+    left: 50%;
+}
+
+.timeline-content {
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    position: relative;
+}
+
+.timeline-dot {
+    width: 20px;
+    height: 20px;
+    background: #0d6efd;
+    border-radius: 50%;
+    position: absolute;
+    right: -10px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+}
+
+.timeline-item-right .timeline-dot {
+    left: -10px;
+}
+
+.timeline-year {
+    font-weight: bold;
+    color: #0d6efd;
+    margin-bottom: 10px;
+}
+
+.timeline-text {
+    color: #6c757d;
+}
+
+@media (max-width: 768px) {
+    .timeline::after {
+        left: 31px;
+    }
+
+    .timeline-item {
+        width: 100%;
+        padding-left: 70px;
+        padding-right: 25px;
+    }
+
+    .timeline-item-right {
+        left: 0;
+    }
+
+    .timeline-dot {
+        left: 21px;
+    }
+
+    .timeline-item-right .timeline-dot {
+        left: 21px;
+    }
+}
+</style>
+
 <div class="bg-white">
     <!-- Hero Section -->
     <section class="hero bg-gradient-primary text-white py-5">
@@ -72,6 +166,26 @@
                             </div>
                             <h3 class="card-title h5"><?= htmlspecialchars($titulo) ?></h3>
                             <p class="card-text"><?= htmlspecialchars($descripcion) ?></p>
+                        </div>
+                    </div>
+                </div>
+                <?php endforeach; ?>
+            </div>
+        </div>
+    </section>
+
+    <!-- Línea de Tiempo -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5">Nuestra Historia</h2>
+            <div class="timeline">
+                <?php $counter = 0; foreach ($empresa['linea_tiempo'] as $anio => $evento): $counter++; ?>
+                <div class="timeline-item <?= $counter % 2 == 0 ? 'timeline-item-right' : 'timeline-item-left' ?>">
+                    <div class="timeline-content">
+                        <div class="timeline-year"><?= htmlspecialchars($anio) ?></div>
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-text">
+                            <p><?= htmlspecialchars($evento) ?></p>
                         </div>
                     </div>
                 </div>
