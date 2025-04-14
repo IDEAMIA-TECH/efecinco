@@ -75,9 +75,6 @@ class QuienesSomosController extends BaseController {
                 'empresa' => $empresa
             ];
 
-            // Extraer los datos para que estén disponibles en la vista
-            extract($data);
-
             // Renderizar la vista
             $this->render('quienes-somos/index', $data);
 

@@ -16,12 +16,12 @@ class BaseController {
 
     protected function render($view, $data = []) {
         try {
-            // Manejo seguro del buffer
+            // Limpiar cualquier buffer existente
             while (ob_get_level() > 0) {
                 ob_end_clean();
             }
             
-            // Obtener el contenido de la vista
+            // Verificar que la vista existe
             $viewFile = VIEWS_PATH . '/' . $view . '.php';
             if (!file_exists($viewFile)) {
                 throw new \Exception("Vista no encontrada: $viewFile");
@@ -30,21 +30,13 @@ class BaseController {
             // Extraer los datos para que estén disponibles en la vista
             extract($data);
             
-            // Incluir la vista y obtener su contenido
+            // Capturar el contenido de la vista
             ob_start();
             include $viewFile;
             $content = ob_get_clean();
             
-            // Iniciar un nuevo buffer para el layout
-            ob_start();
-            
-            // Renderizar el layout con el contenido y los datos
+            // Incluir el layout con el contenido
             require_once VIEWS_PATH . '/layout/main.php';
-            
-            // Enviar todo el contenido
-            if (ob_get_level() > 0) {
-                ob_end_flush();
-            }
             
         } catch (\Exception $e) {
             // Limpiar cualquier buffer pendiente en caso de error

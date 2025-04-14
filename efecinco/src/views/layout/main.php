@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo $data['title'] ?? 'Efecinco'; ?></title>
-    <meta name="description" content="<?php echo $data['description'] ?? ''; ?>">
+    <title><?php echo isset($data['title']) ? $data['title'] : 'Efecinco'; ?></title>
+    <meta name="description" content="<?php echo isset($data['description']) ? $data['description'] : ''; ?>">
     
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -47,7 +47,13 @@
 
     <!-- Main Content -->
     <main>
-        <?php echo $content; ?>
+        <?php 
+        if (isset($content)) {
+            echo $content;
+        } else {
+            echo '<div class="container py-5"><div class="alert alert-danger">Error: No se pudo cargar el contenido</div></div>';
+        }
+        ?>
     </main>
 
     <!-- Footer -->
@@ -57,14 +63,14 @@
                 <div class="col-md-4">
                     <h5>Contacto</h5>
                     <p>
-                        <i class="fas fa-map-marker-alt"></i> <?php echo $data['config']['contacto_direccion'] ?? 'Calle 123 #45-67, Bogotá, Colombia'; ?><br>
-                        <i class="fas fa-phone"></i> <?php echo $data['config']['contacto_telefono'] ?? '+57 1 234 5678'; ?><br>
-                        <i class="fas fa-envelope"></i> <?php echo $data['config']['contacto_email'] ?? 'contacto@efecinco.com'; ?>
+                        <i class="fas fa-map-marker-alt"></i> <?php echo isset($data['config']['contacto_direccion']) ? $data['config']['contacto_direccion'] : 'Calle 123 #45-67, Bogotá, Colombia'; ?><br>
+                        <i class="fas fa-phone"></i> <?php echo isset($data['config']['contacto_telefono']) ? $data['config']['contacto_telefono'] : '+57 1 234 5678'; ?><br>
+                        <i class="fas fa-envelope"></i> <?php echo isset($data['config']['contacto_email']) ? $data['config']['contacto_email'] : 'contacto@efecinco.com'; ?>
                     </p>
                 </div>
                 <div class="col-md-4">
                     <h5>Horario</h5>
-                    <p><?php echo $data['config']['horario'] ?? 'Lunes a Viernes: 8:00 AM - 6:00 PM'; ?></p>
+                    <p><?php echo isset($data['config']['horario']) ? $data['config']['horario'] : 'Lunes a Viernes: 8:00 AM - 6:00 PM'; ?></p>
                 </div>
                 <div class="col-md-4">
                     <h5>Síguenos</h5>
