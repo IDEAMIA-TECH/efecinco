@@ -62,6 +62,14 @@ try {
     define('VIEWS_PATH', SRC_PATH . '/views');
     define('CONTROLLERS_PATH', SRC_PATH . '/Controllers');
     
+    // Verificar que los directorios existan
+    if (!is_dir(CONTROLLERS_PATH)) {
+        throw new \Exception("El directorio de controladores no existe: " . CONTROLLERS_PATH);
+    }
+    if (!is_dir(VIEWS_PATH)) {
+        throw new \Exception("El directorio de vistas no existe: " . VIEWS_PATH);
+    }
+    
     // Autoloader mejorado
     logMessage('Registrando autoloader');
     spl_autoload_register(function ($class) {
@@ -80,12 +88,17 @@ try {
         // Reemplazar namespace separators con directory separators
         $file = $base_dir . str_replace('\\', '/', $relative_class) . '.php';
         
+        logMessage("Intentando cargar clase: $class");
+        logMessage("Ruta del archivo: $file");
+        
         // Si el archivo existe, cargarlo
         if (file_exists($file)) {
+            logMessage("Archivo encontrado: $file");
             require $file;
         } else {
-            logMessage("Clase no encontrada: $file", 'ERROR');
-            throw new \Exception("Clase no encontrada: $class");
+            $error = "Clase no encontrada: $class en $file";
+            logMessage($error, 'ERROR');
+            throw new \Exception($error);
         }
     });
     
@@ -124,6 +137,8 @@ try {
         logMessage("Procesando ruta: $request");
         list($controller, $method) = explode('@', $routes[$request]);
         $controllerClass = "Controllers\\$controller";
+        
+        logMessage("Intentando instanciar controlador: $controllerClass");
         
         if (!class_exists($controllerClass)) {
             throw new \Exception("Controlador no encontrado: $controllerClass");
