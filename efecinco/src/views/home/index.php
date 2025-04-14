@@ -4,41 +4,38 @@ ob_start();
 ?>
 
 <!-- Hero Section -->
-<section class="hero-section bg-primary text-white py-5">
+<section class="hero bg-primary text-white py-5">
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-6">
-                <h1 class="display-4 fw-bold">Soluciones en Seguridad y Tecnología</h1>
-                <p class="lead">Expertos en sistemas de seguridad, cableado estructurado y soluciones tecnológicas para tu empresa.</p>
-                <a href="<?php echo SITE_URL; ?>/contacto" class="btn btn-light btn-lg">Contáctanos</a>
+                <h1 class="display-4 fw-bold"><?php echo $data['hero']['title']; ?></h1>
+                <p class="lead"><?php echo $data['hero']['subtitle']; ?></p>
+                <a href="<?php echo $data['hero']['cta_link']; ?>" class="btn btn-light btn-lg">
+                    <?php echo $data['hero']['cta_text']; ?>
+                </a>
             </div>
             <div class="col-lg-6">
-                <img src="<?php echo SITE_URL; ?>/assets/images/hero-image.jpg" alt="Soluciones Tecnológicas" class="img-fluid rounded">
+                <img src="/assets/images/hero-image.jpg" alt="Efecinco" class="img-fluid rounded">
             </div>
         </div>
     </div>
 </section>
 
-<!-- Servicios Section -->
-<section class="services-section py-5">
+<!-- Services Section -->
+<section class="py-5">
     <div class="container">
-        <h2 class="text-center mb-5">Nuestros Servicios</h2>
+        <h2 class="text-center mb-4">Nuestros Servicios</h2>
         <div class="row">
-            <?php foreach ($servicios as $servicio): ?>
-            <div class="col-md-4 mb-4">
-                <div class="card h-100">
-                    <?php if ($servicio['imagen_fondo']): ?>
-                    <img src="<?php echo SITE_URL; ?>/uploads/<?php echo $servicio['imagen_fondo']; ?>" class="card-img-top" alt="<?php echo $servicio['titulo']; ?>">
-                    <?php endif; ?>
-                    <div class="card-body">
-                        <?php if ($servicio['icono']): ?>
-                        <i class="<?php echo $servicio['icono']; ?> fa-2x mb-3"></i>
-                        <?php endif; ?>
-                        <h5 class="card-title"><?php echo $servicio['titulo']; ?></h5>
-                        <p class="card-text"><?php echo $servicio['descripcion']; ?></p>
+            <?php foreach ($data['services'] as $service): ?>
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <i class="<?php echo $service['icon']; ?> fa-3x mb-3 text-primary"></i>
+                            <h3 class="card-title"><?php echo $service['title']; ?></h3>
+                            <p class="card-text"><?php echo $service['description']; ?></p>
+                        </div>
                     </div>
                 </div>
-            </div>
             <?php endforeach; ?>
         </div>
     </div>
@@ -101,5 +98,5 @@ ob_start();
 
 <?php
 $content = ob_get_clean();
-include VIEWS_PATH . '/layouts/main.php';
+require_once VIEWS_PATH . '/layout/main.php';
 ?> 
