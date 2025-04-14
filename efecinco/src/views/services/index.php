@@ -184,7 +184,9 @@
                 <div class="col-md-3">
                     <div class="card h-100 shadow-sm">
                         <div class="card-body text-center">
-                            <div class="display-4 mb-3 text-primary">1</div>
+                            <div class="mb-3">
+                                <i class="fas fa-headset fa-3x text-primary"></i>
+                            </div>
                             <h3 class="h5 mb-3">Contacta a un Asesor</h3>
                             <p class="card-text">Por chat o cita, plantea tus necesidades.</p>
                         </div>
@@ -193,7 +195,9 @@
                 <div class="col-md-3">
                     <div class="card h-100 shadow-sm">
                         <div class="card-body text-center">
-                            <div class="display-4 mb-3 text-primary">2</div>
+                            <div class="mb-3">
+                                <i class="fas fa-clipboard-list fa-3x text-primary"></i>
+                            </div>
                             <h3 class="h5 mb-3">Evaluación</h3>
                             <p class="card-text">El asesor evaluará tus necesidades, aportando mejoras y apoyándote para una cotización.</p>
                         </div>
@@ -202,7 +206,9 @@
                 <div class="col-md-3">
                     <div class="card h-100 shadow-sm">
                         <div class="card-body text-center">
-                            <div class="display-4 mb-3 text-primary">3</div>
+                            <div class="mb-3">
+                                <i class="fas fa-file-invoice-dollar fa-3x text-primary"></i>
+                            </div>
                             <h3 class="h5 mb-3">Cotización</h3>
                             <p class="card-text">Cotizaremos el más mínimo detalle de tus necesidades siempre con el mejor precio.</p>
                         </div>
@@ -211,7 +217,9 @@
                 <div class="col-md-3">
                     <div class="card h-100 shadow-sm">
                         <div class="card-body text-center">
-                            <div class="display-4 mb-3 text-primary">4</div>
+                            <div class="mb-3">
+                                <i class="fas fa-calendar-check fa-3x text-primary"></i>
+                            </div>
                             <h3 class="h5 mb-3">Agenda de Instalación</h3>
                             <p class="card-text">Agendamos la cita para iniciar las instalaciones del equipo de seguridad.</p>
                         </div>
