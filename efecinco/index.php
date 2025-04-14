@@ -105,7 +105,8 @@ try {
         $prefixes = [
             'controllers' => CONTROLLERS_PATH,
             'models' => SRC_PATH . '/models',
-            'database' => SRC_PATH . '/database'
+            'database' => SRC_PATH . '/database',
+            'core' => SRC_PATH . '/core'
         ];
 
         foreach ($prefixes as $prefix => $base_dir) {

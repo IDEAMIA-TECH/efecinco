@@ -40,6 +40,10 @@ ini_set('display_errors', 1);
 define('HASH_COST', 12);
 define('TOKEN_EXPIRATION', 3600); // 1 hora en segundos
 
+// Configuración de reCAPTCHA
+define('RECAPTCHA_SITE_KEY', 'tu-site-key');
+define('RECAPTCHA_SECRET_KEY', 'tu-secret-key');
+
 // Configuración de uploads
 define('MAX_FILE_SIZE', 5242880); // 5MB
 define('ALLOWED_FILE_TYPES', ['jpg', 'jpeg', 'png', 'gif', 'pdf']);
