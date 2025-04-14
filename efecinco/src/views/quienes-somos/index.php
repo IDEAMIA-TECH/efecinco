@@ -4,15 +4,20 @@
 
 <div class="bg-white">
     <!-- Hero Section -->
-    <div class="relative bg-blue-900">
+    <div class="relative bg-blue-900" style="max-height: 200px;">
         <div class="absolute inset-0">
-            <img class="w-full h-[300px] object-cover" src="https://images.unsplash.com/photo-1497366216548-37526070297c" alt="Efecinco Team">
+            <img class="w-full h-[200px] object-cover" 
+                 src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&h=200&q=80" 
+                 alt="Efecinco Team">
             <div class="absolute inset-0 bg-blue-900 mix-blend-multiply opacity-80"></div>
         </div>
-        <div class="relative max-w-7xl mx-auto py-12 px-4 sm:py-16 sm:px-6 lg:px-8">
-            <img src="<?php echo SITE_URL; ?>/assets/images/logo/logof5.png" alt="Efe Cinco Logo" class="h-16 mb-6">
-            <h1 class="text-3xl font-extrabold tracking-tight text-white sm:text-4xl lg:text-5xl">¿Quiénes Somos?</h1>
-            <p class="mt-4 text-lg text-blue-100 max-w-3xl">
+        <div class="relative max-w-7xl mx-auto py-8 px-4">
+            <img src="<?php echo SITE_URL; ?>/assets/images/logo/logof5.png" 
+                 alt="Efe Cinco Logo" 
+                 class="h-12 mb-4" 
+                 style="max-width: 150px;">
+            <h1 class="text-2xl font-bold text-white">¿Quiénes Somos?</h1>
+            <p class="mt-2 text-sm text-blue-100 max-w-2xl">
                 Somos una empresa líder en soluciones tecnológicas y de seguridad, comprometida con la excelencia y la innovación.
             </p>
         </div>
@@ -87,25 +92,25 @@
     </div>
 
     <!-- Clientes -->
-    <div class="bg-gradient-to-b from-gray-50 to-white py-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-2xl font-bold text-gray-900 text-center mb-8">Nuestros Clientes</h2>
-            <div class="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-5">
+    <div class="bg-gradient-to-b from-gray-50 to-white py-8">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-xl font-bold text-gray-900 text-center mb-6">Nuestros Clientes</h2>
+            <div class="grid grid-cols-3 gap-3 md:grid-cols-5">
                 <?php
                 $logos = [
                     'Walmart' => 'https://upload.wikimedia.org/wikipedia/commons/c/ca/Walmart_logo.svg',
-                    'Importex Green' => 'https://images.unsplash.com/photo-1599305445671-ac291c95aaa9',
+                    'Importex Green' => 'https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?auto=format&fit=crop&w=100&h=100&q=80',
                     'Banco Azteca' => 'https://upload.wikimedia.org/wikipedia/commons/8/86/Banco_Azteca_logo.svg',
                     'Henkel' => 'https://upload.wikimedia.org/wikipedia/commons/2/23/Henkel-Logo.svg',
-                    'Otros clientes destacados' => 'https://images.unsplash.com/photo-1557426272-fc759fdf7a8d'
+                    'Otros clientes destacados' => 'https://images.unsplash.com/photo-1557426272-fc759fdf7a8d?auto=format&fit=crop&w=100&h=100&q=80'
                 ];
                 foreach ($empresa['clientes'] as $cliente): ?>
-                <div class="flex items-center justify-center p-3 bg-white rounded-lg shadow-sm transform hover:scale-105 transition-transform duration-300">
-                    <div class="w-20 h-20 flex items-center justify-center">
+                <div class="flex items-center justify-center p-2 bg-white rounded shadow-sm">
+                    <div class="w-12 h-12 flex items-center justify-center" style="max-width: 48px; max-height: 48px;">
                         <img src="<?= $logos[$cliente] ?>" 
                              alt="<?= htmlspecialchars($cliente) ?>" 
-                             class="max-w-full max-h-full object-contain filter hover:brightness-100 transition duration-300"
-                             style="filter: grayscale(100%) brightness(90%);">
+                             class="w-full h-full object-contain filter hover:brightness-100 transition duration-300"
+                             style="filter: grayscale(100%) brightness(90%); max-width: 100%; max-height: 100%;">
                     </div>
                 </div>
                 <?php endforeach; ?>
@@ -114,24 +119,25 @@
     </div>
 
     <!-- Certificaciones -->
-    <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-        <h2 class="text-2xl font-bold text-gray-900 text-center mb-8">Certificaciones y Alianzas</h2>
-        <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    <div class="max-w-7xl mx-auto py-8 px-4">
+        <h2 class="text-xl font-bold text-gray-900 text-center mb-6">Certificaciones y Alianzas</h2>
+        <div class="grid grid-cols-2 gap-4 lg:grid-cols-3">
             <?php 
             $certificacionesImagenes = [
-                'Certificación en Seguridad' => 'https://images.unsplash.com/photo-1562813733-b31f71025d54',
-                'Certificación en TI' => 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31'
+                'Certificación en Seguridad' => 'https://images.unsplash.com/photo-1562813733-b31f71025d54?auto=format&fit=crop&w=300&h=150&q=80',
+                'Certificación en TI' => 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=300&h=150&q=80'
             ];
             foreach ($empresa['certificaciones'] as $certificacion): ?>
-            <div class="bg-white rounded-lg shadow-sm overflow-hidden transform hover:scale-105 transition-transform duration-300">
-                <div class="h-32 overflow-hidden">
+            <div class="bg-white rounded shadow-sm overflow-hidden">
+                <div style="height: 120px; max-height: 120px; overflow: hidden;">
                     <img src="<?= $certificacionesImagenes[$certificacion['nombre']] ?>" 
                          alt="<?= htmlspecialchars($certificacion['nombre']) ?>" 
-                         class="w-full h-full object-cover">
+                         class="w-full h-full object-cover"
+                         style="max-height: 120px;">
                 </div>
-                <div class="p-4">
-                    <h3 class="text-lg font-bold text-blue-900 mb-2"><?= htmlspecialchars($certificacion['nombre']) ?></h3>
-                    <p class="text-gray-600 text-sm"><?= htmlspecialchars($certificacion['descripcion']) ?></p>
+                <div class="p-3">
+                    <h3 class="text-sm font-bold text-blue-900 mb-1"><?= htmlspecialchars($certificacion['nombre']) ?></h3>
+                    <p class="text-gray-600 text-xs"><?= htmlspecialchars($certificacion['descripcion']) ?></p>
                 </div>
             </div>
             <?php endforeach; ?>
@@ -139,20 +145,18 @@
     </div>
 
     <!-- CTA Section -->
-    <div class="bg-gradient-to-r from-blue-800 to-blue-900 py-8">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 lg:flex lg:items-center lg:justify-between">
-            <h2 class="text-2xl font-bold tracking-tight text-white sm:text-3xl">
+    <div class="bg-gradient-to-r from-blue-800 to-blue-900 py-6">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between">
+            <h2 class="text-xl font-bold text-white mb-4 md:mb-0">
                 <span class="block">¿Listo para comenzar?</span>
-                <span class="block text-blue-200 text-lg">Contáctanos hoy mismo.</span>
+                <span class="block text-blue-200 text-sm">Contáctanos hoy mismo.</span>
             </h2>
-            <div class="mt-6 flex lg:mt-0 lg:flex-shrink-0">
-                <div class="inline-flex rounded-md shadow">
-                    <a href="<?php echo SITE_URL; ?>/contacto" 
-                       class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-blue-900 bg-white hover:bg-blue-50 transform hover:scale-105 transition-transform duration-300">
-                        <i class="fas fa-envelope mr-2"></i>
-                        Contáctanos
-                    </a>
-                </div>
+            <div class="flex">
+                <a href="<?php echo SITE_URL; ?>/contacto" 
+                   class="inline-flex items-center px-3 py-2 text-sm font-medium rounded bg-white text-blue-900 hover:bg-blue-50">
+                    <i class="fas fa-envelope mr-2"></i>
+                    Contáctanos
+                </a>
             </div>
         </div>
     </div>
