@@ -6,16 +6,22 @@ use database\Database;
 class BaseController {
     protected $db;
     protected $view;
+    protected $config;
 
     public function __construct() {
         $database = new Database();
         $this->db = $database->getConnection();
+        $this->config = require_once SRC_PATH . '/config/config.php';
     }
 
     protected function render($view, $data = []) {
         try {
             // Iniciar el buffer de salida
             ob_start();
+            
+            // Hacer la configuración disponible globalmente
+            global $config;
+            $config = $this->config;
             
             // Extraer las variables para que estén disponibles en la vista
             extract($data);

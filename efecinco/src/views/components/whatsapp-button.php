@@ -1,5 +1,8 @@
 <?php
-$config = require_once CONFIG_PATH . '/config.php';
+global $config;
+if (!isset($config)) {
+    $config = require_once CONFIG_PATH . '/config.php';
+}
 $whatsapp_number = $config['whatsapp_number'];
 ?>
 
