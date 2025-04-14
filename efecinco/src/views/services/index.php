@@ -1,4 +1,5 @@
 <?php
+// Iniciar el buffer de salida
 ob_start();
 ?>
 
@@ -216,6 +217,9 @@ ob_start();
 </div>
 
 <?php
+// Obtener el contenido del buffer y limpiarlo
 $content = ob_get_clean();
-include VIEWS_PATH . '/layouts/main.php';
+
+// Incluir el layout principal
+require_once VIEWS_PATH . '/layouts/main.php';
 ?> 
