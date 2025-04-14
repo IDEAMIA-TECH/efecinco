@@ -56,26 +56,7 @@ try {
     require_once __DIR__ . '/src/config/config.php';
     require_once __DIR__ . '/src/config/database.php';
     
-    // Definir constantes de rutas si no están definidas
-    if (!defined('ROOT_PATH')) {
-        define('ROOT_PATH', '/home/ideamiadev/public_html/efecinco');
-        logMessage("ROOT_PATH definido como: " . ROOT_PATH);
-    }
-    
-    if (!defined('SRC_PATH')) {
-        define('SRC_PATH', ROOT_PATH . '/src');
-        logMessage("SRC_PATH definido como: " . SRC_PATH);
-    }
-    
-    if (!defined('VIEWS_PATH')) {
-        define('VIEWS_PATH', '/src/views');
-        logMessage("VIEWS_PATH definido como: " . VIEWS_PATH);
-    }
-    
-    if (!defined('CONTROLLERS_PATH')) {
-        define('CONTROLLERS_PATH', '/src/controllers');
-        logMessage("CONTROLLERS_PATH definido como: " . CONTROLLERS_PATH);
-    }
+
     
     // Verificar estructura de directorios
     logMessage("Verificando estructura de directorios:");
