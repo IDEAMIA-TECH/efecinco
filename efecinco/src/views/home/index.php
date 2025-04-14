@@ -1,5 +1,5 @@
 <?php
-$content = ob_get_clean();
+// No necesitamos limpiar el buffer aquí
 ob_start();
 ?>
 
