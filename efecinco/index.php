@@ -61,7 +61,7 @@ try {
         define('ROOT_PATH', __DIR__);
     }
     if (!defined('SRC_PATH')) {
-        define('SRC_PATH', ROOT_PATH);
+        define('SRC_PATH', ROOT_PATH . '/src');
     }
     if (!defined('VIEWS_PATH')) {
         define('VIEWS_PATH', SRC_PATH . '/views');
