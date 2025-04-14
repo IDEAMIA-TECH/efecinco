@@ -92,33 +92,34 @@ try {
     // Autoloader mejorado
     logMessage('Registrando autoloader');
     spl_autoload_register(function ($class) {
-        $prefix = 'controllers\\';
-        $base_dir = CONTROLLERS_PATH . '/';
-        
-        // Verificar si la clase pertenece al namespace controllers
-        $len = strlen($prefix);
-        if (strncmp($prefix, $class, $len) !== 0) {
-            return;
+        // Mapeo de namespaces a directorios
+        $prefixes = [
+            'controllers\\' => CONTROLLERS_PATH . '/',
+            'database\\' => SRC_PATH . '/database/'
+        ];
+
+        foreach ($prefixes as $prefix => $base_dir) {
+            $len = strlen($prefix);
+            if (strncmp($prefix, $class, $len) !== 0) {
+                continue;
+            }
+
+            $relative_class = substr($class, $len);
+            $file = $base_dir . str_replace('\\', '/', $relative_class) . '.php';
+
+            logMessage("Intentando cargar clase: $class");
+            logMessage("Ruta del archivo: $file");
+
+            if (file_exists($file)) {
+                logMessage("Archivo encontrado: $file");
+                require_once $file;
+                return;
+            }
         }
-        
-        // Obtener el nombre relativo de la clase
-        $relative_class = substr($class, $len);
-        
-        // Reemplazar namespace separators con directory separators
-        $file = $base_dir . str_replace('\\', '/', $relative_class) . '.php';
-        
-        logMessage("Intentando cargar clase: $class");
-        logMessage("Ruta del archivo: $file");
-        
-        // Si el archivo existe, cargarlo
-        if (file_exists($file)) {
-            logMessage("Archivo encontrado: $file");
-            require_once $file;
-        } else {
-            $error = "Clase no encontrada: $class en $file";
-            logMessage($error, 'ERROR');
-            throw new \Exception($error);
-        }
+
+        $error = "Clase no encontrada: $class";
+        logMessage($error, 'ERROR');
+        throw new \Exception($error);
     });
     
     // Cargar BaseController primero
