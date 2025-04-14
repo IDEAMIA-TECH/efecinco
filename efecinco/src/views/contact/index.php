@@ -1,11 +1,10 @@
 <?php
-// Iniciar el buffer de salida
-ob_start();
+// El buffer y el layout se manejan en main.php
 ?>
 
 <div class="bg-white">
     <!-- Hero Section -->
-    <section class="hero bg-gradient-primary text-white py-5 mt-5">
+    <section class="hero">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-6">
@@ -34,7 +33,7 @@ ob_start();
                     <div class="card shadow-sm">
                         <div class="card-body p-4">
                             <h2 class="h3 mb-4">Envíanos un mensaje</h2>
-                            <form action="/contacto/enviar" method="POST" class="needs-validation" novalidate>
+                            <form action="/contacto/enviar" method="POST" class="contact-form needs-validation" novalidate>
                                 <div class="mb-3">
                                     <label for="nombre" class="form-label">Nombre completo</label>
                                     <input type="text" class="form-control" id="nombre" name="nombre" required>
@@ -105,17 +104,19 @@ ob_start();
                     <div class="card shadow-sm mb-4">
                         <div class="card-body p-4">
                             <h2 class="h3 mb-4">Horarios de atención</h2>
-                            <div class="d-flex justify-content-between mb-2">
-                                <span>Lunes a Viernes:</span>
-                                <span class="fw-bold"><?php echo $config['contact_info']['business_hours']; ?></span>
-                            </div>
-                            <div class="d-flex justify-content-between mb-2">
-                                <span>Sábados:</span>
-                                <span class="fw-bold">9:00 AM - 2:00 PM</span>
-                            </div>
-                            <div class="d-flex justify-content-between">
-                                <span>Domingos:</span>
-                                <span class="fw-bold">Cerrado</span>
+                            <div class="business-hours">
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span>Lunes a Viernes:</span>
+                                    <span class="fw-bold"><?php echo $config['contact_info']['business_hours']; ?></span>
+                                </div>
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span>Sábados:</span>
+                                    <span class="fw-bold">9:00 AM - 2:00 PM</span>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <span>Domingos:</span>
+                                    <span class="fw-bold">Cerrado</span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -124,7 +125,7 @@ ob_start();
                     <div class="card shadow-sm">
                         <div class="card-body p-4">
                             <h2 class="h3 mb-4">Ubicación</h2>
-                            <div class="ratio ratio-16x9">
+                            <div class="map-container">
                                 <iframe
                                     src="<?php echo $config['maps_embed']; ?>"
                                     width="100%"
@@ -140,12 +141,4 @@ ob_start();
             </div>
         </div>
     </section>
-</div>
-
-<?php
-// Obtener el contenido del buffer y limpiarlo
-$content = ob_get_clean();
-
-// Incluir el layout principal
-require_once VIEWS_PATH . '/layouts/main.php';
-?> 
+</div> 

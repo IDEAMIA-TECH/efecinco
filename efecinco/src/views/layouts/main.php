@@ -15,9 +15,8 @@ if (!isset($config)) {
     <!-- Favicon -->
     <link rel="icon" href="<?php echo SITE_URL; ?>/assets/images/favicon.ico">
     
-    <!-- CSS -->
-    <link rel="stylesheet" href="<?php echo SITE_URL; ?>/assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="<?php echo SITE_URL; ?>/assets/css/style.css">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -25,15 +24,18 @@ if (!isset($config)) {
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="<?php echo SITE_URL; ?>/assets/css/style.css">
+    
     <!-- reCAPTCHA -->
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 <body>
-    <!-- Header -->
-    <header class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div class="container">
             <a class="navbar-brand" href="<?php echo SITE_URL; ?>">
-                <img src="<?php echo SITE_URL; ?>/assets/images/logo.png" alt="<?php echo SITE_NAME; ?>" height="50">
+                <img src="<?php echo SITE_URL; ?>/assets/images/logo/logof5.png" alt="Efe Cinco Logo" height="40">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -44,7 +46,7 @@ if (!isset($config)) {
                         <a class="nav-link" href="<?php echo SITE_URL; ?>">Inicio</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo SITE_URL; ?>/quienes-somos">¿Quiénes Somos?</a>
+                        <a class="nav-link" href="<?php echo SITE_URL; ?>/quienes-somos">Quiénes Somos</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="<?php echo SITE_URL; ?>/servicios">Servicios</a>
@@ -58,68 +60,61 @@ if (!isset($config)) {
                 </ul>
             </div>
         </div>
-    </header>
+    </nav>
 
-    <!-- Main Content -->
-    <main class="pt-5">
+    <!-- Contenido Principal -->
+    <main class="mt-5 pt-4">
         <?php echo $content; ?>
     </main>
 
     <!-- Footer -->
-    <footer class="bg-dark text-light py-4">
+    <footer class="bg-dark text-white py-4">
         <div class="container">
             <div class="row">
                 <div class="col-md-4">
                     <h5>Contacto</h5>
                     <p>
-                        <i class="fas fa-map-marker-alt"></i> <?php echo $config['contact_info']['address']; ?><br>
-                        <i class="fas fa-phone"></i> <?php echo $config['contact_info']['phone']; ?><br>
-                        <i class="fas fa-envelope"></i> <?php echo $config['contact_info']['email']; ?><br>
-                        <i class="fas fa-clock"></i> <?php echo $config['contact_info']['business_hours']; ?>
+                        <i class="fas fa-map-marker-alt me-2"></i>
+                        <?php echo $config['contact_info']['address']; ?>
+                    </p>
+                    <p>
+                        <i class="fas fa-phone me-2"></i>
+                        <?php echo $config['contact_info']['phone']; ?>
+                    </p>
+                    <p>
+                        <i class="fas fa-envelope me-2"></i>
+                        <?php echo $config['contact_info']['email']; ?>
                     </p>
                 </div>
                 <div class="col-md-4">
-                    <h5>Enlaces Rápidos</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="<?php echo SITE_URL; ?>/quienes-somos">¿Quiénes Somos?</a></li>
-                        <li><a href="<?php echo SITE_URL; ?>/servicios">Servicios</a></li>
-                        <li><a href="<?php echo SITE_URL; ?>/proyectos">Proyectos</a></li>
-                        <li><a href="<?php echo SITE_URL; ?>/contacto">Contacto</a></li>
-                    </ul>
+                    <h5>Horario</h5>
+                    <p><?php echo $config['contact_info']['business_hours']; ?></p>
                 </div>
                 <div class="col-md-4">
-                    <h5>Redes Sociales</h5>
+                    <h5>Síguenos</h5>
                     <div class="social-links">
-                        <?php if (!empty($config['social_media']['facebook'])): ?>
-                            <a href="<?php echo $config['social_media']['facebook']; ?>" class="text-light me-2" target="_blank" rel="noopener noreferrer">
-                                <i class="fab fa-facebook-f"></i>
-                            </a>
-                        <?php endif; ?>
-                        <?php if (!empty($config['social_media']['instagram'])): ?>
-                            <a href="<?php echo $config['social_media']['instagram']; ?>" class="text-light me-2" target="_blank" rel="noopener noreferrer">
-                                <i class="fab fa-instagram"></i>
-                            </a>
-                        <?php endif; ?>
-                        <?php if (!empty($config['social_media']['linkedin'])): ?>
-                            <a href="<?php echo $config['social_media']['linkedin']; ?>" class="text-light me-2" target="_blank" rel="noopener noreferrer">
-                                <i class="fab fa-linkedin-in"></i>
-                            </a>
-                        <?php endif; ?>
+                        <a href="<?php echo $config['social_media']['facebook']; ?>" class="text-white me-2">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="<?php echo $config['social_media']['instagram']; ?>" class="text-white me-2">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="<?php echo $config['social_media']['linkedin']; ?>" class="text-white">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
                     </div>
                 </div>
-            </div>
-            <hr>
-            <div class="text-center">
-                <p>&copy; <?php echo date('Y'); ?> <?php echo SITE_NAME; ?>. Todos los derechos reservados.</p>
             </div>
         </div>
     </footer>
 
-    <!-- Scripts -->
-    <script src="<?php echo SITE_URL; ?>/assets/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JS -->
     <script src="<?php echo SITE_URL; ?>/assets/js/main.js"></script>
     
-    <!-- Components -->
+    <!-- WhatsApp Button -->
     <?php include VIEWS_PATH . '/components/whatsapp-button.php'; ?>
 </body>
 </html> 
