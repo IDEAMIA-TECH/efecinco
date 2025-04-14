@@ -20,6 +20,7 @@
     bottom: 0;
     left: 50%;
     margin-left: -1px;
+    display: none;
 }
 
 .timeline-item {
@@ -52,12 +53,12 @@
     height: 100px;
     border-radius: 50%;
     overflow: hidden;
-    border: 3px solid #0d6efd;
+    border: 3px solid #ddd;
 }
 
 .timeline-year {
     font-weight: bold;
-    color: #0d6efd;
+    color: #333;
     margin-bottom: 10px;
     font-size: 1.2rem;
 }

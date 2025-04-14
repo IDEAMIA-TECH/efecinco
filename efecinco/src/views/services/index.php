@@ -1,82 +1,238 @@
 <?php
-$content = ob_get_clean();
-ob_start();
+// El contenido se capturará automáticamente por el buffer
 ?>
 
-<!-- Hero Section -->
-<section class="hero-section bg-primary text-white py-5">
-    <div class="container">
-        <h1 class="display-4 fw-bold text-center">Nuestros Servicios</h1>
-        <p class="lead text-center">Soluciones tecnológicas y de seguridad para tu empresa</p>
-    </div>
-</section>
+<div class="bg-white">
+    <!-- Hero Section -->
+    <section class="hero bg-gradient-primary text-white py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <img src="<?php echo SITE_URL; ?>/assets/images/logo/logof5.png" 
+                         alt="Efe Cinco Logo" 
+                         class="img-fluid mb-4" 
+                         style="max-width: 300px;">
+                    <h1 class="display-4 fw-bold">Nuestros Servicios</h1>
+                    <p class="lead">Soluciones tecnológicas integrales para tu empresa y hogar</p>
+                </div>
+                <div class="col-lg-6">
+                    <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=800&h=400&q=80" 
+                         alt="Servicios Tecnológicos" 
+                         class="img-fluid rounded shadow-lg">
+                </div>
+            </div>
+        </div>
+    </section>
 
-<!-- Servicios Section -->
-<section class="services-section py-5">
-    <div class="container">
-        <div class="row">
-            <?php foreach ($servicios as $servicio): ?>
-            <div class="col-md-6 col-lg-4 mb-4">
-                <div class="card h-100 service-card">
-                    <div class="card-img-top" style="background-image: url('<?php echo SITE_URL; ?>/uploads/<?php echo $servicio['imagen_fondo']; ?>');">
-                        <div class="service-icon">
-                            <i class="<?php echo $servicio['icono']; ?>"></i>
+    <!-- Servicios Principales -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5">Servicios Especializados</h2>
+            <div class="row g-4">
+                <!-- Cableado Estructurado -->
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body text-center">
+                            <div class="mb-4">
+                                <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=300&h=200&q=80" 
+                                     alt="Cableado Estructurado"
+                                     class="img-fluid rounded"
+                                     style="height: 200px; object-fit: cover;">
+                            </div>
+                            <h3 class="h4 mb-3">Cableado Estructurado</h3>
+                            <p class="card-text">Crea una infraestructura tecnológica consolidada, segura y de calidad, para reducir los riesgos o incidencias técnicas.</p>
                         </div>
                     </div>
-                    <div class="card-body">
-                        <h3 class="card-title"><?php echo $servicio['titulo']; ?></h3>
-                        <p class="card-text"><?php echo $servicio['descripcion']; ?></p>
-                        <a href="<?php echo SITE_URL; ?>/servicios/<?php echo $servicio['id']; ?>" class="btn btn-primary">Ver más</a>
+                </div>
+
+                <!-- Cámaras de seguridad CCTV -->
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body text-center">
+                            <div class="mb-4">
+                                <img src="https://images.unsplash.com/photo-1557426272-fc759fdf7a8d?auto=format&fit=crop&w=300&h=200&q=80" 
+                                     alt="Cámaras CCTV"
+                                     class="img-fluid rounded"
+                                     style="height: 200px; object-fit: cover;">
+                            </div>
+                            <h3 class="h4 mb-3">Cámaras de Seguridad CCTV</h3>
+                            <p class="card-text">Monitorea donde quieras con un circuito cerrado de televisión (CCTV) para vigilancia de manera local o remotamente.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Control de Accesos -->
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body text-center">
+                            <div class="mb-4">
+                                <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=300&h=200&q=80" 
+                                     alt="Control de Accesos"
+                                     class="img-fluid rounded"
+                                     style="height: 200px; object-fit: cover;">
+                            </div>
+                            <h3 class="h4 mb-3">Control de Accesos</h3>
+                            <p class="card-text">Mejora la eficiencia operativa y obtén la tranquilidad de tener un entorno más seguro para empleados, visitantes y habitantes.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sistemas Inalámbricos -->
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body text-center">
+                            <div class="mb-4">
+                                <img src="https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?auto=format&fit=crop&w=300&h=200&q=80" 
+                                     alt="Sistemas Inalámbricos"
+                                     class="img-fluid rounded"
+                                     style="height: 200px; object-fit: cover;">
+                            </div>
+                            <h3 class="h4 mb-3">Sistemas Inalámbricos</h3>
+                            <p class="card-text">No pierdas la conectividad en tu hogar y adecúa una estructura para ti y nunca dejes de disfrutar tus programas favoritos.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Audio Multizonas -->
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body text-center">
+                            <div class="mb-4">
+                                <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=300&h=200&q=80" 
+                                     alt="Audio Multizonas"
+                                     class="img-fluid rounded"
+                                     style="height: 200px; object-fit: cover;">
+                            </div>
+                            <h3 class="h4 mb-3">Audio Multizonas</h3>
+                            <p class="card-text">Escucha tus canciones favoritas o conferencias en cualquier lugar de tu casa u oficina con este sistema.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sistemas de Alarmas -->
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body text-center">
+                            <div class="mb-4">
+                                <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=300&h=200&q=80" 
+                                     alt="Sistemas de Alarmas"
+                                     class="img-fluid rounded"
+                                     style="height: 200px; object-fit: cover;">
+                            </div>
+                            <h3 class="h4 mb-3">Sistemas de Alarmas</h3>
+                            <p class="card-text">Crea un sistema de alarmas para tu hogar y empresas. Monitorea y mantente siempre alerta, deja a F5 garantizar tu seguridad.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Telefonía IP -->
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body text-center">
+                            <div class="mb-4">
+                                <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=300&h=200&q=80" 
+                                     alt="Telefonía IP"
+                                     class="img-fluid rounded"
+                                     style="height: 200px; object-fit: cover;">
+                            </div>
+                            <h3 class="h4 mb-3">Telefonía IP y Análoga</h3>
+                            <p class="card-text">Dale diseño a tus oficinas y espacios de trabajo con la mejor comunicación.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Almacenamiento NAS -->
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body text-center">
+                            <div class="mb-4">
+                                <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=300&h=200&q=80" 
+                                     alt="Almacenamiento NAS"
+                                     class="img-fluid rounded"
+                                     style="height: 200px; object-fit: cover;">
+                            </div>
+                            <h3 class="h4 mb-3">Sistemas NAS</h3>
+                            <p class="card-text">Servicio ideal para centralizar todo el almacenamiento de forma segura. Ten siempre los datos a la mano con un sistema NAS.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Soporte TI -->
+                <div class="col-md-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body text-center">
+                            <div class="mb-4">
+                                <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=300&h=200&q=80" 
+                                     alt="Soporte TI"
+                                     class="img-fluid rounded"
+                                     style="height: 200px; object-fit: cover;">
+                            </div>
+                            <h3 class="h4 mb-3">Soporte TI</h3>
+                            <p class="card-text">Mantenimiento y resolución de incidencias en tu equipo de cómputo.</p>
+                        </div>
                     </div>
                 </div>
             </div>
-            <?php endforeach; ?>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- Planes de Mantenimiento Section -->
-<?php if (!empty($planes_mantenimiento)): ?>
-<section class="maintenance-plans-section bg-light py-5">
-    <div class="container">
-        <h2 class="text-center mb-5">Planes de Mantenimiento</h2>
-        <div class="row">
-            <?php foreach ($planes_mantenimiento as $plan): ?>
-            <div class="col-md-4 mb-4">
-                <div class="card h-100">
-                    <div class="card-header bg-primary text-white text-center">
-                        <h3 class="mb-0"><?php echo $plan['nombre']; ?></h3>
+    <!-- Proceso de Contratación -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5">Proceso de Contratación</h2>
+            <div class="row g-4">
+                <div class="col-md-3">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body text-center">
+                            <div class="display-4 mb-3 text-primary">1</div>
+                            <h3 class="h5 mb-3">Contacta a un Asesor</h3>
+                            <p class="card-text">Por chat o cita, plantea tus necesidades.</p>
+                        </div>
                     </div>
-                    <div class="card-body">
-                        <h4 class="text-center mb-4"><?php echo $plan['precio']; ?></h4>
-                        <ul class="list-unstyled">
-                            <?php foreach ($plan['caracteristicas'] as $caracteristica): ?>
-                            <li class="mb-2">
-                                <i class="fas fa-check text-primary me-2"></i>
-                                <?php echo $caracteristica; ?>
-                            </li>
-                            <?php endforeach; ?>
-                        </ul>
+                </div>
+                <div class="col-md-3">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body text-center">
+                            <div class="display-4 mb-3 text-primary">2</div>
+                            <h3 class="h5 mb-3">Evaluación</h3>
+                            <p class="card-text">El asesor evaluará tus necesidades, aportando mejoras y apoyándote para una cotización.</p>
+                        </div>
                     </div>
-                    <div class="card-footer text-center">
-                        <a href="<?php echo SITE_URL; ?>/contacto" class="btn btn-primary">Solicitar Información</a>
+                </div>
+                <div class="col-md-3">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body text-center">
+                            <div class="display-4 mb-3 text-primary">3</div>
+                            <h3 class="h5 mb-3">Cotización</h3>
+                            <p class="card-text">Cotizaremos el más mínimo detalle de tus necesidades siempre con el mejor precio.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body text-center">
+                            <div class="display-4 mb-3 text-primary">4</div>
+                            <h3 class="h5 mb-3">Agenda de Instalación</h3>
+                            <p class="card-text">Agendamos la cita para iniciar las instalaciones del equipo de seguridad.</p>
+                        </div>
                     </div>
                 </div>
             </div>
-            <?php endforeach; ?>
         </div>
-    </div>
-</section>
-<?php endif; ?>
+    </section>
 
-<!-- CTA Section -->
-<section class="cta-section py-5">
-    <div class="container text-center">
-        <h2 class="mb-4">¿Necesitas un servicio personalizado?</h2>
-        <p class="lead mb-4">Contáctanos para una solución a medida para tu empresa</p>
-        <a href="<?php echo SITE_URL; ?>/contacto" class="btn btn-primary btn-lg">Contáctanos</a>
-    </div>
-</section>
+    <!-- CTA Section -->
+    <section class="cta-section bg-gradient-primary text-black py-5">
+        <div class="container text-center">
+            <h2 class="mb-4">¿Listo para mejorar tu seguridad?</h2>
+            <p class="lead mb-4">Contáctanos hoy mismo para una consulta gratuita</p>
+            <a href="<?php echo SITE_URL; ?>/contacto" class="btn btn-light btn-lg shadow">
+                <i class="fas fa-envelope me-2"></i>
+                Contactar Asesor
+            </a>
+        </div>
+    </section>
+</div>
 
 <?php
 $content = ob_get_clean();
