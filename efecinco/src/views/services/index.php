@@ -11,7 +11,8 @@
                     <img src="<?php echo SITE_URL; ?>/assets/images/logo/logof5.png" 
                          alt="Efe Cinco Logo" 
                          class="img-fluid mb-4" 
-                         style="max-width: 300px;">
+                         style="max-width: 300px;"
+                         height="50">
                     <h1 class="display-4 fw-bold">Nuestros Servicios</h1>
                     <p class="lead">Soluciones tecnológicas integrales para tu empresa y hogar</p>
                 </div>
