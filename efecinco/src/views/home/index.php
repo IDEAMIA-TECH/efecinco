@@ -16,8 +16,8 @@ ob_start();
                 </a>
             </div>
             <div class="col-lg-6">
-                <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab" 
-                     alt="Edificio moderno con tecnología" 
+                <img src="https://images.unsplash.com/photo-1557683316-973673baf926" 
+                     alt="Tecnología de seguridad" 
                      class="img-fluid rounded shadow-lg">
             </div>
         </div>
@@ -32,7 +32,7 @@ ob_start();
             <div class="col-md-3 mb-4">
                 <div class="card h-100 shadow-sm">
                     <div class="image-container" style="height: 200px; overflow: hidden;">
-                        <img src="https://images.unsplash.com/photo-1580894894513-541e068a3e2b" 
+                        <img src="https://images.unsplash.com/photo-1557683311-eac922347aa1" 
                              class="card-img-top" 
                              alt="Sistemas de Seguridad"
                              style="width: 100%; height: 100%; object-fit: cover;">
@@ -47,7 +47,7 @@ ob_start();
             <div class="col-md-3 mb-4">
                 <div class="card h-100 shadow-sm">
                     <div class="image-container" style="height: 200px; overflow: hidden;">
-                        <img src="https://images.unsplash.com/photo-1562516155-e0c1ee44059b" 
+                        <img src="https://images.unsplash.com/photo-1558002038-1055907df827" 
                              class="card-img-top" 
                              alt="Control de Acceso"
                              style="width: 100%; height: 100%; object-fit: cover;">
@@ -77,7 +77,7 @@ ob_start();
             <div class="col-md-3 mb-4">
                 <div class="card h-100 shadow-sm">
                     <div class="image-container" style="height: 200px; overflow: hidden;">
-                        <img src="https://images.unsplash.com/photo-1558002038-1055907df827" 
+                        <img src="https://images.unsplash.com/photo-1589939705384-5185137a7f0f" 
                              class="card-img-top" 
                              alt="Automatización"
                              style="width: 100%; height: 100%; object-fit: cover;">
