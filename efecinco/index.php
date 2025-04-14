@@ -113,7 +113,7 @@ try {
         // Si el archivo existe, cargarlo
         if (file_exists($file)) {
             logMessage("Archivo encontrado: $file");
-            require $file;
+            require_once $file;
         } else {
             $error = "Clase no encontrada: $class en $file";
             logMessage($error, 'ERROR');
@@ -128,6 +128,14 @@ try {
         logMessage("BaseController cargado desde: $baseControllerPath");
     } else {
         $error = "BaseController no encontrado en: $baseControllerPath";
+        logMessage($error, 'ERROR');
+        throw new \Exception($error);
+    }
+    
+    // Verificar que HomeController existe
+    $homeControllerPath = CONTROLLERS_PATH . '/HomeController.php';
+    if (!file_exists($homeControllerPath)) {
+        $error = "HomeController no encontrado en: $homeControllerPath";
         logMessage($error, 'ERROR');
         throw new \Exception($error);
     }
