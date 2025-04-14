@@ -1,6 +1,5 @@
 <?php
-// Iniciamos el buffer de salida
-ob_start();
+// El contenido se capturará automáticamente por el buffer
 ?>
 
 <!-- Hero Section -->
@@ -9,10 +8,10 @@ ob_start();
         <div class="row align-items-center">
             <div class="col-lg-6">
                 <img src="<?php echo SITE_URL; ?>/assets/images/logo/logof5.png" alt="Efe Cinco Logo" class="img-fluid mb-4" style="max-width: 300px;">
-                <h1 class="display-4 fw-bold"><?php echo $data['hero']['title']; ?></h1>
-                <p class="lead"><?php echo $data['hero']['subtitle']; ?></p>
-                <a href="<?php echo $data['hero']['cta_link']; ?>" class="btn btn-light btn-lg">
-                    <?php echo $data['hero']['cta_text']; ?>
+                <h1 class="display-4 fw-bold"><?php echo $hero['title']; ?></h1>
+                <p class="lead"><?php echo $hero['subtitle']; ?></p>
+                <a href="<?php echo $hero['cta_link']; ?>" class="btn btn-light btn-lg">
+                    <?php echo $hero['cta_text']; ?>
                 </a>
             </div>
             <div class="col-lg-6">
@@ -208,10 +207,4 @@ ob_start();
         <p class="lead mb-4">Contáctanos hoy mismo para una consulta gratuita.</p>
         <a href="<?php echo SITE_URL; ?>/contacto" class="btn btn-light btn-lg shadow">Solicitar Cotización</a>
     </div>
-</section>
-
-<?php
-// Solo obtenemos el contenido del buffer, el layout se manejará en el controlador
-$content = ob_get_clean();
-return $content;
-?> 
+</section> 
