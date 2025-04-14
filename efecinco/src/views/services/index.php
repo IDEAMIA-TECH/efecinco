@@ -34,10 +34,7 @@
                     <div class="card h-100 shadow-sm">
                         <div class="card-body text-center">
                             <div class="mb-4">
-                                <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=300&h=200&q=80" 
-                                     alt="Cableado Estructurado"
-                                     class="img-fluid rounded"
-                                     style="height: 200px; object-fit: cover;">
+                                <i class="fas fa-network-wired fa-3x text-primary"></i>
                             </div>
                             <h3 class="h4 mb-3">Cableado Estructurado</h3>
                             <p class="card-text">Crea una infraestructura tecnológica consolidada, segura y de calidad, para reducir los riesgos o incidencias técnicas.</p>
@@ -50,10 +47,7 @@
                     <div class="card h-100 shadow-sm">
                         <div class="card-body text-center">
                             <div class="mb-4">
-                                <img src="https://images.unsplash.com/photo-1557426272-fc759fdf7a8d?auto=format&fit=crop&w=300&h=200&q=80" 
-                                     alt="Cámaras CCTV"
-                                     class="img-fluid rounded"
-                                     style="height: 200px; object-fit: cover;">
+                                <i class="fas fa-video fa-3x text-primary"></i>
                             </div>
                             <h3 class="h4 mb-3">Cámaras de Seguridad CCTV</h3>
                             <p class="card-text">Monitorea donde quieras con un circuito cerrado de televisión (CCTV) para vigilancia de manera local o remotamente.</p>
@@ -66,10 +60,7 @@
                     <div class="card h-100 shadow-sm">
                         <div class="card-body text-center">
                             <div class="mb-4">
-                                <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=300&h=200&q=80" 
-                                     alt="Control de Accesos"
-                                     class="img-fluid rounded"
-                                     style="height: 200px; object-fit: cover;">
+                                <i class="fas fa-key fa-3x text-primary"></i>
                             </div>
                             <h3 class="h4 mb-3">Control de Accesos</h3>
                             <p class="card-text">Mejora la eficiencia operativa y obtén la tranquilidad de tener un entorno más seguro para empleados, visitantes y habitantes.</p>
@@ -82,10 +73,7 @@
                     <div class="card h-100 shadow-sm">
                         <div class="card-body text-center">
                             <div class="mb-4">
-                                <img src="https://images.unsplash.com/photo-1573164713714-d95e436ab8d6?auto=format&fit=crop&w=300&h=200&q=80" 
-                                     alt="Sistemas Inalámbricos"
-                                     class="img-fluid rounded"
-                                     style="height: 200px; object-fit: cover;">
+                                <i class="fas fa-wifi fa-3x text-primary"></i>
                             </div>
                             <h3 class="h4 mb-3">Sistemas Inalámbricos</h3>
                             <p class="card-text">No pierdas la conectividad en tu hogar y adecúa una estructura para ti y nunca dejes de disfrutar tus programas favoritos.</p>
@@ -98,10 +86,7 @@
                     <div class="card h-100 shadow-sm">
                         <div class="card-body text-center">
                             <div class="mb-4">
-                                <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=300&h=200&q=80" 
-                                     alt="Audio Multizonas"
-                                     class="img-fluid rounded"
-                                     style="height: 200px; object-fit: cover;">
+                                <i class="fas fa-volume-up fa-3x text-primary"></i>
                             </div>
                             <h3 class="h4 mb-3">Audio Multizonas</h3>
                             <p class="card-text">Escucha tus canciones favoritas o conferencias en cualquier lugar de tu casa u oficina con este sistema.</p>
@@ -114,10 +99,7 @@
                     <div class="card h-100 shadow-sm">
                         <div class="card-body text-center">
                             <div class="mb-4">
-                                <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=300&h=200&q=80" 
-                                     alt="Sistemas de Alarmas"
-                                     class="img-fluid rounded"
-                                     style="height: 200px; object-fit: cover;">
+                                <i class="fas fa-bell fa-3x text-primary"></i>
                             </div>
                             <h3 class="h4 mb-3">Sistemas de Alarmas</h3>
                             <p class="card-text">Crea un sistema de alarmas para tu hogar y empresas. Monitorea y mantente siempre alerta, deja a F5 garantizar tu seguridad.</p>
@@ -130,10 +112,7 @@
                     <div class="card h-100 shadow-sm">
                         <div class="card-body text-center">
                             <div class="mb-4">
-                                <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=300&h=200&q=80" 
-                                     alt="Telefonía IP"
-                                     class="img-fluid rounded"
-                                     style="height: 200px; object-fit: cover;">
+                                <i class="fas fa-phone-alt fa-3x text-primary"></i>
                             </div>
                             <h3 class="h4 mb-3">Telefonía IP y Análoga</h3>
                             <p class="card-text">Dale diseño a tus oficinas y espacios de trabajo con la mejor comunicación.</p>
@@ -146,10 +125,7 @@
                     <div class="card h-100 shadow-sm">
                         <div class="card-body text-center">
                             <div class="mb-4">
-                                <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=300&h=200&q=80" 
-                                     alt="Almacenamiento NAS"
-                                     class="img-fluid rounded"
-                                     style="height: 200px; object-fit: cover;">
+                                <i class="fas fa-database fa-3x text-primary"></i>
                             </div>
                             <h3 class="h4 mb-3">Sistemas NAS</h3>
                             <p class="card-text">Servicio ideal para centralizar todo el almacenamiento de forma segura. Ten siempre los datos a la mano con un sistema NAS.</p>
@@ -162,10 +138,7 @@
                     <div class="card h-100 shadow-sm">
                         <div class="card-body text-center">
                             <div class="mb-4">
-                                <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=300&h=200&q=80" 
-                                     alt="Soporte TI"
-                                     class="img-fluid rounded"
-                                     style="height: 200px; object-fit: cover;">
+                                <i class="fas fa-laptop-code fa-3x text-primary"></i>
                             </div>
                             <h3 class="h4 mb-3">Soporte TI</h3>
                             <p class="card-text">Mantenimiento y resolución de incidencias en tu equipo de cómputo.</p>
