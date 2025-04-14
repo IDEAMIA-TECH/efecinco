@@ -14,8 +14,13 @@ class ContactController extends Controller {
 
     public function index() {
         try {
-            // Renderizar la vista de contacto
-            $this->render('contact/index');
+            // Obtener la configuración
+            $config = require_once CONFIG_PATH . '/config.php';
+            
+            // Renderizar la vista de contacto con la configuración
+            $this->render('contact/index', [
+                'config' => $config
+            ]);
         } catch (\Exception $e) {
             // Log del error
             error_log('Error en ContactController::index: ' . $e->getMessage());

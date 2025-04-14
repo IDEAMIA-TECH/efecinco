@@ -1,21 +1,104 @@
-/* General Styles */
+/* Variables */
 :root {
-    --primary-color: #0056b3;
+    --primary-color: #007bff;
     --secondary-color: #6c757d;
-    --light-color: #f8f9fa;
     --dark-color: #343a40;
+    --light-color: #f8f9fa;
 }
 
+/* General Styles */
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Roboto', sans-serif;
     line-height: 1.6;
-    color: var(--dark-color);
 }
 
 /* Hero Section */
-.hero-section {
-    background: linear-gradient(135deg, var(--primary-color), #003366);
+.hero {
+    background: linear-gradient(135deg, var(--primary-color), var(--dark-color));
     padding: 4rem 0;
+}
+
+.hero h1 {
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.hero .lead {
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+}
+
+/* Cards */
+.card {
+    border: none;
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card-body {
+    padding: 2rem;
+}
+
+/* Icons */
+.fa-3x {
+    margin-bottom: 1rem;
+}
+
+/* Forms */
+.form-control {
+    padding: 0.75rem;
+    border-radius: 0.25rem;
+}
+
+.form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    padding: 0.75rem 1.5rem;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+/* Footer */
+footer {
+    background-color: var(--dark-color);
+    padding: 3rem 0;
+}
+
+footer h5 {
+    margin-bottom: 1.5rem;
+}
+
+.social-links a {
+    font-size: 1.5rem;
+    margin-right: 1rem;
+    transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+    color: var(--primary-color) !important;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero {
+        padding: 2rem 0;
+    }
+    
+    .card-body {
+        padding: 1.5rem;
+    }
 }
 
 /* About Page Specific Styles */
@@ -80,37 +163,7 @@ body {
     object-fit: contain;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-    .hero-section {
-        padding: 2rem 0;
-    }
-
-    .timeline::before {
-        left: 20px;
-    }
-
-    .values-section .card {
-        margin-bottom: 1rem;
-    }
-}
-
 /* General Components */
-.btn-primary {
-    background-color: var(--primary-color);
-    border-color: var(--primary-color);
-}
-
-.btn-primary:hover {
-    background-color: #004494;
-    border-color: #004494;
-}
-
-.card {
-    border-radius: 10px;
-    overflow: hidden;
-}
-
 .section-title {
     position: relative;
     margin-bottom: 3rem;
