@@ -230,8 +230,8 @@
                 $logos = [
                     'Walmart' => 'https://upload.wikimedia.org/wikipedia/commons/c/ca/Walmart_logo.svg',
                     'Importex Green' => 'https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?auto=format&fit=crop&w=100&h=100&q=80',
-                    'Banco Azteca' => '/assets/images/clients/Cliente-Logo-Banco-Azteca.png',
-                    'Henkel' => '/assets/images/clients/henkel-logo.png',
+                    'Banco Azteca' => '/efecinco/assets/images/clients/Cliente-Logo-Banco-Azteca.png',
+                    'Henkel' => '/efecinco/assets/images/clients/henkel-logo.png',
                     'Otros clientes destacados' => 'https://images.unsplash.com/photo-1557426272-fc759fdf7a8d?auto=format&fit=crop&w=100&h=100&q=80'
                 ];
                 foreach ($empresa['clientes'] as $cliente): ?>
