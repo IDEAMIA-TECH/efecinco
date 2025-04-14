@@ -1,7 +1,16 @@
 <?php
 namespace controllers;
 
+use models\ConfiguracionModel;
+
 class QuienesSomosController extends BaseController {
+    private $configModel;
+
+    public function __construct() {
+        parent::__construct();
+        $this->configModel = new ConfiguracionModel($this->db);
+    }
+
     public function index() {
         try {
             // Obtener configuración necesaria
