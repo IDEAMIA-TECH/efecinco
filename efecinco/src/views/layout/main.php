@@ -28,7 +28,7 @@
                             <a class="nav-link" href="/">Inicio</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/quienes-somos">Quiénes Somos</a>
+                            <a class="nav-link" href="<?php echo SITE_URL; ?>/quienes-somos">Quiénes Somos</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/servicios">Servicios</a>
