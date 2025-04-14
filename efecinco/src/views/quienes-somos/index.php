@@ -43,32 +43,28 @@
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     position: relative;
+    text-align: center;
 }
 
-.timeline-dot {
-    width: 20px;
-    height: 20px;
-    background: #0d6efd;
+.timeline-image {
+    margin: 15px auto;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
-    position: absolute;
-    right: -10px;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 1;
-}
-
-.timeline-item-right .timeline-dot {
-    left: -10px;
+    overflow: hidden;
+    border: 3px solid #0d6efd;
 }
 
 .timeline-year {
     font-weight: bold;
     color: #0d6efd;
     margin-bottom: 10px;
+    font-size: 1.2rem;
 }
 
 .timeline-text {
     color: #6c757d;
+    margin-top: 15px;
 }
 
 @media (max-width: 768px) {
@@ -86,12 +82,8 @@
         left: 0;
     }
 
-    .timeline-dot {
-        left: 21px;
-    }
-
-    .timeline-item-right .timeline-dot {
-        left: 21px;
+    .timeline-image {
+        margin: 15px auto;
     }
 }
 </style>
@@ -125,7 +117,12 @@
                 <div class="col-md-6 mb-4">
                     <div class="card h-100 shadow-sm">
                         <div class="card-body text-center">
-                            <i class="fas fa-bullseye fa-3x mb-3 text-primary"></i>
+                            <div class="image-container mb-4" style="height: 200px; overflow: hidden;">
+                                <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=400&h=300&q=80" 
+                                     alt="Misión" 
+                                     class="img-fluid rounded"
+                                     style="width: 100%; height: 100%; object-fit: cover;">
+                            </div>
                             <h2 class="card-title h4">Nuestra Misión</h2>
                             <p class="card-text"><?= htmlspecialchars($empresa['mision']) ?></p>
                         </div>
@@ -134,7 +131,12 @@
                 <div class="col-md-6 mb-4">
                     <div class="card h-100 shadow-sm">
                         <div class="card-body text-center">
-                            <i class="fas fa-eye fa-3x mb-3 text-primary"></i>
+                            <div class="image-container mb-4" style="height: 200px; overflow: hidden;">
+                                <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=400&h=300&q=80" 
+                                     alt="Visión" 
+                                     class="img-fluid rounded"
+                                     style="width: 100%; height: 100%; object-fit: cover;">
+                            </div>
                             <h2 class="card-title h4">Nuestra Visión</h2>
                             <p class="card-text"><?= htmlspecialchars($empresa['vision']) ?></p>
                         </div>
@@ -150,19 +152,22 @@
             <h2 class="text-center mb-4">Nuestros Valores</h2>
             <div class="row">
                 <?php 
-                $iconos = [
-                    'Excelencia' => 'fa-star',
-                    'Innovación' => 'fa-lightbulb',
-                    'Integridad' => 'fa-shield-alt',
-                    'Compromiso' => 'fa-handshake'
+                $valores_imagenes = [
+                    'Excelencia' => 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=300&h=200&q=80',
+                    'Innovación' => 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=300&h=200&q=80',
+                    'Integridad' => 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=300&h=200&q=80',
+                    'Compromiso' => 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=300&h=200&q=80'
                 ];
                 foreach ($empresa['valores'] as $titulo => $descripcion): 
                 ?>
                 <div class="col-md-3 mb-4">
                     <div class="card h-100 shadow-sm">
                         <div class="card-body text-center">
-                            <div class="inline-block p-3 rounded-full bg-primary bg-opacity-10 mb-3">
-                                <i class="fas <?= $iconos[$titulo] ?> fa-2x text-primary"></i>
+                            <div class="image-container mb-3" style="height: 150px; overflow: hidden;">
+                                <img src="<?= $valores_imagenes[$titulo] ?>" 
+                                     alt="<?= htmlspecialchars($titulo) ?>" 
+                                     class="img-fluid rounded"
+                                     style="width: 100%; height: 100%; object-fit: cover;">
                             </div>
                             <h3 class="card-title h5"><?= htmlspecialchars($titulo) ?></h3>
                             <p class="card-text"><?= htmlspecialchars($descripcion) ?></p>
@@ -179,11 +184,33 @@
         <div class="container">
             <h2 class="text-center mb-5">Nuestra Historia</h2>
             <div class="timeline">
-                <?php $counter = 0; foreach ($empresa['linea_tiempo'] as $anio => $evento): $counter++; ?>
+                <?php 
+                $timeline_images = [
+                    '2014' => 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=300&h=200&q=80',
+                    '2015' => 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=300&h=200&q=80',
+                    '2016' => 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=300&h=200&q=80',
+                    '2017' => 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=300&h=200&q=80',
+                    '2018' => 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=300&h=200&q=80',
+                    '2019' => 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=300&h=200&q=80',
+                    '2020' => 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=300&h=200&q=80',
+                    '2021' => 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=300&h=200&q=80',
+                    '2022' => 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=300&h=200&q=80',
+                    '2023' => 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=300&h=200&q=80',
+                    '2024' => 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=300&h=200&q=80'
+                ];
+                $counter = 0; 
+                foreach ($empresa['linea_tiempo'] as $anio => $evento): 
+                    $counter++; 
+                ?>
                 <div class="timeline-item <?= $counter % 2 == 0 ? 'timeline-item-right' : 'timeline-item-left' ?>">
                     <div class="timeline-content">
                         <div class="timeline-year"><?= htmlspecialchars($anio) ?></div>
-                        <div class="timeline-dot"></div>
+                        <div class="timeline-image">
+                            <img src="<?= $timeline_images[$anio] ?>" 
+                                 alt="<?= htmlspecialchars($anio) ?>" 
+                                 class="img-fluid rounded-circle"
+                                 style="width: 100px; height: 100px; object-fit: cover;">
+                        </div>
                         <div class="timeline-text">
                             <p><?= htmlspecialchars($evento) ?></p>
                         </div>
