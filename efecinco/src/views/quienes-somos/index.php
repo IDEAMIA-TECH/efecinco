@@ -6,7 +6,7 @@
     <!-- Hero Section -->
     <div class="relative bg-blue-900">
         <div class="absolute inset-0">
-            <img class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1497366216548-37526070297c" alt="Efecinco Team">
+            <img class="w-full h-[500px] object-cover" src="https://images.unsplash.com/photo-1497366216548-37526070297c" alt="Efecinco Team">
             <div class="absolute inset-0 bg-blue-900 mix-blend-multiply opacity-80"></div>
         </div>
         <div class="relative max-w-7xl mx-auto py-24 px-4 sm:py-32 sm:px-6 lg:px-8">
@@ -101,10 +101,12 @@
                 ];
                 foreach ($empresa['clientes'] as $cliente): ?>
                 <div class="flex items-center justify-center p-4 bg-white rounded-lg shadow-md transform hover:scale-110 transition-transform duration-300">
-                    <img src="<?= $logos[$cliente] ?>" 
-                         alt="<?= htmlspecialchars($cliente) ?>" 
-                         class="max-h-16 object-contain filter hover:brightness-100 transition duration-300"
-                         style="filter: grayscale(100%) brightness(90%);">
+                    <div class="w-32 h-32 flex items-center justify-center">
+                        <img src="<?= $logos[$cliente] ?>" 
+                             alt="<?= htmlspecialchars($cliente) ?>" 
+                             class="max-w-full max-h-full object-contain filter hover:brightness-100 transition duration-300"
+                             style="filter: grayscale(100%) brightness(90%);">
+                    </div>
                 </div>
                 <?php endforeach; ?>
             </div>
@@ -122,9 +124,11 @@
             ];
             foreach ($empresa['certificaciones'] as $certificacion): ?>
             <div class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300">
-                <img src="<?= $certificacionesImagenes[$certificacion['nombre']] ?>" 
-                     alt="<?= htmlspecialchars($certificacion['nombre']) ?>" 
-                     class="w-full h-48 object-cover">
+                <div class="h-48 overflow-hidden">
+                    <img src="<?= $certificacionesImagenes[$certificacion['nombre']] ?>" 
+                         alt="<?= htmlspecialchars($certificacion['nombre']) ?>" 
+                         class="w-full h-full object-cover">
+                </div>
                 <div class="p-6">
                     <h3 class="text-xl font-bold text-blue-900 mb-2"><?= htmlspecialchars($certificacion['nombre']) ?></h3>
                     <p class="text-gray-600"><?= htmlspecialchars($certificacion['descripcion']) ?></p>
