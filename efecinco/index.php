@@ -48,8 +48,8 @@ ini_set('session.use_only_cookies', 1);
 // Iniciar sesión
 session_start();
 
-// Limpiar cualquier salida anterior
-ob_clean();
+// Iniciar buffer de salida
+ob_start();
 
 try {
     logMessage('Iniciando aplicación');
@@ -231,3 +231,9 @@ try {
         echo "Ha ocurrido un error. Por favor, intente más tarde.";
     }
 }
+
+// Asegurar que todo el contenido sea enviado
+if (ob_get_level() > 0) {
+    ob_end_flush();
+}
+?>

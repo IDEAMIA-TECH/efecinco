@@ -16,10 +16,8 @@ class BaseController {
 
     protected function render($view, $data = []) {
         try {
-            // Asegurarse de que no haya salida previa
-            if (ob_get_level()) {
-                ob_clean();
-            }
+            // Asegurar que los datos de configuración estén disponibles
+            $data['config'] = $this->config;
             
             // Obtener el contenido de la vista
             $viewFile = VIEWS_PATH . '/' . $view . '.php';
@@ -27,15 +25,16 @@ class BaseController {
                 throw new \Exception("Vista no encontrada: $viewFile");
             }
             
-            // Incluir la vista y obtener su contenido
+            // Extraer variables para la vista
+            extract($data);
+            
+            // Capturar el contenido de la vista
             ob_start();
-            $content = include $viewFile;
-            if (ob_get_length() > 0) {
-                $content = ob_get_clean();
-            }
+            include $viewFile;
+            $content = ob_get_clean();
             
             // Renderizar el layout con el contenido
-            require_once VIEWS_PATH . '/layout/main.php';
+            include VIEWS_PATH . '/layout/main.php';
             
         } catch (\Exception $e) {
             error_log($e->getMessage());
