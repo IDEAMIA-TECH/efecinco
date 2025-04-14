@@ -202,7 +202,7 @@ ob_start();
 </section>
 
 <!-- CTA Section -->
-<section class="cta-section bg-gradient-primary text-white py-5">
+<section class="cta-section bg-gradient-primary text-black py-5">
     <div class="container text-center">
         <h2 class="mb-4">¿Listo para comenzar tu proyecto?</h2>
         <p class="lead mb-4">Contáctanos hoy mismo para una consulta gratuita.</p>

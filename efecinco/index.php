@@ -48,6 +48,9 @@ ini_set('session.use_only_cookies', 1);
 // Iniciar sesión
 session_start();
 
+// Limpiar cualquier salida anterior
+ob_clean();
+
 try {
     logMessage('Iniciando aplicación');
     
@@ -201,6 +204,8 @@ try {
             throw new \Exception("Método no encontrado: $method en $controllerClass");
         }
         
+        // Asegurarse de que no haya salida antes del controlador
+        ob_clean();
         $controllerInstance->$method();
     } else {
         logMessage("Ruta no encontrada: $request", 'WARNING');
