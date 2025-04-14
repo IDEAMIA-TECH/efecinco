@@ -78,7 +78,7 @@ try {
     // Router básico
     logMessage('Iniciando router');
     $request = $_SERVER['REQUEST_URI'];
-    $basePath = dirname($_SERVER['SCRIPT_NAME']);
+    $basePath = '/efecinco/efecinco';
     $request = str_replace($basePath, '', $request);
     $request = strtok($request, '?');
     
