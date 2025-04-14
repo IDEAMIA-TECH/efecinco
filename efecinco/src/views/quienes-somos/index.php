@@ -118,7 +118,7 @@
                     <div class="card h-100 shadow-sm">
                         <div class="card-body text-center">
                             <div class="image-container mb-4" style="height: 200px; overflow: hidden;">
-                                <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=400&h=300&q=80" 
+                                <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=400&h=300&q=80" 
                                      alt="Misión" 
                                      class="img-fluid rounded"
                                      style="width: 100%; height: 100%; object-fit: cover;">
@@ -132,7 +132,7 @@
                     <div class="card h-100 shadow-sm">
                         <div class="card-body text-center">
                             <div class="image-container mb-4" style="height: 200px; overflow: hidden;">
-                                <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=400&h=300&q=80" 
+                                <img src="https://images.unsplash.com/photo-1533750349088-cd871a92f312?auto=format&fit=crop&w=400&h=300&q=80" 
                                      alt="Visión" 
                                      class="img-fluid rounded"
                                      style="width: 100%; height: 100%; object-fit: cover;">
@@ -153,10 +153,10 @@
             <div class="row">
                 <?php 
                 $valores_imagenes = [
-                    'Excelencia' => 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=300&h=200&q=80',
-                    'Innovación' => 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=300&h=200&q=80',
-                    'Integridad' => 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=300&h=200&q=80',
-                    'Compromiso' => 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=300&h=200&q=80'
+                    'Excelencia' => 'https://images.unsplash.com/photo-1533750516457-a7f992034fec?auto=format&fit=crop&w=300&h=200&q=80',
+                    'Innovación' => 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=300&h=200&q=80',
+                    'Integridad' => 'https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=300&h=200&q=80',
+                    'Compromiso' => 'https://images.unsplash.com/photo-1521791055366-0d553872125f?auto=format&fit=crop&w=300&h=200&q=80'
                 ];
                 foreach ($empresa['valores'] as $titulo => $descripcion): 
                 ?>
@@ -186,17 +186,17 @@
             <div class="timeline">
                 <?php 
                 $timeline_images = [
-                    '2014' => 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=300&h=200&q=80',
-                    '2015' => 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=300&h=200&q=80',
-                    '2016' => 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=300&h=200&q=80',
-                    '2017' => 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=300&h=200&q=80',
-                    '2018' => 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=300&h=200&q=80',
-                    '2019' => 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=300&h=200&q=80',
-                    '2020' => 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=300&h=200&q=80',
-                    '2021' => 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=300&h=200&q=80',
-                    '2022' => 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=300&h=200&q=80',
-                    '2023' => 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=300&h=200&q=80',
-                    '2024' => 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=300&h=200&q=80'
+                    '2014' => 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=300&h=200&q=80',
+                    '2015' => 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=300&h=200&q=80',
+                    '2016' => 'https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=300&h=200&q=80',
+                    '2017' => 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=300&h=200&q=80',
+                    '2018' => 'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=300&h=200&q=80',
+                    '2019' => 'https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&w=300&h=200&q=80',
+                    '2020' => 'https://images.unsplash.com/photo-1584483766114-2cea6facdf57?auto=format&fit=crop&w=300&h=200&q=80',
+                    '2021' => 'https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?auto=format&fit=crop&w=300&h=200&q=80',
+                    '2022' => 'https://images.unsplash.com/photo-1550432163-9cb326104944?auto=format&fit=crop&w=300&h=200&q=80',
+                    '2023' => 'https://images.unsplash.com/photo-1550432163-9cb326104944?auto=format&fit=crop&w=300&h=200&q=80',
+                    '2024' => 'https://images.unsplash.com/photo-1562813733-b31f71025d54?auto=format&fit=crop&w=300&h=200&q=80'
                 ];
                 $counter = 0; 
                 foreach ($empresa['linea_tiempo'] as $anio => $evento): 
