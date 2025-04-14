@@ -131,7 +131,7 @@ ob_start();
             <div class="col-md-4 mb-4">
                 <div class="card h-100 shadow">
                     <div class="image-container" style="height: 250px; overflow: hidden;">
-                        <img src="https://images.unsplash.com/photo-1551703599-6b3e8379aa8b" 
+                        <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31" 
                              class="card-img-top" 
                              alt="Infraestructura de Red"
                              style="width: 100%; height: 100%; object-fit: cover;">
