@@ -1,5 +1,6 @@
 <?php
-// El buffer y el layout se manejan en main.php
+// Iniciar el buffer de salida
+ob_start();
 ?>
 
 <div class="bg-white">
@@ -80,21 +81,21 @@
                                 <i class="fas fa-map-marker-alt text-primary me-3 mt-1"></i>
                                 <div>
                                     <h5 class="mb-1">Dirección</h5>
-                                    <p class="mb-0"><?php echo $config['contact_info']['direccion']; ?></p>
+                                    <p class="mb-0">Calle 123 #45-67, Bogotá, Colombia</p>
                                 </div>
                             </div>
                             <div class="d-flex align-items-start mb-3">
                                 <i class="fas fa-phone text-primary me-3 mt-1"></i>
                                 <div>
                                     <h5 class="mb-1">Teléfono</h5>
-                                    <p class="mb-0"><?php echo $config['contact_info']['telefono']; ?></p>
+                                    <p class="mb-0">+57 1 234 5678</p>
                                 </div>
                             </div>
                             <div class="d-flex align-items-start mb-3">
                                 <i class="fas fa-envelope text-primary me-3 mt-1"></i>
                                 <div>
                                     <h5 class="mb-1">Email</h5>
-                                    <p class="mb-0"><?php echo $config['contact_info']['email']; ?></p>
+                                    <p class="mb-0">contacto@efecinco.com</p>
                                 </div>
                             </div>
                         </div>
@@ -106,7 +107,7 @@
                             <h2 class="h3 mb-4">Horarios de atención</h2>
                             <div class="d-flex justify-content-between mb-2">
                                 <span>Lunes a Viernes:</span>
-                                <span class="fw-bold"><?php echo $config['contact_info']['horario_laboral']; ?></span>
+                                <span class="fw-bold">8:00 AM - 6:00 PM</span>
                             </div>
                             <div class="d-flex justify-content-between mb-2">
                                 <span>Sábados:</span>
@@ -139,4 +140,12 @@
             </div>
         </div>
     </section>
-</div> 
+</div>
+
+<?php
+// Obtener el contenido del buffer y limpiarlo
+$content = ob_get_clean();
+
+// Incluir el layout principal
+require_once VIEWS_PATH . '/layouts/main.php';
+?> 
