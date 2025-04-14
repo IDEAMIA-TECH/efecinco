@@ -31,10 +31,12 @@ ob_start();
         <div class="row">
             <div class="col-md-3 mb-4">
                 <div class="card h-100 shadow-sm">
-                    <img src="https://images.unsplash.com/photo-1580894894513-541e068a3e2b" 
-                         class="card-img-top" 
-                         alt="Sistemas de Seguridad"
-                         style="height: 200px; object-fit: cover;">
+                    <div class="image-container" style="height: 200px; overflow: hidden;">
+                        <img src="https://images.unsplash.com/photo-1580894894513-541e068a3e2b" 
+                             class="card-img-top" 
+                             alt="Sistemas de Seguridad"
+                             style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
                     <div class="card-body text-center">
                         <i class="fas fa-shield-alt fa-3x mb-3 text-primary"></i>
                         <h3 class="card-title h5">Sistemas de Seguridad</h3>
@@ -44,9 +46,12 @@ ob_start();
             </div>
             <div class="col-md-3 mb-4">
                 <div class="card h-100 shadow-sm">
-                    <img src="https://images.unsplash.com/photo-1562516155-e0c1ee44059b" 
-                         class="card-img-top" 
-                         alt="Control de Acceso">
+                    <div class="image-container" style="height: 200px; overflow: hidden;">
+                        <img src="https://images.unsplash.com/photo-1562516155-e0c1ee44059b" 
+                             class="card-img-top" 
+                             alt="Control de Acceso"
+                             style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
                     <div class="card-body text-center">
                         <i class="fas fa-key fa-3x mb-3 text-primary"></i>
                         <h3 class="card-title h5">Control de Acceso</h3>
@@ -56,10 +61,12 @@ ob_start();
             </div>
             <div class="col-md-3 mb-4">
                 <div class="card h-100 shadow-sm">
-                    <img src="https://images.unsplash.com/photo-1573164713714-d95e436ab8d6" 
-                         class="card-img-top" 
-                         alt="Redes y Conectividad"
-                         style="height: 200px; object-fit: cover;">
+                    <div class="image-container" style="height: 200px; overflow: hidden;">
+                        <img src="https://images.unsplash.com/photo-1573164713714-d95e436ab8d6" 
+                             class="card-img-top" 
+                             alt="Redes y Conectividad"
+                             style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
                     <div class="card-body text-center">
                         <i class="fas fa-network-wired fa-3x mb-3 text-primary"></i>
                         <h3 class="card-title h5">Redes y Conectividad</h3>
@@ -69,9 +76,12 @@ ob_start();
             </div>
             <div class="col-md-3 mb-4">
                 <div class="card h-100 shadow-sm">
-                    <img src="https://images.unsplash.com/photo-1558002038-1055907df827" 
-                         class="card-img-top" 
-                         alt="Automatización">
+                    <div class="image-container" style="height: 200px; overflow: hidden;">
+                        <img src="https://images.unsplash.com/photo-1558002038-1055907df827" 
+                             class="card-img-top" 
+                             alt="Automatización"
+                             style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
                     <div class="card-body text-center">
                         <i class="fas fa-cogs fa-3x mb-3 text-primary"></i>
                         <h3 class="card-title h5">Automatización</h3>
@@ -90,9 +100,12 @@ ob_start();
         <div class="row">
             <div class="col-md-4 mb-4">
                 <div class="card h-100 shadow">
-                    <img src="https://images.unsplash.com/photo-1581092795360-fd1ca04f0952" 
-                         class="card-img-top" 
-                         alt="Centro de Monitoreo">
+                    <div class="image-container" style="height: 250px; overflow: hidden;">
+                        <img src="https://images.unsplash.com/photo-1581092795360-fd1ca04f0952" 
+                             class="card-img-top" 
+                             alt="Centro de Monitoreo"
+                             style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
                     <div class="card-body">
                         <h5 class="card-title">Centro de Monitoreo</h5>
                         <p class="card-text">Implementación de centro de monitoreo para empresa de seguridad.</p>
@@ -102,9 +115,12 @@ ob_start();
             </div>
             <div class="col-md-4 mb-4">
                 <div class="card h-100 shadow">
-                    <img src="https://images.unsplash.com/photo-1541746972996-4e0b0f43e02a" 
-                         class="card-img-top" 
-                         alt="Control de Acceso Corporativo">
+                    <div class="image-container" style="height: 250px; overflow: hidden;">
+                        <img src="https://images.unsplash.com/photo-1541746972996-4e0b0f43e02a" 
+                             class="card-img-top" 
+                             alt="Control de Acceso Corporativo"
+                             style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
                     <div class="card-body">
                         <h5 class="card-title">Control de Acceso Corporativo</h5>
                         <p class="card-text">Sistema de control de acceso para edificio empresarial.</p>
@@ -114,9 +130,12 @@ ob_start();
             </div>
             <div class="col-md-4 mb-4">
                 <div class="card h-100 shadow">
-                    <img src="https://images.unsplash.com/photo-1551703599-6b3e8379aa8b" 
-                         class="card-img-top" 
-                         alt="Infraestructura de Red">
+                    <div class="image-container" style="height: 250px; overflow: hidden;">
+                        <img src="https://images.unsplash.com/photo-1551703599-6b3e8379aa8b" 
+                             class="card-img-top" 
+                             alt="Infraestructura de Red"
+                             style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
                     <div class="card-body">
                         <h5 class="card-title">Infraestructura de Red</h5>
                         <p class="card-text">Implementación de red corporativa para multinacional.</p>
