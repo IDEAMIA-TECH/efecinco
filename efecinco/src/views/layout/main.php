@@ -11,14 +11,14 @@
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <!-- Custom CSS -->
-    <link href="/assets/css/style.css" rel="stylesheet">
+    <link href="<?php echo SITE_URL; ?>/assets/css/style.css" rel="stylesheet">
 </head>
 <body>
     <!-- Header -->
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container">
-                <a class="navbar-brand" href="/">Efecinco</a>
+                <a class="navbar-brand" href="<?php echo SITE_URL; ?>">Efecinco</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -57,25 +57,32 @@
                 <div class="col-md-4">
                     <h5>Contacto</h5>
                     <p>
-                        <i class="fas fa-map-marker-alt"></i> <?php echo $config['contact_info']['address']; ?><br>
-                        <i class="fas fa-phone"></i> <?php echo $config['contact_info']['phone']; ?><br>
-                        <i class="fas fa-envelope"></i> <?php echo $config['contact_info']['email']; ?>
+                        <i class="fas fa-map-marker-alt"></i> <?php echo $data['config']['contacto_direccion'] ?? 'Calle 123 #45-67, Bogotá, Colombia'; ?><br>
+                        <i class="fas fa-phone"></i> <?php echo $data['config']['contacto_telefono'] ?? '+57 1 234 5678'; ?><br>
+                        <i class="fas fa-envelope"></i> <?php echo $data['config']['contacto_email'] ?? 'contacto@efecinco.com'; ?>
                     </p>
                 </div>
                 <div class="col-md-4">
                     <h5>Horario</h5>
-                    <p><?php echo $config['contact_info']['business_hours']; ?></p>
+                    <p><?php echo $data['config']['horario'] ?? 'Lunes a Viernes: 8:00 AM - 6:00 PM'; ?></p>
                 </div>
                 <div class="col-md-4">
                     <h5>Síguenos</h5>
                     <div class="social-links">
-                        <a href="<?php echo $config['social_media']['facebook']; ?>" class="text-white me-2">
+                        <?php 
+                        $redes_sociales = isset($data['config']['redes_sociales']) ? json_decode($data['config']['redes_sociales'], true) : [
+                            'facebook' => 'https://facebook.com/efecinco',
+                            'instagram' => 'https://instagram.com/efecinco',
+                            'linkedin' => 'https://linkedin.com/company/efecinco'
+                        ];
+                        ?>
+                        <a href="<?php echo $redes_sociales['facebook']; ?>" class="text-white me-2" target="_blank">
                             <i class="fab fa-facebook-f"></i>
                         </a>
-                        <a href="<?php echo $config['social_media']['instagram']; ?>" class="text-white me-2">
+                        <a href="<?php echo $redes_sociales['instagram']; ?>" class="text-white me-2" target="_blank">
                             <i class="fab fa-instagram"></i>
                         </a>
-                        <a href="<?php echo $config['social_media']['linkedin']; ?>" class="text-white">
+                        <a href="<?php echo $redes_sociales['linkedin']; ?>" class="text-white" target="_blank">
                             <i class="fab fa-linkedin-in"></i>
                         </a>
                     </div>
@@ -87,6 +94,6 @@
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Custom JS -->
-    <script src="/assets/js/main.js"></script>
+    <script src="<?php echo SITE_URL; ?>/assets/js/main.js"></script>
 </body>
 </html> 

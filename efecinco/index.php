@@ -95,6 +95,7 @@ try {
         // Mapeo de namespaces a directorios
         $prefixes = [
             'controllers\\' => CONTROLLERS_PATH . '/',
+            'models\\' => SRC_PATH . '/models/',
             'database\\' => SRC_PATH . '/database/'
         ];
 
