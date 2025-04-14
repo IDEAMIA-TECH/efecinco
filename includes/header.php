@@ -121,7 +121,7 @@ session_start();
         <div class="container">
             <div class="logo">
                 <a href="index.php">
-                    <img src="assets/images/logo.png" alt="Efecinco Logo">
+                    <img src="assets/images/logof5.png" alt="Efecinco - Sistemas de Seguridad y Tecnología">
                 </a>
             </div>
             <nav>
