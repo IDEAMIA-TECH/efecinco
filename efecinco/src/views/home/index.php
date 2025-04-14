@@ -1,5 +1,5 @@
 <?php
-// No necesitamos limpiar el buffer aquí
+// Iniciamos el buffer de salida
 ob_start();
 ?>
 
@@ -211,6 +211,7 @@ ob_start();
 </section>
 
 <?php
+// Solo obtenemos el contenido del buffer, el layout se manejará en el controlador
 $content = ob_get_clean();
-require_once VIEWS_PATH . '/layout/main.php';
+return $content;
 ?> 

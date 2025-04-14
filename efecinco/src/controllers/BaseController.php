@@ -16,29 +16,27 @@ class BaseController {
 
     protected function render($view, $data = []) {
         try {
-            // Iniciar el buffer de salida
-            ob_start();
-            
-            // Hacer la configuración disponible globalmente
-            global $config;
-            $config = $this->config;
-            
-            // Extraer las variables para que estén disponibles en la vista
-            extract($data);
-            
-            // Incluir la vista
-            $viewPath = VIEWS_PATH . '/' . $view . '.php';
-            if (!file_exists($viewPath)) {
-                throw new \Exception("Vista no encontrada: $viewPath");
+            // Asegurarse de que no haya salida previa
+            if (ob_get_level()) {
+                ob_clean();
             }
             
-            require $viewPath;
+            // Obtener el contenido de la vista
+            $viewFile = VIEWS_PATH . '/' . $view . '.php';
+            if (!file_exists($viewFile)) {
+                throw new \Exception("Vista no encontrada: $viewFile");
+            }
             
-            // Obtener el contenido del buffer
-            $content = ob_get_clean();
+            // Incluir la vista y obtener su contenido
+            ob_start();
+            $content = include $viewFile;
+            if (ob_get_length() > 0) {
+                $content = ob_get_clean();
+            }
             
-            // Incluir el layout
-            require VIEWS_PATH . '/layout/main.php';
+            // Renderizar el layout con el contenido
+            require_once VIEWS_PATH . '/layout/main.php';
+            
         } catch (\Exception $e) {
             error_log($e->getMessage());
             throw $e;
