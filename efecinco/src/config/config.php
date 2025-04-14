@@ -24,6 +24,7 @@ define('MAIL_ENCRYPTION', 'tls');
 define('ROOT_PATH', dirname(__DIR__));
 define('SRC_PATH', ROOT_PATH . '/src');
 define('VIEWS_PATH', SRC_PATH . '/views');
+define('CONTROLLERS_PATH', SRC_PATH . '/controllers');
 define('ASSETS_PATH', ROOT_PATH . '/assets');
 define('UPLOADS_PATH', ROOT_PATH . '/uploads');
 

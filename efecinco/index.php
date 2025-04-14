@@ -56,8 +56,6 @@ try {
     require_once __DIR__ . '/src/config/config.php';
     require_once __DIR__ . '/src/config/database.php';
     
-
-    
     // Verificar estructura de directorios
     logMessage("Verificando estructura de directorios:");
     logMessage("ROOT_PATH existe: " . (is_dir(ROOT_PATH) ? 'Sí' : 'No'));
