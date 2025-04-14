@@ -61,10 +61,10 @@
                 <div class="col-md-4">
                     <h5>Contacto</h5>
                     <p>
-                        <i class="fas fa-map-marker-alt"></i> <?php echo $config['contact_info']['address']; ?><br>
-                        <i class="fas fa-phone"></i> <?php echo $config['contact_info']['phone']; ?><br>
-                        <i class="fas fa-envelope"></i> <?php echo $config['contact_info']['email']; ?><br>
-                        <i class="fas fa-clock"></i> <?php echo $config['contact_info']['business_hours']; ?>
+                        <i class="fas fa-map-marker-alt"></i> <?php echo isset($config['contact_info']['address']) ? $config['contact_info']['address'] : ''; ?><br>
+                        <i class="fas fa-phone"></i> <?php echo isset($config['contact_info']['phone']) ? $config['contact_info']['phone'] : ''; ?><br>
+                        <i class="fas fa-envelope"></i> <?php echo isset($config['contact_info']['email']) ? $config['contact_info']['email'] : ''; ?><br>
+                        <i class="fas fa-clock"></i> <?php echo isset($config['contact_info']['business_hours']) ? $config['contact_info']['business_hours'] : ''; ?>
                     </p>
                 </div>
                 <div class="col-md-4">
