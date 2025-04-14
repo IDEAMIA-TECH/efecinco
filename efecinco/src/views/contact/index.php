@@ -81,21 +81,21 @@ ob_start();
                                 <i class="fas fa-map-marker-alt text-primary me-3 mt-1"></i>
                                 <div>
                                     <h5 class="mb-1">Dirección</h5>
-                                    <p class="mb-0">Calle 123 #45-67, Bogotá, Colombia</p>
+                                    <p class="mb-0"><?php echo $config['contact_info']['address']; ?></p>
                                 </div>
                             </div>
                             <div class="d-flex align-items-start mb-3">
                                 <i class="fas fa-phone text-primary me-3 mt-1"></i>
                                 <div>
                                     <h5 class="mb-1">Teléfono</h5>
-                                    <p class="mb-0">+57 1 234 5678</p>
+                                    <p class="mb-0"><?php echo $config['contact_info']['phone']; ?></p>
                                 </div>
                             </div>
                             <div class="d-flex align-items-start mb-3">
                                 <i class="fas fa-envelope text-primary me-3 mt-1"></i>
                                 <div>
                                     <h5 class="mb-1">Email</h5>
-                                    <p class="mb-0">contacto@efecinco.com</p>
+                                    <p class="mb-0"><?php echo $config['contact_info']['email']; ?></p>
                                 </div>
                             </div>
                         </div>
@@ -107,7 +107,7 @@ ob_start();
                             <h2 class="h3 mb-4">Horarios de atención</h2>
                             <div class="d-flex justify-content-between mb-2">
                                 <span>Lunes a Viernes:</span>
-                                <span class="fw-bold">8:00 AM - 6:00 PM</span>
+                                <span class="fw-bold"><?php echo $config['contact_info']['business_hours']; ?></span>
                             </div>
                             <div class="d-flex justify-content-between mb-2">
                                 <span>Sábados:</span>
@@ -126,7 +126,7 @@ ob_start();
                             <h2 class="h3 mb-4">Ubicación</h2>
                             <div class="ratio ratio-16x9">
                                 <iframe
-                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3976.7854!2d-74.0817!3d4.6097!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDDCsDM2JzM0LjkiTiA3NMKwMDQnNTQuMSJX!5e0!3m2!1ses!2sco!4v1620000000000!5m2!1ses!2sco"
+                                    src="<?php echo $config['maps_embed']; ?>"
                                     width="100%"
                                     height="300"
                                     style="border:0;"
