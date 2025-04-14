@@ -56,7 +56,7 @@ ob_start();
             </div>
             <div class="col-md-3 mb-4">
                 <div class="card h-100 shadow-sm">
-                    <img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8" 
+                    <img src="https://images.unsplash.com/photo-1573164713714-d95e436ab8d6" 
                          class="card-img-top" 
                          alt="Redes y Conectividad"
                          style="height: 200px; object-fit: cover;">
