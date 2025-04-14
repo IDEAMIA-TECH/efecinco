@@ -51,46 +51,22 @@ session_start();
 try {
     logMessage('Iniciando aplicación');
     
-    // Verificar permisos de archivos
-    $htaccessPath = __DIR__ . '/.htaccess';
-    $indexPath = __FILE__;
-    
-    logMessage("Ruta .htaccess: $htaccessPath");
-    logMessage("Permisos .htaccess: " . substr(sprintf('%o', fileperms($htaccessPath)), -4));
-    logMessage("Permisos index.php: " . substr(sprintf('%o', fileperms($indexPath)), -4));
-    logMessage("Permisos logs/: " . substr(sprintf('%o', fileperms(LOG_DIR)), -4));
-    
-    // Verificar si Apache puede leer .htaccess
-    if (!is_readable($htaccessPath)) {
-        throw new Exception('.htaccess no es legible');
-    }
-    
-    // Verificar módulos de Apache
-    if (function_exists('apache_get_modules')) {
-        $modules = apache_get_modules();
-        logMessage('Módulos de Apache: ' . implode(', ', $modules));
-        if (!in_array('mod_rewrite', $modules)) {
-            throw new Exception('mod_rewrite no está habilitado');
-        }
-    }
-    
-    // Verificar variables de entorno
-    logMessage('DOCUMENT_ROOT: ' . ($_SERVER['DOCUMENT_ROOT'] ?? 'No definido'));
-    logMessage('SCRIPT_FILENAME: ' . ($_SERVER['SCRIPT_FILENAME'] ?? 'No definido'));
-    logMessage('REQUEST_URI: ' . ($_SERVER['REQUEST_URI'] ?? 'No definido'));
-    logMessage('PHP_SELF: ' . ($_SERVER['PHP_SELF'] ?? 'No definido'));
-    logMessage('SCRIPT_NAME: ' . ($_SERVER['SCRIPT_NAME'] ?? 'No definido'));
-    
     // Cargar configuraciones
     logMessage('Cargando configuraciones');
     require_once __DIR__ . '/src/config/config.php';
     require_once __DIR__ . '/src/config/database.php';
     
+    // Definir constantes de rutas
+    define('ROOT_PATH', __DIR__);
+    define('SRC_PATH', ROOT_PATH . '/src');
+    define('VIEWS_PATH', SRC_PATH . '/views');
+    define('CONTROLLERS_PATH', SRC_PATH . '/Controllers');
+    
     // Autoloader mejorado
     logMessage('Registrando autoloader');
     spl_autoload_register(function ($class) {
         $prefix = 'Controllers\\';
-        $base_dir = __DIR__ . '/src/Controllers/';
+        $base_dir = CONTROLLERS_PATH . '/';
         
         // Verificar si la clase pertenece al namespace Controllers
         $len = strlen($prefix);
@@ -109,6 +85,7 @@ try {
             require $file;
         } else {
             logMessage("Clase no encontrada: $file", 'ERROR');
+            throw new \Exception("Clase no encontrada: $class");
         }
     });
     
@@ -149,21 +126,32 @@ try {
         $controllerClass = "Controllers\\$controller";
         
         if (!class_exists($controllerClass)) {
-            throw new Exception("Controlador no encontrado: $controllerClass");
+            throw new \Exception("Controlador no encontrado: $controllerClass");
         }
         
         $controllerInstance = new $controllerClass();
+        if (!method_exists($controllerInstance, $method)) {
+            throw new \Exception("Método no encontrado: $method en $controllerClass");
+        }
+        
         $controllerInstance->$method();
     } else {
         logMessage("Ruta no encontrada: $request", 'WARNING');
         header("HTTP/1.0 404 Not Found");
-        include __DIR__ . '/src/views/404.php';
+        include VIEWS_PATH . '/404.php';
     }
     
-} catch (Exception $e) {
+} catch (\Exception $e) {
     $errorMessage = "Excepción: " . $e->getMessage() . "\nStack trace: " . $e->getTraceAsString();
     logMessage($errorMessage, 'ERROR');
     error_log($errorMessage);
-    header("HTTP/1.0 500 Internal Server Error");
-    echo "Ha ocurrido un error. Por favor, intente más tarde.";
+    
+    // Intentar mostrar la página de error
+    if (class_exists('Controllers\\HomeController')) {
+        $controller = new \Controllers\HomeController();
+        $controller->error();
+    } else {
+        header("HTTP/1.0 500 Internal Server Error");
+        echo "Ha ocurrido un error. Por favor, intente más tarde.";
+    }
 }
