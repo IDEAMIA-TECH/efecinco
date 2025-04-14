@@ -68,12 +68,12 @@ try {
     }
     
     if (!defined('VIEWS_PATH')) {
-        define('VIEWS_PATH', ROOT_PATH . '/src/views');
+        define('VIEWS_PATH', '/src/views');
         logMessage("VIEWS_PATH definido como: " . VIEWS_PATH);
     }
     
     if (!defined('CONTROLLERS_PATH')) {
-        define('CONTROLLERS_PATH', ROOT_PATH . '/src/controllers');
+        define('CONTROLLERS_PATH', '/src/controllers');
         logMessage("CONTROLLERS_PATH definido como: " . CONTROLLERS_PATH);
     }
     
