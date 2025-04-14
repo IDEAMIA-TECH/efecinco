@@ -155,10 +155,12 @@ ob_start();
             <div class="col-md-4 mb-4">
                 <div class="card h-100 shadow-sm">
                     <div class="card-body text-center">
-                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d" 
-                             class="rounded-circle mb-3" 
-                             alt="Cliente 1" 
-                             width="100">
+                        <div class="testimonial-image-container mb-4">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d" 
+                                 class="rounded-circle" 
+                                 alt="Cliente 1" 
+                                 style="width: 120px; height: 120px; object-fit: cover; border: 3px solid #f8f9fa; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                        </div>
                         <p class="card-text">"Excelente servicio y profesionalismo en la implementación de nuestro sistema de seguridad."</p>
                         <h5 class="card-title">Juan Pérez</h5>
                         <p class="text-muted">Gerente de Operaciones</p>
@@ -168,10 +170,12 @@ ob_start();
             <div class="col-md-4 mb-4">
                 <div class="card h-100 shadow-sm">
                     <div class="card-body text-center">
-                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330" 
-                             class="rounded-circle mb-3" 
-                             alt="Cliente 2" 
-                             width="100">
+                        <div class="testimonial-image-container mb-4">
+                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330" 
+                                 class="rounded-circle" 
+                                 alt="Cliente 2" 
+                                 style="width: 120px; height: 120px; object-fit: cover; border: 3px solid #f8f9fa; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                        </div>
                         <p class="card-text">"La automatización implementada ha mejorado significativamente nuestra eficiencia."</p>
                         <h5 class="card-title">María García</h5>
                         <p class="text-muted">Directora de Tecnología</p>
@@ -181,10 +185,12 @@ ob_start();
             <div class="col-md-4 mb-4">
                 <div class="card h-100 shadow-sm">
                     <div class="card-body text-center">
-                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e" 
-                             class="rounded-circle mb-3" 
-                             alt="Cliente 3" 
-                             width="100">
+                        <div class="testimonial-image-container mb-4">
+                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e" 
+                                 class="rounded-circle" 
+                                 alt="Cliente 3" 
+                                 style="width: 120px; height: 120px; object-fit: cover; border: 3px solid #f8f9fa; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                        </div>
                         <p class="card-text">"El sistema de control de acceso ha revolucionado la seguridad de nuestras instalaciones."</p>
                         <h5 class="card-title">Carlos Rodríguez</h5>
                         <p class="text-muted">Gerente de Seguridad</p>
