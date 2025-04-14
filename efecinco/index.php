@@ -120,6 +120,16 @@ try {
             }
         }
 
+        // Si es BaseController, intentar cargarlo directamente
+        if ($class === 'controllers/BaseController') {
+            $baseControllerPath = CONTROLLERS_PATH . '/BaseController.php';
+            if (file_exists($baseControllerPath)) {
+                logMessage("Cargando BaseController directamente desde: $baseControllerPath");
+                require_once $baseControllerPath;
+                return;
+            }
+        }
+
         $error = "Clase no encontrada: $class";
         logMessage($error, 'ERROR');
         throw new \Exception($error);

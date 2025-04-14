@@ -1,4 +1,5 @@
 <?php
+namespace models;
 
 class Project {
     private $db;
@@ -17,8 +18,8 @@ class Project {
                 WHERE estado = 'activo' 
                 ORDER BY fecha_proyecto DESC
             ");
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
-        } catch (PDOException $e) {
+            return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        } catch (\PDOException $e) {
             error_log($e->getMessage());
             return [];
         }
@@ -34,8 +35,8 @@ class Project {
                 WHERE id = ? AND estado = 'activo'
             ");
             $stmt->execute([$id]);
-            return $stmt->fetch(PDO::FETCH_ASSOC);
-        } catch (PDOException $e) {
+            return $stmt->fetch(\PDO::FETCH_ASSOC);
+        } catch (\PDOException $e) {
             error_log($e->getMessage());
             return null;
         }
@@ -54,8 +55,8 @@ class Project {
                 LIMIT ?
             ");
             $stmt->execute(['%' . $serviceTitle . '%', $limit]);
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
-        } catch (PDOException $e) {
+            return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        } catch (\PDOException $e) {
             error_log($e->getMessage());
             return [];
         }
@@ -81,7 +82,7 @@ class Project {
             
             $stmt = $this->db->prepare($sql);
             return $stmt->execute($params);
-        } catch (PDOException $e) {
+        } catch (\PDOException $e) {
             error_log($e->getMessage());
             return false;
         }
@@ -99,7 +100,7 @@ class Project {
             $stmt = $this->db->prepare($sql);
             
             return $stmt->execute(array_values($data));
-        } catch (PDOException $e) {
+        } catch (\PDOException $e) {
             error_log($e->getMessage());
             return false;
         }
@@ -117,8 +118,8 @@ class Project {
                 LIMIT ?
             ");
             $stmt->execute([$limit]);
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
-        } catch (PDOException $e) {
+            return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        } catch (\PDOException $e) {
             error_log($e->getMessage());
             return [];
         }
