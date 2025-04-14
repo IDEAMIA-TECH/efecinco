@@ -1,6 +1,8 @@
 <?php
 namespace controllers;
 
+use database\Database;
+
 class BaseController {
     protected $db;
     protected $view;

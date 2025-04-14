@@ -174,7 +174,7 @@ try {
     if (isset($routes[$request])) {
         logMessage("Procesando ruta: $request");
         list($controller, $method) = explode('@', $routes[$request]);
-        $controllerClass = "Controllers\\$controller";
+        $controllerClass = "controllers\\$controller";
         
         logMessage("Intentando instanciar controlador: $controllerClass");
         
@@ -202,8 +202,8 @@ try {
     error_log($errorMessage);
     
     // Intentar mostrar la página de error
-    if (class_exists('Controllers\\HomeController')) {
-        $controller = new \Controllers\HomeController();
+    if (class_exists('controllers\\HomeController')) {
+        $controller = new \controllers\HomeController();
         $controller->error();
     } else {
         if (!headers_sent()) {
