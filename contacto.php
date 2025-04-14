@@ -1,0 +1,301 @@
+<?php
+require_once('includes/db.php');
+$conexion = conectarDB();
+
+$mensaje = '';
+$tipo_mensaje = '';
+
+// Procesar el formulario de contacto
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $nombre = $_POST['nombre'] ?? '';
+    $empresa = $_POST['empresa'] ?? '';
+    $email = $_POST['email'] ?? '';
+    $telefono = $_POST['telefono'] ?? '';
+    $mensaje = $_POST['mensaje'] ?? '';
+    $captcha = $_POST['captcha'] ?? '';
+    $captcha_respuesta = $_POST['captcha_respuesta'] ?? '';
+
+    // Validar campos requeridos
+    if (empty($nombre) || empty($email) || empty($mensaje)) {
+        $mensaje = 'Por favor complete todos los campos requeridos';
+        $tipo_mensaje = 'danger';
+    } 
+    // Validar email
+    elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $mensaje = 'Por favor ingrese un email válido';
+        $tipo_mensaje = 'danger';
+    }
+    // Validar captcha
+    elseif ($captcha !== $captcha_respuesta) {
+        $mensaje = 'La respuesta del captcha es incorrecta';
+        $tipo_mensaje = 'danger';
+    } else {
+        // Guardar en la base de datos
+        $sql = "INSERT INTO contactos (nombre, empresa, email, telefono, mensaje) 
+                VALUES (?, ?, ?, ?, ?)";
+        $stmt = consultaSegura($conexion, $sql, [$nombre, $empresa, $email, $telefono, $mensaje]);
+        
+        if ($stmt->affected_rows > 0) {
+            // Enviar email de notificación
+            $asunto = "Nuevo mensaje de contacto - Efecinco";
+            $cuerpo = "Nombre: $nombre\n";
+            $cuerpo .= "Empresa: $empresa\n";
+            $cuerpo .= "Email: $email\n";
+            $cuerpo .= "Teléfono: $telefono\n";
+            $cuerpo .= "Mensaje: $mensaje\n";
+            
+            $headers = "From: $email\r\n";
+            $headers .= "Reply-To: $email\r\n";
+            
+            mail("contacto@efecinco.com", $asunto, $cuerpo, $headers);
+            
+            $mensaje = 'Gracias por contactarnos. Nos pondremos en contacto contigo pronto.';
+            $tipo_mensaje = 'success';
+        } else {
+            $mensaje = 'Hubo un error al enviar el mensaje. Por favor intente nuevamente.';
+            $tipo_mensaje = 'danger';
+        }
+    }
+}
+
+// Generar captcha
+$num1 = rand(1, 10);
+$num2 = rand(1, 10);
+$captcha_respuesta = $num1 + $num2;
+?>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto - Efecinco</title>
+    <meta name="description" content="Contáctanos para conocer más sobre nuestras soluciones en seguridad y tecnología.">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <?php include('header.php'); ?>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1>Contacto</h1>
+                <p>Estamos aquí para ayudarte. Envíanos un mensaje y nos pondremos en contacto contigo.</p>
+            </div>
+        </section>
+
+        <section class="contacto">
+            <div class="container">
+                <div class="contacto-grid">
+                    <div class="contacto-form">
+                        <h2>Envíanos un mensaje</h2>
+                        
+                        <?php if ($mensaje): ?>
+                            <div class="alert alert-<?php echo $tipo_mensaje; ?>">
+                                <?php echo htmlspecialchars($mensaje); ?>
+                            </div>
+                        <?php endif; ?>
+
+                        <form method="POST" action="">
+                            <div class="form-group">
+                                <label for="nombre">Nombre *</label>
+                                <input type="text" id="nombre" name="nombre" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="empresa">Empresa</label>
+                                <input type="text" id="empresa" name="empresa">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email">Email *</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="telefono">Teléfono</label>
+                                <input type="tel" id="telefono" name="telefono">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="mensaje">Mensaje *</label>
+                                <textarea id="mensaje" name="mensaje" rows="5" required></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="captcha">¿Cuánto es <?php echo $num1; ?> + <?php echo $num2; ?>? *</label>
+                                <input type="number" id="captcha" name="captcha" required>
+                                <input type="hidden" name="captcha_respuesta" value="<?php echo $captcha_respuesta; ?>">
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Enviar mensaje</button>
+                        </form>
+                    </div>
+
+                    <div class="contacto-info">
+                        <h2>Información de contacto</h2>
+                        
+                        <div class="info-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <h3>Dirección</h3>
+                                <p>Av. Principal #123, Ciudad</p>
+                            </div>
+                        </div>
+
+                        <div class="info-item">
+                            <i class="fas fa-phone"></i>
+                            <div>
+                                <h3>Teléfono</h3>
+                                <p>+123 456 7890</p>
+                            </div>
+                        </div>
+
+                        <div class="info-item">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <h3>Email</h3>
+                                <p>contacto@efecinco.com</p>
+                            </div>
+                        </div>
+
+                        <div class="info-item">
+                            <i class="fas fa-clock"></i>
+                            <div>
+                                <h3>Horario de atención</h3>
+                                <p>Lunes a Viernes: 9:00 - 18:00</p>
+                                <p>Sábados: 9:00 - 13:00</p>
+                            </div>
+                        </div>
+
+                        <div class="mapa">
+                            <iframe 
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12345.678901234567!2d-123.456789!3d12.345678!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTLCsDIwJzQ0LjQiTiAxMjPCsDI3JzI0LjQiVw!5e0!3m2!1ses!2smx!4v1234567890"
+                                width="100%" 
+                                height="300" 
+                                style="border:0;" 
+                                allowfullscreen="" 
+                                loading="lazy">
+                            </iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <?php include('footer.php'); ?>
+
+    <style>
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('assets/images/hero-contacto.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 100px 0;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contacto {
+            padding: 80px 0;
+        }
+
+        .contacto-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .contacto-form {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .contacto-form h2 {
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #666;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .contacto-info {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .info-item i {
+            font-size: 1.5rem;
+            color: #007bff;
+            margin-right: 15px;
+            margin-top: 5px;
+        }
+
+        .info-item h3 {
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .info-item p {
+            color: #666;
+            margin: 0;
+        }
+
+        .mapa {
+            margin-top: 30px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        @media (max-width: 768px) {
+            .contacto-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero {
+                padding: 60px 0;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</body>
+</html> 

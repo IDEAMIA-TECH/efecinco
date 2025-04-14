@@ -1,0 +1,320 @@
+<?php
+require_once('includes/db.php');
+$conexion = conectarDB();
+
+// Obtener ID del proyecto
+$id = $_GET['id'] ?? 0;
+
+// Obtener información del proyecto
+$sql = "SELECT * FROM proyectos WHERE id = ? AND activo = 1";
+$stmt = consultaSegura($conexion, $sql, [$id]);
+$proyecto = $stmt->get_result()->fetch_assoc();
+
+// Si no se encuentra el proyecto, redirigir a la página de proyectos
+if (!$proyecto) {
+    header('Location: proyectos.php');
+    exit;
+}
+
+// Obtener servicios relacionados
+$sql = "SELECT s.* FROM servicios s 
+        INNER JOIN proyecto_servicio ps ON s.id = ps.servicio_id 
+        WHERE ps.proyecto_id = ? AND s.activo = 1 
+        ORDER BY s.nombre";
+$stmt = consultaSegura($conexion, $sql, [$id]);
+$servicios = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+// Obtener imágenes adicionales del proyecto
+$sql = "SELECT * FROM proyecto_imagenes WHERE proyecto_id = ? ORDER BY orden";
+$stmt = consultaSegura($conexion, $sql, [$id]);
+$imagenes = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+?>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><?php echo htmlspecialchars($proyecto['cliente']); ?> - Efecinco</title>
+    <meta name="description" content="<?php echo htmlspecialchars($proyecto['descripcion']); ?>">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css">
+</head>
+<body>
+    <?php include('header.php'); ?>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1><?php echo htmlspecialchars($proyecto['cliente']); ?></h1>
+                <p><?php echo htmlspecialchars($proyecto['tipo_solucion']); ?></p>
+            </div>
+        </section>
+
+        <section class="proyecto-detalle">
+            <div class="container">
+                <div class="grid-2-columns">
+                    <div class="proyecto-info">
+                        <h2>Descripción del Proyecto</h2>
+                        <div class="proyecto-descripcion">
+                            <?php echo nl2br(htmlspecialchars($proyecto['descripcion'])); ?>
+                        </div>
+
+                        <?php if ($proyecto['caracteristicas']): ?>
+                            <h3>Características del Proyecto</h3>
+                            <ul class="caracteristicas">
+                                <?php foreach (explode("\n", $proyecto['caracteristicas']) as $caracteristica): ?>
+                                    <li>
+                                        <i class="fas fa-check"></i>
+                                        <?php echo htmlspecialchars(trim($caracteristica)); ?>
+                                    </li>
+                                <?php endforeach; ?>
+                            </ul>
+                        <?php endif; ?>
+
+                        <?php if (!empty($servicios)): ?>
+                            <h3>Servicios Implementados</h3>
+                            <div class="servicios-grid">
+                                <?php foreach ($servicios as $servicio): ?>
+                                    <div class="servicio-card">
+                                        <div class="servicio-icono">
+                                            <i class="<?php echo htmlspecialchars($servicio['icono']); ?>"></i>
+                                        </div>
+                                        <h4><?php echo htmlspecialchars($servicio['nombre']); ?></h4>
+                                        <p><?php echo htmlspecialchars($servicio['descripcion_corta']); ?></p>
+                                    </div>
+                                <?php endforeach; ?>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+
+                    <div class="proyecto-imagen-principal">
+                        <?php if ($proyecto['imagen']): ?>
+                            <img src="<?php echo htmlspecialchars($proyecto['imagen']); ?>" 
+                                 alt="<?php echo htmlspecialchars($proyecto['cliente']); ?>"
+                                 loading="lazy">
+                        <?php endif; ?>
+                    </div>
+                </div>
+
+                <?php if (!empty($imagenes)): ?>
+                    <div class="galeria-proyecto">
+                        <h3>Galería del Proyecto</h3>
+                        <div class="galeria-grid">
+                            <?php foreach ($imagenes as $imagen): ?>
+                                <a href="<?php echo htmlspecialchars($imagen['url']); ?>" 
+                                   data-lightbox="galeria-proyecto"
+                                   data-title="<?php echo htmlspecialchars($imagen['descripcion']); ?>">
+                                    <img src="<?php echo htmlspecialchars($imagen['url']); ?>" 
+                                         alt="<?php echo htmlspecialchars($imagen['descripcion']); ?>"
+                                         loading="lazy">
+                                </a>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+                <?php endif; ?>
+            </div>
+        </section>
+
+        <section class="cta">
+            <div class="container">
+                <h2>¿Tienes un proyecto similar?</h2>
+                <p>Contáctanos para una asesoría personalizada</p>
+                <a href="contacto.php" class="btn btn-primary">Solicitar Asesoría</a>
+            </div>
+        </section>
+    </main>
+
+    <?php include('footer.php'); ?>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
+    <style>
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('assets/images/hero-proyecto.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 100px 0;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .proyecto-detalle {
+            padding: 80px 0;
+        }
+
+        .grid-2-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: start;
+            margin-bottom: 60px;
+        }
+
+        .proyecto-info {
+            padding-right: 20px;
+        }
+
+        .proyecto-info h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .proyecto-descripcion {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .proyecto-info h3 {
+            margin: 30px 0 15px;
+            color: #333;
+        }
+
+        .caracteristicas {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .caracteristicas li {
+            margin-bottom: 10px;
+            color: #666;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .caracteristicas li i {
+            color: #007bff;
+            margin-right: 10px;
+            margin-top: 5px;
+        }
+
+        .servicios-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .servicio-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .servicio-icono {
+            background: #007bff;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+        }
+
+        .servicio-icono i {
+            font-size: 1.5rem;
+        }
+
+        .servicio-card h4 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .servicio-card p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .proyecto-imagen-principal img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .galeria-proyecto {
+            margin-top: 60px;
+        }
+
+        .galeria-proyecto h3 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        .galeria-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .galeria-grid a {
+            display: block;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .galeria-grid a:hover {
+            transform: scale(1.05);
+        }
+
+        .galeria-grid img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .cta {
+            padding: 60px 0;
+            text-align: center;
+            background-color: #f8f9fa;
+        }
+
+        .cta h2 {
+            margin-bottom: 1rem;
+        }
+
+        .cta p {
+            margin-bottom: 2rem;
+            color: #666;
+        }
+
+        @media (max-width: 768px) {
+            .grid-2-columns {
+                grid-template-columns: 1fr;
+            }
+
+            .proyecto-info {
+                padding-right: 0;
+            }
+
+            .hero {
+                padding: 60px 0;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .servicios-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</body>
+</html> 
