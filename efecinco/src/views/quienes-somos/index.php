@@ -49,16 +49,16 @@
         <h2 class="text-3xl font-extrabold text-gray-900 text-center mb-12">Nuestra Historia</h2>
         <div class="relative">
             <div class="absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-blue-200"></div>
-            <?php foreach ($empresa['linea_tiempo'] as $anio => $evento): ?>
+            <?php $counter = 0; foreach ($empresa['linea_tiempo'] as $anio => $evento): $counter++; ?>
             <div class="relative mb-8">
                 <div class="flex items-center">
-                    <div class="flex-1 <?= $loop->iteration % 2 == 0 ? 'order-2' : '' ?>">
-                        <div class="bg-white rounded-lg shadow-lg p-6 <?= $loop->iteration % 2 == 0 ? 'ml-8' : 'mr-8' ?>">
+                    <div class="flex-1 <?= $counter % 2 == 0 ? 'order-2' : '' ?>">
+                        <div class="bg-white rounded-lg shadow-lg p-6 <?= $counter % 2 == 0 ? 'ml-8' : 'mr-8' ?>">
                             <h3 class="text-xl font-bold text-blue-900"><?= htmlspecialchars($anio) ?></h3>
                             <p class="text-gray-600"><?= htmlspecialchars($evento) ?></p>
                         </div>
                     </div>
-                    <div class="flex-1 <?= $loop->iteration % 2 == 0 ? 'order-1' : '' ?>"></div>
+                    <div class="flex-1 <?= $counter % 2 == 0 ? 'order-1' : '' ?>"></div>
                 </div>
             </div>
             <?php endforeach; ?>
