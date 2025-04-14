@@ -1,9 +1,9 @@
 <?php
-global $config;
+// Asegurarse de que la configuración esté disponible
 if (!isset($config)) {
     $config = require_once CONFIG_PATH . '/config.php';
 }
-$whatsapp_number = $config['whatsapp_number'];
+$whatsapp_number = isset($config['whatsapp_number']) ? $config['whatsapp_number'] : '+573123456789';
 ?>
 
 <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 1000;">
