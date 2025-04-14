@@ -38,6 +38,16 @@ function logMessage($message, $type = 'INFO') {
     }
 }
 
+// Configuración de sesión
+ini_set('session.cookie_lifetime', 86400); // 24 horas
+ini_set('session.gc_maxlifetime', 86400); // 24 horas
+ini_set('session.cookie_secure', 1);
+ini_set('session.cookie_httponly', 1);
+ini_set('session.use_only_cookies', 1);
+
+// Iniciar sesión
+session_start();
+
 try {
     logMessage('Iniciando aplicación');
     
@@ -71,19 +81,34 @@ try {
     logMessage('PHP_SELF: ' . ($_SERVER['PHP_SELF'] ?? 'No definido'));
     logMessage('SCRIPT_NAME: ' . ($_SERVER['SCRIPT_NAME'] ?? 'No definido'));
     
-    session_start();
-    
     // Cargar configuraciones
     logMessage('Cargando configuraciones');
     require_once __DIR__ . '/src/config/config.php';
     require_once __DIR__ . '/src/config/database.php';
     
-    // Autoloader básico
+    // Autoloader mejorado
     logMessage('Registrando autoloader');
     spl_autoload_register(function ($class) {
-        $file = __DIR__ . '/src/' . str_replace('\\', '/', $class) . '.php';
+        $prefix = 'Controllers\\';
+        $base_dir = __DIR__ . '/src/Controllers/';
+        
+        // Verificar si la clase pertenece al namespace Controllers
+        $len = strlen($prefix);
+        if (strncmp($prefix, $class, $len) !== 0) {
+            return;
+        }
+        
+        // Obtener el nombre relativo de la clase
+        $relative_class = substr($class, $len);
+        
+        // Reemplazar namespace separators con directory separators
+        $file = $base_dir . str_replace('\\', '/', $relative_class) . '.php';
+        
+        // Si el archivo existe, cargarlo
         if (file_exists($file)) {
-            require_once $file;
+            require $file;
+        } else {
+            logMessage("Clase no encontrada: $file", 'ERROR');
         }
     });
     
@@ -122,6 +147,11 @@ try {
         logMessage("Procesando ruta: $request");
         list($controller, $method) = explode('@', $routes[$request]);
         $controllerClass = "Controllers\\$controller";
+        
+        if (!class_exists($controllerClass)) {
+            throw new Exception("Controlador no encontrado: $controllerClass");
+        }
+        
         $controllerInstance = new $controllerClass();
         $controllerInstance->$method();
     } else {

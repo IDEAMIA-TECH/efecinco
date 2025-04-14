@@ -1,15 +1,5 @@
 <?php
 
-// Configuración de sesión
-ini_set('session.cookie_lifetime', 86400); // 24 horas
-ini_set('session.gc_maxlifetime', 86400); // 24 horas
-ini_set('session.cookie_secure', 1);
-ini_set('session.cookie_httponly', 1);
-ini_set('session.use_only_cookies', 1);
-
-// Iniciar sesión
-session_start();
-
 // Configuración general
 define('SITE_NAME', 'Efecinco');
 define('SITE_URL', 'https://ideamia-dev.com/efecinco');
