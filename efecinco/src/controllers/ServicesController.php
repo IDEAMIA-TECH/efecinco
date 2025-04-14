@@ -1,4 +1,7 @@
 <?php
+namespace controllers;
+
+use models\Service;
 
 class ServicesController extends BaseController {
     private $serviceModel;

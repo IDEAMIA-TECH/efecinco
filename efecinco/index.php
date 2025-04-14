@@ -92,29 +92,31 @@ try {
     // Autoloader mejorado
     logMessage('Registrando autoloader');
     spl_autoload_register(function ($class) {
+        // Normalizar el namespace (reemplazar barras invertidas por barras normales)
+        $class = str_replace('\\', '/', $class);
+        
         // Mapeo de namespaces a directorios
         $prefixes = [
-            'controllers\\' => CONTROLLERS_PATH . '/',
-            'models\\' => SRC_PATH . '/models/',
-            'database\\' => SRC_PATH . '/database/'
+            'controllers' => CONTROLLERS_PATH,
+            'models' => SRC_PATH . '/models',
+            'database' => SRC_PATH . '/database'
         ];
 
         foreach ($prefixes as $prefix => $base_dir) {
-            $len = strlen($prefix);
-            if (strncmp($prefix, $class, $len) !== 0) {
-                continue;
-            }
+            if (strpos($class, $prefix) === 0) {
+                $relative_class = substr($class, strlen($prefix));
+                $file = $base_dir . $relative_class . '.php';
+                
+                logMessage("Intentando cargar clase: $class");
+                logMessage("Ruta del archivo: $file");
 
-            $relative_class = substr($class, $len);
-            $file = $base_dir . str_replace('\\', '/', $relative_class) . '.php';
-
-            logMessage("Intentando cargar clase: $class");
-            logMessage("Ruta del archivo: $file");
-
-            if (file_exists($file)) {
-                logMessage("Archivo encontrado: $file");
-                require_once $file;
-                return;
+                if (file_exists($file)) {
+                    logMessage("Archivo encontrado: $file");
+                    require_once $file;
+                    return;
+                } else {
+                    logMessage("Archivo no encontrado: $file", 'WARNING');
+                }
             }
         }
 

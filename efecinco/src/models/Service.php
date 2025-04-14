@@ -1,4 +1,5 @@
 <?php
+namespace models;
 
 class Service {
     private $db;
@@ -17,8 +18,8 @@ class Service {
                 WHERE estado = 'activo' 
                 ORDER BY orden ASC
             ");
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
-        } catch (PDOException $e) {
+            return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        } catch (\PDOException $e) {
             error_log($e->getMessage());
             return [];
         }
@@ -34,8 +35,8 @@ class Service {
                 WHERE id = ? AND estado = 'activo'
             ");
             $stmt->execute([$id]);
-            return $stmt->fetch(PDO::FETCH_ASSOC);
-        } catch (PDOException $e) {
+            return $stmt->fetch(\PDO::FETCH_ASSOC);
+        } catch (\PDOException $e) {
             error_log($e->getMessage());
             return null;
         }
@@ -50,9 +51,9 @@ class Service {
                 SELECT valor FROM configuracion 
                 WHERE clave = 'planes_mantenimiento'
             ");
-            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+            $result = $stmt->fetch(\PDO::FETCH_ASSOC);
             return $result ? json_decode($result['valor'], true) : [];
-        } catch (PDOException $e) {
+        } catch (\PDOException $e) {
             error_log($e->getMessage());
             return [];
         }
@@ -71,8 +72,8 @@ class Service {
                 LIMIT ?
             ");
             $stmt->execute(['%' . $serviceTitle . '%', $limit]);
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
-        } catch (PDOException $e) {
+            return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        } catch (\PDOException $e) {
             error_log($e->getMessage());
             return [];
         }
@@ -98,7 +99,7 @@ class Service {
             
             $stmt = $this->db->prepare($sql);
             return $stmt->execute($params);
-        } catch (PDOException $e) {
+        } catch (\PDOException $e) {
             error_log($e->getMessage());
             return false;
         }
@@ -116,7 +117,7 @@ class Service {
             $stmt = $this->db->prepare($sql);
             
             return $stmt->execute(array_values($data));
-        } catch (PDOException $e) {
+        } catch (\PDOException $e) {
             error_log($e->getMessage());
             return false;
         }
