@@ -31,9 +31,10 @@ ob_start();
         <div class="row">
             <div class="col-md-3 mb-4">
                 <div class="card h-100 shadow-sm">
-                    <img src="https://images.unsplash.com/photo-1557597774-9d475d5e8142" 
+                    <img src="https://images.unsplash.com/photo-1580894894513-541e068a3e2b" 
                          class="card-img-top" 
-                         alt="Sistemas de Seguridad">
+                         alt="Sistemas de Seguridad"
+                         style="height: 200px; object-fit: cover;">
                     <div class="card-body text-center">
                         <i class="fas fa-shield-alt fa-3x mb-3 text-primary"></i>
                         <h3 class="card-title h5">Sistemas de Seguridad</h3>
@@ -55,9 +56,10 @@ ob_start();
             </div>
             <div class="col-md-3 mb-4">
                 <div class="card h-100 shadow-sm">
-                    <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31" 
+                    <img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8" 
                          class="card-img-top" 
-                         alt="Redes y Conectividad">
+                         alt="Redes y Conectividad"
+                         style="height: 200px; object-fit: cover;">
                     <div class="card-body text-center">
                         <i class="fas fa-network-wired fa-3x mb-3 text-primary"></i>
                         <h3 class="card-title h5">Redes y Conectividad</h3>
