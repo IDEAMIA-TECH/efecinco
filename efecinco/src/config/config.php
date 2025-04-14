@@ -41,8 +41,8 @@ define('HASH_COST', 12);
 define('TOKEN_EXPIRATION', 3600); // 1 hora en segundos
 
 // Configuración de reCAPTCHA
-define('RECAPTCHA_SITE_KEY', 'tu-site-key');
-define('RECAPTCHA_SECRET_KEY', 'tu-secret-key');
+define('RECAPTCHA_SITE_KEY', '6LcNf4MeAAAAACfC25aIZP8MMNyI0FAgqKnsIoiT'); // Reemplaza con tu Site Key
+define('RECAPTCHA_SECRET_KEY', '6LcNf4MeAAAAAEHNg9_69_Np6JhiSMDvNVGjs_Pl'); // Reemplaza con tu Secret Key
 
 // Configuración de uploads
 define('MAX_FILE_SIZE', 5242880); // 5MB
