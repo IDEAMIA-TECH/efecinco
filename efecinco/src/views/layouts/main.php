@@ -36,36 +36,8 @@ if (!isset($config['contact_info']) || !isset($config['social_media'])) {
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 <body>
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-        <div class="container">
-            <a class="navbar-brand" href="<?php echo SITE_URL; ?>">
-                <img src="<?php echo SITE_URL; ?>/assets/images/logo/logof5.png" alt="Efe Cinco Logo" height="40">
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="<?php echo SITE_URL; ?>">Inicio</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="<?php echo SITE_URL; ?>/quienes-somos">Quiénes Somos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="<?php echo SITE_URL; ?>/servicios">Servicios</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="<?php echo SITE_URL; ?>/proyectos">Proyectos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="<?php echo SITE_URL; ?>/contacto">Contacto</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    <!-- Header -->
+    <?php include VIEWS_PATH . '/components/header.php'; ?>
 
     <!-- Contenido Principal -->
     <main class="mt-5 pt-4">
@@ -73,45 +45,7 @@ if (!isset($config['contact_info']) || !isset($config['social_media'])) {
     </main>
 
     <!-- Footer -->
-    <footer class="bg-dark text-white py-4">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4">
-                    <h5>Contacto</h5>
-                    <p>
-                        <i class="fas fa-map-marker-alt me-2"></i>
-                        <?php echo $config['contact_info']['address']; ?>
-                    </p>
-                    <p>
-                        <i class="fas fa-phone me-2"></i>
-                        <?php echo $config['contact_info']['phone']; ?>
-                    </p>
-                    <p>
-                        <i class="fas fa-envelope me-2"></i>
-                        <?php echo $config['contact_info']['email']; ?>
-                    </p>
-                </div>
-                <div class="col-md-4">
-                    <h5>Horario</h5>
-                    <p><?php echo $config['contact_info']['business_hours']; ?></p>
-                </div>
-                <div class="col-md-4">
-                    <h5>Síguenos</h5>
-                    <div class="social-links">
-                        <a href="<?php echo $config['social_media']['facebook']; ?>" class="text-white me-2">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                        <a href="<?php echo $config['social_media']['instagram']; ?>" class="text-white me-2">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a href="<?php echo $config['social_media']['linkedin']; ?>" class="text-white">
-                            <i class="fab fa-linkedin-in"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
+    <?php include VIEWS_PATH . '/components/footer.php'; ?>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
