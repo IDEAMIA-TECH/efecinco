@@ -59,23 +59,46 @@ try {
     // Definir constantes de rutas si no están definidas
     if (!defined('ROOT_PATH')) {
         define('ROOT_PATH', __DIR__);
+        logMessage("ROOT_PATH definido como: " . ROOT_PATH);
     }
+    
     if (!defined('SRC_PATH')) {
         define('SRC_PATH', ROOT_PATH . '/src');
+        logMessage("SRC_PATH definido como: " . SRC_PATH);
     }
+    
     if (!defined('VIEWS_PATH')) {
         define('VIEWS_PATH', SRC_PATH . '/views');
+        logMessage("VIEWS_PATH definido como: " . VIEWS_PATH);
     }
+    
     if (!defined('CONTROLLERS_PATH')) {
         define('CONTROLLERS_PATH', SRC_PATH . '/controllers');
+        logMessage("CONTROLLERS_PATH definido como: " . CONTROLLERS_PATH);
     }
+    
+    // Verificar estructura de directorios
+    logMessage("Verificando estructura de directorios:");
+    logMessage("ROOT_PATH existe: " . (is_dir(ROOT_PATH) ? 'Sí' : 'No'));
+    logMessage("SRC_PATH existe: " . (is_dir(SRC_PATH) ? 'Sí' : 'No'));
+    logMessage("CONTROLLERS_PATH existe: " . (is_dir(CONTROLLERS_PATH) ? 'Sí' : 'No'));
+    logMessage("VIEWS_PATH existe: " . (is_dir(VIEWS_PATH) ? 'Sí' : 'No'));
+    
+    // Listar contenido de directorios
+    logMessage("Contenido de ROOT_PATH: " . implode(', ', scandir(ROOT_PATH)));
+    logMessage("Contenido de SRC_PATH: " . implode(', ', scandir(SRC_PATH)));
     
     // Verificar que los directorios existan
     if (!is_dir(CONTROLLERS_PATH)) {
-        throw new \Exception("El directorio de controladores no existe: " . CONTROLLERS_PATH);
+        $error = "El directorio de controladores no existe: " . CONTROLLERS_PATH;
+        logMessage($error, 'ERROR');
+        throw new \Exception($error);
     }
+    
     if (!is_dir(VIEWS_PATH)) {
-        throw new \Exception("El directorio de vistas no existe: " . VIEWS_PATH);
+        $error = "El directorio de vistas no existe: " . VIEWS_PATH;
+        logMessage($error, 'ERROR');
+        throw new \Exception($error);
     }
     
     // Autoloader mejorado
