@@ -17,8 +17,8 @@ ob_start();
                     <p class="lead">Conoce algunos de nuestros proyectos más destacados y las soluciones que hemos implementado para nuestros clientes.</p>
                 </div>
                 <div class="col-lg-6">
-                    <img src="<?php echo SITE_URL; ?>/assets/images/projects-hero.jpg" 
-                         alt="Proyectos" 
+                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=800&h=400&q=80" 
+                         alt="Proyectos Tecnológicos" 
                          class="img-fluid rounded shadow-lg">
                 </div>
             </div>
@@ -39,9 +39,48 @@ ob_start();
                                      alt="<?php echo htmlspecialchars($proyecto['titulo']); ?>"
                                      class="w-100 h-100 object-fit-cover">
                                 <?php else: ?>
-                                <div class="w-100 h-100 bg-light d-flex align-items-center justify-content-center">
-                                    <i class="fas fa-image fa-3x text-muted"></i>
-                                </div>
+                                <!-- Imágenes de ejemplo basadas en el tipo de solución -->
+                                <?php if ($proyecto['tipo_solucion'] == 'Cableado Estructurado'): ?>
+                                    <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=800&h=400&q=80" 
+                                         alt="Cableado Estructurado"
+                                         class="w-100 h-100 object-fit-cover">
+                                <?php elseif ($proyecto['tipo_solucion'] == 'CCTV'): ?>
+                                    <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=800&h=400&q=80" 
+                                         alt="Sistema CCTV"
+                                         class="w-100 h-100 object-fit-cover">
+                                <?php elseif ($proyecto['tipo_solucion'] == 'Control de Accesos'): ?>
+                                    <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=800&h=400&q=80" 
+                                         alt="Control de Accesos"
+                                         class="w-100 h-100 object-fit-cover">
+                                <?php elseif ($proyecto['tipo_solucion'] == 'Sistemas Inalámbricos'): ?>
+                                    <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=800&h=400&q=80" 
+                                         alt="Sistemas Inalámbricos"
+                                         class="w-100 h-100 object-fit-cover">
+                                <?php elseif ($proyecto['tipo_solucion'] == 'Audio Multizonas'): ?>
+                                    <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=800&h=400&q=80" 
+                                         alt="Audio Multizonas"
+                                         class="w-100 h-100 object-fit-cover">
+                                <?php elseif ($proyecto['tipo_solucion'] == 'Sistemas de Alarmas'): ?>
+                                    <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=800&h=400&q=80" 
+                                         alt="Sistemas de Alarmas"
+                                         class="w-100 h-100 object-fit-cover">
+                                <?php elseif ($proyecto['tipo_solucion'] == 'Telefonía IP'): ?>
+                                    <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=800&h=400&q=80" 
+                                         alt="Telefonía IP"
+                                         class="w-100 h-100 object-fit-cover">
+                                <?php elseif ($proyecto['tipo_solucion'] == 'Sistemas NAS'): ?>
+                                    <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=800&h=400&q=80" 
+                                         alt="Sistemas NAS"
+                                         class="w-100 h-100 object-fit-cover">
+                                <?php elseif ($proyecto['tipo_solucion'] == 'Soporte TI'): ?>
+                                    <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=800&h=400&q=80" 
+                                         alt="Soporte TI"
+                                         class="w-100 h-100 object-fit-cover">
+                                <?php else: ?>
+                                    <div class="w-100 h-100 bg-light d-flex align-items-center justify-content-center">
+                                        <i class="fas fa-image fa-3x text-muted"></i>
+                                    </div>
+                                <?php endif; ?>
                                 <?php endif; ?>
                             </div>
                             <div class="card-body">
