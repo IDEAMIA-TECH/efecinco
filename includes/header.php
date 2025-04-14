@@ -11,9 +11,113 @@ session_start();
     <link rel="stylesheet" href="assets/css/styles.css">
     <!-- Font Awesome para íconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .header {
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 50px;
+            width: auto;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: #333;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #00B4DB;
+        }
+
+        .mobile-menu {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        main {
+            margin-top: 80px; /* Igual a la altura del header */
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu {
+                display: block;
+            }
+
+            nav {
+                display: none;
+                position: absolute;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background: white;
+                padding: 20px;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            }
+
+            nav.active {
+                display: block;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .logo img {
+                height: 40px;
+            }
+        }
+
+        .admin-link a {
+            color: #00B4DB;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .admin-link a:hover {
+            color: #0083a3;
+        }
+    </style>
 </head>
 <body>
-    <header>
+    <header class="header">
         <div class="container">
             <div class="logo">
                 <a href="index.php">
@@ -43,27 +147,19 @@ session_start();
     </header>
     <main>
 
-<style>
-.admin-link a {
-    color: #25D366;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenu = document.querySelector('.mobile-menu');
+            const nav = document.querySelector('nav');
 
-.admin-link a:hover {
-    color: #1da851;
-}
-
-@media (max-width: 768px) {
-    .admin-link {
-        margin-top: 1rem;
-        border-top: 1px solid #444;
-        padding-top: 1rem;
-    }
-}
-</style>
+            mobileMenu.addEventListener('click', function() {
+                nav.classList.toggle('active');
+                const icon = mobileMenu.querySelector('i');
+                icon.classList.toggle('fa-bars');
+                icon.classList.toggle('fa-times');
+            });
+        });
+    </script>
 <?php include 'includes/footer.php'; ?>
 <?php include 'includes/whatsapp-button.php'; ?>
 </body>
