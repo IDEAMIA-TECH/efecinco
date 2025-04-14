@@ -1,4 +1,5 @@
 <?php
+namespace controllers;
 
 class BaseController {
     protected $db;
@@ -10,15 +11,29 @@ class BaseController {
     }
 
     protected function render($view, $data = []) {
-        extract($data);
-        $viewPath = VIEWS_PATH . '/' . $view . '.php';
-        
-        if (file_exists($viewPath)) {
+        try {
+            // Iniciar el buffer de salida
             ob_start();
-            include $viewPath;
-            return ob_get_clean();
-        } else {
-            throw new Exception("View {$view} not found");
+            
+            // Extraer las variables para que estén disponibles en la vista
+            extract($data);
+            
+            // Incluir la vista
+            $viewPath = VIEWS_PATH . '/' . $view . '.php';
+            if (!file_exists($viewPath)) {
+                throw new \Exception("Vista no encontrada: $viewPath");
+            }
+            
+            require $viewPath;
+            
+            // Obtener el contenido del buffer
+            $content = ob_get_clean();
+            
+            // Incluir el layout
+            require VIEWS_PATH . '/layout/main.php';
+        } catch (\Exception $e) {
+            error_log($e->getMessage());
+            throw $e;
         }
     }
 
@@ -30,7 +45,7 @@ class BaseController {
     }
 
     protected function redirect($url) {
-        header("Location: " . SITE_URL . $url);
+        header("Location: $url");
         exit;
     }
 

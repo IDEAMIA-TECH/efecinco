@@ -1,40 +1,51 @@
 <?php
+namespace controllers;
 
 class HomeController extends BaseController {
     public function index() {
         try {
-            // Obtener servicios activos
-            $stmt = $this->db->query("SELECT * FROM servicios WHERE estado = 'activo' ORDER BY orden ASC");
-            $servicios = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-            // Obtener proyectos destacados
-            $stmt = $this->db->query("SELECT * FROM proyectos WHERE estado = 'activo' ORDER BY fecha_proyecto DESC LIMIT 3");
-            $proyectos = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-            // Obtener testimonios
-            $stmt = $this->db->query("SELECT * FROM testimonios WHERE estado = 'activo' ORDER BY fecha_creacion DESC LIMIT 3");
-            $testimonios = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-            // Renderizar la vista con los datos
+            // Obtener datos para la página de inicio
             $data = [
-                'servicios' => $servicios,
-                'proyectos' => $proyectos,
-                'testimonios' => $testimonios,
-                'pageTitle' => 'Inicio - ' . SITE_NAME
+                'title' => 'Inicio - Efecinco',
+                'description' => 'Bienvenido a Efecinco, su socio en ingeniería y construcción',
+                'hero' => [
+                    'title' => 'Ingeniería y Construcción de Excelencia',
+                    'subtitle' => 'Soluciones integrales para sus proyectos',
+                    'cta_text' => 'Conozca Nuestros Servicios',
+                    'cta_link' => '/servicios'
+                ],
+                'services' => [
+                    [
+                        'title' => 'Ingeniería Civil',
+                        'description' => 'Diseño y construcción de obras civiles',
+                        'icon' => 'fas fa-building'
+                    ],
+                    [
+                        'title' => 'Arquitectura',
+                        'description' => 'Diseño arquitectónico y planificación',
+                        'icon' => 'fas fa-drafting-compass'
+                    ],
+                    [
+                        'title' => 'Consultoría',
+                        'description' => 'Asesoría técnica especializada',
+                        'icon' => 'fas fa-chart-line'
+                    ]
+                ]
             ];
 
-            echo $this->render('home/index', $data);
-        } catch (Exception $e) {
+            // Renderizar la vista
+            $this->render('home/index', $data);
+        } catch (\Exception $e) {
             error_log($e->getMessage());
-            $this->redirect('/error');
+            $this->error();
         }
     }
 
     public function error() {
         $data = [
-            'pageTitle' => 'Error - ' . SITE_NAME,
+            'title' => 'Error - ' . SITE_NAME,
             'message' => 'Ha ocurrido un error. Por favor, intente más tarde.'
         ];
-        echo $this->render('error', $data);
+        $this->render('error', $data);
     }
 } 

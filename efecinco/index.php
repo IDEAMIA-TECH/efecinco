@@ -92,10 +92,10 @@ try {
     // Autoloader mejorado
     logMessage('Registrando autoloader');
     spl_autoload_register(function ($class) {
-        $prefix = 'Controllers\\';
+        $prefix = 'controllers\\';
         $base_dir = CONTROLLERS_PATH . '/';
         
-        // Verificar si la clase pertenece al namespace Controllers
+        // Verificar si la clase pertenece al namespace controllers
         $len = strlen($prefix);
         if (strncmp($prefix, $class, $len) !== 0) {
             return;
