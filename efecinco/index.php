@@ -56,33 +56,25 @@ try {
     require_once __DIR__ . '/src/config/config.php';
     require_once __DIR__ . '/src/config/database.php';
     
-    // Verificar estructura de directorios
-    logMessage("Verificando estructura de directorios:");
+    // Verificar y mostrar todas las rutas
+    logMessage("=== VERIFICACIÓN DE RUTAS ===");
+    logMessage("__DIR__: " . __DIR__);
+    logMessage("ROOT_PATH: " . ROOT_PATH);
+    logMessage("SRC_PATH: " . SRC_PATH);
+    logMessage("CONTROLLERS_PATH: " . CONTROLLERS_PATH);
+    logMessage("VIEWS_PATH: " . VIEWS_PATH);
+    
+    // Verificar existencia de directorios
+    logMessage("=== VERIFICACIÓN DE DIRECTORIOS ===");
     logMessage("ROOT_PATH existe: " . (is_dir(ROOT_PATH) ? 'Sí' : 'No'));
     logMessage("SRC_PATH existe: " . (is_dir(SRC_PATH) ? 'Sí' : 'No'));
     logMessage("CONTROLLERS_PATH existe: " . (is_dir(CONTROLLERS_PATH) ? 'Sí' : 'No'));
     logMessage("VIEWS_PATH existe: " . (is_dir(VIEWS_PATH) ? 'Sí' : 'No'));
     
-    // Listar contenido de directorios de forma segura
-    function safeScandir($path) {
-        if (!is_dir($path)) {
-            logMessage("Directorio no existe: $path", 'WARNING');
-            return [];
-        }
-        $result = scandir($path);
-        if ($result === false) {
-            logMessage("Error al escanear directorio: $path", 'WARNING');
-            return [];
-        }
-        return $result;
-    }
-    
     // Listar contenido de directorios
-    $rootContent = safeScandir(ROOT_PATH);
-    logMessage("Contenido de ROOT_PATH: " . implode(', ', $rootContent));
-    
-    $srcContent = safeScandir(SRC_PATH);
-    logMessage("Contenido de SRC_PATH: " . implode(', ', $srcContent));
+    logMessage("=== CONTENIDO DE DIRECTORIOS ===");
+    logMessage("Contenido de ROOT_PATH: " . implode(', ', scandir(ROOT_PATH)));
+    logMessage("Contenido de SRC_PATH: " . implode(', ', scandir(SRC_PATH)));
     
     // Verificar que los directorios existan
     if (!is_dir(CONTROLLERS_PATH)) {

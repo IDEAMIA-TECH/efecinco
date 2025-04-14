@@ -21,7 +21,7 @@ define('MAIL_PASSWORD', 'tu-password');
 define('MAIL_ENCRYPTION', 'tls');
 
 // Configuración de directorios
-define('ROOT_PATH', dirname(__DIR__));
+define('ROOT_PATH', '/home/ideamiadev/public_html/efecinco');
 define('SRC_PATH', ROOT_PATH . '/src');
 define('VIEWS_PATH', SRC_PATH . '/views');
 define('CONTROLLERS_PATH', SRC_PATH . '/controllers');
