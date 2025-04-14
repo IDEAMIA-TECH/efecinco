@@ -58,12 +58,12 @@ try {
     
     // Definir constantes de rutas si no están definidas
     if (!defined('ROOT_PATH')) {
-        define('ROOT_PATH', __DIR__);
+        define('ROOT_PATH', '/home/ideamiadev/public_html/efecinco');
         logMessage("ROOT_PATH definido como: " . ROOT_PATH);
     }
     
     if (!defined('SRC_PATH')) {
-        define('SRC_PATH', ROOT_PATH);
+        define('SRC_PATH', ROOT_PATH . '/src');
         logMessage("SRC_PATH definido como: " . SRC_PATH);
     }
     
