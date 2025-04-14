@@ -56,11 +56,19 @@ try {
     require_once __DIR__ . '/src/config/config.php';
     require_once __DIR__ . '/src/config/database.php';
     
-    // Definir constantes de rutas
-    define('ROOT_PATH', __DIR__);
-    define('SRC_PATH', ROOT_PATH . '/src');
-    define('VIEWS_PATH', SRC_PATH . '/views');
-    define('CONTROLLERS_PATH', SRC_PATH . '/Controllers');
+    // Definir constantes de rutas si no están definidas
+    if (!defined('ROOT_PATH')) {
+        define('ROOT_PATH', __DIR__);
+    }
+    if (!defined('SRC_PATH')) {
+        define('SRC_PATH', ROOT_PATH . '/src');
+    }
+    if (!defined('VIEWS_PATH')) {
+        define('VIEWS_PATH', SRC_PATH . '/views');
+    }
+    if (!defined('CONTROLLERS_PATH')) {
+        define('CONTROLLERS_PATH', SRC_PATH . '/controllers');
+    }
     
     // Verificar que los directorios existan
     if (!is_dir(CONTROLLERS_PATH)) {
@@ -152,7 +160,9 @@ try {
         $controllerInstance->$method();
     } else {
         logMessage("Ruta no encontrada: $request", 'WARNING');
-        header("HTTP/1.0 404 Not Found");
+        if (!headers_sent()) {
+            header("HTTP/1.0 404 Not Found");
+        }
         include VIEWS_PATH . '/404.php';
     }
     
@@ -166,7 +176,9 @@ try {
         $controller = new \Controllers\HomeController();
         $controller->error();
     } else {
-        header("HTTP/1.0 500 Internal Server Error");
+        if (!headers_sent()) {
+            header("HTTP/1.0 500 Internal Server Error");
+        }
         echo "Ha ocurrido un error. Por favor, intente más tarde.";
     }
 }
