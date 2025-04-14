@@ -2,7 +2,7 @@
 RewriteEngine On
 
 # Establecer el directorio base correcto
-RewriteBase /efecinco/efecinco/
+RewriteBase /efecinco/
 
 # Si el archivo o directorio no existe, redirigir a index.php
 RewriteCond %{REQUEST_FILENAME} !-f

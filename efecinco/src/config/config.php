@@ -2,7 +2,7 @@
 
 // Configuración general
 define('SITE_NAME', 'Efecinco');
-define('SITE_URL', 'https://ideamia-dev.com/efecinco/efecinco');
+define('SITE_URL', 'https://ideamia-dev.com/efecinco');
 define('SITE_DESCRIPTION', 'Soluciones en Seguridad y Tecnología');
 
 // Configuración de base de datos
@@ -51,7 +51,7 @@ return [
     'site_title' => 'Efecinco',
     'site_description' => 'Soluciones eléctricas profesionales',
     'site_keywords' => 'electricidad, instalaciones eléctricas, mantenimiento eléctrico',
-    'site_url' => 'https://ideamia-dev.com/efecinco/efecinco',
+    'site_url' => 'https://ideamia-dev.com/efecinco',
     'admin_email' => 'admin@efecinco.com',
     'whatsapp_number' => '+573123456789', // Número de WhatsApp para contacto
     'maps_embed' => 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3976.123456789!2d-74.123456789!3d4.123456789!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDDCsDA3JzI0LjQiTiA3NMKwMDcnMjQuNCJX!5e0!3m2!1ses!2sco!4v1234567890',

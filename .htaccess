@@ -1,0 +1,13 @@
+# Habilitar el motor de reescritura
+RewriteEngine On
+
+# Permitir acceso a archivos y directorios
+Options +FollowSymLinks
+Options -Indexes
+
+# Establecer el directorio base
+RewriteBase /efecinco/
+
+# Redirigir todo al subdirectorio efecinco
+RewriteCond %{REQUEST_URI} !^/efecinco/efecinco/
+RewriteRule ^(.*)$ efecinco/$1 [L] 
