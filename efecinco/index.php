@@ -162,7 +162,7 @@ try {
     // Rutas básicas
     $routes = [
         '/' => 'HomeController@index',
-        '/quienes-somos' => 'AboutController@index',
+        '/quienes-somos' => 'QuienesSomosController@index',
         '/servicios' => 'ServicesController@index',
         '/proyectos' => 'ProjectsController@index',
         '/contacto' => 'ContactController@index',

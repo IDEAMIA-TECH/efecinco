@@ -4,7 +4,7 @@
     <!-- Hero Section -->
     <div class="relative bg-blue-900">
         <div class="absolute inset-0">
-            <img class="w-full h-full object-cover" src="/assets/images/about-hero.jpg" alt="Efecinco Team">
+            <img class="w-full h-full object-cover" src="<?php echo SITE_URL; ?>/assets/images/about-hero.jpg" alt="Efecinco Team">
             <div class="absolute inset-0 bg-blue-900 mix-blend-multiply"></div>
         </div>
         <div class="relative max-w-7xl mx-auto py-24 px-4 sm:py-32 sm:px-6 lg:px-8">
@@ -72,7 +72,7 @@
             <div class="grid grid-cols-2 gap-8 md:grid-cols-4 lg:grid-cols-5">
                 <?php foreach ($empresa['clientes'] as $cliente): ?>
                 <div class="flex items-center justify-center">
-                    <img src="/assets/images/clientes/<?= strtolower(str_replace(' ', '-', $cliente)) ?>.png" 
+                    <img src="<?php echo SITE_URL; ?>/assets/images/clientes/<?= strtolower(str_replace(' ', '-', $cliente)) ?>.png" 
                          alt="<?= htmlspecialchars($cliente) ?>" 
                          class="max-h-16 grayscale hover:grayscale-0 transition duration-300">
                 </div>
@@ -87,7 +87,7 @@
         <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
             <?php foreach ($empresa['certificaciones'] as $certificacion): ?>
             <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-                <img src="<?= htmlspecialchars($certificacion['imagen']) ?>" 
+                <img src="<?php echo SITE_URL; ?><?= htmlspecialchars($certificacion['imagen']) ?>" 
                      alt="<?= htmlspecialchars($certificacion['nombre']) ?>" 
                      class="w-full h-48 object-cover">
                 <div class="p-6">
@@ -108,7 +108,7 @@
             </h2>
             <div class="mt-8 flex lg:mt-0 lg:flex-shrink-0">
                 <div class="inline-flex rounded-md shadow">
-                    <a href="/contacto" class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-blue-900 bg-white hover:bg-blue-50">
+                    <a href="<?php echo SITE_URL; ?>/contacto" class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-blue-900 bg-white hover:bg-blue-50">
                         Contáctanos
                     </a>
                 </div>
@@ -119,5 +119,5 @@
 
 <?php 
 $content = ob_get_clean();
-include VIEWS_PATH . '/layout.php';
+include VIEWS_PATH . '/layout/main.php';
 ?> 
