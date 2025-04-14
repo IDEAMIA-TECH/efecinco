@@ -101,7 +101,7 @@
                     </div>
 
                     <!-- Horarios de Atención -->
-                    <div class="card shadow-sm mb-4">
+                    <div class="card shadow-sm">
                         <div class="card-body p-4">
                             <h2 class="h3 mb-4">Horarios de atención</h2>
                             <div class="business-hours">
@@ -117,23 +117,6 @@
                                     <span>Domingos:</span>
                                     <span class="fw-bold">Cerrado</span>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Mapa -->
-                    <div class="card shadow-sm">
-                        <div class="card-body p-4">
-                            <h2 class="h3 mb-4">Ubicación</h2>
-                            <div class="map-container">
-                                <iframe
-                                    src="<?php echo $config['maps_embed']; ?>"
-                                    width="100%"
-                                    height="300"
-                                    style="border:0;"
-                                    allowfullscreen=""
-                                    loading="lazy">
-                                </iframe>
                             </div>
                         </div>
                     </div>
