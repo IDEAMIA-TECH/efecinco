@@ -139,5 +139,5 @@ ob_start();
 $content = ob_get_clean();
 
 // Incluir el layout principal
-include VIEWS_PATH . '/layouts/main.php';
+require_once VIEWS_PATH . '/layouts/main.php';
 ?> 
