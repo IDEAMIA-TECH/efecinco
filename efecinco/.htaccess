@@ -1,12 +1,30 @@
+# Habilitar el motor de reescritura
 RewriteEngine On
 
 # Establecer el directorio base
-RewriteBase /
+RewriteBase /efecinco/
 
 # Si el archivo o directorio no existe, redirigir a index.php
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ index.php [QSA,L]
+
+# Prevenir el acceso a archivos sensibles
+<FilesMatch "^(config\.php|database\.php|\.htaccess)$">
+    Order deny,allow
+    Deny from all
+</FilesMatch>
+
+# Prevenir el acceso a directorios
+Options -Indexes
+
+# Configuración básica de PHP
+<IfModule mod_php.c>
+    php_value upload_max_filesize 5M
+    php_value post_max_size 6M
+    php_value max_execution_time 300
+    php_value max_input_time 300
+</IfModule>
 
 # Prevenir el acceso a archivos ocultos
 <FilesMatch "^\.">
@@ -14,29 +32,12 @@ RewriteRule ^(.*)$ index.php [QSA,L]
     Deny from all
 </FilesMatch>
 
-# Prevenir el acceso a archivos de configuración
-<FilesMatch "^(config\.php|database\.php|\.htaccess)$">
-    Order allow,deny
-    Deny from all
-</FilesMatch>
-
-# Prevenir el acceso a directorios
-Options -Indexes
-
 # Configuración de seguridad adicional
 <IfModule mod_headers.c>
     Header set X-Content-Type-Options "nosniff"
     Header set X-XSS-Protection "1; mode=block"
     Header set X-Frame-Options "SAMEORIGIN"
     Header set Strict-Transport-Security "max-age=31536000; includeSubDomains"
-</IfModule>
-
-# Configuración de PHP
-<IfModule mod_php.c>
-    php_value upload_max_filesize 5M
-    php_value post_max_size 6M
-    php_value max_execution_time 300
-    php_value max_input_time 300
 </IfModule>
 
 # Compresión GZIP
