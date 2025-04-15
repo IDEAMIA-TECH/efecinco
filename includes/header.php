@@ -115,6 +115,63 @@ require_once __DIR__ . '/db.php';
         .admin-link a:hover, .login-link a:hover {
             color: #0083a3;
         }
+
+        /* Add dropdown menu styles */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            min-width: 200px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            border-radius: 4px;
+            padding: 10px 0;
+            z-index: 1000;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+
+        .dropdown-menu li {
+            padding: 0;
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 8px 20px;
+            color: #333;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: #f8f9fa;
+            color: #00B4DB;
+        }
+
+        @media (max-width: 768px) {
+            .dropdown-menu {
+                position: static;
+                box-shadow: none;
+                padding: 0;
+                display: none;
+            }
+
+            .dropdown.active .dropdown-menu {
+                display: block;
+            }
+
+            .dropdown-menu a {
+                padding: 10px 20px;
+                border-left: 3px solid #00B4DB;
+            }
+        }
     </style>
 </head>
 <body>
@@ -130,7 +187,13 @@ require_once __DIR__ . '/db.php';
                     <li><a href="index.php">Inicio</a></li>
                     <li><a href="servicios.php">Servicios</a></li>
                     <li><a href="proyectos.php">Proyectos</a></li>
-                    <li><a href="cotizacion-camaras.php">Cotización Cámaras</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle">Cotizaciones</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="cotizacion-camaras.php">Cámaras de Seguridad</a></li>
+                            <li><a href="cotizacion-acceso.php">Control de Acceso</a></li>
+                        </ul>
+                    </li>
                     <li><a href="contacto.php">Contacto</a></li>
                     <?php if (isset($_SESSION['usuario_id'])): ?>
                         <li class="admin-link">
@@ -164,6 +227,20 @@ require_once __DIR__ . '/db.php';
                 const icon = mobileMenu.querySelector('i');
                 icon.classList.toggle('fa-bars');
                 icon.classList.toggle('fa-times');
+            });
+
+            // Add mobile dropdown functionality
+            const dropdowns = document.querySelectorAll('.dropdown');
+            
+            dropdowns.forEach(dropdown => {
+                const toggle = dropdown.querySelector('.dropdown-toggle');
+                
+                toggle.addEventListener('click', function(e) {
+                    if (window.innerWidth <= 768) {
+                        e.preventDefault();
+                        dropdown.classList.toggle('active');
+                    }
+                });
             });
         });
     </script>
