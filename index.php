@@ -104,7 +104,9 @@ include('includes/header.php');
                             <div class="testimonio-content">
                                 <div class="testimonio-text">
                                     <i class="fas fa-quote-left"></i>
-                                    <p><?php echo htmlspecialchars($testimonio['testimonio']); ?></p>
+                                    <div class="testimonio-contenido">
+                                        <?php echo $testimonio['testimonio']; ?>
+                                    </div>
                                 </div>
                                 <div class="testimonio-author">
                                     <?php if ($testimonio['imagen']): ?>
@@ -421,6 +423,27 @@ include('includes/header.php');
     background-color: #d1ecf1;
     color: #0c5460;
     border: 1px solid #bee5eb;
+}
+
+.testimonio-contenido {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #666;
+    font-style: italic;
+    margin-top: 15px;
+}
+
+.testimonio-contenido p {
+    margin: 0;
+}
+
+.testimonio-contenido strong {
+    color: #333;
+    font-weight: 600;
+}
+
+.testimonio-contenido em {
+    font-style: italic;
 }
 
 @media (max-width: 768px) {
