@@ -26,1139 +26,327 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
     <?php include('includes/header.php'); ?>
 
     <main>
-        <section class="hero" style="background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1520869562399-e772f042f422?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80') no-repeat center center; background-size: cover;">
+        <section class="hero">
             <div class="container">
                 <div class="hero-content">
-                    <h1>Soluciones en Seguridad y Tecnología</h1>
-                    <p>Expertos en implementación de sistemas de seguridad y tecnología para tu empresa</p>
+                    <h1>Empowering Ideas<br>with Technological Excellence</h1>
+                    <p>Highly tailored technology, development & support services for your business success.</p>
                     <div class="cta-buttons">
-                        <a href="contacto.php" class="btn btn-primary">Contáctanos</a>
-                        <a href="contacto.php" class="btn btn-secondary">Solicita una cotización</a>
+                        <a href="contacto.php" class="btn btn-primary">Get Started</a>
+                        <a href="contacto.php" class="btn btn-secondary">Contact Us</a>
                     </div>
+                </div>
+                <div class="hero-image">
+                    <img src="https://images.pexels.com/photos/1181696/pexels-photo-1181696.jpeg?auto=compress&w=600&q=80" alt="IT Professional">
                 </div>
             </div>
         </section>
-
-        <section class="sobre-nosotros">
-            <div class="container">
-                <div class="texto">
-                    <h2>Somos F5</h2>
-                    <p>Una empresa especialista en soluciones tecnológicas para tu hogar o empresa.</p>
-                    <p>Llevamos más de 15 años trabajando con marcas reconocidas en el mercado que dan garantía a cada instalación que realizamos.</p>
-                    <p>Contamos con expertos consultores e instaladores que acompañan paso a paso a cada uno de nuestros clientes o proyectos; ayudando siempre, a que cada instalación tenga siempre el mejor resultado.</p>
+        <section class="services-section">
+            <div class="services-title">Our IT Services</div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <i class="fas fa-network-wired"></i>
+                    <h3>Network Cabling</h3>
+                    <p>Professional network solutions for your company.</p>
                 </div>
-                
-                <div class="caracteristicas">
-                    <div class="caracteristica-item">
-                        <i class="fas fa-flag"></i>
-                        <h3>Una empresa 100% mexicana</h3>
-                        <p>Nos enfocamos a dar siempre los mejores resultados, con soluciones que generen la seguridad que necesitas.</p>
-                    </div>
-                    <div class="caracteristica-item">
-                        <i class="fas fa-shield-alt"></i>
-                        <h3>Confianza y Seguridad</h3>
-                        <p>Buscamos que siempre te sientas seguro de vivir o trabajar con instalaciones eficientes con profesionalismo.</p>
-                    </div>
-                    <div class="caracteristica-item">
-                        <i class="fas fa-award"></i>
-                        <h3>Experiencia que nos respalda</h3>
-                        <p>15 años de experiencia en el mercado nos respaldan.</p>
-                    </div>
+                <div class="service-card">
+                    <i class="fas fa-video"></i>
+                    <h3>CCTV</h3>
+                    <p>Next-generation video surveillance systems.</p>
                 </div>
-            </div>
-        </section>
-
-        <section class="mision-vision">
-            <div class="container">
-                <div class="grid-2-columns">
-                    <div class="card">
-                        <img src="https://images.unsplash.com/photo-1533750349088-cd871a92f312?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Misión Efecinco">
-                        <h3>Misión</h3>
-                        <p><?php echo nl2br(htmlspecialchars($empresa['mision'] ?? '')); ?></p>
-                    </div>
-                    <div class="card">
-                        <img src="https://images.unsplash.com/photo-1533749871411-5e21e14bcc7d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80" alt="Visión Efecinco">
-                        <h3>Visión</h3>
-                        <p><?php echo nl2br(htmlspecialchars($empresa['vision'] ?? '')); ?></p>
-                    </div>
+                <div class="service-card">
+                    <i class="fas fa-lock"></i>
+                    <h3>Access Control</h3>
+                    <p>Secure management of access to your facilities.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-bell"></i>
+                    <h3>Alarm Systems</h3>
+                    <p>Comprehensive protection for your home or business.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-robot"></i>
+                    <h3>Automation</h3>
+                    <p>Smart solutions for your space.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-volume-up"></i>
+                    <h3>Audio Systems</h3>
+                    <p>Professional sound experience.</p>
                 </div>
             </div>
         </section>
-
-        <section class="servicios-destacados">
-            <div class="container">
-                <h2>Nuestros Servicios</h2>
-                <div class="servicios-grid">
-                    <div class="servicio-card">
-                        <div class="servicio-imagen">
-                            <img src="assets/images/project-1.png" alt="Cableado Estructurado">
-                        </div>
-                        <i class="fas fa-network-wired"></i>
-                        <h3>Cableado Estructurado</h3>
-                        <p>Soluciones de red profesional para tu empresa</p>
-                    </div>
-                    <div class="servicio-card">
-                        <div class="servicio-imagen">
-                            <img src="assets/images/project-2.png" alt="CCTV">
-                        </div>
-                        <i class="fas fa-video"></i>
-                        <h3>CCTV</h3>
-                        <p>Sistemas de videovigilancia de última generación</p>
-                    </div>
-                    <div class="servicio-card">
-                        <div class="servicio-imagen">
-                            <img src="assets/images/project-3.png" alt="Control de Acceso">
-                        </div>
-                        <i class="fas fa-lock"></i>
-                        <h3>Control de Acceso</h3>
-                        <p>Gestión segura de accesos a tus instalaciones</p>
-                    </div>
-                    <div class="servicio-card">
-                        <div class="servicio-imagen">
-                            <img src="assets/images/project-4.png" alt="Sistemas de Alarma">
-                        </div>
-                        <i class="fas fa-bell"></i>
-                        <h3>Sistemas de Alarma</h3>
-                        <p>Protección integral para tu hogar o negocio</p>
-                    </div>
-                    <div class="servicio-card">
-                        <div class="servicio-imagen">
-                            <img src="assets/images/project-5.png" alt="Automatización">
-                        </div>
-                        <i class="fas fa-robot"></i>
-                        <h3>Automatización</h3>
-                        <p>Soluciones inteligentes para tu espacio</p>
-                    </div>
-                    <div class="servicio-card">
-                        <div class="servicio-imagen">
-                            <img src="assets/images/project-6.png" alt="Sistemas de Audio">
-                        </div>
-                        <i class="fas fa-volume-up"></i>
-                        <h3>Sistemas de Audio</h3>
-                        <p>Experiencia sonora profesional</p>
-                    </div>
+        <section class="stats-section">
+            <div class="stats-title">We run all kinds of IT services that wow your success</div>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">24+</div>
+                    <div class="stat-label">Years of Experience</div>
                 </div>
-                <div class="text-center" style="margin-top: 60px; margin-bottom: 30px;">
-                    <a href="servicios.php" class="btn btn-primary" style="padding: 12px 30px; font-size: 1.1rem;">
-                        <i class="fas fa-arrow-right"></i> Ver todos los servicios
-                    </a>
+                <div class="stat-card">
+                    <div class="stat-number">98%</div>
+                    <div class="stat-label">Client Satisfaction</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">6795+</div>
+                    <div class="stat-label">Projects Delivered</div>
                 </div>
             </div>
         </section>
-
-        <section class="proyectos-destacados">
-            <div class="container">
-                <h2>Proyectos Destacados</h2>
-                <div class="proyectos-grid">
-                    <?php
-                    require_once('includes/db.php');
-                    $conexion = conectarDB();
-                    
-                    // Verificar la conexión
-                    if (!$conexion) {
-                        echo '<div class="alert alert-danger">Error al conectar con la base de datos</div>';
-                    } else {
-                        $sql = "SELECT * FROM proyectos WHERE activo = 1 AND destacado = 1 ORDER BY fecha_creacion DESC LIMIT 3";
-                        $stmt = consultaSegura($conexion, $sql, []);
-                        
-                        if ($stmt) {
-                            $result = $stmt->get_result();
-                            $proyectos = $result->fetch_all(MYSQLI_ASSOC);
-                            
-                            if (empty($proyectos)) {
-                                echo '<div class="alert alert-info">No hay proyectos destacados disponibles</div>';
-                            } else {
-                                foreach ($proyectos as $proyecto):
-                                ?>
-                                <div class="proyecto-card">
-                                    <?php if ($proyecto['imagen']): ?>
-                                        <img src="<?php echo htmlspecialchars($proyecto['imagen']); ?>" 
-                                             alt="<?php echo htmlspecialchars($proyecto['cliente']); ?>"
-                                             class="proyecto-imagen">
-                                    <?php else: ?>
-                                        <div class="proyecto-imagen default">
-                                            <i class="fas fa-image"></i>
-                                        </div>
-                                    <?php endif; ?>
-                                    <div class="proyecto-info">
-                                        <h3><?php echo htmlspecialchars($proyecto['cliente']); ?></h3>
-                                        <p class="tipo-solucion"><?php echo htmlspecialchars($proyecto['tipo_solucion']); ?></p>
-                                        <p class="descripcion-corta"><?php echo htmlspecialchars($proyecto['descripcion_corta']); ?></p>
-                                    </div>
-                                </div>
-                                <?php 
-                                endforeach;
-                            }
-                        } else {
-                            echo '<div class="alert alert-danger">Error al ejecutar la consulta</div>';
-                        }
-                    }
-                    ?>
-                </div>
-            </div>
-        </section>
-
-        <section class="testimonios">
-            <div class="container">
-                <h2>Lo que dicen nuestros clientes</h2>
-                <div class="testimonios-carousel">
-                    <?php
-                    require_once('includes/db.php');
-                    $conexion = conectarDB();
-                    
-                    // Verificar la conexión
-                    if (!$conexion) {
-                        echo '<div class="alert alert-danger">Error al conectar con la base de datos</div>';
-                    } else {
-                        $sql = "SELECT * FROM testimonios WHERE activo = 1 AND destacado = 1 ORDER BY fecha_creacion DESC LIMIT 5";
-                        $stmt = consultaSegura($conexion, $sql, []);
-                        
-                        if ($stmt) {
-                            $result = $stmt->get_result();
-                            $testimonios = $result->fetch_all(MYSQLI_ASSOC);
-                            
-                            if (empty($testimonios)) {
-                                echo '<div class="alert alert-info">No hay testimonios destacados disponibles</div>';
-                            } else {
-                                foreach ($testimonios as $testimonio):
-                                ?>
-                                <div class="testimonio-card">
-                                    <div class="testimonio-content">
-                                        <div class="testimonio-text">
-                                            <i class="fas fa-quote-left"></i>
-                                            <div class="testimonio-contenido">
-                                                <?php echo $testimonio['testimonio']; ?>
-                                            </div>
-                                        </div>
-                                        <div class="testimonio-author">
-                                            <?php if ($testimonio['logo']): ?>
-                                                <img src="<?php echo str_replace('../', '', $testimonio['logo']); ?>" 
-                                                     alt="<?php echo htmlspecialchars($testimonio['empresa']); ?>" 
-                                                     class="author-logo">
-                                            <?php else: ?>
-                                                <div class="author-logo default">
-                                                    <i class="fas fa-building"></i>
-                                                </div>
-                                            <?php endif; ?>
-                                            <div class="author-info">
-                                                <h4><?php echo htmlspecialchars($testimonio['cliente']); ?></h4>
-                                                <?php if ($testimonio['cargo']): ?>
-                                                    <p class="cargo"><?php echo htmlspecialchars($testimonio['cargo']); ?></p>
-                                                <?php endif; ?>
-                                                <?php if ($testimonio['empresa']): ?>
-                                                    <p class="empresa"><?php echo htmlspecialchars($testimonio['empresa']); ?></p>
-                                                <?php endif; ?>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <?php 
-                                endforeach;
-                            }
-                        } else {
-                            echo '<div class="alert alert-danger">Error al ejecutar la consulta</div>';
-                        }
-                    }
-                    ?>
-                </div>
-                <div class="testimonios-controls">
-                    <button class="prev-testimonio"><i class="fas fa-chevron-left"></i></button>
-                    <button class="next-testimonio"><i class="fas fa-chevron-right"></i></button>
-                </div>
-            </div>
-        </section>
-
-        <section class="certificaciones">
-            <div class="container">
-                <h2>Nuestras Certificaciones</h2>
-                <div class="certificaciones-grid">
-                    <?php
-                    // Reutilizamos la conexión existente
-                    if (!$conexion) {
-                        echo '<div class="alert alert-danger">Error al conectar con la base de datos</div>';
-                    } else {
-                        $sql = "SELECT * FROM certificaciones WHERE activo = 1 ORDER BY orden ASC, fecha_creacion DESC";
-                        $stmt = consultaSegura($conexion, $sql, []);
-                        
-                        if ($stmt) {
-                            $result = $stmt->get_result();
-                            $certificaciones = $result->fetch_all(MYSQLI_ASSOC);
-                            
-                            if (empty($certificaciones)) {
-                                echo '<div class="alert alert-info">No hay certificaciones disponibles</div>';
-                            } else {
-                                foreach ($certificaciones as $certificacion):
-                                ?>
-                                <div class="certificacion-card">
-                                    <div class="certificacion-imagen">
-                                        <?php if ($certificacion['imagen']): ?>
-                                            <img src="<?php echo str_replace('../', '', $certificacion['imagen']); ?>" 
-                                                 alt="<?php echo htmlspecialchars($certificacion['titulo']); ?>"
-                                                 class="certificacion-img">
-                                        <?php else: ?>
-                                            <div class="imagen-default">
-                                                <i class="fas fa-certificate"></i>
-                                            </div>
-                                        <?php endif; ?>
-                                    </div>
-                                    <div class="certificacion-info">
-                                        <h3><?php echo htmlspecialchars($certificacion['titulo']); ?></h3>
-                                        <?php if ($certificacion['descripcion']): ?>
-                                            <div class="certificacion-descripcion">
-                                                <?php echo $certificacion['descripcion']; ?>
-                                            </div>
-                                        <?php endif; ?>
-                                        <?php if ($certificacion['fecha']): ?>
-                                            <span class="fecha">Obtenido: <?php echo date('d/m/Y', strtotime($certificacion['fecha'])); ?></span>
-                                        <?php endif; ?>
-                                    </div>
-                                </div>
-                                <?php 
-                                endforeach;
-                            }
-                        } else {
-                            echo '<div class="alert alert-danger">Error al cargar las certificaciones</div>';
-                        }
-                    }
-                    ?>
-                </div>
-            </div>
-        </section>
-
-        <section class="nuestros-clientes">
-            <div class="container">
-                <h2>Nuestros Clientes</h2>
-                <p class="section-description">Empresas que confían en nuestros servicios</p>
-                <div class="clientes-grid">
-                    <div class="cliente-item">
-                        <img src="assets/images/clientes/client-a.png" alt="Cliente A" loading="lazy">
-                    </div>
-                    <div class="cliente-item">
-                        <img src="assets/images/clientes/client-b.png" alt="Cliente B" loading="lazy">
-                    </div>
-                    <div class="cliente-item">
-                        <img src="assets/images/clientes/client-c.png" alt="Cliente C" loading="lazy">
-                    </div>
-                    <div class="cliente-item">
-                        <img src="assets/images/clientes/client-d.png" alt="Cliente D" loading="lazy">
-                    </div>
-                    <div class="cliente-item">
-                        <img src="assets/images/clientes/client-e.png" alt="Cliente E" loading="lazy">
-                    </div>
-                    <div class="cliente-item">
-                        <img src="assets/images/clientes/client-f.png" alt="Cliente F" loading="lazy">
-                    </div>
-                    <div class="cliente-item">
-                        <img src="assets/images/clientes/client-g.png" alt="Cliente G" loading="lazy">
-                    </div>
-                    <div class="cliente-item">
-                        <img src="assets/images/clientes/client-h.png" alt="Cliente H" loading="lazy">
-                    </div>
-                    <div class="cliente-item">
-                        <img src="assets/images/clientes/client-i.png" alt="Cliente I" loading="lazy">
-                    </div>
-                    <div class="cliente-item">
-                        <img src="assets/images/clientes/client-j.png" alt="Cliente J" loading="lazy">
-                    </div>
-                    <div class="cliente-item">
-                        <img src="assets/images/clientes/client-k.png" alt="Cliente K" loading="lazy">
-                    </div>
-                    <div class="cliente-item">
-                        <img src="assets/images/clientes/client-l.png" alt="Cliente L" loading="lazy">
-                    </div>
-                    <div class="cliente-item">
-                        <img src="assets/images/clientes/client-m.png" alt="Cliente M" loading="lazy">
-                    </div>
-                    <div class="cliente-item">
-                        <img src="assets/images/clientes/client-n.png" alt="Cliente N" loading="lazy">
-                    </div>
-                    <div class="cliente-item">
-                        <img src="assets/images/clientes/client-o.png" alt="Cliente O" loading="lazy">
-                    </div>
-                    <div class="cliente-item">
-                        <img src="assets/images/clientes/client-p.png" alt="Cliente P" loading="lazy">
-                    </div>
-                    <div class="cliente-item">
-                        <img src="assets/images/clientes/client-q.png" alt="Cliente Q" loading="lazy">
-                    </div>
-                    <div class="cliente-item">
-                        <img src="assets/images/clientes/client-r.png" alt="Cliente R" loading="lazy">
-                    </div>
-                    <div class="cliente-item">
-                        <img src="assets/images/clientes/client-s.png" alt="Cliente S" loading="lazy">
-                    </div>
-                    <div class="cliente-item">
-                        <img src="assets/images/clientes/client-t.png" alt="Cliente T" loading="lazy">
-                    </div>
-                    <div class="cliente-item">
-                        <img src="assets/images/clientes/client-u.png" alt="Cliente U" loading="lazy">
-                    </div>
-                    <div class="cliente-item">
-                        <img src="assets/images/clientes/client-v.png" alt="Cliente V" loading="lazy">
-                    </div>
-                    <div class="cliente-item">
-                        <img src="assets/images/clientes/client-w.png" alt="Cliente W" loading="lazy">
-                    </div>
-                </div>
-            </div>
+        <section class="dark-section">
+            <h2>Technological Applications Play a Role in Improving Our Community</h2>
+            <p>Accelerate innovation with world-class tech teams. We'll match you to vetted senior remote technology talent.</p>
+            <a href="contacto.php" class="btn btn-primary">Request a Quote</a>
         </section>
     </main>
 
     <style>
-    .hero {
-        color: white;
-        text-align: center;
-        padding: 200px 0;
-        margin-bottom: 60px;
-        position: relative;
-    }
-
-    .hero::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: linear-gradient(45deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.4) 100%);
-        z-index: 1;
-    }
-
-    .hero-content {
-        position: relative;
-        z-index: 2;
-        max-width: 800px;
-        margin: 0 auto;
-    }
-
-    .hero h1 {
-        font-size: 3.5rem;
-        margin-bottom: 20px;
-        text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-    }
-
-    .hero p {
-        font-size: 1.2rem;
-        margin-bottom: 30px;
-        text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
-    }
-
-    .cta-buttons {
-        display: flex;
-        gap: 20px;
-        justify-content: center;
-    }
-
-    .btn {
-        padding: 15px 30px;
-        border-radius: 5px;
-        text-decoration: none;
-        font-weight: bold;
-        transition: all 0.3s ease;
-    }
-
-    .btn-primary {
-        background-color: #00B4DB;
-        color: white;
-    }
-
-    .btn-secondary {
-        background-color: transparent;
-        border: 2px solid white;
-        color: white;
-    }
-
-    .servicios-destacados, .proyectos-destacados {
-        padding: 80px 0;
-    }
-
-    .servicios-grid, .proyectos-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 30px;
-        margin-top: 40px;
-    }
-
-    .servicio-card {
-        text-align: center;
-        padding: 30px;
-        background: white;
-        border-radius: 10px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        transition: transform 0.3s ease;
-    }
-
-    .servicio-card:hover {
-        transform: translateY(-10px);
-    }
-
-    .servicio-imagen {
-        margin-bottom: 20px;
-        border-radius: 10px;
-        overflow: hidden;
-        height: 200px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .servicio-imagen img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transition: transform 0.3s ease;
-    }
-
-    .servicio-card:hover .servicio-imagen img {
-        transform: scale(1.1);
-    }
-
-    .servicio-card i {
-        font-size: 2.5rem;
-        color: #00B4DB;
-        margin: 20px 0;
-    }
-
-    .servicio-card h3 {
-        color: #333;
-        margin-bottom: 15px;
-        font-size: 1.5rem;
-    }
-
-    .servicio-card p {
-        color: #666;
-        line-height: 1.6;
-        margin: 0;
-    }
-
-    .proyecto-card {
-        position: relative;
-        border-radius: 10px;
-        overflow: hidden;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        transition: transform 0.3s ease;
-    }
-
-    .proyecto-card:hover {
-        transform: translateY(-5px);
-    }
-
-    .proyecto-imagen {
-        width: 100%;
-        height: 250px;
-        object-fit: cover;
-        transition: transform 0.3s ease;
-    }
-
-    .proyecto-imagen.default {
-        width: 100%;
-        height: 250px;
-        background-color: #f8f9fa;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #6c757d;
-    }
-
-    .proyecto-imagen.default i {
-        font-size: 3rem;
-    }
-
-    .proyecto-card:hover .proyecto-imagen {
-        transform: scale(1.05);
-    }
-
-    .proyecto-info {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        padding: 20px;
-        background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
-        color: white;
-    }
-
-    .proyecto-info h3 {
-        margin: 0 0 10px 0;
-        font-size: 1.5rem;
-    }
-
-    .proyecto-info .tipo-solucion {
-        margin: 0 0 5px 0;
-        font-size: 1.1rem;
-        font-weight: 500;
-    }
-
-    .proyecto-info .descripcion-corta {
-        margin: 0;
-        font-size: 0.9rem;
-        opacity: 0.9;
-    }
-
-    .testimonios {
-        padding: 80px 0;
-        background-color: #f8f9fa;
-    }
-
-    .testimonios h2 {
-        text-align: center;
-        margin-bottom: 40px;
-        color: #333;
-    }
-
-    .testimonios-carousel {
-        position: relative;
-        max-width: 800px;
-        margin: 0 auto;
-        overflow: hidden;
-    }
-
-    .testimonio-card {
-        background: white;
-        border-radius: 10px;
-        padding: 30px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        margin: 0 15px;
-        transition: transform 0.3s ease;
-    }
-
-    .testimonio-card:hover {
-        transform: translateY(-5px);
-    }
-
-    .testimonio-content {
-        text-align: center;
-    }
-
-    .testimonio-text {
-        margin-bottom: 20px;
-        position: relative;
-    }
-
-    .testimonio-text i {
-        color: #00B4DB;
-        font-size: 2rem;
-        margin-bottom: 15px;
-    }
-
-    .testimonio-text p {
-        font-size: 1.1rem;
-        line-height: 1.6;
-        color: #666;
-        font-style: italic;
-    }
-
-    .testimonio-author {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 15px;
-        margin-top: 20px;
-    }
-
-    .author-logo {
-        width: 80px;
-        height: 80px;
-        object-fit: contain;
-        background-color: white;
-        padding: 10px;
-        border-radius: 8px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-
-    .author-logo.default {
-        width: 80px;
-        height: 80px;
-        background-color: #f8f9fa;
-        border-radius: 8px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #6c757d;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-
-    .author-logo.default i {
-        font-size: 2rem;
-    }
-
-    .author-info {
-        text-align: left;
-    }
-
-    .author-info h4 {
-        margin: 0;
-        color: #333;
-        font-size: 1.1rem;
-    }
-
-    .author-info .cargo {
-        margin: 5px 0;
-        color: #666;
-        font-size: 0.9rem;
-    }
-
-    .author-info .empresa {
-        margin: 0;
-        color: #00B4DB;
-        font-weight: 500;
-        font-size: 0.9rem;
-    }
-
-    .testimonios-controls {
-        display: flex;
-        justify-content: center;
-        gap: 20px;
-        margin-top: 30px;
-    }
-
-    .testimonios-controls button {
-        background: #00B4DB;
-        color: white;
-        border: none;
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        cursor: pointer;
-        transition: all 0.3s ease;
-    }
-
-    .testimonios-controls button:hover {
-        background: #0099b8;
-        transform: scale(1.1);
-    }
-
-    .alert {
-        padding: 15px;
-        margin: 20px 0;
-        border-radius: 5px;
-        text-align: center;
-    }
-
-    .alert-danger {
-        background-color: #f8d7da;
-        color: #721c24;
-        border: 1px solid #f5c6cb;
-    }
-
-    .alert-info {
-        background-color: #d1ecf1;
-        color: #0c5460;
-        border: 1px solid #bee5eb;
-    }
-
-    .testimonio-contenido {
-        font-size: 1.1rem;
-        line-height: 1.6;
-        color: #666;
-        font-style: italic;
-        margin-top: 15px;
-    }
-
-    .testimonio-contenido p {
-        margin: 0;
-    }
-
-    .testimonio-contenido strong {
-        color: #333;
-        font-weight: 600;
-    }
-
-    .testimonio-contenido em {
-        font-style: italic;
-    }
-
-    @media (max-width: 768px) {
-        .hero h1 {
-            font-size: 2.5rem;
+        body {
+            font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+            background: #f4f8fb;
+            color: #222;
         }
-        
-        .cta-buttons {
-            flex-direction: column;
+        .hero {
+            background: linear-gradient(135deg, #0a2e73 0%, #1e90ff 100%);
+            position: relative;
+            min-height: 600px;
+            display: flex;
             align-items: center;
+            justify-content: center;
+            padding: 0;
+            overflow: hidden;
         }
-        
-        .servicios-grid, .proyectos-grid {
-            grid-template-columns: 1fr;
+        .hero .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 1200px;
+            padding: 60px 30px 60px 30px;
         }
-        
-        .testimonio-card {
-            margin: 0 10px;
-            padding: 20px;
+        .hero-content {
+            flex: 1 1 50%;
+            color: #fff;
+            text-align: left;
+            z-index: 2;
         }
-        
-        .testimonio-text p {
-            font-size: 1rem;
+        .hero-content h1 {
+            font-size: 3.2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.1;
         }
-        
-        .proyecto-imagen {
-            height: 200px;
+        .hero-content p {
+            font-size: 1.3rem;
+            margin-bottom: 35px;
+            color: #e0eaff;
         }
-        
-        .proyecto-info h3 {
+        .cta-buttons {
+            display: flex;
+            gap: 18px;
+        }
+        .btn {
+            padding: 15px 32px;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+            box-shadow: 0 2px 8px rgba(30,144,255,0.08);
+        }
+        .btn-primary {
+            background: #fff;
+            color: #1e90ff;
+        }
+        .btn-primary:hover {
+            background: #e0eaff;
+        }
+        .btn-secondary {
+            background: transparent;
+            color: #fff;
+            border: 2px solid #fff;
+        }
+        .btn-secondary:hover {
+            background: #1e90ff;
+            color: #fff;
+            border-color: #1e90ff;
+        }
+        .hero-image {
+            flex: 1 1 45%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2;
+        }
+        .hero-image img {
+            width: 370px;
+            height: 470px;
+            object-fit: cover;
+            border-radius: 30px 30px 120px 30px;
+            box-shadow: 0 8px 32px rgba(10,46,115,0.18);
+            background: #fff;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -80px;
+            right: -120px;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, #fff 0%, #1e90ff00 80%);
+            opacity: 0.18;
+            z-index: 1;
+        }
+        .services-section {
+            background: #fff;
+            margin-top: -80px;
+            border-radius: 30px;
+            box-shadow: 0 8px 32px rgba(30,144,255,0.08);
+            padding: 60px 0 40px 0;
+            position: relative;
+            z-index: 3;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .services-title {
+            text-align: center;
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 40px;
+            color: #0a2e73;
+        }
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 32px;
+            margin: 0 30px;
+        }
+        .service-card {
+            background: #f4f8fb;
+            border-radius: 18px;
+            box-shadow: 0 2px 12px rgba(30,144,255,0.07);
+            padding: 36px 24px 28px 24px;
+            text-align: center;
+            transition: box-shadow 0.2s, transform 0.2s;
+            position: relative;
+        }
+        .service-card:hover {
+            box-shadow: 0 8px 32px rgba(30,144,255,0.13);
+            transform: translateY(-6px) scale(1.03);
+        }
+        .service-card i {
+            font-size: 2.8rem;
+            color: #1e90ff;
+            margin-bottom: 18px;
+        }
+        .service-card h3 {
             font-size: 1.2rem;
+            font-weight: 700;
+            color: #0a2e73;
+            margin-bottom: 10px;
         }
-        
-        .proyecto-info .tipo-solucion {
+        .service-card p {
+            color: #555;
             font-size: 1rem;
         }
-        
-        .proyecto-info .descripcion-corta {
-            font-size: 0.8rem;
+        /* Sección de estadísticas */
+        .stats-section {
+            background: #f4f8fb;
+            padding: 60px 0 30px 0;
+            text-align: center;
         }
-    }
-
-    .certificaciones {
-        padding: 80px 0;
-        background-color: #f8f9fa;
-    }
-
-    .certificaciones h2 {
-        text-align: center;
-        margin-bottom: 40px;
-        color: #333;
-    }
-
-    .certificaciones-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 20px;
-        margin-top: 30px;
-    }
-
-    .certificacion-card {
-        background: white;
-        border-radius: 8px;
-        overflow: hidden;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        transition: transform 0.3s ease;
-    }
-
-    .certificacion-card:hover {
-        transform: translateY(-3px);
-    }
-
-    .certificacion-imagen {
-        width: 100%;
-        height: 150px;
-        overflow: hidden;
-        position: relative;
-        background-color: white;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 15px;
-    }
-
-    .certificacion-img {
-        max-width: 100%;
-        max-height: 100%;
-        width: auto;
-        height: auto;
-        object-fit: contain;
-    }
-
-    .imagen-default {
-        width: 100%;
-        height: 100%;
-        background-color: #e9ecef;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .imagen-default i {
-        font-size: 3rem;
-        color: #6c757d;
-    }
-
-    .certificacion-info {
-        padding: 15px;
-    }
-
-    .certificacion-info h3 {
-        margin: 0 0 8px 0;
-        font-size: 1.1rem;
-        color: #333;
-    }
-
-    .certificacion-descripcion {
-        margin: 0 0 8px 0;
-        color: #666;
-        font-size: 0.85rem;
-        line-height: 1.4;
-    }
-
-    .certificacion-descripcion p {
-        margin: 0 0 8px 0;
-    }
-
-    .certificacion-descripcion p:last-child {
-        margin-bottom: 0;
-    }
-
-    .certificacion-info .fecha {
-        display: block;
-        color: #6c757d;
-        font-size: 0.75rem;
-        font-style: italic;
-    }
-
-    @media (max-width: 768px) {
-        .certificaciones-grid {
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
+        .stats-title {
+            font-size: 2.1rem;
+            color: #0a2e73;
+            font-weight: 700;
+            margin-bottom: 18px;
         }
-        
-        .certificacion-imagen {
-            height: 120px;
+        .stats-grid {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            margin-top: 30px;
+            flex-wrap: wrap;
         }
-        
-        .certificacion-info h3 {
-            font-size: 1rem;
+        .stat-card {
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 2px 12px rgba(30,144,255,0.07);
+            padding: 36px 32px 28px 32px;
+            min-width: 220px;
+            text-align: center;
         }
-        
-        .certificacion-descripcion {
-            font-size: 0.8rem;
+        .stat-number {
+            font-size: 2.5rem;
+            color: #1e90ff;
+            font-weight: 700;
         }
-    }
-
-    .sobre-nosotros {
-        padding: 80px 0;
-        background-color: #fff;
-    }
-
-    .sobre-nosotros .container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 20px;
-    }
-
-    .sobre-nosotros .texto {
-        text-align: center;
-        margin-bottom: 50px;
-    }
-
-    .sobre-nosotros h2 {
-        font-size: 2.5rem;
-        color: #333;
-        margin-bottom: 20px;
-    }
-
-    .sobre-nosotros p {
-        color: #666;
-        line-height: 1.6;
-        margin-bottom: 15px;
-        max-width: 800px;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    .caracteristicas {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 30px;
-        margin-top: 30px;
-    }
-
-    .caracteristica-item {
-        text-align: center;
-        padding: 30px;
-        background: #f8f9fa;
-        border-radius: 10px;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
-
-    .caracteristica-item:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-    }
-
-    .caracteristica-item i {
-        font-size: 2.5rem;
-        color: #00B4DB;
-        margin-bottom: 20px;
-    }
-
-    .caracteristica-item h3 {
-        color: #333;
-        margin-bottom: 15px;
-        font-size: 1.2rem;
-    }
-
-    .caracteristica-item p {
-        color: #666;
-        line-height: 1.6;
-        margin: 0;
-    }
-
-    @media (max-width: 768px) {
-        .caracteristicas {
-            grid-template-columns: 1fr;
-            gap: 20px;
+        .stat-label {
+            color: #0a2e73;
+            font-size: 1.1rem;
+            margin-top: 8px;
         }
-
-        .sobre-nosotros {
-            padding: 60px 0;
+        /* Sección fondo oscuro */
+        .dark-section {
+            background: linear-gradient(135deg, #0a2e73 0%, #1e90ff 100%);
+            color: #fff;
+            padding: 70px 0 60px 0;
+            text-align: center;
+            border-radius: 30px;
+            margin: 60px 0 0 0;
         }
-
-        .sobre-nosotros h2 {
-            font-size: 2rem;
+        .dark-section h2 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 18px;
         }
-    }
-
-    .mision-vision {
-        background-color: #f8f9fa;
-        padding: 80px 0;
-    }
-
-    .mision-vision .container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 20px;
-    }
-
-    .grid-2-columns {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 40px;
-    }
-
-    .mision-vision .card {
-        text-align: center;
-        padding: 30px;
-        background: white;
-        border-radius: 10px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        transition: transform 0.3s ease;
-    }
-
-    .mision-vision .card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-    }
-
-    .mision-vision .card img {
-        width: 120px;
-        height: 120px;
-        object-fit: cover;
-        border-radius: 50%;
-        margin-bottom: 20px;
-    }
-
-    .mision-vision .card h3 {
-        color: #00B4DB;
-        margin-bottom: 15px;
-        font-size: 1.5rem;
-    }
-
-    .mision-vision .card p {
-        color: #666;
-        line-height: 1.6;
-        margin: 0;
-    }
-
-    @media (max-width: 768px) {
-        .grid-2-columns {
-            grid-template-columns: 1fr;
-            gap: 30px;
+        .dark-section p {
+            font-size: 1.1rem;
+            color: #e0eaff;
+            margin-bottom: 30px;
         }
-
-        .mision-vision {
-            padding: 60px 0;
+        .dark-section .btn {
+            background: #fff;
+            color: #1e90ff;
+            border: none;
         }
-
-        .mision-vision .card {
-            padding: 20px;
+        .dark-section .btn:hover {
+            background: #e0eaff;
         }
-
-        .mision-vision .card img {
-            width: 100px;
-            height: 100px;
+        /* Responsive */
+        @media (max-width: 900px) {
+            .hero .container {
+                flex-direction: column;
+                text-align: center;
+                padding: 40px 10px 40px 10px;
+            }
+            .hero-content, .hero-image {
+                flex: 1 1 100%;
+                margin: 0;
+            }
+            .hero-image {
+                margin-top: 30px;
+            }
         }
-    }
-
-    .nuestros-clientes {
-        padding: 80px 0;
-        background-color: #fff;
-    }
-
-    .nuestros-clientes h2 {
-        text-align: center;
-        margin-bottom: 20px;
-        color: #333;
-        font-size: 2.5rem;
-    }
-
-    .section-description {
-        text-align: center;
-        color: #666;
-        margin-bottom: 50px;
-        font-size: 1.2rem;
-    }
-
-    .clientes-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 30px;
-        align-items: center;
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 20px;
-    }
-
-    .cliente-item {
-        text-align: center;
-        padding: 30px;
-        background: white;
-        border-radius: 10px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        transition: all 0.3s ease;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 120px;
-    }
-
-    .cliente-item:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-    }
-
-    .cliente-item img {
-        max-width: 100%;
-        height: auto;
-        max-height: 80px;
-        width: auto;
-        object-fit: contain;
-        filter: grayscale(100%);
-        transition: filter 0.3s ease;
-    }
-
-    .cliente-item:hover img {
-        filter: grayscale(0%);
-    }
-
-    @media (max-width: 768px) {
-        .clientes-grid {
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
+        @media (max-width: 600px) {
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+            .services-title, .dark-section h2, .stats-title {
+                font-size: 1.3rem;
+            }
+            .service-card {
+                padding: 20px 10px 18px 10px;
+            }
+            .stat-card {
+                padding: 20px 10px 18px 10px;
+            }
+            .dark-section {
+                padding: 40px 0 30px 0;
+            }
         }
-
-        .cliente-item {
-            padding: 20px;
-            min-height: 100px;
-        }
-
-        .cliente-item img {
-            max-height: 60px;
-        }
-
-        .nuestros-clientes h2 {
-            font-size: 2rem;
-        }
-    }
     </style>
 
     <script>
