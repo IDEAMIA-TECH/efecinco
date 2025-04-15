@@ -41,33 +41,28 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
 
         <section class="sobre-nosotros">
             <div class="container">
-                <div class="grid-2-columns">
-                    <div class="texto">
-                        <h2>Somos F5</h2>
-                        <p>Una empresa especialista en soluciones tecnológicas para tu hogar o empresa.</p>
-                        <p>Llevamos más de 15 años trabajando con marcas reconocidas en el mercado que dan garantía a cada instalación que realizamos.</p>
-                        <p>Contamos con expertos consultores e instaladores que acompañan paso a paso a cada uno de nuestros clientes o proyectos; ayudando siempre, a que cada instalación tenga siempre el mejor resultado.</p>
-                        
-                        <div class="caracteristicas">
-                            <div class="caracteristica-item">
-                                <i class="fas fa-flag"></i>
-                                <h3>Una empresa 100% mexicana</h3>
-                                <p>Nos enfocamos a dar siempre los mejores resultados, con soluciones que generen la seguridad que necesitas.</p>
-                            </div>
-                            <div class="caracteristica-item">
-                                <i class="fas fa-shield-alt"></i>
-                                <h3>Confianza y Seguridad</h3>
-                                <p>Buscamos que siempre te sientas seguro de vivir o trabajar con instalaciones eficientes con profesionalismo.</p>
-                            </div>
-                            <div class="caracteristica-item">
-                                <i class="fas fa-award"></i>
-                                <h3>Experiencia que nos respalda</h3>
-                                <p>15 años de experiencia en el mercado nos respaldan.</p>
-                            </div>
+                <div class="texto">
+                    <h2>Somos F5</h2>
+                    <p>Una empresa especialista en soluciones tecnológicas para tu hogar o empresa.</p>
+                    <p>Llevamos más de 15 años trabajando con marcas reconocidas en el mercado que dan garantía a cada instalación que realizamos.</p>
+                    <p>Contamos con expertos consultores e instaladores que acompañan paso a paso a cada uno de nuestros clientes o proyectos; ayudando siempre, a que cada instalación tenga siempre el mejor resultado.</p>
+                    
+                    <div class="caracteristicas">
+                        <div class="caracteristica-item">
+                            <i class="fas fa-flag"></i>
+                            <h3>Una empresa 100% mexicana</h3>
+                            <p>Nos enfocamos a dar siempre los mejores resultados, con soluciones que generen la seguridad que necesitas.</p>
                         </div>
-                    </div>
-                    <div class="imagen">
-                        <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Historia de Efecinco" loading="lazy">
+                        <div class="caracteristica-item">
+                            <i class="fas fa-shield-alt"></i>
+                            <h3>Confianza y Seguridad</h3>
+                            <p>Buscamos que siempre te sientas seguro de vivir o trabajar con instalaciones eficientes con profesionalismo.</p>
+                        </div>
+                        <div class="caracteristica-item">
+                            <i class="fas fa-award"></i>
+                            <h3>Experiencia que nos respalda</h3>
+                            <p>15 años de experiencia en el mercado nos respaldan.</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -852,163 +847,40 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
         padding: 80px 0;
     }
 
-    .grid-2-columns {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 40px;
-        align-items: center;
-    }
-
-    .texto h2 {
-        margin-bottom: 20px;
-        color: #333;
-    }
-
-    .texto p {
-        color: #666;
-        line-height: 1.6;
-    }
-
-    .imagen img {
-        width: 100%;
-        height: 400px;
-        object-fit: cover;
-        border-radius: 10px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
-
-    .mision-vision {
-        background-color: #f8f9fa;
-        padding: 80px 0;
-    }
-
-    .mision-vision .card {
-        text-align: center;
-        padding: 30px;
-        background: white;
-        border-radius: 10px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .mision-vision .card img {
-        width: 120px;
-        height: 120px;
-        object-fit: cover;
-        border-radius: 50%;
-        margin-bottom: 20px;
-    }
-
-    .mision-vision .card h3 {
-        margin-bottom: 15px;
-        color: #333;
-    }
-
-    .mision-vision .card p {
-        color: #666;
-        line-height: 1.6;
-    }
-
-    @media (max-width: 768px) {
-        .grid-2-columns {
-            grid-template-columns: 1fr;
-        }
-        
-        .imagen img {
-            height: 300px;
-        }
-        
-        .mision-vision .card {
-            padding: 20px;
-        }
-    }
-
-    .linea-tiempo {
-        padding: 80px 0;
-        background-color: #f8f9fa;
-    }
-
-    .linea-tiempo h2 {
-        text-align: center;
-        margin-bottom: 50px;
-        color: #333;
-    }
-
-    .timeline {
-        position: relative;
-        max-width: 800px;
+    .sobre-nosotros .texto {
+        max-width: 1200px;
         margin: 0 auto;
+        text-align: center;
     }
 
-    .timeline::before {
-        content: '';
-        position: absolute;
-        width: 2px;
-        background-color: #00B4DB;
-        top: 0;
-        bottom: 0;
-        left: 50%;
-        margin-left: -1px;
+    .sobre-nosotros h2 {
+        margin-bottom: 20px;
+        color: #333;
     }
 
-    .timeline-item {
-        padding: 20px 0;
-        position: relative;
-    }
-
-    .timeline-content {
-        position: relative;
-        width: 45%;
-        padding: 20px;
-        background: white;
-        border-radius: 10px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
-
-    .timeline-item:nth-child(odd) .timeline-content {
-        margin-left: 50%;
-    }
-
-    .timeline-item:nth-child(even) .timeline-content {
-        margin-right: 50%;
-    }
-
-    .timeline-content h3 {
-        color: #00B4DB;
-        margin-bottom: 10px;
-    }
-
-    .timeline-content p {
+    .sobre-nosotros p {
         color: #666;
-        margin: 0;
-    }
-
-    @media (max-width: 768px) {
-        .timeline::before {
-            left: 30px;
-        }
-
-        .timeline-content {
-            width: calc(100% - 60px);
-            margin-left: 60px !important;
-        }
+        line-height: 1.6;
+        margin-bottom: 15px;
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     .caracteristicas {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 20px;
-        margin-top: 30px;
+        gap: 30px;
+        margin-top: 50px;
     }
 
     .caracteristica-item {
         text-align: center;
-        padding: 20px;
+        padding: 30px;
         background: #f8f9fa;
         border-radius: 10px;
         transition: transform 0.3s ease;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
 
     .caracteristica-item:hover {
@@ -1018,12 +890,12 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
     .caracteristica-item i {
         font-size: 2.5rem;
         color: #00B4DB;
-        margin-bottom: 15px;
+        margin-bottom: 20px;
     }
 
     .caracteristica-item h3 {
         color: #333;
-        margin-bottom: 10px;
+        margin-bottom: 15px;
         font-size: 1.2rem;
     }
 
@@ -1035,6 +907,11 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
     @media (max-width: 768px) {
         .caracteristicas {
             grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        .sobre-nosotros {
+            padding: 60px 0;
         }
     }
     </style>
