@@ -84,39 +84,56 @@ include('includes/header.php');
             require_once('includes/db.php');
             $conexion = conectarDB();
             
-            $sql = "SELECT * FROM testimonios WHERE activo = 1 AND destacado = 1 ORDER BY fecha_creacion DESC LIMIT 5";
-            $stmt = consultaSegura($conexion, $sql, []);
-            $testimonios = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
-            
-            foreach ($testimonios as $testimonio):
-            ?>
-            <div class="testimonio-card">
-                <div class="testimonio-content">
-                    <div class="testimonio-text">
-                        <i class="fas fa-quote-left"></i>
-                        <p><?php echo htmlspecialchars($testimonio['testimonio']); ?></p>
-                    </div>
-                    <div class="testimonio-author">
-                        <?php if ($testimonio['imagen']): ?>
-                            <img src="<?php echo htmlspecialchars($testimonio['imagen']); ?>" alt="<?php echo htmlspecialchars($testimonio['cliente']); ?>" class="author-image">
-                        <?php else: ?>
-                            <div class="author-image default">
-                                <i class="fas fa-user"></i>
+            // Verificar la conexión
+            if (!$conexion) {
+                echo '<div class="alert alert-danger">Error al conectar con la base de datos</div>';
+            } else {
+                $sql = "SELECT * FROM testimonios WHERE activo = 1 AND destacado = 1 ORDER BY fecha_creacion DESC LIMIT 5";
+                $stmt = consultaSegura($conexion, $sql, []);
+                
+                if ($stmt) {
+                    $result = $stmt->get_result();
+                    $testimonios = $result->fetch_all(MYSQLI_ASSOC);
+                    
+                    if (empty($testimonios)) {
+                        echo '<div class="alert alert-info">No hay testimonios destacados disponibles</div>';
+                    } else {
+                        foreach ($testimonios as $testimonio):
+                        ?>
+                        <div class="testimonio-card">
+                            <div class="testimonio-content">
+                                <div class="testimonio-text">
+                                    <i class="fas fa-quote-left"></i>
+                                    <p><?php echo htmlspecialchars($testimonio['testimonio']); ?></p>
+                                </div>
+                                <div class="testimonio-author">
+                                    <?php if ($testimonio['imagen']): ?>
+                                        <img src="<?php echo htmlspecialchars($testimonio['imagen']); ?>" alt="<?php echo htmlspecialchars($testimonio['cliente']); ?>" class="author-image">
+                                    <?php else: ?>
+                                        <div class="author-image default">
+                                            <i class="fas fa-user"></i>
+                                        </div>
+                                    <?php endif; ?>
+                                    <div class="author-info">
+                                        <h4><?php echo htmlspecialchars($testimonio['cliente']); ?></h4>
+                                        <?php if ($testimonio['cargo']): ?>
+                                            <p class="cargo"><?php echo htmlspecialchars($testimonio['cargo']); ?></p>
+                                        <?php endif; ?>
+                                        <?php if ($testimonio['empresa']): ?>
+                                            <p class="empresa"><?php echo htmlspecialchars($testimonio['empresa']); ?></p>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
                             </div>
-                        <?php endif; ?>
-                        <div class="author-info">
-                            <h4><?php echo htmlspecialchars($testimonio['cliente']); ?></h4>
-                            <?php if ($testimonio['cargo']): ?>
-                                <p class="cargo"><?php echo htmlspecialchars($testimonio['cargo']); ?></p>
-                            <?php endif; ?>
-                            <?php if ($testimonio['empresa']): ?>
-                                <p class="empresa"><?php echo htmlspecialchars($testimonio['empresa']); ?></p>
-                            <?php endif; ?>
                         </div>
-                    </div>
-                </div>
-            </div>
-            <?php endforeach; ?>
+                        <?php 
+                        endforeach;
+                    }
+                } else {
+                    echo '<div class="alert alert-danger">Error al ejecutar la consulta</div>';
+                }
+            }
+            ?>
         </div>
         <div class="testimonios-controls">
             <button class="prev-testimonio"><i class="fas fa-chevron-left"></i></button>
@@ -387,6 +404,25 @@ include('includes/header.php');
     transform: scale(1.1);
 }
 
+.alert {
+    padding: 15px;
+    margin: 20px 0;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.alert-info {
+    background-color: #d1ecf1;
+    color: #0c5460;
+    border: 1px solid #bee5eb;
+}
+
 @media (max-width: 768px) {
     .hero h1 {
         font-size: 2.5rem;
@@ -419,26 +455,31 @@ document.addEventListener('DOMContentLoaded', function() {
     const prevBtn = document.querySelector('.prev-testimonio');
     const nextBtn = document.querySelector('.next-testimonio');
     
-    let currentIndex = 0;
-    
-    function showTestimonio(index) {
-        cards.forEach((card, i) => {
-            card.style.display = i === index ? 'block' : 'none';
+    if (cards.length > 0) {
+        let currentIndex = 0;
+        
+        function showTestimonio(index) {
+            cards.forEach((card, i) => {
+                card.style.display = i === index ? 'block' : 'none';
+            });
+        }
+        
+        prevBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + cards.length) % cards.length;
+            showTestimonio(currentIndex);
         });
+        
+        nextBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % cards.length;
+            showTestimonio(currentIndex);
+        });
+        
+        // Show first testimonio initially
+        showTestimonio(currentIndex);
+    } else {
+        // Hide controls if no testimonios
+        document.querySelector('.testimonios-controls').style.display = 'none';
     }
-    
-    prevBtn.addEventListener('click', () => {
-        currentIndex = (currentIndex - 1 + cards.length) % cards.length;
-        showTestimonio(currentIndex);
-    });
-    
-    nextBtn.addEventListener('click', () => {
-        currentIndex = (currentIndex + 1) % cards.length;
-        showTestimonio(currentIndex);
-    });
-    
-    // Show first testimonio initially
-    showTestimonio(currentIndex);
 });
 </script>
 
