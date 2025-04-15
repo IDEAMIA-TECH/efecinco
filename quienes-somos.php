@@ -104,8 +104,10 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
 
         <section class="nuestros-clientes">
             <div class="container">
-                <h2>Nuestros Clientes</h2>
-                <p class="section-description">Empresas que confían en nuestros servicios</p>
+                <div class="section-header text-center">
+                    <h2>Nuestros Clientes</h2>
+                    <p class="section-description">Empresas que confían en nuestros servicios</p>
+                </div>
                 <div class="clientes-grid">
                     <div class="cliente-item">
                         <img src="assets/images/clientes/client-a.png" alt="Cliente A" loading="lazy">
