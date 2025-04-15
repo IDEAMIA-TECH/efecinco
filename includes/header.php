@@ -104,7 +104,7 @@ require_once __DIR__ . '/db.php';
             }
         }
 
-        .admin-link a {
+        .admin-link a, .login-link a {
             color: #00B4DB;
             font-weight: bold;
             display: flex;
@@ -112,7 +112,7 @@ require_once __DIR__ . '/db.php';
             gap: 0.5rem;
         }
 
-        .admin-link a:hover {
+        .admin-link a:hover, .login-link a:hover {
             color: #0083a3;
         }
     </style>
@@ -136,6 +136,12 @@ require_once __DIR__ . '/db.php';
                         <li class="admin-link">
                             <a href="admin/dashboard.php">
                                 <i class="fas fa-user-shield"></i> Panel Admin
+                            </a>
+                        </li>
+                    <?php else: ?>
+                        <li class="login-link">
+                            <a href="admin/login.php">
+                                <i class="fas fa-sign-in-alt"></i> Iniciar Sesión
                             </a>
                         </li>
                     <?php endif; ?>
