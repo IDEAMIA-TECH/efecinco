@@ -182,6 +182,7 @@ $stats['certificaciones'] = $resultado->fetch_assoc()['total'];
             background-color: #f8f9fa;
             color: #2c3e50;
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            min-height: 100vh;
         }
 
         .admin-wrapper {
@@ -196,14 +197,18 @@ $stats['certificaciones'] = $resultado->fetch_assoc()['total'];
             display: flex;
             flex-direction: column;
             position: fixed;
+            left: 0;
+            top: 0;
             height: 100vh;
             box-shadow: 2px 0 5px rgba(0,0,0,0.05);
+            z-index: 1000;
         }
 
         .sidebar-header {
             padding: 2rem;
             text-align: center;
             border-bottom: 1px solid #e9ecef;
+            background: #fff;
         }
 
         .sidebar-header .logo {
@@ -216,11 +221,13 @@ $stats['certificaciones'] = $resultado->fetch_assoc()['total'];
             margin: 0;
             color: #2c3e50;
             font-size: 1.5rem;
+            font-weight: 600;
         }
 
         .admin-nav {
             padding: 1.5rem 0;
             flex-grow: 1;
+            overflow-y: auto;
         }
 
         .admin-nav a {
@@ -230,6 +237,7 @@ $stats['certificaciones'] = $resultado->fetch_assoc()['total'];
             color: #6c757d;
             text-decoration: none;
             transition: all 0.3s ease;
+            border-left: 4px solid transparent;
         }
 
         .admin-nav a:hover,
@@ -242,11 +250,18 @@ $stats['certificaciones'] = $resultado->fetch_assoc()['total'];
         .admin-nav a i {
             width: 24px;
             margin-right: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .admin-nav a span {
+            font-size: 0.95rem;
+            font-weight: 500;
         }
 
         .sidebar-footer {
             padding: 1.5rem 2rem;
             border-top: 1px solid #e9ecef;
+            background: #fff;
         }
 
         .logout-btn {
@@ -270,6 +285,8 @@ $stats['certificaciones'] = $resultado->fetch_assoc()['total'];
             flex-grow: 1;
             margin-left: 280px;
             padding: 2rem;
+            min-height: 100vh;
+            background: #f8f9fa;
         }
 
         .main-header {
@@ -455,6 +472,7 @@ $stats['certificaciones'] = $resultado->fetch_assoc()['total'];
 
             .admin-nav a i {
                 margin: 0;
+                font-size: 1.2rem;
             }
 
             .sidebar-footer {
@@ -471,16 +489,20 @@ $stats['certificaciones'] = $resultado->fetch_assoc()['total'];
         }
 
         @media (max-width: 768px) {
-            .stats-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .quick-actions-grid {
-                grid-template-columns: 1fr;
+            .admin-sidebar {
+                width: 60px;
             }
 
             .admin-main {
-                padding: 1rem;
+                margin-left: 60px;
+            }
+
+            .admin-nav a {
+                padding: 0.8rem;
+            }
+
+            .admin-nav a i {
+                font-size: 1.1rem;
             }
         }
     </style>
