@@ -16,13 +16,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     if (!empty($usuario) && !empty($password)) {
         $conexion = conectarDB();
-        $sql = "SELECT id, usuario, password_hash, nombre FROM usuarios_admin WHERE usuario = ?";
+        $sql = "SELECT id, usuario, password, nombre FROM usuarios_admin WHERE usuario = ?";
         $stmt = consultaSegura($conexion, $sql, [$usuario]);
         $resultado = $stmt->get_result();
         
         if ($resultado->num_rows === 1) {
             $admin = $resultado->fetch_assoc();
-            if (password_verify($password, $admin['password_hash'])) {
+            if (password_verify($password, $admin['password'])) {
                 $_SESSION['admin_logged_in'] = true;
                 $_SESSION['admin_id'] = $admin['id'];
                 $_SESSION['admin_nombre'] = $admin['nombre'];
@@ -67,6 +67,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
                 <button type="submit" class="btn btn-primary">Ingresar</button>
             </form>
+            <div class="back-link">
+                <a href="../index.php">← Volver al sitio</a>
+            </div>
         </div>
     </div>
 </body>
