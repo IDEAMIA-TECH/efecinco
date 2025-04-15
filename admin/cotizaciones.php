@@ -1,6 +1,6 @@
 <?php
-require_once('../includes/functions.php');
 require_once('auth.php');
+require_once('../includes/functions.php');
 $conexion = conectarDB();
 
 $mensaje = '';

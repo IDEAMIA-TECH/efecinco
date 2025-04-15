@@ -20,6 +20,7 @@ CREATE TABLE IF NOT EXISTS cotizaciones_camaras (
     tiempo_instalacion VARCHAR(50) NOT NULL,
     horario_contacto VARCHAR(20) NOT NULL,
     comentarios TEXT,
+    comentarios_admin TEXT,
     fecha_creacion DATETIME NOT NULL,
     estado ENUM('pendiente', 'en_proceso', 'completado', 'cancelado') DEFAULT 'pendiente',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
