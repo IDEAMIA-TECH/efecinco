@@ -171,4 +171,27 @@ CREATE TABLE IF NOT EXISTS `contactos` (
     `leido` boolean DEFAULT FALSE,
     `fecha_creacion` timestamp DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci; 
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Tabla clientes
+CREATE TABLE IF NOT EXISTS `clientes` (
+    `id` int(11) NOT NULL AUTO_INCREMENT,
+    `nombre` varchar(100) NOT NULL,
+    `logo` varchar(255),
+    `url` varchar(255),
+    `descripcion` text,
+    `destacado` boolean DEFAULT FALSE,
+    `activo` boolean DEFAULT TRUE,
+    `orden` int DEFAULT 0,
+    `fecha_creacion` timestamp DEFAULT CURRENT_TIMESTAMP,
+    `fecha_actualizacion` timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Insertar algunos clientes de ejemplo
+INSERT INTO clientes (nombre, descripcion, destacado, activo) VALUES
+('Walmart', 'Centro de Distribución - Implementación de CCTV y Control de Acceso', TRUE, TRUE),
+('Liverpool', 'Tiendas Departamentales - Sistema de Audio Ambiental', TRUE, TRUE),
+('Chedraui', 'Supermercados - Cableado Estructurado y CCTV', TRUE, TRUE),
+('OXXO', 'Tiendas de Conveniencia - Sistemas de Seguridad Integral', TRUE, TRUE),
+('Soriana', 'Hipermercados - Soluciones de Control de Acceso', TRUE, TRUE); 
