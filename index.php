@@ -91,30 +91,35 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
                 <div class="timeline">
                     <div class="timeline-item">
                         <div class="timeline-content">
+                            <i class="fas fa-building"></i>
                             <h3>2014</h3>
                             <p>Fundación de Efecinco</p>
                         </div>
                     </div>
                     <div class="timeline-item">
                         <div class="timeline-content">
+                            <i class="fas fa-globe-americas"></i>
                             <h3>2016</h3>
                             <p>Expansión a nuevos mercados</p>
                         </div>
                     </div>
                     <div class="timeline-item">
                         <div class="timeline-content">
+                            <i class="fas fa-certificate"></i>
                             <h3>2018</h3>
                             <p>Certificación ISO 9001</p>
                         </div>
                     </div>
                     <div class="timeline-item">
                         <div class="timeline-content">
+                            <i class="fas fa-handshake"></i>
                             <h3>2020</h3>
                             <p>Nuevas alianzas estratégicas</p>
                         </div>
                     </div>
                     <div class="timeline-item">
                         <div class="timeline-content">
+                            <i class="fas fa-trophy"></i>
                             <h3>2024</h3>
                             <p>10 años de excelencia y crecimiento</p>
                         </div>
@@ -1005,16 +1010,24 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
     .timeline-content {
         position: relative;
         width: 45%;
-        padding: 20px;
+        padding: 30px;
         background: white;
         border-radius: 10px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         transition: transform 0.3s ease;
+        text-align: center;
     }
 
     .timeline-content:hover {
         transform: translateY(-5px);
         box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .timeline-content i {
+        font-size: 2.5rem;
+        color: #00B4DB;
+        margin-bottom: 15px;
+        display: block;
     }
 
     .timeline-item:nth-child(odd) .timeline-content {
@@ -1048,6 +1061,10 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
         }
 
         .linea-tiempo h2 {
+            font-size: 2rem;
+        }
+
+        .timeline-content i {
             font-size: 2rem;
         }
     }
