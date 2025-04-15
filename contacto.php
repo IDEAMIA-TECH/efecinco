@@ -188,12 +188,16 @@ $captcha_respuesta = $num1 + $num2;
 
     <style>
         .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://source.unsplash.com/random/1920x1080/?contact,office');
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg');
             background-size: cover;
             background-position: center;
             color: white;
             text-align: center;
             padding: 100px 0;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .hero h1 {
