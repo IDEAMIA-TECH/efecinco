@@ -439,6 +439,35 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
                 max-height: 60px;
             }
         }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .section-description {
+            color: #666;
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .nuestros-clientes {
+            padding: 80px 0;
+            background-color: #fff;
+        }
+
+        .nuestros-clientes .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
     </style>
 </body>
 </html> 
