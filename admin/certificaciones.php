@@ -150,7 +150,10 @@ include('includes/header.php');
 <div class="container">
     <div class="card">
         <div class="card-header">
-            <h2>Gestión de Certificaciones</h2>
+            <div class="header-content">
+                <img src="../assets/img/logof5.png" alt="Logo" class="logo">
+                <h2>Gestión de Certificaciones</h2>
+            </div>
             <button class="btn btn-success" onclick="mostrarFormulario('nuevo')">
                 <i class="fas fa-plus"></i> Nueva Certificación
             </button>

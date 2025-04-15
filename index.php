@@ -51,27 +51,50 @@ include('includes/header.php');
     <div class="container">
         <h2>Proyectos Destacados</h2>
         <div class="proyectos-grid">
-            <div class="proyecto-card">
-                <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Proyecto Corporativo">
-                <div class="proyecto-info">
-                    <h3>Centro Corporativo</h3>
-                    <p>Implementación de sistema integral de seguridad</p>
-                </div>
-            </div>
-            <div class="proyecto-card">
-                <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Proyecto Comercial">
-                <div class="proyecto-info">
-                    <h3>Centro Comercial</h3>
-                    <p>Sistema de CCTV y control de acceso</p>
-                </div>
-            </div>
-            <div class="proyecto-card">
-                <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Proyecto Industrial">
-                <div class="proyecto-info">
-                    <h3>Complejo Industrial</h3>
-                    <p>Infraestructura de red y seguridad</p>
-                </div>
-            </div>
+            <?php
+            require_once('includes/db.php');
+            $conexion = conectarDB();
+            
+            // Verificar la conexión
+            if (!$conexion) {
+                echo '<div class="alert alert-danger">Error al conectar con la base de datos</div>';
+            } else {
+                $sql = "SELECT * FROM proyectos WHERE activo = 1 AND destacado = 1 ORDER BY fecha_creacion DESC LIMIT 3";
+                $stmt = consultaSegura($conexion, $sql, []);
+                
+                if ($stmt) {
+                    $result = $stmt->get_result();
+                    $proyectos = $result->fetch_all(MYSQLI_ASSOC);
+                    
+                    if (empty($proyectos)) {
+                        echo '<div class="alert alert-info">No hay proyectos destacados disponibles</div>';
+                    } else {
+                        foreach ($proyectos as $proyecto):
+                        ?>
+                        <div class="proyecto-card">
+                            <?php if ($proyecto['imagen']): ?>
+                                <img src="<?php echo htmlspecialchars($proyecto['imagen']); ?>" 
+                                     alt="<?php echo htmlspecialchars($proyecto['cliente']); ?>"
+                                     class="proyecto-imagen">
+                            <?php else: ?>
+                                <div class="proyecto-imagen default">
+                                    <i class="fas fa-image"></i>
+                                </div>
+                            <?php endif; ?>
+                            <div class="proyecto-info">
+                                <h3><?php echo htmlspecialchars($proyecto['cliente']); ?></h3>
+                                <p class="tipo-solucion"><?php echo htmlspecialchars($proyecto['tipo_solucion']); ?></p>
+                                <p class="descripcion-corta"><?php echo htmlspecialchars($proyecto['descripcion_corta']); ?></p>
+                            </div>
+                        </div>
+                        <?php 
+                        endforeach;
+                    }
+                } else {
+                    echo '<div class="alert alert-danger">Error al ejecutar la consulta</div>';
+                }
+            }
+            ?>
         </div>
     </div>
 </section>
@@ -260,17 +283,36 @@ include('includes/header.php');
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
 }
 
-.proyecto-card img {
+.proyecto-card:hover {
+    transform: translateY(-5px);
+}
+
+.proyecto-imagen {
     width: 100%;
-    height: 300px;
+    height: 250px;
     object-fit: cover;
     transition: transform 0.3s ease;
 }
 
-.proyecto-card:hover img {
-    transform: scale(1.1);
+.proyecto-imagen.default {
+    width: 100%;
+    height: 250px;
+    background-color: #f8f9fa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #6c757d;
+}
+
+.proyecto-imagen.default i {
+    font-size: 3rem;
+}
+
+.proyecto-card:hover .proyecto-imagen {
+    transform: scale(1.05);
 }
 
 .proyecto-info {
@@ -284,7 +326,20 @@ include('includes/header.php');
 }
 
 .proyecto-info h3 {
-    margin-bottom: 10px;
+    margin: 0 0 10px 0;
+    font-size: 1.5rem;
+}
+
+.proyecto-info .tipo-solucion {
+    margin: 0 0 5px 0;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.proyecto-info .descripcion-corta {
+    margin: 0;
+    font-size: 0.9rem;
+    opacity: 0.9;
 }
 
 .testimonios {
@@ -467,6 +522,22 @@ include('includes/header.php');
     
     .testimonio-text p {
         font-size: 1rem;
+    }
+    
+    .proyecto-imagen {
+        height: 200px;
+    }
+    
+    .proyecto-info h3 {
+        font-size: 1.2rem;
+    }
+    
+    .proyecto-info .tipo-solucion {
+        font-size: 1rem;
+    }
+    
+    .proyecto-info .descripcion-corta {
+        font-size: 0.8rem;
     }
 }
 </style>
