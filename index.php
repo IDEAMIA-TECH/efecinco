@@ -927,6 +927,90 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
             font-size: 2rem;
         }
     }
+
+    .linea-tiempo {
+        padding: 80px 0;
+        background-color: #f8f9fa;
+    }
+
+    .linea-tiempo h2 {
+        text-align: center;
+        margin-bottom: 50px;
+        color: #333;
+        font-size: 2.5rem;
+    }
+
+    .timeline {
+        position: relative;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .timeline::before {
+        content: '';
+        position: absolute;
+        width: 2px;
+        background-color: #00B4DB;
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        margin-left: -1px;
+    }
+
+    .timeline-item {
+        padding: 20px 0;
+        position: relative;
+    }
+
+    .timeline-content {
+        position: relative;
+        width: 45%;
+        padding: 20px;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+    }
+
+    .timeline-content:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .timeline-item:nth-child(odd) .timeline-content {
+        margin-left: 50%;
+    }
+
+    .timeline-item:nth-child(even) .timeline-content {
+        margin-right: 50%;
+    }
+
+    .timeline-content h3 {
+        color: #00B4DB;
+        margin-bottom: 10px;
+        font-size: 1.5rem;
+    }
+
+    .timeline-content p {
+        color: #666;
+        margin: 0;
+        line-height: 1.6;
+    }
+
+    @media (max-width: 768px) {
+        .timeline::before {
+            left: 30px;
+        }
+
+        .timeline-content {
+            width: calc(100% - 60px);
+            margin-left: 60px !important;
+        }
+
+        .linea-tiempo h2 {
+            font-size: 2rem;
+        }
+    }
     </style>
 
     <script>
