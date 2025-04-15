@@ -43,8 +43,28 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
             <div class="container">
                 <div class="grid-2-columns">
                     <div class="texto">
-                        <h2>Nuestra Historia</h2>
-                        <p><?php echo nl2br(htmlspecialchars($empresa['historia'] ?? '')); ?></p>
+                        <h2>Somos F5</h2>
+                        <p>Una empresa especialista en soluciones tecnológicas para tu hogar o empresa.</p>
+                        <p>Llevamos más de 15 años trabajando con marcas reconocidas en el mercado que dan garantía a cada instalación que realizamos.</p>
+                        <p>Contamos con expertos consultores e instaladores que acompañan paso a paso a cada uno de nuestros clientes o proyectos; ayudando siempre, a que cada instalación tenga siempre el mejor resultado.</p>
+                        
+                        <div class="caracteristicas">
+                            <div class="caracteristica-item">
+                                <i class="fas fa-flag"></i>
+                                <h3>Una empresa 100% mexicana</h3>
+                                <p>Nos enfocamos a dar siempre los mejores resultados, con soluciones que generen la seguridad que necesitas.</p>
+                            </div>
+                            <div class="caracteristica-item">
+                                <i class="fas fa-shield-alt"></i>
+                                <h3>Confianza y Seguridad</h3>
+                                <p>Buscamos que siempre te sientas seguro de vivir o trabajar con instalaciones eficientes con profesionalismo.</p>
+                            </div>
+                            <div class="caracteristica-item">
+                                <i class="fas fa-award"></i>
+                                <h3>Experiencia que nos respalda</h3>
+                                <p>15 años de experiencia en el mercado nos respaldan.</p>
+                            </div>
+                        </div>
                     </div>
                     <div class="imagen">
                         <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Historia de Efecinco" loading="lazy">
@@ -973,6 +993,48 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
         .timeline-content {
             width: calc(100% - 60px);
             margin-left: 60px !important;
+        }
+    }
+
+    .caracteristicas {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        margin-top: 30px;
+    }
+
+    .caracteristica-item {
+        text-align: center;
+        padding: 20px;
+        background: #f8f9fa;
+        border-radius: 10px;
+        transition: transform 0.3s ease;
+    }
+
+    .caracteristica-item:hover {
+        transform: translateY(-5px);
+    }
+
+    .caracteristica-item i {
+        font-size: 2.5rem;
+        color: #00B4DB;
+        margin-bottom: 15px;
+    }
+
+    .caracteristica-item h3 {
+        color: #333;
+        margin-bottom: 10px;
+        font-size: 1.2rem;
+    }
+
+    .caracteristica-item p {
+        color: #666;
+        line-height: 1.6;
+    }
+
+    @media (max-width: 768px) {
+        .caracteristicas {
+            grid-template-columns: 1fr;
         }
     }
     </style>
