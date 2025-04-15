@@ -521,6 +521,51 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
                 padding: 40px 0 30px 0;
             }
         }
+        /* --- MISION Y VISION --- */
+        .mision-vision {
+            background-color: #f8f9fa;
+            padding: 80px 0;
+        }
+        .mision-vision .grid-2-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+        .mision-vision .card {
+            text-align: center;
+            padding: 30px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .mision-vision .card img {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-bottom: 20px;
+        }
+        .mision-vision .card h3 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+        .mision-vision .card p {
+            color: #666;
+            line-height: 1.6;
+        }
+        @media (max-width: 900px) {
+            .mision-vision .grid-2-columns {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            .mision-vision {
+                padding: 60px 0;
+            }
+        }
     </style>
 
     <script>

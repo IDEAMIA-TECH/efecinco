@@ -412,3 +412,124 @@ include('includes/header.php');
 // Incluir el footer
 include('includes/footer.php');
 ?> 
+                <?php if ($mensaje): ?>
+                    <div class="alert alert-<?php echo $tipo_mensaje; ?> auto-dismiss">
+                        <?php echo htmlspecialchars($mensaje); ?>
+                    </div>
+                <?php endif; ?>
+
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Imagen</th>
+                                <th>Título</th>
+                                <th>Descripción</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($certificaciones as $certificacion): ?>
+                                <tr>
+                                    <td>
+                                        <?php if ($certificacion['imagen']): ?>
+                                            <img src="<?php echo htmlspecialchars($certificacion['imagen']); ?>" 
+                                                 alt="<?php echo htmlspecialchars($certificacion['titulo']); ?>"
+                                                 style="max-width: 100px;">
+                                        <?php endif; ?>
+                                    </td>
+                                    <td><?php echo htmlspecialchars($certificacion['titulo']); ?></td>
+                                    <td><?php echo htmlspecialchars(substr($certificacion['descripcion'], 0, 100)) . '...'; ?></td>
+                                    <td>
+                                        <span class="badge <?php echo $certificacion['activo'] ? 'badge-success' : 'badge-danger'; ?>">
+                                            <?php echo $certificacion['activo'] ? 'Activo' : 'Inactivo'; ?>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-sm btn-warning" onclick="mostrarFormulario('editar', <?php echo $certificacion['id']; ?>)">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <form method="POST" style="display: inline;">
+                                            <input type="hidden" name="action" value="delete">
+                                            <input type="hidden" name="id" value="<?php echo $certificacion['id']; ?>">
+                                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('¿Está seguro que desea eliminar esta certificación?')">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Formulario de creación/edición -->
+            <div id="formularioCertificacion" class="card" style="display: none;">
+                <div class="card-header">
+                    <h3 id="tituloFormulario">Nueva Certificación</h3>
+                    <button class="btn btn-secondary" onclick="ocultarFormulario()">Cancelar</button>
+                </div>
+                <form method="POST" id="formCertificacion" enctype="multipart/form-data">
+                    <input type="hidden" name="action" id="formAction" value="create">
+                    <input type="hidden" name="id" id="certificacionId">
+                    <input type="hidden" name="imagen_actual" id="imagenActual">
+                    
+                    <div class="form-group">
+                        <label for="titulo">Título</label>
+                        <input type="text" id="titulo" name="titulo" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="descripcion">Descripción</label>
+                        <textarea id="descripcion" name="descripcion" rows="3"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="imagen">Imagen</label>
+                        <input type="file" id="imagen" name="imagen" accept="image/*">
+                        <small class="form-text text-muted">Formatos aceptados: JPG, PNG, GIF. Tamaño máximo: 2MB</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" id="activo" name="activo" checked>
+                            Activo
+                        </label>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function mostrarFormulario(accion, id = null) {
+            const formulario = document.getElementById('formularioCertificacion');
+            const titulo = document.getElementById('tituloFormulario');
+            const formAction = document.getElementById('formAction');
+            const certificacionId = document.getElementById('certificacionId');
+            
+            if (accion === 'nuevo') {
+                titulo.textContent = 'Nueva Certificación';
+                formAction.value = 'create';
+                certificacionId.value = '';
+                document.getElementById('formCertificacion').reset();
+            } else {
+                titulo.textContent = 'Editar Certificación';
+                formAction.value = 'update';
+                certificacionId.value = id;
+                // Aquí se cargarían los datos de la certificación
+            }
+            
+            formulario.style.display = 'block';
+        }
+        
+        function ocultarFormulario() {
+            document.getElementById('formularioCertificacion').style.display = 'none';
+        }
+    </script>
+</body>
+</html> 
