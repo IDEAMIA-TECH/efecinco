@@ -7,6 +7,10 @@ verificarAutenticacion();
 
 $conexion = conectarDB();
 
+// Variables para el header
+$titulo_pagina = 'Administrar Proyectos';
+$pagina_actual = 'proyectos';
+
 // Procesar acciones
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $accion = $_POST['accion'] ?? '';
@@ -212,631 +216,251 @@ $proyectos = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 $sql = "SELECT * FROM servicios WHERE activo = 1 ORDER BY nombre";
 $stmt = consultaSegura($conexion, $sql, []);
 $servicios = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+// Incluir el header
+include('includes/header.php');
 ?>
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Administrar Proyectos - Efecinco</title>
-    <link rel="stylesheet" href="../assets/css/admin.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
 
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 10px 20px;
-            border-radius: 5px;
-            text-decoration: none;
-            font-weight: 500;
-            cursor: pointer;
-            border: none;
-            transition: all 0.3s ease;
-        }
-
-        .btn-primary {
-            background-color: #007bff;
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background-color: #0056b3;
-        }
-
-        .btn-danger {
-            background-color: #dc3545;
-            color: white;
-        }
-
-        .btn-danger:hover {
-            background-color: #c82333;
-        }
-
-        .btn-outline {
-            background-color: transparent;
-            border: 1px solid #007bff;
-            color: #007bff;
-        }
-
-        .btn-outline:hover {
-            background-color: #007bff;
-            color: white;
-        }
-
-        .table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 30px;
-        }
-
-        .table th,
-        .table td {
-            padding: 12px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-
-        .table th {
-            background-color: #f8f9fa;
-            font-weight: 600;
-        }
-
-        .table tr:hover {
-            background-color: #f5f5f5;
-        }
-
-        .badge {
-            display: inline-block;
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 500;
-        }
-
-        .badge-success {
-            background-color: #28a745;
-            color: white;
-        }
-
-        .badge-danger {
-            background-color: #dc3545;
-            color: white;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 1rem;
-        }
-
-        .form-control:focus {
-            outline: none;
-            border-color: #007bff;
-        }
-
-        textarea.form-control {
-            min-height: 100px;
-            resize: vertical;
-        }
-
-        .checkbox-group {
-            display: flex;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-
-        .checkbox-group input {
-            margin-right: 10px;
-        }
-
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 1000;
-        }
-
-        .modal-content {
-            background-color: white;
-            margin: 50px auto;
-            padding: 20px;
-            border-radius: 5px;
-            max-width: 600px;
-            position: relative;
-        }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .modal-header h2 {
-            margin: 0;
-        }
-
-        .close {
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        .alert {
-            padding: 15px;
-            border-radius: 5px;
-            margin-bottom: 20px;
-        }
-
-        .alert-success {
-            background-color: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
-
-        .alert-danger {
-            background-color: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-        }
-
-        .preview-image {
-            max-width: 200px;
-            margin-top: 10px;
-        }
-
-        .preview-image img {
-            width: 100%;
-            border-radius: 5px;
-        }
-
-        .servicios-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-
-        .servicio-item {
-            display: flex;
-            align-items: center;
-            padding: 10px;
-            background-color: #f8f9fa;
-            border-radius: 5px;
-        }
-
-        .servicio-item input {
-            margin-right: 10px;
-        }
-
-        /* Add the header styles from dashboard.php */
-        .modern-admin {
-            margin: 0;
-            padding: 0;
-            background-color: #f8f9fa;
-            color: #2c3e50;
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            min-height: 100vh;
-        }
-
-        .admin-wrapper {
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-
-        .admin-header {
-            background: #fff;
-            padding: 0.5rem 2rem;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-        }
-
-        .header-logo {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .header-logo .logo {
-            width: 120px;
-            height: auto;
-            padding: 10px 0;
-        }
-
-        .header-logo h2 {
-            margin: 0;
-            color: #2c3e50;
-            font-size: 1.2rem;
-        }
-
-        .admin-nav {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-        }
-
-        .admin-nav a {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: #6c757d;
-            text-decoration: none;
-            padding: 0.5rem 1rem;
-            border-radius: 5px;
-            transition: all 0.3s ease;
-        }
-
-        .admin-nav a:hover,
-        .admin-nav a.active {
-            background: #f8f9fa;
-            color: #007bff;
-        }
-
-        .admin-nav a i {
-            font-size: 1rem;
-        }
-
-        .admin-nav a span {
-            font-size: 0.9rem;
-            font-weight: 500;
-        }
-
-        .logout-btn {
-            color: #dc3545;
-        }
-
-        .logout-btn:hover {
-            background: #f8f9fa;
-            color: #c82333;
-        }
-
-        .admin-main {
-            margin-top: 70px;
-            padding: 2rem;
-            min-height: 100vh;
-            background: #f8f9fa;
-        }
-
-        @media (max-width: 1024px) {
-            .admin-nav {
-                gap: 1rem;
-            }
-
-            .admin-nav a {
-                padding: 0.5rem;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .admin-header {
-                padding: 0.5rem 1rem;
-            }
-
-            .header-logo h2 {
-                display: none;
-            }
-
-            .admin-nav a span {
-                display: none;
-            }
-
-            .admin-nav a i {
-                font-size: 1.2rem;
-            }
-
-            .admin-nav {
-                gap: 0.5rem;
-            }
-        }
-    </style>
-</head>
-<body class="modern-admin">
-    <div class="admin-wrapper">
-        <header class="admin-header">
-            <div class="header-logo">
-                <img src="../assets/img/logof5.png" alt="Efecinco Logo" class="logo">
-                <h2>Efecinco</h2>
-            </div>
-            <nav class="admin-nav">
-                <a href="dashboard.php">
-                    <i class="fas fa-chart-line"></i>
-                    <span>Dashboard</span>
-                </a>
-                <a href="servicios.php">
-                    <i class="fas fa-cogs"></i>
-                    <span>Servicios</span>
-                </a>
-                <a href="proyectos.php" class="active">
-                    <i class="fas fa-project-diagram"></i>
-                    <span>Proyectos</span>
-                </a>
-                <a href="testimonios.php">
-                    <i class="fas fa-comments"></i>
-                    <span>Testimonios</span>
-                </a>
-                <a href="certificaciones.php">
-                    <i class="fas fa-certificate"></i>
-                    <span>Certificaciones</span>
-                </a>
-                <a href="?logout=1" class="logout-btn">
-                    <i class="fas fa-sign-out-alt"></i>
-                    <span>Cerrar Sesión</span>
-                </a>
-            </nav>
-        </header>
-
-        <main class="admin-main">
-            <div class="container">
-                <div class="header">
-                    <h1>Administrar Proyectos</h1>
-                    <button class="btn btn-primary" onclick="mostrarFormulario('crear')">
-                        <i class="fas fa-plus"></i> Nuevo Proyecto
-                    </button>
-                </div>
-
-                <?php if (isset($_GET['mensaje'])): ?>
-                    <?php
-                    $mensajes = [
-                        'creado' => ['Proyecto creado exitosamente', 'success'],
-                        'actualizado' => ['Proyecto actualizado exitosamente', 'success'],
-                        'eliminado' => ['Proyecto eliminado exitosamente', 'success']
-                    ];
-                    $mensaje = $mensajes[$_GET['mensaje']] ?? ['Ha ocurrido un error', 'danger'];
-                    ?>
-                    <div class="alert alert-<?php echo $mensaje[1]; ?>">
-                        <?php echo $mensaje[0]; ?>
-                    </div>
-                <?php endif; ?>
-
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Cliente</th>
-                            <th>Tipo de Solución</th>
-                            <th>Fecha</th>
-                            <th>Estado</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach ($proyectos as $proyecto): ?>
-                            <tr>
-                                <td><?php echo htmlspecialchars($proyecto['cliente']); ?></td>
-                                <td><?php echo htmlspecialchars($proyecto['tipo_solucion']); ?></td>
-                                <td><?php echo date('d/m/Y', strtotime($proyecto['fecha'])); ?></td>
-                                <td>
-                                    <?php if ($proyecto['activo']): ?>
-                                        <span class="badge badge-success">Activo</span>
-                                    <?php else: ?>
-                                        <span class="badge badge-danger">Inactivo</span>
-                                    <?php endif; ?>
-                                </td>
-                                <td>
-                                    <button class="btn btn-outline" onclick="mostrarFormulario('editar', <?php echo $proyecto['id']; ?>)">
-                                        <i class="fas fa-edit"></i>
-                                    </button>
-                                    <button class="btn btn-danger" onclick="eliminarProyecto(<?php echo $proyecto['id']; ?>)">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
-            </div>
-
-            <!-- Modal de formulario -->
-            <div id="modalFormulario" class="modal">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h2 id="tituloModal">Nuevo Proyecto</h2>
-                        <span class="close" onclick="cerrarModal()">&times;</span>
-                    </div>
-                    <form id="formProyecto" method="POST" enctype="multipart/form-data">
-                        <input type="hidden" name="accion" id="accion" value="crear">
-                        <input type="hidden" name="id" id="proyectoId">
-                        <input type="hidden" name="imagen_actual" id="imagenActual">
-
-                        <div class="form-group">
-                            <label for="cliente">Cliente</label>
-                            <input type="text" class="form-control" id="cliente" name="cliente" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="tipo_solucion">Tipo de Solución</label>
-                            <input type="text" class="form-control" id="tipo_solucion" name="tipo_solucion" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="descripcion">Descripción</label>
-                            <textarea class="form-control" id="descripcion" name="descripcion" required></textarea>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="descripcion_corta">Descripción Corta</label>
-                            <textarea class="form-control" id="descripcion_corta" name="descripcion_corta" required></textarea>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="caracteristicas">Características (una por línea)</label>
-                            <textarea class="form-control" id="caracteristicas" name="caracteristicas"></textarea>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="fecha">Fecha</label>
-                            <input type="date" class="form-control" id="fecha" name="fecha" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="imagen">Imagen Principal</label>
-                            <input type="file" class="form-control" id="imagen" name="imagen" accept="image/*">
-                            <div class="preview-image" id="previewImagen"></div>
-                        </div>
-
-                        <div class="form-group">
-                            <label>Servicios Relacionados</label>
-                            <div class="servicios-grid">
-                                <?php foreach ($servicios as $servicio): ?>
-                                    <div class="servicio-item">
-                                        <input type="checkbox" name="servicios[]" value="<?php echo $servicio['id']; ?>" 
-                                               id="servicio_<?php echo $servicio['id']; ?>">
-                                        <label for="servicio_<?php echo $servicio['id']; ?>">
-                                            <?php echo htmlspecialchars($servicio['nombre']); ?>
-                                        </label>
-                                    </div>
-                                <?php endforeach; ?>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label>Imágenes Adicionales</label>
-                            <input type="file" class="form-control" name="imagenes_adicionales[]" multiple accept="image/*">
-                            <div id="descripcionesImagenes"></div>
-                        </div>
-
-                        <div class="checkbox-group">
-                            <input type="checkbox" id="destacado" name="destacado">
-                            <label for="destacado">Destacado</label>
-                        </div>
-
-                        <div class="checkbox-group">
-                            <input type="checkbox" id="activo" name="activo" checked>
-                            <label for="activo">Activo</label>
-                        </div>
-
-                        <button type="submit" class="btn btn-primary">Guardar</button>
-                        <button type="button" class="btn btn-outline" onclick="cerrarModal()">Cancelar</button>
-                    </form>
-                </div>
-            </div>
-        </main>
+<div class="container">
+    <div class="header">
+        <h1>Administrar Proyectos</h1>
+        <button class="btn btn-primary" onclick="mostrarFormulario('crear')">
+            <i class="fas fa-plus"></i> Nuevo Proyecto
+        </button>
     </div>
 
-    <script>
-        function mostrarFormulario(accion, id = null) {
-            const modal = document.getElementById('modalFormulario');
-            const form = document.getElementById('formProyecto');
-            const titulo = document.getElementById('tituloModal');
-            const accionInput = document.getElementById('accion');
-            const proyectoId = document.getElementById('proyectoId');
+    <?php if (isset($_GET['mensaje'])): ?>
+        <?php
+        $mensajes = [
+            'creado' => ['Proyecto creado exitosamente', 'success'],
+            'actualizado' => ['Proyecto actualizado exitosamente', 'success'],
+            'eliminado' => ['Proyecto eliminado exitosamente', 'success']
+        ];
+        $mensaje = $mensajes[$_GET['mensaje']] ?? ['Ha ocurrido un error', 'danger'];
+        ?>
+        <div class="alert alert-<?php echo $mensaje[1]; ?>">
+            <?php echo $mensaje[0]; ?>
+        </div>
+    <?php endif; ?>
 
-            // Configurar el formulario según la acción
-            if (accion === 'crear') {
-                titulo.textContent = 'Nuevo Proyecto';
-                accionInput.value = 'crear';
-                form.reset();
-                proyectoId.value = '';
-                document.getElementById('previewImagen').innerHTML = '';
-            } else {
-                titulo.textContent = 'Editar Proyecto';
-                accionInput.value = 'actualizar';
-                proyectoId.value = id;
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Cliente</th>
+                <th>Tipo de Solución</th>
+                <th>Fecha</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($proyectos as $proyecto): ?>
+                <tr>
+                    <td><?php echo htmlspecialchars($proyecto['cliente']); ?></td>
+                    <td><?php echo htmlspecialchars($proyecto['tipo_solucion']); ?></td>
+                    <td><?php echo date('d/m/Y', strtotime($proyecto['fecha'])); ?></td>
+                    <td>
+                        <?php if ($proyecto['activo']): ?>
+                            <span class="badge badge-success">Activo</span>
+                        <?php else: ?>
+                            <span class="badge badge-danger">Inactivo</span>
+                        <?php endif; ?>
+                    </td>
+                    <td>
+                        <button class="btn btn-outline" onclick="mostrarFormulario('editar', <?php echo $proyecto['id']; ?>)">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="btn btn-danger" onclick="eliminarProyecto(<?php echo $proyecto['id']; ?>)">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
 
-                // Cargar datos del proyecto
-                fetch(`get_proyecto.php?id=${id}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        document.getElementById('cliente').value = data.cliente;
-                        document.getElementById('tipo_solucion').value = data.tipo_solucion;
-                        document.getElementById('descripcion').value = data.descripcion;
-                        document.getElementById('descripcion_corta').value = data.descripcion_corta;
-                        document.getElementById('caracteristicas').value = data.caracteristicas;
-                        document.getElementById('fecha').value = data.fecha;
-                        document.getElementById('imagenActual').value = data.imagen;
-                        document.getElementById('destacado').checked = data.destacado == 1;
-                        document.getElementById('activo').checked = data.activo == 1;
+    <!-- Modal de formulario -->
+    <div id="modalFormulario" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="tituloModal">Nuevo Proyecto</h2>
+                <span class="close" onclick="cerrarModal()">&times;</span>
+            </div>
+            <form id="formProyecto" method="POST" enctype="multipart/form-data">
+                <input type="hidden" name="accion" id="accion" value="crear">
+                <input type="hidden" name="id" id="proyectoId">
+                <input type="hidden" name="imagen_actual" id="imagenActual">
 
-                        // Mostrar imagen actual
-                        if (data.imagen) {
-                            document.getElementById('previewImagen').innerHTML = `
-                                <img src="../${data.imagen}" alt="Imagen actual">
-                            `;
-                        }
+                <div class="form-group">
+                    <label for="cliente">Cliente</label>
+                    <input type="text" class="form-control" id="cliente" name="cliente" required>
+                </div>
 
-                        // Marcar servicios relacionados
-                        data.servicios.forEach(servicioId => {
-                            const checkbox = document.getElementById(`servicio_${servicioId}`);
-                            if (checkbox) checkbox.checked = true;
-                        });
+                <div class="form-group">
+                    <label for="tipo_solucion">Tipo de Solución</label>
+                    <input type="text" class="form-control" id="tipo_solucion" name="tipo_solucion" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="descripcion">Descripción</label>
+                    <textarea class="form-control" id="descripcion" name="descripcion" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="descripcion_corta">Descripción Corta</label>
+                    <textarea class="form-control" id="descripcion_corta" name="descripcion_corta" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="caracteristicas">Características (una por línea)</label>
+                    <textarea class="form-control" id="caracteristicas" name="caracteristicas"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="fecha">Fecha</label>
+                    <input type="date" class="form-control" id="fecha" name="fecha" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="imagen">Imagen Principal</label>
+                    <input type="file" class="form-control" id="imagen" name="imagen" accept="image/*">
+                    <div class="preview-image" id="previewImagen"></div>
+                </div>
+
+                <div class="form-group">
+                    <label>Servicios Relacionados</label>
+                    <div class="servicios-grid">
+                        <?php foreach ($servicios as $servicio): ?>
+                            <div class="servicio-item">
+                                <input type="checkbox" name="servicios[]" value="<?php echo $servicio['id']; ?>" 
+                                       id="servicio_<?php echo $servicio['id']; ?>">
+                                <label for="servicio_<?php echo $servicio['id']; ?>">
+                                    <?php echo htmlspecialchars($servicio['nombre']); ?>
+                                </label>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Imágenes Adicionales</label>
+                    <input type="file" class="form-control" name="imagenes_adicionales[]" multiple accept="image/*">
+                    <div id="descripcionesImagenes"></div>
+                </div>
+
+                <div class="checkbox-group">
+                    <input type="checkbox" id="destacado" name="destacado">
+                    <label for="destacado">Destacado</label>
+                </div>
+
+                <div class="checkbox-group">
+                    <input type="checkbox" id="activo" name="activo" checked>
+                    <label for="activo">Activo</label>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Guardar</button>
+                <button type="button" class="btn btn-outline" onclick="cerrarModal()">Cancelar</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<?php
+// Variable para scripts adicionales
+$scripts_adicionales = '
+<script>
+    function mostrarFormulario(accion, id = null) {
+        const modal = document.getElementById('modalFormulario');
+        const form = document.getElementById('formProyecto');
+        const titulo = document.getElementById('tituloModal');
+        const accionInput = document.getElementById('accion');
+        const proyectoId = document.getElementById('proyectoId');
+
+        // Configurar el formulario según la acción
+        if (accion === 'crear') {
+            titulo.textContent = 'Nuevo Proyecto';
+            accionInput.value = 'crear';
+            form.reset();
+            proyectoId.value = '';
+            document.getElementById('previewImagen').innerHTML = '';
+        } else {
+            titulo.textContent = 'Editar Proyecto';
+            accionInput.value = 'actualizar';
+            proyectoId.value = id;
+
+            // Cargar datos del proyecto
+            fetch(`get_proyecto.php?id=${id}`)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('cliente').value = data.cliente;
+                    document.getElementById('tipo_solucion').value = data.tipo_solucion;
+                    document.getElementById('descripcion').value = data.descripcion;
+                    document.getElementById('descripcion_corta').value = data.descripcion_corta;
+                    document.getElementById('caracteristicas').value = data.caracteristicas;
+                    document.getElementById('fecha').value = data.fecha;
+                    document.getElementById('imagenActual').value = data.imagen;
+                    document.getElementById('destacado').checked = data.destacado == 1;
+                    document.getElementById('activo').checked = data.activo == 1;
+
+                    // Mostrar imagen actual
+                    if (data.imagen) {
+                        document.getElementById('previewImagen').innerHTML = `
+                            <img src="../${data.imagen}" alt="Imagen actual">
+                        `;
+                    }
+
+                    // Marcar servicios relacionados
+                    data.servicios.forEach(servicioId => {
+                        const checkbox = document.getElementById(`servicio_${servicioId}`);
+                        if (checkbox) checkbox.checked = true;
                     });
-            }
-
-            modal.style.display = 'block';
+                });
         }
 
-        function cerrarModal() {
-            document.getElementById('modalFormulario').style.display = 'none';
-        }
+        modal.style.display = 'block';
+    }
 
-        function eliminarProyecto(id) {
-            if (confirm('¿Estás seguro de que deseas eliminar este proyecto?')) {
-                const form = document.createElement('form');
-                form.method = 'POST';
-                form.innerHTML = `
-                    <input type="hidden" name="accion" value="eliminar">
-                    <input type="hidden" name="id" value="${id}">
-                `;
-                document.body.appendChild(form);
-                form.submit();
-            }
-        }
+    function cerrarModal() {
+        document.getElementById('modalFormulario').style.display = 'none';
+    }
 
-        // Cerrar modal al hacer clic fuera
-        window.onclick = function(event) {
-            const modal = document.getElementById('modalFormulario');
-            if (event.target == modal) {
-                cerrarModal();
-            }
+    function eliminarProyecto(id) {
+        if (confirm('¿Estás seguro de que deseas eliminar este proyecto?')) {
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.innerHTML = `
+                <input type="hidden" name="accion" value="eliminar">
+                <input type="hidden" name="id" value="${id}">
+            `;
+            document.body.appendChild(form);
+            form.submit();
         }
+    }
 
-        // Preview de imagen
-        document.getElementById('imagen').addEventListener('change', function(e) {
-            const preview = document.getElementById('previewImagen');
-            const file = e.target.files[0];
-            
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    preview.innerHTML = `<img src="${e.target.result}" alt="Preview">`;
-                }
-                reader.readAsDataURL(file);
+    // Cerrar modal al hacer clic fuera
+    window.onclick = function(event) {
+        const modal = document.getElementById('modalFormulario');
+        if (event.target == modal) {
+            cerrarModal();
+        }
+    }
+
+    // Preview de imagen
+    document.getElementById('imagen').addEventListener('change', function(e) {
+        const preview = document.getElementById('previewImagen');
+        const file = e.target.files[0];
+        
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                preview.innerHTML = `<img src="${e.target.result}" alt="Preview">`;
             }
-        });
-    </script>
-</body>
-</html> 
+            reader.readAsDataURL(file);
+        }
+    });
+</script>
+';
+
+// Incluir el footer
+include('includes/footer.php');
+?> 
