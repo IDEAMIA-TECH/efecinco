@@ -201,19 +201,53 @@ $servicios = $resultado->fetch_all(MYSQLI_ASSOC);
                 formAction.value = 'create';
                 servicioId.value = '';
                 document.getElementById('formServicio').reset();
+                document.getElementById('activo').checked = true;
             } else {
                 titulo.textContent = 'Editar Servicio';
                 formAction.value = 'update';
                 servicioId.value = id;
-                // Aquí se cargarían los datos del servicio
+                
+                // Obtener los datos del servicio
+                fetch(`get_servicio.php?id=${id}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data) {
+                            document.getElementById('nombre').value = data.nombre;
+                            document.getElementById('descripcion').value = data.descripcion;
+                            document.getElementById('icono').value = data.icono;
+                            document.getElementById('orden').value = data.orden;
+                            document.getElementById('activo').checked = data.activo == 1;
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error al cargar los datos:', error);
+                        alert('Error al cargar los datos del servicio');
+                    });
             }
             
             formulario.style.display = 'block';
+            window.scrollTo({
+                top: formulario.offsetTop - 20,
+                behavior: 'smooth'
+            });
         }
         
         function ocultarFormulario() {
             document.getElementById('formularioServicio').style.display = 'none';
         }
+
+        // Cerrar automáticamente los mensajes de alerta después de 5 segundos
+        document.addEventListener('DOMContentLoaded', function() {
+            const alerts = document.querySelectorAll('.auto-dismiss');
+            alerts.forEach(alert => {
+                setTimeout(() => {
+                    alert.style.opacity = '0';
+                    setTimeout(() => {
+                        alert.style.display = 'none';
+                    }, 500);
+                }, 5000);
+            });
+        });
     </script>
 </body>
 </html> 
