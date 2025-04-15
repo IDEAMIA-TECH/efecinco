@@ -66,6 +66,13 @@ $empresa = mysqli_fetch_assoc($resultado);
     </div>
 </footer>
 
+<!-- Botón flotante de WhatsApp -->
+<?php if (!empty($empresa['whatsapp'])): ?>
+<a href="https://wa.me/<?php echo htmlspecialchars($empresa['whatsapp']); ?>" class="whatsapp-float" target="_blank" rel="noopener" aria-label="WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+</a>
+<?php endif; ?>
+
 <style>
 .footer {
     background: linear-gradient(90deg, #00B4DB 0%, #0072ff 100%);
@@ -192,6 +199,38 @@ $empresa = mysqli_fetch_assoc($resultado);
     }
     .social-links {
         justify-content: center;
+    }
+}
+
+.whatsapp-float {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    z-index: 2000;
+    background: #25D366;
+    color: #fff;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.2rem;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+    transition: background 0.3s, transform 0.3s;
+}
+.whatsapp-float:hover {
+    background: #128C7E;
+    color: #fff;
+    transform: scale(1.08) translateY(-4px);
+}
+@media (max-width: 768px) {
+    .whatsapp-float {
+        width: 50px;
+        height: 50px;
+        font-size: 1.7rem;
+        bottom: 18px;
+        right: 18px;
     }
 }
 </style> 
