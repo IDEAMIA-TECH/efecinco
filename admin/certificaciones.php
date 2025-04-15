@@ -151,7 +151,6 @@ include('includes/header.php');
     <div class="card">
         <div class="card-header">
             <div class="header-content">
-                <img src="../assets/images/logof5.png" alt="Logo" class="logo">
                 <h2>Gestión de Certificaciones</h2>
             </div>
             <button class="btn btn-success" onclick="mostrarFormulario('nuevo')">
