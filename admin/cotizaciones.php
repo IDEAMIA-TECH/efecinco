@@ -230,6 +230,7 @@ $cotizaciones = $conexion->query($sql);
             padding: 2rem;
             border-radius: 10px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            margin-bottom: 2rem;
         }
 
         .details-header {
@@ -237,6 +238,12 @@ $cotizaciones = $conexion->query($sql);
             justify-content: space-between;
             align-items: center;
             margin-bottom: 2rem;
+        }
+
+        .details-header h2 {
+            color: #2c3e50;
+            margin: 0;
+            font-size: 1.8rem;
         }
 
         .details-grid {
@@ -249,6 +256,7 @@ $cotizaciones = $conexion->query($sql);
             background: #f8f9fa;
             padding: 1.5rem;
             border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
         }
 
         .details-section h3 {
@@ -256,43 +264,59 @@ $cotizaciones = $conexion->query($sql);
             margin-top: 0;
             margin-bottom: 1rem;
             font-size: 1.2rem;
+            border-bottom: 2px solid #00B4DB;
+            padding-bottom: 0.5rem;
         }
 
         .details-section p {
             margin: 0.5rem 0;
+            color: #495057;
+            line-height: 1.5;
         }
 
         .details-section p strong {
-            color: #495057;
+            color: #2c3e50;
+            font-weight: 600;
         }
 
         .form-group {
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
         }
 
         .form-group label {
             display: block;
             margin-bottom: 0.5rem;
             color: #495057;
+            font-weight: 500;
         }
 
         .form-group select,
         .form-group textarea {
             width: 100%;
-            padding: 0.5rem;
+            padding: 0.75rem;
             border: 1px solid #ced4da;
             border-radius: 4px;
             font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #00B4DB;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(0,180,219,0.2);
         }
 
         .btn {
             display: inline-flex;
             align-items: center;
-            padding: 0.5rem 1rem;
+            padding: 0.75rem 1.5rem;
             border-radius: 4px;
             text-decoration: none;
             font-weight: 500;
             transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
         }
 
         .btn i {
@@ -300,25 +324,30 @@ $cotizaciones = $conexion->query($sql);
         }
 
         .btn-primary {
-            background-color: #007bff;
+            background-color: #00B4DB;
             color: white;
-            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: #0099b8;
+            transform: translateY(-1px);
         }
 
         .btn-secondary {
             background-color: #6c757d;
             color: white;
-            border: none;
         }
 
-        .btn:hover {
-            opacity: 0.9;
+        .btn-secondary:hover {
+            background-color: #5a6268;
+            transform: translateY(-1px);
         }
 
         .alert {
             padding: 1rem;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
             border-radius: 4px;
+            font-weight: 500;
         }
 
         .alert-success {
@@ -333,6 +362,92 @@ $cotizaciones = $conexion->query($sql);
             border: 1px solid #f5c6cb;
         }
 
+        .cotizaciones-table {
+            overflow-x: auto;
+            margin-top: 1.5rem;
+        }
+
+        .cotizaciones-table table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .cotizaciones-table th,
+        .cotizaciones-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .cotizaciones-table th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+            color: #495057;
+        }
+
+        .cotizaciones-table tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        .status-badge {
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            text-align: center;
+            display: inline-block;
+        }
+
+        .status-pendiente {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+
+        .status-en_proceso {
+            background-color: #cce5ff;
+            color: #004085;
+        }
+
+        .status-completado {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .status-cancelado {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        .action-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            margin: 0 0.25rem;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .view-btn {
+            background-color: #17a2b8;
+        }
+
+        .edit-btn {
+            background-color: #28a745;
+        }
+
+        .action-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
         @media (max-width: 768px) {
             .details-grid {
                 grid-template-columns: 1fr;
@@ -341,11 +456,21 @@ $cotizaciones = $conexion->query($sql);
             .details-header {
                 flex-direction: column;
                 gap: 1rem;
+                text-align: center;
             }
 
             .btn {
                 width: 100%;
                 justify-content: center;
+            }
+
+            .cotizaciones-table {
+                font-size: 0.875rem;
+            }
+
+            .cotizaciones-table th,
+            .cotizaciones-table td {
+                padding: 0.75rem;
             }
         }
     </style>
