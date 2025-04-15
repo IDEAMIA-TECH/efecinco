@@ -191,7 +191,7 @@ $stats['certificaciones'] = $resultado->fetch_assoc()['total'];
         }
 
         .admin-sidebar {
-            width: 280px;
+            width: 250px;
             background: #fff;
             border-right: 1px solid #e9ecef;
             display: flex;
@@ -202,30 +202,31 @@ $stats['certificaciones'] = $resultado->fetch_assoc()['total'];
             height: 100vh;
             box-shadow: 2px 0 5px rgba(0,0,0,0.05);
             z-index: 1000;
+            transition: width 0.3s ease;
         }
 
         .sidebar-header {
-            padding: 2rem;
+            padding: 1.5rem;
             text-align: center;
             border-bottom: 1px solid #e9ecef;
             background: #fff;
         }
 
         .sidebar-header .logo {
-            width: 80px;
+            width: 60px;
             height: auto;
-            margin-bottom: 1rem;
+            margin-bottom: 0.5rem;
         }
 
         .sidebar-header h2 {
             margin: 0;
             color: #2c3e50;
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             font-weight: 600;
         }
 
         .admin-nav {
-            padding: 1.5rem 0;
+            padding: 1rem 0;
             flex-grow: 1;
             overflow-y: auto;
         }
@@ -233,11 +234,12 @@ $stats['certificaciones'] = $resultado->fetch_assoc()['total'];
         .admin-nav a {
             display: flex;
             align-items: center;
-            padding: 1rem 2rem;
+            padding: 0.8rem 1.5rem;
             color: #6c757d;
             text-decoration: none;
             transition: all 0.3s ease;
             border-left: 4px solid transparent;
+            margin: 0.2rem 0;
         }
 
         .admin-nav a:hover,
@@ -245,21 +247,23 @@ $stats['certificaciones'] = $resultado->fetch_assoc()['total'];
             background: #f8f9fa;
             color: #007bff;
             border-left: 4px solid #007bff;
+            transform: translateX(5px);
         }
 
         .admin-nav a i {
-            width: 24px;
+            width: 20px;
             margin-right: 1rem;
-            font-size: 1.1rem;
+            font-size: 1rem;
+            text-align: center;
         }
 
         .admin-nav a span {
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             font-weight: 500;
         }
 
         .sidebar-footer {
-            padding: 1.5rem 2rem;
+            padding: 1rem 1.5rem;
             border-top: 1px solid #e9ecef;
             background: #fff;
         }
@@ -279,14 +283,16 @@ $stats['certificaciones'] = $resultado->fetch_assoc()['total'];
 
         .logout-btn i {
             margin-right: 1rem;
+            font-size: 1rem;
         }
 
         .admin-main {
             flex-grow: 1;
-            margin-left: 280px;
+            margin-left: 250px;
             padding: 2rem;
             min-height: 100vh;
             background: #f8f9fa;
+            transition: margin-left 0.3s ease;
         }
 
         .main-header {
@@ -452,11 +458,25 @@ $stats['certificaciones'] = $resultado->fetch_assoc()['total'];
 
         @media (max-width: 1024px) {
             .admin-sidebar {
-                width: 80px;
+                width: 200px;
             }
 
             .admin-main {
-                margin-left: 80px;
+                margin-left: 200px;
+            }
+
+            .admin-nav a {
+                padding: 0.8rem 1rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .admin-sidebar {
+                width: 60px;
+            }
+
+            .admin-main {
+                margin-left: 60px;
             }
 
             .sidebar-header h2,
@@ -485,24 +505,6 @@ $stats['certificaciones'] = $resultado->fetch_assoc()['total'];
 
             .logout-btn i {
                 margin: 0;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .admin-sidebar {
-                width: 60px;
-            }
-
-            .admin-main {
-                margin-left: 60px;
-            }
-
-            .admin-nav a {
-                padding: 0.8rem;
-            }
-
-            .admin-nav a i {
-                font-size: 1.1rem;
             }
         }
     </style>
