@@ -224,28 +224,28 @@ include('includes/header.php');
 $scripts_adicionales = '
 <script>
     function mostrarFormulario(accion, id = null) {
-        const formulario = document.getElementById('formularioCertificacion');
-        const titulo = document.getElementById('tituloFormulario');
-        const formAction = document.getElementById('formAction');
-        const certificacionId = document.getElementById('certificacionId');
+        const formulario = document.getElementById("formularioCertificacion");
+        const titulo = document.getElementById("tituloFormulario");
+        const formAction = document.getElementById("formAction");
+        const certificacionId = document.getElementById("certificacionId");
         
-        if (accion === 'nuevo') {
-            titulo.textContent = 'Nueva Certificación';
-            formAction.value = 'create';
-            certificacionId.value = '';
-            document.getElementById('formCertificacion').reset();
+        if (accion === "nuevo") {
+            titulo.textContent = "Nueva Certificación";
+            formAction.value = "create";
+            certificacionId.value = "";
+            document.getElementById("formCertificacion").reset();
         } else {
-            titulo.textContent = 'Editar Certificación';
-            formAction.value = 'update';
+            titulo.textContent = "Editar Certificación";
+            formAction.value = "update";
             certificacionId.value = id;
             // Aquí se cargarían los datos de la certificación
         }
         
-        formulario.style.display = 'block';
+        formulario.style.display = "block";
     }
     
     function ocultarFormulario() {
-        document.getElementById('formularioCertificacion').style.display = 'none';
+        document.getElementById("formularioCertificacion").style.display = "none";
     }
 </script>
 ';
