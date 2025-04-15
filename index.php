@@ -2,13 +2,15 @@
 include('includes/header.php');
 ?>
 
-<section class="hero" style="background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1557862921-37829c7c0958?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80') no-repeat center center; background-size: cover;">
+<section class="hero" style="background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1520869562399-e772f042f422?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80') no-repeat center center; background-size: cover;">
     <div class="container">
-        <h1>Soluciones en Seguridad y Tecnología</h1>
-        <p>Expertos en implementación de sistemas de seguridad y tecnología para tu empresa</p>
-        <div class="cta-buttons">
-            <a href="contacto.php" class="btn btn-primary">Contáctanos</a>
-            <a href="contacto.php" class="btn btn-secondary">Solicita una cotización</a>
+        <div class="hero-content">
+            <h1>Soluciones en Seguridad y Tecnología</h1>
+            <p>Expertos en implementación de sistemas de seguridad y tecnología para tu empresa</p>
+            <div class="cta-buttons">
+                <a href="contacto.php" class="btn btn-primary">Contáctanos</a>
+                <a href="contacto.php" class="btn btn-secondary">Solicita una cotización</a>
+            </div>
         </div>
     </div>
 </section>
@@ -78,18 +80,39 @@ include('includes/header.php');
 .hero {
     color: white;
     text-align: center;
-    padding: 150px 0;
+    padding: 200px 0;
     margin-bottom: 60px;
+    position: relative;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.4) 100%);
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    margin: 0 auto;
 }
 
 .hero h1 {
     font-size: 3.5rem;
     margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
 }
 
 .hero p {
     font-size: 1.2rem;
     margin-bottom: 30px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
 }
 
 .cta-buttons {
