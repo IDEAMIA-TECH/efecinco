@@ -43,6 +43,9 @@ $servicios = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 $sql = "SELECT DISTINCT tipo_solucion FROM proyectos WHERE activo = 1 ORDER BY tipo_solucion";
 $stmt = consultaSegura($conexion, $sql, []);
 $tipos_solucion = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+// Incluir el header
+include('includes/header.php');
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -55,8 +58,6 @@ $tipos_solucion = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <?php include('header.php'); ?>
-
     <main>
         <section class="hero">
             <div class="container">
