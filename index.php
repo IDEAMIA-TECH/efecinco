@@ -29,11 +29,11 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
         <section class="hero">
             <div class="container">
                 <div class="hero-content">
-                    <h1>Empowering Ideas<br>with Technological Excellence</h1>
-                    <p>Highly tailored technology, development & support services for your business success.</p>
+                    <h1>Soluciones en Seguridad y Tecnología</h1>
+                    <p>Expertos en implementación de sistemas de seguridad y tecnología para tu empresa</p>
                     <div class="cta-buttons">
-                        <a href="contacto.php" class="btn btn-primary">Get Started</a>
-                        <a href="contacto.php" class="btn btn-secondary">Contact Us</a>
+                        <a href="contacto.php" class="btn btn-primary">Contáctanos</a>
+                        <a href="contacto.php" class="btn btn-secondary">Solicita una cotización</a>
                     </div>
                 </div>
                 <div class="hero-image">
@@ -41,62 +41,236 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
                 </div>
             </div>
         </section>
+
+        <section class="sobre-nosotros">
+            <div class="container">
+                <div class="texto">
+                    <h2>Somos F5</h2>
+                    <p>Una empresa especialista en soluciones tecnológicas para tu hogar o empresa.</p>
+                    <p>Llevamos más de 15 años trabajando con marcas reconocidas en el mercado que dan garantía a cada instalación que realizamos.</p>
+                    <p>Contamos con expertos consultores e instaladores que acompañan paso a paso a cada uno de nuestros clientes o proyectos; ayudando siempre, a que cada instalación tenga siempre el mejor resultado.</p>
+                </div>
+                <div class="caracteristicas">
+                    <div class="caracteristica-item">
+                        <i class="fas fa-flag"></i>
+                        <h3>Una empresa 100% mexicana</h3>
+                        <p>Nos enfocamos a dar siempre los mejores resultados, con soluciones que generen la seguridad que necesitas.</p>
+                    </div>
+                    <div class="caracteristica-item">
+                        <i class="fas fa-shield-alt"></i>
+                        <h3>Confianza y Seguridad</h3>
+                        <p>Buscamos que siempre te sientas seguro de vivir o trabajar con instalaciones eficientes con profesionalismo.</p>
+                    </div>
+                    <div class="caracteristica-item">
+                        <i class="fas fa-award"></i>
+                        <h3>Experiencia que nos respalda</h3>
+                        <p>15 años de experiencia en el mercado nos respaldan.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mision-vision">
+            <div class="container">
+                <div class="grid-2-columns">
+                    <div class="card">
+                        <img src="https://images.unsplash.com/photo-1533750349088-cd871a92f312?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Misión Efecinco">
+                        <h3>Misión</h3>
+                        <p><?php echo nl2br(htmlspecialchars($empresa['mision'] ?? '')); ?></p>
+                    </div>
+                    <div class="card">
+                        <img src="https://images.unsplash.com/photo-1533749871411-5e21e14bcc7d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80" alt="Visión Efecinco">
+                        <h3>Visión</h3>
+                        <p><?php echo nl2br(htmlspecialchars($empresa['vision'] ?? '')); ?></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <section class="services-section">
-            <div class="services-title">Our IT Services</div>
+            <div class="services-title">Nuestros Servicios</div>
             <div class="services-grid">
                 <div class="service-card">
                     <i class="fas fa-network-wired"></i>
-                    <h3>Network Cabling</h3>
-                    <p>Professional network solutions for your company.</p>
+                    <h3>Cableado Estructurado</h3>
+                    <p>Soluciones de red profesional para tu empresa</p>
                 </div>
                 <div class="service-card">
                     <i class="fas fa-video"></i>
                     <h3>CCTV</h3>
-                    <p>Next-generation video surveillance systems.</p>
+                    <p>Sistemas de videovigilancia de última generación</p>
                 </div>
                 <div class="service-card">
                     <i class="fas fa-lock"></i>
-                    <h3>Access Control</h3>
-                    <p>Secure management of access to your facilities.</p>
+                    <h3>Control de Acceso</h3>
+                    <p>Gestión segura de accesos a tus instalaciones</p>
                 </div>
                 <div class="service-card">
                     <i class="fas fa-bell"></i>
-                    <h3>Alarm Systems</h3>
-                    <p>Comprehensive protection for your home or business.</p>
+                    <h3>Sistemas de Alarma</h3>
+                    <p>Protección integral para tu hogar o negocio</p>
                 </div>
                 <div class="service-card">
                     <i class="fas fa-robot"></i>
-                    <h3>Automation</h3>
-                    <p>Smart solutions for your space.</p>
+                    <h3>Automatización</h3>
+                    <p>Soluciones inteligentes para tu espacio</p>
                 </div>
                 <div class="service-card">
                     <i class="fas fa-volume-up"></i>
-                    <h3>Audio Systems</h3>
-                    <p>Professional sound experience.</p>
+                    <h3>Sistemas de Audio</h3>
+                    <p>Experiencia sonora profesional</p>
                 </div>
             </div>
         </section>
-        <section class="stats-section">
-            <div class="stats-title">We run all kinds of IT services that wow your success</div>
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-number">24+</div>
-                    <div class="stat-label">Years of Experience</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">98%</div>
-                    <div class="stat-label">Client Satisfaction</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number">6795+</div>
-                    <div class="stat-label">Projects Delivered</div>
+
+        <section class="proyectos-destacados">
+            <div class="container">
+                <h2>Proyectos Destacados</h2>
+                <div class="proyectos-grid">
+                    <?php
+                    $sql = "SELECT * FROM proyectos WHERE activo = 1 AND destacado = 1 ORDER BY fecha_creacion DESC LIMIT 3";
+                    $stmt = consultaSegura($conexion, $sql, []);
+                    if ($stmt) {
+                        $result = $stmt->get_result();
+                        $proyectos = $result->fetch_all(MYSQLI_ASSOC);
+                        if (empty($proyectos)) {
+                            echo '<div class="alert alert-info">No hay proyectos destacados disponibles</div>';
+                        } else {
+                            foreach ($proyectos as $proyecto):
+                    ?>
+                    <div class="proyecto-card">
+                        <?php if ($proyecto['imagen']): ?>
+                            <img src="<?php echo htmlspecialchars($proyecto['imagen']); ?>" alt="<?php echo htmlspecialchars($proyecto['cliente']); ?>" class="proyecto-imagen">
+                        <?php else: ?>
+                            <div class="proyecto-imagen default">
+                                <i class="fas fa-image"></i>
+                            </div>
+                        <?php endif; ?>
+                        <div class="proyecto-info">
+                            <h3><?php echo htmlspecialchars($proyecto['cliente']); ?></h3>
+                            <p class="tipo-solucion"><?php echo htmlspecialchars($proyecto['tipo_solucion']); ?></p>
+                            <p class="descripcion-corta"><?php echo htmlspecialchars($proyecto['descripcion_corta']); ?></p>
+                        </div>
+                    </div>
+                    <?php endforeach; } } else { echo '<div class="alert alert-danger">Error al ejecutar la consulta</div>'; } ?>
                 </div>
             </div>
         </section>
-        <section class="dark-section">
-            <h2>Technological Applications Play a Role in Improving Our Community</h2>
-            <p>Accelerate innovation with world-class tech teams. We'll match you to vetted senior remote technology talent.</p>
-            <a href="contacto.php" class="btn btn-primary">Request a Quote</a>
+
+        <section class="testimonios">
+            <div class="container">
+                <h2>Lo que dicen nuestros clientes</h2>
+                <div class="testimonios-carousel">
+                    <?php
+                    $sql = "SELECT * FROM testimonios WHERE activo = 1 AND destacado = 1 ORDER BY fecha_creacion DESC LIMIT 5";
+                    $stmt = consultaSegura($conexion, $sql, []);
+                    if ($stmt) {
+                        $result = $stmt->get_result();
+                        $testimonios = $result->fetch_all(MYSQLI_ASSOC);
+                        if (empty($testimonios)) {
+                            echo '<div class="alert alert-info">No hay testimonios destacados disponibles</div>';
+                        } else {
+                            foreach ($testimonios as $testimonio):
+                    ?>
+                    <div class="testimonio-card">
+                        <div class="testimonio-content">
+                            <div class="testimonio-text">
+                                <i class="fas fa-quote-left"></i>
+                                <div class="testimonio-contenido">
+                                    <?php echo $testimonio['testimonio']; ?>
+                                </div>
+                            </div>
+                            <div class="testimonio-author">
+                                <?php if ($testimonio['logo']): ?>
+                                    <img src="<?php echo str_replace('../', '', $testimonio['logo']); ?>" alt="<?php echo htmlspecialchars($testimonio['empresa']); ?>" class="author-logo">
+                                <?php else: ?>
+                                    <div class="author-logo default">
+                                        <i class="fas fa-building"></i>
+                                    </div>
+                                <?php endif; ?>
+                                <div class="author-info">
+                                    <h4><?php echo htmlspecialchars($testimonio['cliente']); ?></h4>
+                                    <?php if ($testimonio['cargo']): ?>
+                                        <p class="cargo"><?php echo htmlspecialchars($testimonio['cargo']); ?></p>
+                                    <?php endif; ?>
+                                    <?php if ($testimonio['empresa']): ?>
+                                        <p class="empresa"><?php echo htmlspecialchars($testimonio['empresa']); ?></p>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <?php endforeach; } } else { echo '<div class="alert alert-danger">Error al ejecutar la consulta</div>'; } ?>
+                </div>
+                <div class="testimonios-controls">
+                    <button class="prev-testimonio"><i class="fas fa-chevron-left"></i></button>
+                    <button class="next-testimonio"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+        </section>
+
+        <section class="certificaciones">
+            <div class="container">
+                <h2>Nuestras Certificaciones</h2>
+                <div class="certificaciones-grid">
+                    <?php
+                    $sql = "SELECT * FROM certificaciones WHERE activo = 1 ORDER BY orden ASC, fecha_creacion DESC";
+                    $stmt = consultaSegura($conexion, $sql, []);
+                    if ($stmt) {
+                        $result = $stmt->get_result();
+                        $certificaciones = $result->fetch_all(MYSQLI_ASSOC);
+                        if (empty($certificaciones)) {
+                            echo '<div class="alert alert-info">No hay certificaciones disponibles</div>';
+                        } else {
+                            foreach ($certificaciones as $certificacion):
+                    ?>
+                    <div class="certificacion-card">
+                        <div class="certificacion-imagen">
+                            <?php if ($certificacion['imagen']): ?>
+                                <img src="<?php echo str_replace('../', '', $certificacion['imagen']); ?>" alt="<?php echo htmlspecialchars($certificacion['titulo']); ?>" class="certificacion-img">
+                            <?php else: ?>
+                                <div class="imagen-default">
+                                    <i class="fas fa-certificate"></i>
+                                </div>
+                            <?php endif; ?>
+                        </div>
+                        <div class="certificacion-info">
+                            <h3><?php echo htmlspecialchars($certificacion['titulo']); ?></h3>
+                            <?php if ($certificacion['descripcion']): ?>
+                                <div class="certificacion-descripcion">
+                                    <?php echo $certificacion['descripcion']; ?>
+                                </div>
+                            <?php endif; ?>
+                            <?php if ($certificacion['fecha']): ?>
+                                <span class="fecha">Obtenido: <?php echo date('d/m/Y', strtotime($certificacion['fecha'])); ?></span>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                    <?php endforeach; } } else { echo '<div class="alert alert-danger">Error al cargar las certificaciones</div>'; } ?>
+                </div>
+            </div>
+        </section>
+
+        <section class="nuestros-clientes">
+            <div class="container">
+                <h2>Nuestros Clientes</h2>
+                <p class="section-description">Empresas que confían en nuestros servicios</p>
+                <div class="clientes-grid">
+                    <?php foreach ($clientes as $cliente): ?>
+                        <div class="cliente-item">
+                            <img src="<?php echo htmlspecialchars($cliente['logo']); ?>" alt="<?php echo htmlspecialchars($cliente['nombre']); ?>" loading="lazy">
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta">
+            <div class="container">
+                <h2>¿Listo para trabajar con nosotros?</h2>
+                <p>Contáctanos para conocer cómo podemos ayudarte a alcanzar tus objetivos</p>
+                <a href="contacto.php" class="btn btn-primary">Contáctanos</a>
+            </div>
         </section>
     </main>
 
