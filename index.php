@@ -129,7 +129,7 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
                 <div class="servicios-grid">
                     <div class="servicio-card">
                         <div class="servicio-imagen">
-                            <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Cableado Estructurado">
+                            <img src="assets/images/project-1.png" alt="Cableado Estructurado">
                         </div>
                         <i class="fas fa-network-wired"></i>
                         <h3>Cableado Estructurado</h3>
@@ -137,7 +137,7 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
                     </div>
                     <div class="servicio-card">
                         <div class="servicio-imagen">
-                            <img src="https://images.unsplash.com/photo-1577962917302-cd874c4e31d2?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="CCTV">
+                            <img src="assets/images/project-2.png" alt="CCTV">
                         </div>
                         <i class="fas fa-video"></i>
                         <h3>CCTV</h3>
@@ -145,11 +145,35 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
                     </div>
                     <div class="servicio-card">
                         <div class="servicio-imagen">
-                            <img src="https://images.unsplash.com/photo-1516992654410-9309d4587e94?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Control de Acceso">
+                            <img src="assets/images/project-3.png" alt="Control de Acceso">
                         </div>
                         <i class="fas fa-lock"></i>
                         <h3>Control de Acceso</h3>
                         <p>Gestión segura de accesos a tus instalaciones</p>
+                    </div>
+                    <div class="servicio-card">
+                        <div class="servicio-imagen">
+                            <img src="assets/images/project-4.png" alt="Sistemas de Alarma">
+                        </div>
+                        <i class="fas fa-bell"></i>
+                        <h3>Sistemas de Alarma</h3>
+                        <p>Protección integral para tu hogar o negocio</p>
+                    </div>
+                    <div class="servicio-card">
+                        <div class="servicio-imagen">
+                            <img src="assets/images/project-5.png" alt="Automatización">
+                        </div>
+                        <i class="fas fa-robot"></i>
+                        <h3>Automatización</h3>
+                        <p>Soluciones inteligentes para tu espacio</p>
+                    </div>
+                    <div class="servicio-card">
+                        <div class="servicio-imagen">
+                            <img src="assets/images/project-6.png" alt="Sistemas de Audio">
+                        </div>
+                        <i class="fas fa-volume-up"></i>
+                        <h3>Sistemas de Audio</h3>
+                        <p>Experiencia sonora profesional</p>
                     </div>
                 </div>
                 <div class="text-center" style="margin-top: 60px; margin-bottom: 30px;">
@@ -432,11 +456,15 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
         margin-bottom: 20px;
         border-radius: 10px;
         overflow: hidden;
+        height: 200px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .servicio-imagen img {
         width: 100%;
-        height: 200px;
+        height: 100%;
         object-fit: cover;
         transition: transform 0.3s ease;
     }
@@ -449,6 +477,18 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
         font-size: 2.5rem;
         color: #00B4DB;
         margin: 20px 0;
+    }
+
+    .servicio-card h3 {
+        color: #333;
+        margin-bottom: 15px;
+        font-size: 1.5rem;
+    }
+
+    .servicio-card p {
+        color: #666;
+        line-height: 1.6;
+        margin: 0;
     }
 
     .proyecto-card {
