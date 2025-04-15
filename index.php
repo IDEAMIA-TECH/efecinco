@@ -27,7 +27,7 @@ include('includes/header.php');
             </div>
             <div class="servicio-card">
                 <div class="servicio-imagen">
-                    <img src="https://images.unsplash.com/photo-1557862921-37829c7c0958?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="CCTV">
+                    <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="CCTV">
                 </div>
                 <i class="fas fa-video"></i>
                 <h3>CCTV</h3>
@@ -35,7 +35,7 @@ include('includes/header.php');
             </div>
             <div class="servicio-card">
                 <div class="servicio-imagen">
-                    <img src="https://images.unsplash.com/photo-1558002038-76f45789c4a4?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Control de Acceso">
+                    <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Control de Acceso">
                 </div>
                 <i class="fas fa-lock"></i>
                 <h3>Control de Acceso</h3>
