@@ -191,7 +191,7 @@ include('includes/header.php');
                         <div class="certificacion-card">
                             <div class="certificacion-imagen">
                                 <?php if ($certificacion['imagen']): ?>
-                                    <img src="<?php echo htmlspecialchars($certificacion['imagen']); ?>" 
+                                    <img src="<?php echo $certificacion['imagen']; ?>" 
                                          alt="<?php echo htmlspecialchars($certificacion['titulo']); ?>">
                                 <?php else: ?>
                                     <div class="imagen-default">
@@ -202,7 +202,9 @@ include('includes/header.php');
                             <div class="certificacion-info">
                                 <h3><?php echo htmlspecialchars($certificacion['titulo']); ?></h3>
                                 <?php if ($certificacion['descripcion']): ?>
-                                    <p><?php echo htmlspecialchars($certificacion['descripcion']); ?></p>
+                                    <div class="certificacion-descripcion">
+                                        <?php echo $certificacion['descripcion']; ?>
+                                    </div>
                                 <?php endif; ?>
                                 <?php if ($certificacion['fecha']): ?>
                                     <span class="fecha">Obtenido: <?php echo date('d/m/Y', strtotime($certificacion['fecha'])); ?></span>
@@ -635,7 +637,9 @@ include('includes/header.php');
 .certificacion-imagen img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
+    background-color: white;
+    padding: 20px;
     transition: transform 0.3s ease;
 }
 
@@ -667,11 +671,19 @@ include('includes/header.php');
     color: #333;
 }
 
-.certificacion-info p {
+.certificacion-descripcion {
     margin: 0 0 10px 0;
     color: #666;
     font-size: 0.9rem;
     line-height: 1.5;
+}
+
+.certificacion-descripcion p {
+    margin: 0 0 10px 0;
+}
+
+.certificacion-descripcion p:last-child {
+    margin-bottom: 0;
 }
 
 .certificacion-info .fecha {
@@ -694,7 +706,7 @@ include('includes/header.php');
         font-size: 1.1rem;
     }
     
-    .certificacion-info p {
+    .certificacion-descripcion {
         font-size: 0.85rem;
     }
 }
