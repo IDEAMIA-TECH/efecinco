@@ -394,7 +394,21 @@ include('includes/header.php');
 <?php
 // Variable para scripts adicionales
 $scripts_adicionales = '
+<script src="https://cdn.tiny.cloud/1/4u89qw1ptzfqell0ybjhqth1cc16ilb1y0792h3momw4lk8l/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 <script>
+    // Inicializar TinyMCE
+    function initTinyMCE() {
+        tinymce.init({
+            selector: "#descripcion_corta, #descripcion",
+            plugins: "advlist autolink lists link image charmap preview anchor searchreplace visualblocks code fullscreen insertdatetime media table code help wordcount",
+            toolbar: "undo redo | blocks | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media | forecolor backcolor emoticons",
+            height: 300,
+            language: "es",
+            branding: false
+        });
+    }
+
+    // Función para mostrar/ocultar formulario
     function mostrarFormulario(accion, id = null) {
         const modal = document.getElementById("modalFormulario");
         const form = document.getElementById("formProyecto");
@@ -409,6 +423,8 @@ $scripts_adicionales = '
             form.reset();
             proyectoId.value = "";
             document.getElementById("previewImagen").innerHTML = "";
+            tinymce.get("descripcion_corta").setContent("");
+            tinymce.get("descripcion").setContent("");
         } else {
             titulo.textContent = "Editar Proyecto";
             accionInput.value = "actualizar";
@@ -420,8 +436,8 @@ $scripts_adicionales = '
                 .then(data => {
                     document.getElementById("cliente").value = data.cliente;
                     document.getElementById("tipo_solucion").value = data.tipo_solucion;
-                    document.getElementById("descripcion").value = data.descripcion;
-                    document.getElementById("descripcion_corta").value = data.descripcion_corta;
+                    tinymce.get("descripcion").setContent(data.descripcion);
+                    tinymce.get("descripcion_corta").setContent(data.descripcion_corta);
                     document.getElementById("caracteristicas").value = data.caracteristicas;
                     document.getElementById("fecha").value = data.fecha;
                     document.getElementById("imagenActual").value = data.imagen;
@@ -445,6 +461,11 @@ $scripts_adicionales = '
 
         modal.style.display = "block";
     }
+
+    // Inicializar TinyMCE al cargar la página
+    document.addEventListener("DOMContentLoaded", function() {
+        initTinyMCE();
+    });
 
     function cerrarModal() {
         document.getElementById("modalFormulario").style.display = "none";
