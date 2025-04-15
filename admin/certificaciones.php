@@ -355,7 +355,34 @@ include('includes/header.php');
             titulo.textContent = "Editar Certificación";
             accionInput.value = "update";
             certificacionId.value = id;
-            // Aquí se cargarían los datos de la certificación
+            
+            // Cargar los datos de la certificación
+            fetch(`get_certificacion.php?id=${id}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Error al cargar los datos');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.error) {
+                        throw new Error(data.error);
+                    }
+                    
+                    // Llenar el formulario con los datos
+                    document.getElementById("titulo").value = data.titulo;
+                    document.getElementById("imagenActual").value = data.imagen;
+                    document.getElementById("activo").checked = data.activo == 1;
+                    
+                    // Establecer el contenido del editor TinyMCE
+                    if (tinymce.get('descripcion')) {
+                        tinymce.get('descripcion').setContent(data.descripcion || '');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Error al cargar los datos de la certificación: ' + error.message);
+                });
         }
 
         modal.style.display = "block";
