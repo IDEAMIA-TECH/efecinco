@@ -109,7 +109,7 @@ require_once __DIR__ . '/db.php';
             top: 100%;
             left: 0;
             background: #fff;
-            min-width: 200px;
+            min-width: 260px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.08);
             border-radius: 8px;
             padding: 10px 0;
