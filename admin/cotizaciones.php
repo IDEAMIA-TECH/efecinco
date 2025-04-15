@@ -1,4 +1,5 @@
 <?php
+require_once('../includes/functions.php');
 require_once('auth.php');
 $conexion = conectarDB();
 
@@ -52,7 +53,7 @@ $cotizaciones = $conexion->query($sql);
     <div class="admin-wrapper">
         <header class="admin-header">
             <div class="header-logo">
-                <img src="../assets/img/logof5.png" alt="Efecinco Logo" class="logo">
+                <img src="../assets/images/logof5.png" alt="Efecinco Logo" class="logo">
                 <h2>Efecinco</h2>
             </div>
             <nav class="admin-nav">
