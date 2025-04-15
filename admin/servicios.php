@@ -83,6 +83,7 @@ $servicios = $resultado->fetch_all(MYSQLI_ASSOC);
     <title>Gestión de Servicios - Panel de Administración</title>
     <link rel="stylesheet" href="../assets/css/admin.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.tiny.cloud/1/4u89qw1ptzfqell0ybjhqth1cc16ilb1y0792h3momw4lk8l/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
 </head>
 <body>
     <?php include('header.php'); ?>
@@ -163,7 +164,7 @@ $servicios = $resultado->fetch_all(MYSQLI_ASSOC);
                     
                     <div class="form-group">
                         <label for="descripcion">Descripción</label>
-                        <textarea id="descripcion" name="descripcion" rows="3"></textarea>
+                        <textarea id="descripcion" name="descripcion" rows="5"></textarea>
                     </div>
                     
                     <div class="form-group">
@@ -190,6 +191,22 @@ $servicios = $resultado->fetch_all(MYSQLI_ASSOC);
     </main>
 
     <script>
+        // Inicializar TinyMCE
+        tinymce.init({
+            selector: '#descripcion',
+            plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
+            toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
+            height: 300,
+            menubar: false,
+            language: 'es',
+            content_style: 'body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 14px; }',
+            setup: function(editor) {
+                editor.on('change', function() {
+                    editor.save();
+                });
+            }
+        });
+
         function mostrarFormulario(accion, id = null) {
             const formulario = document.getElementById('formularioServicio');
             const titulo = document.getElementById('tituloFormulario');
@@ -202,6 +219,7 @@ $servicios = $resultado->fetch_all(MYSQLI_ASSOC);
                 servicioId.value = '';
                 document.getElementById('formServicio').reset();
                 document.getElementById('activo').checked = true;
+                tinymce.get('descripcion').setContent('');
             } else {
                 titulo.textContent = 'Editar Servicio';
                 formAction.value = 'update';
@@ -213,7 +231,7 @@ $servicios = $resultado->fetch_all(MYSQLI_ASSOC);
                     .then(data => {
                         if (data) {
                             document.getElementById('nombre').value = data.nombre;
-                            document.getElementById('descripcion').value = data.descripcion;
+                            tinymce.get('descripcion').setContent(data.descripcion);
                             document.getElementById('icono').value = data.icono;
                             document.getElementById('orden').value = data.orden;
                             document.getElementById('activo').checked = data.activo == 1;
