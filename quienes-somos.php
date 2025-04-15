@@ -41,7 +41,7 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
                         <p><?php echo nl2br(htmlspecialchars($empresa['historia'] ?? '')); ?></p>
                     </div>
                     <div class="imagen">
-                        <img src="assets/images/historia-empresa.jpg" alt="Historia de Efecinco" loading="lazy">
+                        <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Historia de Efecinco" loading="lazy">
                     </div>
                 </div>
             </div>
@@ -51,12 +51,12 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
             <div class="container">
                 <div class="grid-2-columns">
                     <div class="card">
-                        <i class="fas fa-bullseye"></i>
+                        <img src="https://images.unsplash.com/photo-1533750349088-cd871a92f312?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Misión Efecinco">
                         <h3>Misión</h3>
                         <p><?php echo nl2br(htmlspecialchars($empresa['mision'] ?? '')); ?></p>
                     </div>
                     <div class="card">
-                        <i class="fas fa-eye"></i>
+                        <img src="https://images.unsplash.com/photo-1533749871411-5e21e14bcc7d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80" alt="Visión Efecinco">
                         <h3>Visión</h3>
                         <p><?php echo nl2br(htmlspecialchars($empresa['vision'] ?? '')); ?></p>
                     </div>
@@ -130,7 +130,7 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
 
     <style>
         .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('assets/images/hero-quienes-somos.jpg');
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
             background-size: cover;
             background-position: center;
             color: white;
@@ -172,6 +172,8 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
 
         .imagen img {
             width: 100%;
+            height: 400px;
+            object-fit: cover;
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
@@ -187,11 +189,16 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
             background: white;
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
-        .mision-vision .card i {
-            font-size: 2.5rem;
-            color: #007bff;
+        .mision-vision .card img {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 50%;
             margin-bottom: 20px;
         }
 
