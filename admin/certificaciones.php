@@ -180,76 +180,174 @@ include('includes/header.php');
         </div>
     </div>
 
-    <!-- Formulario de creación/edición -->
-    <div id="formularioCertificacion" class="card" style="display: none;">
-        <div class="card-header">
-            <h3 id="tituloFormulario">Nueva Certificación</h3>
-            <button class="btn btn-secondary" onclick="ocultarFormulario()">Cancelar</button>
+    <!-- Modal para el formulario -->
+    <div id="modalFormulario" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="tituloModal">Nueva Certificación</h3>
+                <span class="close" onclick="cerrarModal()">&times;</span>
+            </div>
+            <form method="POST" id="formCertificacion" enctype="multipart/form-data">
+                <input type="hidden" name="action" id="formAction" value="create">
+                <input type="hidden" name="id" id="certificacionId">
+                <input type="hidden" name="imagen_actual" id="imagenActual">
+                
+                <div class="form-group">
+                    <label for="titulo">Título</label>
+                    <input type="text" id="titulo" name="titulo" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="descripcion">Descripción</label>
+                    <textarea id="descripcion" name="descripcion" rows="3" class="form-control"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="imagen">Imagen</label>
+                    <input type="file" id="imagen" name="imagen" accept="image/*" class="form-control">
+                    <small class="form-text text-muted">Formatos aceptados: JPG, PNG, GIF. Tamaño máximo: 2MB</small>
+                </div>
+                
+                <div class="form-group">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="activo" name="activo" checked>
+                        <label for="activo">
+                            <i class="fas fa-check-circle"></i>
+                            Activo
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save"></i> Guardar
+                    </button>
+                    <button type="button" class="btn btn-outline" onclick="cerrarModal()">
+                        <i class="fas fa-times"></i> Cancelar
+                    </button>
+                </div>
+            </form>
         </div>
-        <form method="POST" id="formCertificacion" enctype="multipart/form-data">
-            <input type="hidden" name="action" id="formAction" value="create">
-            <input type="hidden" name="id" id="certificacionId">
-            <input type="hidden" name="imagen_actual" id="imagenActual">
-            
-            <div class="form-group">
-                <label for="titulo">Título</label>
-                <input type="text" id="titulo" name="titulo" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="descripcion">Descripción</label>
-                <textarea id="descripcion" name="descripcion" rows="3"></textarea>
-            </div>
-            
-            <div class="form-group">
-                <label for="imagen">Imagen</label>
-                <input type="file" id="imagen" name="imagen" accept="image/*">
-                <small class="form-text text-muted">Formatos aceptados: JPG, PNG, GIF. Tamaño máximo: 2MB</small>
-            </div>
-            
-            <div class="form-group">
-                <label>
-                    <input type="checkbox" id="activo" name="activo" checked>
-                    Activo
-                </label>
-            </div>
-            
-            <button type="submit" class="btn btn-primary">Guardar</button>
-        </form>
     </div>
 </div>
 
-<?php
-// Variable para scripts adicionales
-$scripts_adicionales = '
+<style>
+    /* Modal Styles */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        overflow-y: auto;
+    }
+
+    .modal-content {
+        background-color: #fff;
+        margin: 2rem auto;
+        padding: 2rem;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        max-width: 600px;
+        width: 90%;
+        position: relative;
+    }
+
+    .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid #e9ecef;
+    }
+
+    .modal-header h3 {
+        margin: 0;
+        color: #2c3e50;
+        font-size: 1.5rem;
+    }
+
+    .close {
+        color: #6c757d;
+        font-size: 1.5rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: color 0.3s ease;
+    }
+
+    .close:hover {
+        color: #343a40;
+    }
+
+    .form-actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 1rem;
+        margin-top: 1.5rem;
+        padding-top: 1rem;
+        border-top: 1px solid #e9ecef;
+    }
+
+    @media (max-width: 768px) {
+        .modal-content {
+            margin: 1rem auto;
+            padding: 1rem;
+            width: 95%;
+        }
+    }
+</style>
+
 <script>
     function mostrarFormulario(accion, id = null) {
-        const formulario = document.getElementById("formularioCertificacion");
-        const titulo = document.getElementById("tituloFormulario");
-        const formAction = document.getElementById("formAction");
+        const modal = document.getElementById("modalFormulario");
+        const form = document.getElementById("formCertificacion");
+        const titulo = document.getElementById("tituloModal");
+        const accionInput = document.getElementById("formAction");
         const certificacionId = document.getElementById("certificacionId");
-        
+
+        // Configurar el formulario según la acción
         if (accion === "nuevo") {
             titulo.textContent = "Nueva Certificación";
-            formAction.value = "create";
+            accionInput.value = "create";
+            form.reset();
             certificacionId.value = "";
-            document.getElementById("formCertificacion").reset();
+            document.getElementById("activo").checked = true;
         } else {
             titulo.textContent = "Editar Certificación";
-            formAction.value = "update";
+            accionInput.value = "update";
             certificacionId.value = id;
             // Aquí se cargarían los datos de la certificación
         }
-        
-        formulario.style.display = "block";
-    }
-    
-    function ocultarFormulario() {
-        document.getElementById("formularioCertificacion").style.display = "none";
-    }
-</script>
-';
 
+        modal.style.display = "block";
+    }
+
+    function cerrarModal() {
+        document.getElementById("modalFormulario").style.display = "none";
+    }
+
+    // Cerrar modal al hacer clic fuera
+    window.onclick = function(event) {
+        const modal = document.getElementById("modalFormulario");
+        if (event.target == modal) {
+            cerrarModal();
+        }
+    }
+
+    // Cerrar alertas automáticamente después de 5 segundos
+    setTimeout(function() {
+        const alertas = document.getElementsByClassName("alert");
+        for (let alerta of alertas) {
+            alerta.style.display = "none";
+        }
+    }, 5000);
+</script>
+
+<?php
 // Incluir el footer
 include('includes/footer.php');
 ?> 
