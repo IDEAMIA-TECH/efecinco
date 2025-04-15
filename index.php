@@ -46,23 +46,23 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
                     <p>Una empresa especialista en soluciones tecnológicas para tu hogar o empresa.</p>
                     <p>Llevamos más de 15 años trabajando con marcas reconocidas en el mercado que dan garantía a cada instalación que realizamos.</p>
                     <p>Contamos con expertos consultores e instaladores que acompañan paso a paso a cada uno de nuestros clientes o proyectos; ayudando siempre, a que cada instalación tenga siempre el mejor resultado.</p>
-                    
-                    <div class="caracteristicas">
-                        <div class="caracteristica-item">
-                            <i class="fas fa-flag"></i>
-                            <h3>Una empresa 100% mexicana</h3>
-                            <p>Nos enfocamos a dar siempre los mejores resultados, con soluciones que generen la seguridad que necesitas.</p>
-                        </div>
-                        <div class="caracteristica-item">
-                            <i class="fas fa-shield-alt"></i>
-                            <h3>Confianza y Seguridad</h3>
-                            <p>Buscamos que siempre te sientas seguro de vivir o trabajar con instalaciones eficientes con profesionalismo.</p>
-                        </div>
-                        <div class="caracteristica-item">
-                            <i class="fas fa-award"></i>
-                            <h3>Experiencia que nos respalda</h3>
-                            <p>15 años de experiencia en el mercado nos respaldan.</p>
-                        </div>
+                </div>
+                
+                <div class="caracteristicas">
+                    <div class="caracteristica-item">
+                        <i class="fas fa-flag"></i>
+                        <h3>Una empresa 100% mexicana</h3>
+                        <p>Nos enfocamos a dar siempre los mejores resultados, con soluciones que generen la seguridad que necesitas.</p>
+                    </div>
+                    <div class="caracteristica-item">
+                        <i class="fas fa-shield-alt"></i>
+                        <h3>Confianza y Seguridad</h3>
+                        <p>Buscamos que siempre te sientas seguro de vivir o trabajar con instalaciones eficientes con profesionalismo.</p>
+                    </div>
+                    <div class="caracteristica-item">
+                        <i class="fas fa-award"></i>
+                        <h3>Experiencia que nos respalda</h3>
+                        <p>15 años de experiencia en el mercado nos respaldan.</p>
                     </div>
                 </div>
             </div>
@@ -845,17 +845,24 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
 
     .sobre-nosotros {
         padding: 80px 0;
+        background-color: #fff;
+    }
+
+    .sobre-nosotros .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
     }
 
     .sobre-nosotros .texto {
-        max-width: 1200px;
-        margin: 0 auto;
         text-align: center;
+        margin-bottom: 50px;
     }
 
     .sobre-nosotros h2 {
-        margin-bottom: 20px;
+        font-size: 2.5rem;
         color: #333;
+        margin-bottom: 20px;
     }
 
     .sobre-nosotros p {
@@ -869,9 +876,9 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
 
     .caracteristicas {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        grid-template-columns: repeat(3, 1fr);
         gap: 30px;
-        margin-top: 50px;
+        margin-top: 30px;
     }
 
     .caracteristica-item {
@@ -879,12 +886,13 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
         padding: 30px;
         background: #f8f9fa;
         border-radius: 10px;
-        transition: transform 0.3s ease;
+        transition: all 0.3s ease;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
 
     .caracteristica-item:hover {
         transform: translateY(-5px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
     }
 
     .caracteristica-item i {
@@ -902,6 +910,7 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
     .caracteristica-item p {
         color: #666;
         line-height: 1.6;
+        margin: 0;
     }
 
     @media (max-width: 768px) {
@@ -912,6 +921,10 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
 
         .sobre-nosotros {
             padding: 60px 0;
+        }
+
+        .sobre-nosotros h2 {
+            font-size: 2rem;
         }
     }
     </style>
