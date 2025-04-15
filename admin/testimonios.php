@@ -262,6 +262,16 @@ include('includes/header.php');
                         </label>
                     </div>
                 </div>
+
+                <div class="form-group">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="destacado" name="destacado">
+                        <label for="destacado">
+                            <i class="fas fa-star"></i>
+                            Destacado
+                        </label>
+                    </div>
+                </div>
                 
                 <div class="form-actions">
                     <button type="submit" class="btn btn-primary">
@@ -310,6 +320,7 @@ include('includes/header.php');
             form.reset();
             testimonioId.value = "";
             document.getElementById("activo").checked = true;
+            document.getElementById("destacado").checked = false;
             tinymce.get('testimonio').setContent('');
         } else {
             titulo.textContent = "Editar Testimonio";
@@ -330,6 +341,7 @@ include('includes/header.php');
                     document.getElementById("empresa").value = data.empresa;
                     tinymce.get('testimonio').setContent(data.testimonio);
                     document.getElementById("activo").checked = data.activo == 1;
+                    document.getElementById("destacado").checked = data.destacado == 1;
                 })
                 .catch(error => {
                     console.error("Error:", error);
