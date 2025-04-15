@@ -100,7 +100,7 @@ $empresa = mysqli_fetch_assoc($resultado);
 }
 
 .footer-section i {
-    color: #00B4DB;
+    color: #fff;
     width: 20px;
 }
 
