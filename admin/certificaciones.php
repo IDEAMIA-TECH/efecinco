@@ -302,6 +302,21 @@ include('includes/header.php');
 </style>
 
 <script>
+    // Inicializar TinyMCE
+    tinymce.init({
+        selector: '#descripcion',
+        plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
+        toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
+        height: 300,
+        menubar: false,
+        content_style: 'body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 14px; }',
+        setup: function(editor) {
+            editor.on('change', function() {
+                editor.save();
+            });
+        }
+    });
+
     function mostrarFormulario(accion, id = null) {
         const modal = document.getElementById("modalFormulario");
         const form = document.getElementById("formCertificacion");
@@ -316,6 +331,7 @@ include('includes/header.php');
             form.reset();
             certificacionId.value = "";
             document.getElementById("activo").checked = true;
+            tinymce.get('descripcion').setContent('');
         } else {
             titulo.textContent = "Editar Certificación";
             accionInput.value = "update";
