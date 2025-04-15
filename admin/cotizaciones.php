@@ -5,15 +5,25 @@ $conexion = conectarDB();
 
 $mensaje = '';
 $error = '';
+$tipo_cotizacion = $_GET['tipo'] ?? 'camaras'; // Por defecto mostrar cámaras
 
 // Procesar acciones
 if (isset($_GET['action'])) {
     $action = $_GET['action'];
     $id = $_GET['id'] ?? 0;
+    $tipo = $_GET['tipo'] ?? 'camaras';
+
+    // Determinar la tabla según el tipo
+    $tabla = match($tipo) {
+        'camaras' => 'cotizaciones_camaras',
+        'acceso' => 'cotizaciones_acceso',
+        'cableado' => 'cotizaciones_cableado',
+        default => 'cotizaciones_camaras'
+    };
 
     if ($action === 'view') {
         // Ver detalles de la cotización
-        $sql = "SELECT * FROM cotizaciones_camaras WHERE id = ?";
+        $sql = "SELECT * FROM $tabla WHERE id = ?";
         $stmt = $conexion->prepare($sql);
         $stmt->bind_param("i", $id);
         $stmt->execute();
@@ -23,7 +33,7 @@ if (isset($_GET['action'])) {
         $estado = limpiarDatos($_POST['estado']);
         $comentarios_admin = limpiarDatos($_POST['comentarios_admin']);
 
-        $sql = "UPDATE cotizaciones_camaras SET estado = ?, comentarios_admin = ? WHERE id = ?";
+        $sql = "UPDATE $tabla SET estado = ?, comentarios_admin = ? WHERE id = ?";
         $stmt = $conexion->prepare($sql);
         $stmt->bind_param("ssi", $estado, $comentarios_admin, $id);
 
@@ -35,8 +45,15 @@ if (isset($_GET['action'])) {
     }
 }
 
-// Obtener todas las cotizaciones
-$sql = "SELECT * FROM cotizaciones_camaras ORDER BY fecha_creacion DESC";
+// Obtener todas las cotizaciones según el tipo
+$tabla = match($tipo_cotizacion) {
+    'camaras' => 'cotizaciones_camaras',
+    'acceso' => 'cotizaciones_acceso',
+    'cableado' => 'cotizaciones_cableado',
+    default => 'cotizaciones_camaras'
+};
+
+$sql = "SELECT * FROM $tabla ORDER BY fecha_creacion DESC";
 $cotizaciones = $conexion->query($sql);
 ?>
 
@@ -78,7 +95,7 @@ $cotizaciones = $conexion->query($sql);
                     <span>Certificaciones</span>
                 </a>
                 <a href="cotizaciones.php" class="active">
-                    <i class="fas fa-camera"></i>
+                    <i class="fas fa-file-invoice"></i>
                     <span>Cotizaciones</span>
                 </a>
                 <a href="?logout=1" class="logout-btn">
@@ -97,11 +114,26 @@ $cotizaciones = $conexion->query($sql);
                     <div class="alert alert-danger"><?php echo $error; ?></div>
                 <?php endif; ?>
 
+                <div class="cotizaciones-filters">
+                    <h2>Cotizaciones</h2>
+                    <div class="filter-buttons">
+                        <a href="?tipo=camaras" class="btn <?php echo $tipo_cotizacion === 'camaras' ? 'btn-primary' : 'btn-secondary'; ?>">
+                            <i class="fas fa-camera"></i> Cámaras
+                        </a>
+                        <a href="?tipo=acceso" class="btn <?php echo $tipo_cotizacion === 'acceso' ? 'btn-primary' : 'btn-secondary'; ?>">
+                            <i class="fas fa-door-closed"></i> Control de Acceso
+                        </a>
+                        <a href="?tipo=cableado" class="btn <?php echo $tipo_cotizacion === 'cableado' ? 'btn-primary' : 'btn-secondary'; ?>">
+                            <i class="fas fa-network-wired"></i> Cableado
+                        </a>
+                    </div>
+                </div>
+
                 <?php if (isset($action) && $action === 'view' && $cotizacion): ?>
                     <div class="cotizacion-details">
                         <div class="details-header">
                             <h2>Detalles de la Cotización</h2>
-                            <a href="cotizaciones.php" class="btn btn-secondary">
+                            <a href="cotizaciones.php?tipo=<?php echo $tipo_cotizacion; ?>" class="btn btn-secondary">
                                 <i class="fas fa-arrow-left"></i> Volver
                             </a>
                         </div>
@@ -114,27 +146,45 @@ $cotizaciones = $conexion->query($sql);
                                 <p><strong>Email:</strong> <?php echo htmlspecialchars($cotizacion['email']); ?></p>
                                 <p><strong>Empresa:</strong> <?php echo htmlspecialchars($cotizacion['empresa'] ?? 'No especificada'); ?></p>
                                 <p><strong>Referencia:</strong> <?php echo htmlspecialchars($cotizacion['referencia']); ?></p>
-                                <?php if ($cotizacion['referencia_otro']): ?>
+                                <?php if (isset($cotizacion['referencia_otro']) && $cotizacion['referencia_otro']): ?>
                                     <p><strong>Otra referencia:</strong> <?php echo htmlspecialchars($cotizacion['referencia_otro']); ?></p>
                                 <?php endif; ?>
                             </div>
+
+                            <?php if ($tipo_cotizacion === 'camaras'): ?>
+                                <div class="details-section">
+                                    <h3>Requerimientos de Cámaras</h3>
+                                    <p><strong>Cantidad de cámaras:</strong> <?php echo htmlspecialchars($cotizacion['cantidad_camaras']); ?></p>
+                                    <p><strong>Tipo de cámaras:</strong> <?php echo htmlspecialchars($cotizacion['tipo_camaras']); ?></p>
+                                    <p><strong>Visión nocturna:</strong> <?php echo htmlspecialchars($cotizacion['vision_nocturna']); ?></p>
+                                    <p><strong>Visualización remota:</strong> <?php echo htmlspecialchars($cotizacion['visualizacion_remota']); ?></p>
+                                    <p><strong>Almacenamiento:</strong> <?php echo htmlspecialchars($cotizacion['almacenamiento']); ?></p>
+                                </div>
+                            <?php elseif ($tipo_cotizacion === 'acceso'): ?>
+                                <div class="details-section">
+                                    <h3>Requerimientos de Control de Acceso</h3>
+                                    <p><strong>Tipo de sistema:</strong> <?php echo htmlspecialchars($cotizacion['tipo_sistema']); ?></p>
+                                    <p><strong>Cantidad de accesos:</strong> <?php echo htmlspecialchars($cotizacion['cantidad_accesos']); ?></p>
+                                    <p><strong>Tipo de control:</strong> <?php echo htmlspecialchars($cotizacion['tipo_control']); ?></p>
+                                    <p><strong>Integración con otros sistemas:</strong> <?php echo htmlspecialchars($cotizacion['integracion_sistemas']); ?></p>
+                                </div>
+                            <?php elseif ($tipo_cotizacion === 'cableado'): ?>
+                                <div class="details-section">
+                                    <h3>Requerimientos de Cableado</h3>
+                                    <p><strong>Tipo de cableado:</strong> <?php echo htmlspecialchars($cotizacion['tipo_cableado']); ?></p>
+                                    <p><strong>Puntos de red:</strong> <?php echo htmlspecialchars($cotizacion['puntos_red']); ?></p>
+                                    <p><strong>Puntos de energía:</strong> <?php echo htmlspecialchars($cotizacion['puntos_energia']); ?></p>
+                                    <p><strong>Área a cubrir:</strong> <?php echo htmlspecialchars($cotizacion['area_cubrir']); ?></p>
+                                </div>
+                            <?php endif; ?>
 
                             <div class="details-section">
                                 <h3>Ubicación del Proyecto</h3>
                                 <p><strong>Dirección:</strong> <?php echo nl2br(htmlspecialchars($cotizacion['direccion'])); ?></p>
                                 <p><strong>Tipo de propiedad:</strong> <?php echo htmlspecialchars($cotizacion['tipo_propiedad']); ?></p>
-                                <?php if ($cotizacion['tipo_propiedad_otro']): ?>
+                                <?php if (isset($cotizacion['tipo_propiedad_otro']) && $cotizacion['tipo_propiedad_otro']): ?>
                                     <p><strong>Otro tipo:</strong> <?php echo htmlspecialchars($cotizacion['tipo_propiedad_otro']); ?></p>
                                 <?php endif; ?>
-                            </div>
-
-                            <div class="details-section">
-                                <h3>Requerimientos Técnicos</h3>
-                                <p><strong>Cantidad de cámaras:</strong> <?php echo htmlspecialchars($cotizacion['cantidad_camaras']); ?></p>
-                                <p><strong>Tipo de cámaras:</strong> <?php echo htmlspecialchars($cotizacion['tipo_camaras']); ?></p>
-                                <p><strong>Visión nocturna:</strong> <?php echo htmlspecialchars($cotizacion['vision_nocturna']); ?></p>
-                                <p><strong>Visualización remota:</strong> <?php echo htmlspecialchars($cotizacion['visualizacion_remota']); ?></p>
-                                <p><strong>Almacenamiento:</strong> <?php echo htmlspecialchars($cotizacion['almacenamiento']); ?></p>
                             </div>
 
                             <div class="details-section">
@@ -159,7 +209,7 @@ $cotizaciones = $conexion->query($sql);
 
                             <div class="details-section">
                                 <h3>Administración</h3>
-                                <form method="POST" action="?action=edit&id=<?php echo $cotizacion['id']; ?>">
+                                <form method="POST" action="?action=edit&id=<?php echo $cotizacion['id']; ?>&tipo=<?php echo $tipo_cotizacion; ?>">
                                     <div class="form-group">
                                         <label for="estado">Estado</label>
                                         <select name="estado" id="estado" required>
@@ -180,7 +230,6 @@ $cotizaciones = $conexion->query($sql);
                     </div>
                 <?php else: ?>
                     <div class="cotizaciones-list">
-                        <h2>Cotizaciones de Cámaras</h2>
                         <div class="cotizaciones-table">
                             <table>
                                 <thead>
@@ -206,10 +255,10 @@ $cotizaciones = $conexion->query($sql);
                                             </span>
                                         </td>
                                         <td>
-                                            <a href="?action=view&id=<?php echo $cotizacion['id']; ?>" class="action-btn view-btn">
+                                            <a href="?action=view&id=<?php echo $cotizacion['id']; ?>&tipo=<?php echo $tipo_cotizacion; ?>" class="action-btn view-btn">
                                                 <i class="fas fa-eye"></i>
                                             </a>
-                                            <a href="?action=edit&id=<?php echo $cotizacion['id']; ?>" class="action-btn edit-btn">
+                                            <a href="?action=edit&id=<?php echo $cotizacion['id']; ?>&tipo=<?php echo $tipo_cotizacion; ?>" class="action-btn edit-btn">
                                                 <i class="fas fa-edit"></i>
                                             </a>
                                         </td>
@@ -225,6 +274,20 @@ $cotizaciones = $conexion->query($sql);
     </div>
 
     <style>
+        .cotizaciones-filters {
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
         .cotizaciones-list,
         .cotizacion-details {
             background: white;
@@ -450,6 +513,21 @@ $cotizaciones = $conexion->query($sql);
         }
 
         @media (max-width: 768px) {
+            .cotizaciones-filters {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .filter-buttons {
+                width: 100%;
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+
             .details-grid {
                 grid-template-columns: 1fr;
             }
@@ -458,11 +536,6 @@ $cotizaciones = $conexion->query($sql);
                 flex-direction: column;
                 gap: 1rem;
                 text-align: center;
-            }
-
-            .btn {
-                width: 100%;
-                justify-content: center;
             }
 
             .cotizaciones-table {
