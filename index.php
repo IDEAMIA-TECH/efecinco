@@ -132,11 +132,13 @@ include('includes/header.php');
                                     </div>
                                 </div>
                                 <div class="testimonio-author">
-                                    <?php if ($testimonio['imagen']): ?>
-                                        <img src="<?php echo htmlspecialchars($testimonio['imagen']); ?>" alt="<?php echo htmlspecialchars($testimonio['cliente']); ?>" class="author-image">
+                                    <?php if ($testimonio['logo']): ?>
+                                        <img src="<?php echo str_replace('../', '', $testimonio['logo']); ?>" 
+                                             alt="<?php echo htmlspecialchars($testimonio['empresa']); ?>" 
+                                             class="author-logo">
                                     <?php else: ?>
-                                        <div class="author-image default">
-                                            <i class="fas fa-user"></i>
+                                        <div class="author-logo default">
+                                            <i class="fas fa-building"></i>
                                         </div>
                                     <?php endif; ?>
                                     <div class="author-info">
@@ -457,41 +459,55 @@ include('includes/header.php');
     align-items: center;
     justify-content: center;
     gap: 15px;
+    margin-top: 20px;
 }
 
-.author-image {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    overflow: hidden;
+.author-logo {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    background-color: white;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.author-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.author-image.default {
-    background-color: #00B4DB;
-    color: white;
+.author-logo.default {
+    width: 80px;
+    height: 80px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
+    color: #6c757d;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.author-image.default i {
-    font-size: 1.5rem;
+.author-logo.default i {
+    font-size: 2rem;
+}
+
+.author-info {
+    text-align: left;
 }
 
 .author-info h4 {
     margin: 0;
     color: #333;
+    font-size: 1.1rem;
 }
 
-.author-info p {
-    margin: 5px 0 0;
+.author-info .cargo {
+    margin: 5px 0;
     color: #666;
+    font-size: 0.9rem;
+}
+
+.author-info .empresa {
+    margin: 0;
+    color: #00B4DB;
+    font-weight: 500;
     font-size: 0.9rem;
 }
 
