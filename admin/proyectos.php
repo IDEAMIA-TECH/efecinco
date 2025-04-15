@@ -360,13 +360,20 @@ include('includes/header.php');
                     </div>
 
                     <div class="form-group checkbox-group">
-                        <input type="checkbox" id="destacado" name="destacado">
-                        <label for="destacado">Destacado</label>
-                    </div>
-
-                    <div class="form-group checkbox-group">
-                        <input type="checkbox" id="activo" name="activo" checked>
-                        <label for="activo">Activo</label>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="destacado" name="destacado">
+                            <label for="destacado">
+                                <i class="fas fa-star"></i>
+                                Destacado
+                            </label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="activo" name="activo" checked>
+                            <label for="activo">
+                                <i class="fas fa-check-circle"></i>
+                                Activo
+                            </label>
+                        </div>
                     </div>
                 </div>
 
@@ -733,7 +740,66 @@ $scripts_adicionales = '
     .checkbox-group {
         display: flex;
         align-items: center;
-        gap: 0.5rem;
+        gap: 1rem;
+        margin-top: 1rem;
+    }
+
+    .checkbox-item {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.75rem;
+        background: #f8f9fa;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        flex: 1;
+    }
+
+    .checkbox-item:hover {
+        background: #e9ecef;
+        transform: translateY(-2px);
+    }
+
+    .checkbox-item input[type="checkbox"] {
+        display: none;
+    }
+
+    .checkbox-item label {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        width: 100%;
+        cursor: pointer;
+        margin: 0;
+        font-size: 0.95rem;
+        color: #495057;
+    }
+
+    .checkbox-item label::before {
+        content: "";
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border: 2px solid #6c757d;
+        border-radius: 4px;
+        background-color: #fff;
+        transition: all 0.2s ease;
+    }
+
+    .checkbox-item input[type="checkbox"]:checked + label::before {
+        background-color: #007bff;
+        border-color: #007bff;
+        content: "✓";
+        color: white;
+        text-align: center;
+        line-height: 16px;
+        font-size: 12px;
+    }
+
+    .checkbox-item i {
+        color: #007bff;
+        font-size: 1.1rem;
     }
 
     .form-actions {
@@ -764,6 +830,10 @@ $scripts_adicionales = '
 
         .servicios-grid {
             grid-template-columns: 1fr;
+        }
+
+        .checkbox-group {
+            flex-direction: column;
         }
     }
 </style>
