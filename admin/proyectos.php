@@ -1,6 +1,6 @@
 <?php
+require_once('auth.php');
 require_once('../includes/db.php');
-require_once('includes/auth.php');
 
 // Verificar autenticación
 verificarAutenticacion();
@@ -219,6 +219,7 @@ $servicios = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Administrar Proyectos - Efecinco</title>
+    <link rel="stylesheet" href="../assets/css/admin.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         .container {
@@ -434,151 +435,316 @@ $servicios = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
         .servicio-item input {
             margin-right: 10px;
         }
+
+        /* Add the header styles from dashboard.php */
+        .modern-admin {
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            color: #2c3e50;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            min-height: 100vh;
+        }
+
+        .admin-wrapper {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .admin-header {
+            background: #fff;
+            padding: 0.5rem 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        .header-logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .header-logo .logo {
+            width: 120px;
+            height: auto;
+            padding: 10px 0;
+        }
+
+        .header-logo h2 {
+            margin: 0;
+            color: #2c3e50;
+            font-size: 1.2rem;
+        }
+
+        .admin-nav {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .admin-nav a {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #6c757d;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .admin-nav a:hover,
+        .admin-nav a.active {
+            background: #f8f9fa;
+            color: #007bff;
+        }
+
+        .admin-nav a i {
+            font-size: 1rem;
+        }
+
+        .admin-nav a span {
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .logout-btn {
+            color: #dc3545;
+        }
+
+        .logout-btn:hover {
+            background: #f8f9fa;
+            color: #c82333;
+        }
+
+        .admin-main {
+            margin-top: 70px;
+            padding: 2rem;
+            min-height: 100vh;
+            background: #f8f9fa;
+        }
+
+        @media (max-width: 1024px) {
+            .admin-nav {
+                gap: 1rem;
+            }
+
+            .admin-nav a {
+                padding: 0.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .admin-header {
+                padding: 0.5rem 1rem;
+            }
+
+            .header-logo h2 {
+                display: none;
+            }
+
+            .admin-nav a span {
+                display: none;
+            }
+
+            .admin-nav a i {
+                font-size: 1.2rem;
+            }
+
+            .admin-nav {
+                gap: 0.5rem;
+            }
+        }
     </style>
 </head>
-<body>
-    <div class="container">
-        <div class="header">
-            <h1>Administrar Proyectos</h1>
-            <button class="btn btn-primary" onclick="mostrarFormulario('crear')">
-                <i class="fas fa-plus"></i> Nuevo Proyecto
-            </button>
-        </div>
-
-        <?php if (isset($_GET['mensaje'])): ?>
-            <?php
-            $mensajes = [
-                'creado' => ['Proyecto creado exitosamente', 'success'],
-                'actualizado' => ['Proyecto actualizado exitosamente', 'success'],
-                'eliminado' => ['Proyecto eliminado exitosamente', 'success']
-            ];
-            $mensaje = $mensajes[$_GET['mensaje']] ?? ['Ha ocurrido un error', 'danger'];
-            ?>
-            <div class="alert alert-<?php echo $mensaje[1]; ?>">
-                <?php echo $mensaje[0]; ?>
+<body class="modern-admin">
+    <div class="admin-wrapper">
+        <header class="admin-header">
+            <div class="header-logo">
+                <img src="../assets/img/logof5.png" alt="Efecinco Logo" class="logo">
+                <h2>Efecinco</h2>
             </div>
-        <?php endif; ?>
+            <nav class="admin-nav">
+                <a href="dashboard.php">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="servicios.php">
+                    <i class="fas fa-cogs"></i>
+                    <span>Servicios</span>
+                </a>
+                <a href="proyectos.php" class="active">
+                    <i class="fas fa-project-diagram"></i>
+                    <span>Proyectos</span>
+                </a>
+                <a href="testimonios.php">
+                    <i class="fas fa-comments"></i>
+                    <span>Testimonios</span>
+                </a>
+                <a href="certificaciones.php">
+                    <i class="fas fa-certificate"></i>
+                    <span>Certificaciones</span>
+                </a>
+                <a href="?logout=1" class="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Cerrar Sesión</span>
+                </a>
+            </nav>
+        </header>
 
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Cliente</th>
-                    <th>Tipo de Solución</th>
-                    <th>Fecha</th>
-                    <th>Estado</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($proyectos as $proyecto): ?>
-                    <tr>
-                        <td><?php echo htmlspecialchars($proyecto['cliente']); ?></td>
-                        <td><?php echo htmlspecialchars($proyecto['tipo_solucion']); ?></td>
-                        <td><?php echo date('d/m/Y', strtotime($proyecto['fecha'])); ?></td>
-                        <td>
-                            <?php if ($proyecto['activo']): ?>
-                                <span class="badge badge-success">Activo</span>
-                            <?php else: ?>
-                                <span class="badge badge-danger">Inactivo</span>
-                            <?php endif; ?>
-                        </td>
-                        <td>
-                            <button class="btn btn-outline" onclick="mostrarFormulario('editar', <?php echo $proyecto['id']; ?>)">
-                                <i class="fas fa-edit"></i>
-                            </button>
-                            <button class="btn btn-danger" onclick="eliminarProyecto(<?php echo $proyecto['id']; ?>)">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </td>
-                    </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
-    </div>
-
-    <!-- Modal de formulario -->
-    <div id="modalFormulario" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 id="tituloModal">Nuevo Proyecto</h2>
-                <span class="close" onclick="cerrarModal()">&times;</span>
-            </div>
-            <form id="formProyecto" method="POST" enctype="multipart/form-data">
-                <input type="hidden" name="accion" id="accion" value="crear">
-                <input type="hidden" name="id" id="proyectoId">
-                <input type="hidden" name="imagen_actual" id="imagenActual">
-
-                <div class="form-group">
-                    <label for="cliente">Cliente</label>
-                    <input type="text" class="form-control" id="cliente" name="cliente" required>
+        <main class="admin-main">
+            <div class="container">
+                <div class="header">
+                    <h1>Administrar Proyectos</h1>
+                    <button class="btn btn-primary" onclick="mostrarFormulario('crear')">
+                        <i class="fas fa-plus"></i> Nuevo Proyecto
+                    </button>
                 </div>
 
-                <div class="form-group">
-                    <label for="tipo_solucion">Tipo de Solución</label>
-                    <input type="text" class="form-control" id="tipo_solucion" name="tipo_solucion" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="descripcion">Descripción</label>
-                    <textarea class="form-control" id="descripcion" name="descripcion" required></textarea>
-                </div>
-
-                <div class="form-group">
-                    <label for="descripcion_corta">Descripción Corta</label>
-                    <textarea class="form-control" id="descripcion_corta" name="descripcion_corta" required></textarea>
-                </div>
-
-                <div class="form-group">
-                    <label for="caracteristicas">Características (una por línea)</label>
-                    <textarea class="form-control" id="caracteristicas" name="caracteristicas"></textarea>
-                </div>
-
-                <div class="form-group">
-                    <label for="fecha">Fecha</label>
-                    <input type="date" class="form-control" id="fecha" name="fecha" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="imagen">Imagen Principal</label>
-                    <input type="file" class="form-control" id="imagen" name="imagen" accept="image/*">
-                    <div class="preview-image" id="previewImagen"></div>
-                </div>
-
-                <div class="form-group">
-                    <label>Servicios Relacionados</label>
-                    <div class="servicios-grid">
-                        <?php foreach ($servicios as $servicio): ?>
-                            <div class="servicio-item">
-                                <input type="checkbox" name="servicios[]" value="<?php echo $servicio['id']; ?>" 
-                                       id="servicio_<?php echo $servicio['id']; ?>">
-                                <label for="servicio_<?php echo $servicio['id']; ?>">
-                                    <?php echo htmlspecialchars($servicio['nombre']); ?>
-                                </label>
-                            </div>
-                        <?php endforeach; ?>
+                <?php if (isset($_GET['mensaje'])): ?>
+                    <?php
+                    $mensajes = [
+                        'creado' => ['Proyecto creado exitosamente', 'success'],
+                        'actualizado' => ['Proyecto actualizado exitosamente', 'success'],
+                        'eliminado' => ['Proyecto eliminado exitosamente', 'success']
+                    ];
+                    $mensaje = $mensajes[$_GET['mensaje']] ?? ['Ha ocurrido un error', 'danger'];
+                    ?>
+                    <div class="alert alert-<?php echo $mensaje[1]; ?>">
+                        <?php echo $mensaje[0]; ?>
                     </div>
-                </div>
+                <?php endif; ?>
 
-                <div class="form-group">
-                    <label>Imágenes Adicionales</label>
-                    <input type="file" class="form-control" name="imagenes_adicionales[]" multiple accept="image/*">
-                    <div id="descripcionesImagenes"></div>
-                </div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Cliente</th>
+                            <th>Tipo de Solución</th>
+                            <th>Fecha</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($proyectos as $proyecto): ?>
+                            <tr>
+                                <td><?php echo htmlspecialchars($proyecto['cliente']); ?></td>
+                                <td><?php echo htmlspecialchars($proyecto['tipo_solucion']); ?></td>
+                                <td><?php echo date('d/m/Y', strtotime($proyecto['fecha'])); ?></td>
+                                <td>
+                                    <?php if ($proyecto['activo']): ?>
+                                        <span class="badge badge-success">Activo</span>
+                                    <?php else: ?>
+                                        <span class="badge badge-danger">Inactivo</span>
+                                    <?php endif; ?>
+                                </td>
+                                <td>
+                                    <button class="btn btn-outline" onclick="mostrarFormulario('editar', <?php echo $proyecto['id']; ?>)">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="btn btn-danger" onclick="eliminarProyecto(<?php echo $proyecto['id']; ?>)">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
 
-                <div class="checkbox-group">
-                    <input type="checkbox" id="destacado" name="destacado">
-                    <label for="destacado">Destacado</label>
-                </div>
+            <!-- Modal de formulario -->
+            <div id="modalFormulario" class="modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 id="tituloModal">Nuevo Proyecto</h2>
+                        <span class="close" onclick="cerrarModal()">&times;</span>
+                    </div>
+                    <form id="formProyecto" method="POST" enctype="multipart/form-data">
+                        <input type="hidden" name="accion" id="accion" value="crear">
+                        <input type="hidden" name="id" id="proyectoId">
+                        <input type="hidden" name="imagen_actual" id="imagenActual">
 
-                <div class="checkbox-group">
-                    <input type="checkbox" id="activo" name="activo" checked>
-                    <label for="activo">Activo</label>
-                </div>
+                        <div class="form-group">
+                            <label for="cliente">Cliente</label>
+                            <input type="text" class="form-control" id="cliente" name="cliente" required>
+                        </div>
 
-                <button type="submit" class="btn btn-primary">Guardar</button>
-                <button type="button" class="btn btn-outline" onclick="cerrarModal()">Cancelar</button>
-            </form>
-        </div>
+                        <div class="form-group">
+                            <label for="tipo_solucion">Tipo de Solución</label>
+                            <input type="text" class="form-control" id="tipo_solucion" name="tipo_solucion" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="descripcion">Descripción</label>
+                            <textarea class="form-control" id="descripcion" name="descripcion" required></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="descripcion_corta">Descripción Corta</label>
+                            <textarea class="form-control" id="descripcion_corta" name="descripcion_corta" required></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="caracteristicas">Características (una por línea)</label>
+                            <textarea class="form-control" id="caracteristicas" name="caracteristicas"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="fecha">Fecha</label>
+                            <input type="date" class="form-control" id="fecha" name="fecha" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="imagen">Imagen Principal</label>
+                            <input type="file" class="form-control" id="imagen" name="imagen" accept="image/*">
+                            <div class="preview-image" id="previewImagen"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Servicios Relacionados</label>
+                            <div class="servicios-grid">
+                                <?php foreach ($servicios as $servicio): ?>
+                                    <div class="servicio-item">
+                                        <input type="checkbox" name="servicios[]" value="<?php echo $servicio['id']; ?>" 
+                                               id="servicio_<?php echo $servicio['id']; ?>">
+                                        <label for="servicio_<?php echo $servicio['id']; ?>">
+                                            <?php echo htmlspecialchars($servicio['nombre']); ?>
+                                        </label>
+                                    </div>
+                                <?php endforeach; ?>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Imágenes Adicionales</label>
+                            <input type="file" class="form-control" name="imagenes_adicionales[]" multiple accept="image/*">
+                            <div id="descripcionesImagenes"></div>
+                        </div>
+
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="destacado" name="destacado">
+                            <label for="destacado">Destacado</label>
+                        </div>
+
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="activo" name="activo" checked>
+                            <label for="activo">Activo</label>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                        <button type="button" class="btn btn-outline" onclick="cerrarModal()">Cancelar</button>
+                    </form>
+                </div>
+            </div>
+        </main>
     </div>
 
     <script>
