@@ -64,9 +64,6 @@ $servicios = $resultado->fetch_all(MYSQLI_ASSOC);
                                 <div class="servicio-contenido">
                                     <h3><?php echo htmlspecialchars($servicio['nombre']); ?></h3>
                                     <p><?php echo htmlspecialchars($servicio['descripcion']); ?></p>
-                                    <a href="servicio.php?id=<?php echo $servicio['id']; ?>" class="btn btn-outline">
-                                        Ver más detalles
-                                    </a>
                                 </div>
                             </div>
                         <?php endforeach; ?>
