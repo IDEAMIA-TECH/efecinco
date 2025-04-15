@@ -68,10 +68,11 @@ $empresa = mysqli_fetch_assoc($resultado);
 
 <style>
 .footer {
-    background-color: #333;
+    background: linear-gradient(90deg, #00B4DB 0%, #0072ff 100%);
     color: #fff;
     padding: 3rem 0 1rem;
     margin-top: 4rem;
+    font-family: 'Montserrat', Arial, Helvetica, sans-serif;
 }
 
 .footer-content {
@@ -87,6 +88,8 @@ $empresa = mysqli_fetch_assoc($resultado);
     color: #fff;
     margin-bottom: 1.5rem;
     font-size: 1.2rem;
+    letter-spacing: 1px;
+    font-weight: 700;
 }
 
 .footer-section p {
@@ -97,7 +100,7 @@ $empresa = mysqli_fetch_assoc($resultado);
 }
 
 .footer-section i {
-    color: #25D366;
+    color: #00B4DB;
     width: 20px;
 }
 
@@ -113,15 +116,28 @@ $empresa = mysqli_fetch_assoc($resultado);
     justify-content: center;
     width: 40px;
     height: 40px;
-    background-color: #444;
+    background: #fff;
     border-radius: 50%;
-    color: #fff;
-    transition: all 0.3s ease;
+    color: #0072ff;
+    font-size: 1.3rem;
+    box-shadow: 0 2px 8px rgba(0,180,219,0.10);
+    transition: all 0.3s;
 }
 
 .social-links a:hover {
-    background-color: #25D366;
-    transform: translateY(-3px);
+    background: linear-gradient(90deg, #00B4DB 0%, #0072ff 100%);
+    color: #fff;
+    transform: translateY(-3px) scale(1.08);
+    box-shadow: 0 6px 18px rgba(0,114,255,0.18);
+}
+
+.social-links a[href*='whatsapp'] {
+    background: #25D366;
+    color: #fff;
+}
+
+.social-links a[href*='whatsapp']:hover {
+    background: #128C7E;
 }
 
 .footer-section ul {
@@ -136,18 +152,21 @@ $empresa = mysqli_fetch_assoc($resultado);
 .footer-section ul li a {
     color: #fff;
     text-decoration: none;
-    transition: color 0.3s ease;
+    font-weight: 500;
+    transition: color 0.3s;
 }
 
 .footer-section ul li a:hover {
-    color: #25D366;
+    color: #00B4DB;
 }
 
 .footer-bottom {
     text-align: center;
     padding-top: 2rem;
     margin-top: 2rem;
-    border-top: 1px solid #444;
+    border-top: 1px solid #fff3;
+    font-size: 1rem;
+    letter-spacing: 1px;
 }
 
 @media (max-width: 768px) {
@@ -155,11 +174,9 @@ $empresa = mysqli_fetch_assoc($resultado);
         grid-template-columns: 1fr;
         text-align: center;
     }
-
     .footer-section p {
         justify-content: center;
     }
-
     .social-links {
         justify-content: center;
     }

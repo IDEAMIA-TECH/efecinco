@@ -21,6 +21,9 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
     <meta name="description" content="Conoce más sobre Efecinco, nuestra misión, visión y trayectoria en el sector de seguridad y tecnología.">
     <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <?php include('includes/header.php'); ?>
@@ -194,71 +197,91 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
     <?php include('includes/footer.php'); ?>
 
     <style>
+        body {
+            font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+            background: #f4f8fb;
+            color: #222;
+        }
         .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
-            background-size: cover;
-            background-position: center;
+            background: linear-gradient(120deg, #00B4DB 0%, #0072ff 100%);
             color: white;
             text-align: center;
-            padding: 100px 0;
+            padding: 120px 0 80px 0;
+            position: relative;
         }
-
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.2) 100%);
+            z-index: 1;
+        }
+        .hero .container {
+            position: relative;
+            z-index: 2;
+        }
         .hero h1 {
             font-size: 3rem;
             margin-bottom: 1rem;
+            text-shadow: 2px 2px 8px rgba(0,180,219,0.2);
+            font-weight: 700;
+            letter-spacing: 2px;
         }
-
         .hero p {
             font-size: 1.2rem;
             max-width: 600px;
             margin: 0 auto;
+            text-shadow: 1px 1px 2px rgba(0,180,219,0.15);
+            font-weight: 400;
         }
-
         .sobre-nosotros {
             padding: 80px 0;
+            background: #fff;
         }
-
         .grid-2-columns {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 40px;
             align-items: center;
         }
-
         .texto h2 {
             margin-bottom: 20px;
-            color: #333;
+            color: #0072ff;
+            font-weight: 700;
         }
-
         .texto p {
             color: #666;
             line-height: 1.6;
         }
-
         .imagen img {
             width: 100%;
             height: 400px;
             object-fit: cover;
             border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 16px rgba(0,180,219,0.08);
         }
-
         .mision-vision {
-            background-color: #f8f9fa;
+            background: linear-gradient(120deg, #f4f8fb 60%, #e3f0fa 100%);
             padding: 80px 0;
         }
-
         .mision-vision .card {
             text-align: center;
             padding: 30px;
-            background: white;
+            background: #fff;
             border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 16px rgba(0,180,219,0.08);
             display: flex;
             flex-direction: column;
             align-items: center;
+            transition: transform 0.3s;
         }
-
+        .mision-vision .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 18px rgba(0,114,255,0.13);
+        }
         .mision-vision .card img {
             width: 120px;
             height: 120px;
@@ -266,87 +289,91 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
             border-radius: 50%;
             margin-bottom: 20px;
         }
-
         .mision-vision .card h3 {
             margin-bottom: 15px;
-            color: #333;
+            color: #00B4DB;
+            font-size: 1.5rem;
+            font-weight: 700;
         }
-
         .mision-vision .card p {
-            color: #666;
+            color: #444;
             line-height: 1.6;
         }
-
         .linea-tiempo {
             padding: 80px 0;
         }
-
         .linea-tiempo h2 {
             text-align: center;
             margin-bottom: 50px;
-            color: #333;
+            color: #0072ff;
+            font-weight: 700;
         }
-
         .timeline {
             position: relative;
             max-width: 800px;
             margin: 0 auto;
         }
-
         .timeline::before {
             content: '';
             position: absolute;
             width: 2px;
-            background-color: #007bff;
+            background-color: #00B4DB;
             top: 0;
             bottom: 0;
             left: 50%;
             margin-left: -1px;
         }
-
         .timeline-item {
             padding: 20px 0;
             position: relative;
         }
-
         .timeline-content {
             position: relative;
             width: 45%;
             padding: 20px;
-            background: white;
+            background: #fff;
             border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 16px rgba(0,180,219,0.08);
         }
-
         .timeline-item:nth-child(odd) .timeline-content {
             margin-left: 50%;
         }
-
         .timeline-item:nth-child(even) .timeline-content {
             margin-right: 50%;
         }
-
         .timeline-content h3 {
-            color: #007bff;
+            color: #00B4DB;
             margin-bottom: 10px;
         }
-
         .timeline-content p {
             color: #666;
             margin: 0;
         }
-
-        .clientes {
-            background-color: #f8f9fa;
-            padding: 80px 0;
-        }
-
-        .clientes h2 {
+        .section-header {
             text-align: center;
-            margin-bottom: 50px;
-            color: #333;
+            margin-bottom: 40px;
         }
-
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: #0072ff;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        .section-description {
+            color: #666;
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .nuestros-clientes {
+            padding: 80px 0;
+            background-color: #fff;
+        }
+        .nuestros-clientes .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
         .clientes-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -356,25 +383,22 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
             margin: 0 auto;
             padding: 0 20px;
         }
-
         .cliente-item {
             text-align: center;
             padding: 30px;
-            background: white;
+            background: #fff;
             border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
+            box-shadow: 0 4px 16px rgba(0,180,219,0.08);
+            transition: all 0.3s;
             display: flex;
             align-items: center;
             justify-content: center;
             min-height: 120px;
         }
-
         .cliente-item:hover {
             transform: translateY(-5px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 6px 18px rgba(0,114,255,0.13);
         }
-
         .cliente-item img {
             max-width: 100%;
             height: auto;
@@ -382,91 +406,72 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
             width: auto;
             object-fit: contain;
             filter: grayscale(100%);
-            transition: filter 0.3s ease;
+            transition: filter 0.3s;
         }
-
         .cliente-item:hover img {
             filter: grayscale(0%);
         }
-
         .cta {
             padding: 60px 0;
             text-align: center;
         }
-
         .cta h2 {
             margin-bottom: 1rem;
+            color: #0072ff;
+            font-weight: 700;
         }
-
         .cta p {
             margin-bottom: 2rem;
             color: #666;
         }
-
+        .btn {
+            padding: 15px 35px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s cubic-bezier(.4,0,.2,1);
+            box-shadow: 0 4px 16px rgba(0,180,219,0.08);
+            border: none;
+            outline: none;
+            letter-spacing: 1px;
+            background: linear-gradient(90deg, #00B4DB 0%, #0072ff 100%);
+            color: #fff;
+        }
+        .btn:hover {
+            background: linear-gradient(90deg, #0072ff 0%, #00B4DB 100%);
+            color: #fff;
+            transform: translateY(-2px) scale(1.04);
+            box-shadow: 0 6px 18px rgba(0,114,255,0.18);
+        }
         @media (max-width: 768px) {
             .grid-2-columns {
                 grid-template-columns: 1fr;
             }
-
             .hero {
                 padding: 60px 0;
             }
-
             .hero h1 {
                 font-size: 2.5rem;
             }
-
             .timeline::before {
                 left: 30px;
             }
-
             .timeline-content {
                 width: calc(100% - 60px);
                 margin-left: 60px !important;
             }
-
             .clientes-grid {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 20px;
             }
-
             .cliente-item {
                 padding: 20px;
                 min-height: 100px;
             }
-
             .cliente-item img {
                 max-height: 60px;
             }
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .section-header h2 {
-            font-size: 2.5rem;
-            color: #333;
-            margin-bottom: 15px;
-        }
-
-        .section-description {
-            color: #666;
-            font-size: 1.2rem;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .nuestros-clientes {
-            padding: 80px 0;
-            background-color: #fff;
-        }
-
-        .nuestros-clientes .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
         }
     </style>
 </body>

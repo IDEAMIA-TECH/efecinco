@@ -14,39 +14,31 @@ require_once __DIR__ . '/db.php';
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <!-- TinyMCE -->
     <script src="https://cdn.tiny.cloud/1/4u89qw1ptzfqell0ybjhqth1cc16ilb1y0792h3momw4lk8l/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
+        body {
+            font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+        }
         .header {
-            background-color: #fff;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            background: linear-gradient(90deg, #00B4DB 0%, #0072ff 100%);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.08);
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
         }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
         .header .container {
             display: flex;
             justify-content: space-between;
             align-items: center;
             height: 80px;
         }
-
-        .logo {
-            display: flex;
-            align-items: center;
-        }
-
         .logo img {
             height: 50px;
             width: auto;
         }
-
         nav ul {
             display: flex;
             list-style: none;
@@ -54,109 +46,89 @@ require_once __DIR__ . '/db.php';
             padding: 0;
             gap: 2rem;
         }
-
         nav a {
-            color: #333;
+            color: #fff;
             text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
+            font-weight: 600;
+            transition: color 0.3s;
+            letter-spacing: 1px;
         }
-
         nav a:hover {
             color: #00B4DB;
+            background: #fff;
+            border-radius: 20px;
+            padding: 6px 18px;
         }
-
         .mobile-menu {
             display: none;
             font-size: 24px;
             cursor: pointer;
+            color: #fff;
         }
-
-        main {
-            margin-top: 80px; /* Igual a la altura del header */
-        }
-
         @media (max-width: 768px) {
             .mobile-menu {
                 display: block;
             }
-
             nav {
                 display: none;
                 position: absolute;
                 top: 80px;
                 left: 0;
                 width: 100%;
-                background: white;
-                padding: 20px;
-                box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+                background: linear-gradient(90deg, #00B4DB 0%, #0072ff 100%);
+                padding: 20px 0;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.08);
             }
-
             nav.active {
                 display: block;
             }
-
             nav ul {
                 flex-direction: column;
                 gap: 1rem;
             }
-
             .logo img {
                 height: 40px;
             }
         }
-
         .admin-link a, .login-link a {
-            color: #00B4DB;
+            color: #fff;
             font-weight: bold;
             display: flex;
             align-items: center;
             gap: 0.5rem;
         }
-
         .admin-link a:hover, .login-link a:hover {
-            color: #0083a3;
+            color: #00B4DB;
         }
-
-        /* Add dropdown menu styles */
         .dropdown {
             position: relative;
         }
-
         .dropdown-menu {
             display: none;
             position: absolute;
             top: 100%;
             left: 0;
-            background: white;
+            background: #fff;
             min-width: 200px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            border-radius: 4px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+            border-radius: 8px;
             padding: 10px 0;
             z-index: 1000;
         }
-
         .dropdown:hover .dropdown-menu {
             display: block;
         }
-
-        .dropdown-menu li {
-            padding: 0;
-        }
-
         .dropdown-menu a {
-            display: block;
-            padding: 8px 20px;
-            color: #333;
-            text-decoration: none;
-            transition: background-color 0.3s;
+            color: #0072ff;
+            font-weight: 500;
+            padding: 10px 20px;
+            border-radius: 6px;
+            transition: background 0.3s, color 0.3s;
         }
-
         .dropdown-menu a:hover {
-            background-color: #f8f9fa;
+            background: #e3f0fa;
             color: #00B4DB;
         }
-
         @media (max-width: 768px) {
             .dropdown-menu {
                 position: static;
@@ -164,11 +136,9 @@ require_once __DIR__ . '/db.php';
                 padding: 0;
                 display: none;
             }
-
             .dropdown.active .dropdown-menu {
                 display: block;
             }
-
             .dropdown-menu a {
                 padding: 10px 20px;
                 border-left: 3px solid #00B4DB;
