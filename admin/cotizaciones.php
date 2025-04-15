@@ -281,11 +281,31 @@ $cotizaciones = $conexion->query($sql);
             align-items: center;
             flex-wrap: wrap;
             gap: 1rem;
+            background: white;
+            padding: 1rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }
 
         .filter-buttons {
             display: flex;
             gap: 1rem;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .filter-buttons .btn {
+            flex: 1;
+            max-width: 200px;
+            min-width: 150px;
+            text-align: center;
+            justify-content: center;
+            white-space: nowrap;
+            padding: 0.75rem 1rem;
+        }
+
+        .filter-buttons .btn i {
+            margin-right: 0.5rem;
         }
 
         .cotizaciones-list,
@@ -515,17 +535,17 @@ $cotizaciones = $conexion->query($sql);
         @media (max-width: 768px) {
             .cotizaciones-filters {
                 flex-direction: column;
-                align-items: flex-start;
+                align-items: stretch;
             }
 
             .filter-buttons {
-                width: 100%;
                 flex-direction: column;
+                gap: 0.5rem;
             }
 
-            .btn {
+            .filter-buttons .btn {
+                max-width: none;
                 width: 100%;
-                justify-content: center;
             }
 
             .details-grid {
