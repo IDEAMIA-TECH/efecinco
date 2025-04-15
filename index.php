@@ -1011,6 +1011,77 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
             font-size: 2rem;
         }
     }
+
+    .mision-vision {
+        background-color: #f8f9fa;
+        padding: 80px 0;
+    }
+
+    .mision-vision .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+
+    .grid-2-columns {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 40px;
+    }
+
+    .mision-vision .card {
+        text-align: center;
+        padding: 30px;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+    }
+
+    .mision-vision .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .mision-vision .card img {
+        width: 120px;
+        height: 120px;
+        object-fit: cover;
+        border-radius: 50%;
+        margin-bottom: 20px;
+    }
+
+    .mision-vision .card h3 {
+        color: #00B4DB;
+        margin-bottom: 15px;
+        font-size: 1.5rem;
+    }
+
+    .mision-vision .card p {
+        color: #666;
+        line-height: 1.6;
+        margin: 0;
+    }
+
+    @media (max-width: 768px) {
+        .grid-2-columns {
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+
+        .mision-vision {
+            padding: 60px 0;
+        }
+
+        .mision-vision .card {
+            padding: 20px;
+        }
+
+        .mision-vision .card img {
+            width: 100px;
+            height: 100px;
+        }
+    }
     </style>
 
     <script>
