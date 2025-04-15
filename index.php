@@ -191,8 +191,9 @@ include('includes/header.php');
                         <div class="certificacion-card">
                             <div class="certificacion-imagen">
                                 <?php if ($certificacion['imagen']): ?>
-                                    <img src="<?php echo $certificacion['imagen']; ?>" 
-                                         alt="<?php echo htmlspecialchars($certificacion['titulo']); ?>">
+                                    <img src="<?php echo str_replace('../', '', $certificacion['imagen']); ?>" 
+                                         alt="<?php echo htmlspecialchars($certificacion['titulo']); ?>"
+                                         class="certificacion-img">
                                 <?php else: ?>
                                     <div class="imagen-default">
                                         <i class="fas fa-certificate"></i>
@@ -632,19 +633,19 @@ include('includes/header.php');
     height: 200px;
     overflow: hidden;
     position: relative;
-}
-
-.certificacion-imagen img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
     background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     padding: 20px;
-    transition: transform 0.3s ease;
 }
 
-.certificacion-card:hover .certificacion-imagen img {
-    transform: scale(1.05);
+.certificacion-img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
 }
 
 .imagen-default {
