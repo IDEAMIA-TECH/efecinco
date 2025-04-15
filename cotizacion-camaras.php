@@ -69,35 +69,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-function enviarCorreoCliente($email, $nombre) {
-    $asunto = "Confirmación de Cotización - Efecinco";
-    $mensaje = "Estimado/a $nombre,\n\n";
-    $mensaje .= "Hemos recibido su solicitud de cotización para la instalación de cámaras de seguridad.\n";
-    $mensaje .= "Uno de nuestros asesores se pondrá en contacto con usted en breve.\n\n";
-    $mensaje .= "Saludos cordiales,\n";
-    $mensaje .= "Equipo Efecinco";
-    
-    $headers = "From: cotizaciones@efecinco.com.mx\r\n";
-    $headers .= "Reply-To: cotizaciones@efecinco.com.mx\r\n";
-    $headers .= "X-Mailer: PHP/" . phpversion();
-    
-    mail($email, $asunto, $mensaje, $headers);
-}
-
-function enviarCorreoAdmin($nombre, $telefono, $email) {
-    $asunto = "Nueva Cotización de Cámaras";
-    $mensaje = "Se ha recibido una nueva cotización:\n\n";
-    $mensaje .= "Nombre: $nombre\n";
-    $mensaje .= "Teléfono: $telefono\n";
-    $mensaje .= "Email: $email\n\n";
-    $mensaje .= "Por favor revise el panel de administración para más detalles.";
-    
-    $headers = "From: sistema@efecinco.com.mx\r\n";
-    $headers .= "Reply-To: sistema@efecinco.com.mx\r\n";
-    $headers .= "X-Mailer: PHP/" . phpversion();
-    
-    mail("admin@efecinco.com.mx", $asunto, $mensaje, $headers);
-}
 ?>
 
 <!DOCTYPE html>
