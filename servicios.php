@@ -16,9 +16,6 @@ $servicios = $resultado->fetch_all(MYSQLI_ASSOC);
     <meta name="description" content="Conoce nuestros servicios en seguridad y tecnología: cableado estructurado, CCTV, control de acceso, y más.">
     <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <?php include('includes/header.php'); ?>
@@ -123,77 +120,62 @@ $servicios = $resultado->fetch_all(MYSQLI_ASSOC);
     <?php include('includes/footer.php'); ?>
 
     <style>
-        body {
-            font-family: 'Montserrat', Arial, Helvetica, sans-serif;
-            background: #f4f8fb;
-            color: #222;
-        }
         .hero {
             position: relative;
-            background: linear-gradient(120deg, #00B4DB 0%, #0072ff 100%);
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
             color: white;
             text-align: center;
-            padding: 120px 0 80px 0;
+            padding: 100px 0;
             overflow: hidden;
         }
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(45deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.2) 100%);
-            z-index: 1;
+
+        .hero-icon {
+            font-size: 4rem;
+            margin-top: 20px;
+            color: rgba(52, 152, 219, 0.3);
+            transition: all 0.3s ease;
         }
-        .hero .container, .hero-icon {
-            position: relative;
-            z-index: 2;
+
+        .hero:hover .hero-icon {
+            color: rgba(52, 152, 219, 0.5);
+            transform: scale(1.1);
         }
+
         .hero h1 {
             font-size: 3rem;
             margin-bottom: 1rem;
-            text-shadow: 2px 2px 8px rgba(0,180,219,0.2);
-            font-weight: 700;
-            letter-spacing: 2px;
         }
+
         .hero p {
             font-size: 1.2rem;
             max-width: 600px;
             margin: 0 auto;
-            text-shadow: 1px 1px 2px rgba(0,180,219,0.15);
-            font-weight: 400;
         }
-        .hero-icon {
-            font-size: 4rem;
-            margin-top: 20px;
-            color: rgba(0,180,219,0.3);
-            transition: all 0.3s ease;
-        }
-        .hero:hover .hero-icon {
-            color: rgba(0,180,219,0.5);
-            transform: scale(1.1);
-        }
+
         .servicios {
             padding: 80px 0;
         }
+
         .servicios-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
             margin-top: 40px;
         }
+
         .servicio-card {
-            background: #fff;
-            border-radius: 16px;
+            background: white;
+            border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 4px 24px rgba(0,180,219,0.07);
-            transition: transform 0.3s cubic-bezier(.4,0,.2,1), box-shadow 0.3s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
             text-align: center;
-            border: 1px solid #e3f0fa;
         }
+
         .servicio-icono {
-            background: linear-gradient(90deg, #00B4DB 0%, #0072ff 100%);
+            background: #2c3e50;
             color: #fff;
             padding: 30px;
             font-size: 2.5rem;
@@ -201,6 +183,7 @@ $servicios = $resultado->fetch_all(MYSQLI_ASSOC);
             position: relative;
             overflow: hidden;
         }
+
         .servicio-icono::before {
             content: '';
             position: absolute;
@@ -208,68 +191,77 @@ $servicios = $resultado->fetch_all(MYSQLI_ASSOC);
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(45deg, #00B4DB, #0072ff);
+            background: linear-gradient(45deg, #3498db, #2ecc71);
             opacity: 0;
             transition: opacity 0.3s ease;
         }
+
         .servicio-icono i {
             position: relative;
             z-index: 1;
             transition: transform 0.3s ease;
         }
+
         .servicio-card:hover .servicio-icono::before {
-            opacity: 0.15;
+            opacity: 1;
         }
+
         .servicio-card:hover .servicio-icono i {
             transform: scale(1.2);
         }
+
         .servicio-card:hover {
-            transform: translateY(-8px) scale(1.03);
-            box-shadow: 0 8px 32px rgba(0,114,255,0.13);
+            transform: translateY(-5px);
         }
+
         .servicio-contenido {
             padding: 20px;
         }
+
         .servicio-contenido h3 {
             margin-bottom: 15px;
-            color: #0072ff;
-            font-size: 1.5rem;
-            font-weight: 700;
+            color: #333;
         }
+
         .servicio-contenido p {
-            color: #444;
+            color: #666;
             margin-bottom: 20px;
             line-height: 1.6;
         }
+
         .beneficios {
-            background: linear-gradient(120deg, #f4f8fb 60%, #e3f0fa 100%);
+            background-color: #f8f9fa;
             padding: 80px 0;
         }
+
         .beneficios h2 {
             text-align: center;
             margin-bottom: 50px;
-            color: #0072ff;
-            font-weight: 700;
+            color: #333;
         }
+
         .beneficios-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 30px;
         }
+
         .beneficio-item {
             text-align: center;
             padding: 30px;
-            background: #fff;
+            background: white;
             border-radius: 10px;
-            box-shadow: 0 4px 16px rgba(0,180,219,0.08);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
+
         .beneficio-icono {
             font-size: 2.5rem;
-            color: #00B4DB;
+            color: #2c3e50;
             margin-bottom: 20px;
             transition: all 0.3s ease;
             position: relative;
         }
+
         .beneficio-icono::after {
             content: '';
             position: absolute;
@@ -278,72 +270,53 @@ $servicios = $resultado->fetch_all(MYSQLI_ASSOC);
             transform: translateX(-50%);
             width: 40px;
             height: 3px;
-            background: linear-gradient(90deg, #00B4DB, #0072ff);
+            background: linear-gradient(90deg, #3498db, #2ecc71);
             border-radius: 3px;
             transition: width 0.3s ease;
         }
+
         .beneficio-item:hover .beneficio-icono {
-            color: #0072ff;
+            color: #3498db;
             transform: translateY(-5px);
         }
+
         .beneficio-item:hover .beneficio-icono::after {
             width: 60px;
         }
+
         .beneficio-item h3 {
             margin-bottom: 15px;
-            color: #0072ff;
-            font-size: 1.2rem;
-            font-weight: 600;
+            color: #333;
         }
+
         .beneficio-item p {
-            color: #444;
+            color: #666;
             line-height: 1.6;
         }
+
         .cta {
             padding: 60px 0;
             text-align: center;
         }
+
         .cta h2 {
             margin-bottom: 1rem;
-            color: #0072ff;
-            font-weight: 700;
         }
+
         .cta p {
             margin-bottom: 2rem;
             color: #666;
         }
-        .btn {
-            padding: 15px 35px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.1rem;
-            transition: all 0.3s cubic-bezier(.4,0,.2,1);
-            box-shadow: 0 4px 16px rgba(0,180,219,0.08);
-            border: none;
-            outline: none;
-            letter-spacing: 1px;
-            background: linear-gradient(90deg, #00B4DB 0%, #0072ff 100%);
-            color: #fff;
-        }
-        .btn-primary {
-            background: linear-gradient(90deg, #00B4DB 0%, #0072ff 100%);
-            color: #fff;
-            box-shadow: 0 2px 8px rgba(0,180,219,0.15);
-        }
-        .btn-primary:hover, .btn:hover {
-            background: linear-gradient(90deg, #0072ff 0%, #00B4DB 100%);
-            color: #fff;
-            transform: translateY(-2px) scale(1.04);
-            box-shadow: 0 6px 18px rgba(0,114,255,0.18);
-        }
+
         @media (max-width: 768px) {
             .hero {
                 padding: 60px 0;
             }
+
             .hero h1 {
                 font-size: 2.5rem;
             }
+
             .servicios-grid,
             .beneficios-grid {
                 grid-template-columns: 1fr;
