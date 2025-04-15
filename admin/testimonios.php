@@ -276,7 +276,26 @@ include('includes/header.php');
     </div>
 </div>
 
+<!-- Place the first <script> tag in your HTML's <head> -->
+<script src="https://cdn.tiny.cloud/1/4u89qw1ptzfqell0ybjhqth1cc16ilb1y0792h3momw4lk8l/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+
 <script>
+    // Initialize TinyMCE
+    tinymce.init({
+        selector: '#testimonio',
+        plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
+        toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
+        height: 300,
+        menubar: false,
+        language: 'es',
+        content_style: 'body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; font-size: 14px; }',
+        setup: function(editor) {
+            editor.on('change', function() {
+                editor.save();
+            });
+        }
+    });
+
     function mostrarFormulario(accion, id = null) {
         const modal = document.getElementById("modalFormulario");
         const form = document.getElementById("formTestimonio");
