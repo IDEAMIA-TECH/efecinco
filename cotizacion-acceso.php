@@ -516,6 +516,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             .cotizacion-form h1 {
                 font-size: 2rem;
             }
+
+            main, .cotizacion-form {
+                margin-top: 80px;
+            }
         }
     </style>
 
