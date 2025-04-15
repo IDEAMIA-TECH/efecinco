@@ -130,6 +130,7 @@ require_once __DIR__ . '/db.php';
                     <li><a href="index.php">Inicio</a></li>
                     <li><a href="servicios.php">Servicios</a></li>
                     <li><a href="proyectos.php">Proyectos</a></li>
+                    <li><a href="cotizacion-camaras.php">Cotización Cámaras</a></li>
                     <li><a href="contacto.php">Contacto</a></li>
                     <?php if (isset($_SESSION['usuario_id'])): ?>
                         <li class="admin-link">
