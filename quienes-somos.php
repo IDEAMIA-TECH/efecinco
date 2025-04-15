@@ -106,13 +106,31 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
             <div class="container">
                 <h2>Nuestros Clientes</h2>
                 <div class="clientes-grid">
-                    <?php foreach ($clientes as $cliente): ?>
-                        <div class="cliente-item">
-                            <img src="<?php echo htmlspecialchars($cliente['logo']); ?>" 
-                                 alt="<?php echo htmlspecialchars($cliente['nombre']); ?>"
-                                 loading="lazy">
-                        </div>
-                    <?php endforeach; ?>
+                    <div class="cliente-item">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Walmart_Spark.svg/1200px-Walmart_Spark.svg.png" 
+                             alt="Walmart" 
+                             loading="lazy">
+                    </div>
+                    <div class="cliente-item">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Liverpool_logo.svg/1200px-Liverpool_logo.svg.png" 
+                             alt="Liverpool" 
+                             loading="lazy">
+                    </div>
+                    <div class="cliente-item">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Chedraui_logo.svg/1200px-Chedraui_logo.svg.png" 
+                             alt="Chedraui" 
+                             loading="lazy">
+                    </div>
+                    <div class="cliente-item">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/OXXO_Logo.svg/1200px-OXXO_Logo.svg.png" 
+                             alt="OXXO" 
+                             loading="lazy">
+                    </div>
+                    <div class="cliente-item">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Soriana_logo.svg/1200px-Soriana_logo.svg.png" 
+                             alt="Soriana" 
+                             loading="lazy">
+                    </div>
                 </div>
             </div>
         </section>
@@ -284,22 +302,33 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
 
         .clientes-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 30px;
             align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
 
         .cliente-item {
             text-align: center;
-            padding: 20px;
+            padding: 30px;
             background: white;
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .cliente-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
         }
 
         .cliente-item img {
             max-width: 100%;
             height: auto;
+            max-height: 80px;
+            object-fit: contain;
             filter: grayscale(100%);
             transition: filter 0.3s ease;
         }
@@ -342,6 +371,19 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
             .timeline-content {
                 width: calc(100% - 60px);
                 margin-left: 60px !important;
+            }
+
+            .clientes-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+
+            .cliente-item {
+                padding: 20px;
+            }
+
+            .cliente-item img {
+                max-height: 60px;
             }
         }
     </style>
