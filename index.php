@@ -167,6 +167,60 @@ include('includes/header.php');
     </div>
 </section>
 
+<section class="certificaciones">
+    <div class="container">
+        <h2>Nuestras Certificaciones</h2>
+        <div class="certificaciones-grid">
+            <?php
+            // Reutilizamos la conexión existente
+            if (!$conexion) {
+                echo '<div class="alert alert-danger">Error al conectar con la base de datos</div>';
+            } else {
+                $sql = "SELECT * FROM certificaciones WHERE activo = 1 ORDER BY orden ASC, fecha_creacion DESC";
+                $stmt = consultaSegura($conexion, $sql, []);
+                
+                if ($stmt) {
+                    $result = $stmt->get_result();
+                    $certificaciones = $result->fetch_all(MYSQLI_ASSOC);
+                    
+                    if (empty($certificaciones)) {
+                        echo '<div class="alert alert-info">No hay certificaciones disponibles</div>';
+                    } else {
+                        foreach ($certificaciones as $certificacion):
+                        ?>
+                        <div class="certificacion-card">
+                            <div class="certificacion-imagen">
+                                <?php if ($certificacion['imagen']): ?>
+                                    <img src="<?php echo htmlspecialchars($certificacion['imagen']); ?>" 
+                                         alt="<?php echo htmlspecialchars($certificacion['titulo']); ?>">
+                                <?php else: ?>
+                                    <div class="imagen-default">
+                                        <i class="fas fa-certificate"></i>
+                                    </div>
+                                <?php endif; ?>
+                            </div>
+                            <div class="certificacion-info">
+                                <h3><?php echo htmlspecialchars($certificacion['titulo']); ?></h3>
+                                <?php if ($certificacion['descripcion']): ?>
+                                    <p><?php echo htmlspecialchars($certificacion['descripcion']); ?></p>
+                                <?php endif; ?>
+                                <?php if ($certificacion['fecha']): ?>
+                                    <span class="fecha">Obtenido: <?php echo date('d/m/Y', strtotime($certificacion['fecha'])); ?></span>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                        <?php 
+                        endforeach;
+                    }
+                } else {
+                    echo '<div class="alert alert-danger">Error al cargar las certificaciones</div>';
+                }
+            }
+            ?>
+        </div>
+    </div>
+</section>
+
 <style>
 .hero {
     color: white;
@@ -538,6 +592,110 @@ include('includes/header.php');
     
     .proyecto-info .descripcion-corta {
         font-size: 0.8rem;
+    }
+}
+
+.certificaciones {
+    padding: 80px 0;
+    background-color: #f8f9fa;
+}
+
+.certificaciones h2 {
+    text-align: center;
+    margin-bottom: 40px;
+    color: #333;
+}
+
+.certificaciones-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.certificacion-card {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.certificacion-card:hover {
+    transform: translateY(-5px);
+}
+
+.certificacion-imagen {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+}
+
+.certificacion-imagen img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.certificacion-card:hover .certificacion-imagen img {
+    transform: scale(1.05);
+}
+
+.imagen-default {
+    width: 100%;
+    height: 100%;
+    background-color: #e9ecef;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.imagen-default i {
+    font-size: 4rem;
+    color: #6c757d;
+}
+
+.certificacion-info {
+    padding: 20px;
+}
+
+.certificacion-info h3 {
+    margin: 0 0 10px 0;
+    font-size: 1.2rem;
+    color: #333;
+}
+
+.certificacion-info p {
+    margin: 0 0 10px 0;
+    color: #666;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.certificacion-info .fecha {
+    display: block;
+    color: #6c757d;
+    font-size: 0.8rem;
+    font-style: italic;
+}
+
+@media (max-width: 768px) {
+    .certificaciones-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .certificacion-imagen {
+        height: 180px;
+    }
+    
+    .certificacion-info h3 {
+        font-size: 1.1rem;
+    }
+    
+    .certificacion-info p {
+        font-size: 0.85rem;
     }
 }
 </style>
