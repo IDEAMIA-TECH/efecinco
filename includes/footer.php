@@ -131,6 +131,15 @@ $empresa = mysqli_fetch_assoc($resultado);
     box-shadow: 0 6px 18px rgba(0,114,255,0.18);
 }
 
+.social-links a i {
+    color: #0072ff;
+    transition: color 0.3s;
+}
+
+.social-links a:hover i {
+    color: #fff;
+}
+
 .social-links a[href*='whatsapp'] {
     background: #25D366;
     color: #fff;
@@ -138,6 +147,10 @@ $empresa = mysqli_fetch_assoc($resultado);
 
 .social-links a[href*='whatsapp']:hover {
     background: #128C7E;
+}
+
+.social-links a[href*='whatsapp'] i {
+    color: #fff;
 }
 
 .footer-section ul {
