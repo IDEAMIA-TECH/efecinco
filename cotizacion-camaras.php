@@ -94,161 +94,188 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <div class="alert alert-danger"><?php echo $error; ?></div>
                 <?php endif; ?>
                 
-                <form method="POST" action="" class="form-cotizacion">
-                    <div class="form-section">
-                        <h2>1. Información General</h2>
-                        <div class="form-group">
-                            <label for="nombre">Nombre completo del cliente *</label>
-                            <input type="text" id="nombre" name="nombre" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="telefono">Teléfono de contacto *</label>
-                            <input type="tel" id="telefono" name="telefono" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Correo electrónico *</label>
-                            <input type="email" id="email" name="email" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="empresa">Empresa (si aplica)</label>
-                            <input type="text" id="empresa" name="empresa">
-                        </div>
-                        <div class="form-group">
-                            <label>¿Cómo se enteró de nosotros? *</label>
-                            <div class="checkbox-group">
-                                <label><input type="radio" name="referencia" value="Google" required> Google</label>
-                                <label><input type="radio" name="referencia" value="Redes Sociales"> Redes Sociales</label>
-                                <label><input type="radio" name="referencia" value="Recomendación"> Recomendación</label>
-                                <label><input type="radio" name="referencia" value="Otro"> Otro:</label>
-                                <input type="text" name="referencia_otro" id="referencia_otro" style="display: none;">
+                <form method="POST" action="" class="form-cotizacion" id="cotizacionForm">
+                    <div class="form-sections">
+                        <!-- Sección 1: Información General -->
+                        <div class="form-section active" data-section="1">
+                            <h2>1. Información General</h2>
+                            <div class="form-group">
+                                <label for="nombre">Nombre completo del cliente *</label>
+                                <input type="text" id="nombre" name="nombre" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="telefono">Teléfono de contacto *</label>
+                                <input type="tel" id="telefono" name="telefono" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Correo electrónico *</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="empresa">Empresa (si aplica)</label>
+                                <input type="text" id="empresa" name="empresa">
+                            </div>
+                            <div class="form-group">
+                                <label>¿Cómo se enteró de nosotros? *</label>
+                                <div class="checkbox-group">
+                                    <label><input type="radio" name="referencia" value="Google" required> Google</label>
+                                    <label><input type="radio" name="referencia" value="Redes Sociales"> Redes Sociales</label>
+                                    <label><input type="radio" name="referencia" value="Recomendación"> Recomendación</label>
+                                    <label><input type="radio" name="referencia" value="Otro"> Otro:</label>
+                                    <input type="text" name="referencia_otro" id="referencia_otro" style="display: none;">
+                                </div>
+                            </div>
+                            <div class="form-navigation">
+                                <button type="button" class="btn btn-next" onclick="nextSection(1)">Siguiente</button>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="form-section">
-                        <h2>2. Ubicación del Proyecto</h2>
-                        <div class="form-group">
-                            <label for="direccion">Dirección completa de instalación *</label>
-                            <textarea id="direccion" name="direccion" required></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label>Tipo de propiedad *</label>
-                            <div class="checkbox-group">
-                                <label><input type="radio" name="tipo_propiedad" value="Casa habitación" required> Casa habitación</label>
-                                <label><input type="radio" name="tipo_propiedad" value="Negocio pequeño"> Negocio pequeño</label>
-                                <label><input type="radio" name="tipo_propiedad" value="Oficina"> Oficina</label>
-                                <label><input type="radio" name="tipo_propiedad" value="Bodega"> Bodega</label>
-                                <label><input type="radio" name="tipo_propiedad" value="Planta industrial"> Planta industrial</label>
-                                <label><input type="radio" name="tipo_propiedad" value="Otro"> Otro:</label>
-                                <input type="text" name="tipo_propiedad_otro" id="tipo_propiedad_otro" style="display: none;">
+                        <!-- Sección 2: Ubicación del Proyecto -->
+                        <div class="form-section" data-section="2">
+                            <h2>2. Ubicación del Proyecto</h2>
+                            <div class="form-group">
+                                <label for="direccion">Dirección completa de instalación *</label>
+                                <textarea id="direccion" name="direccion" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Tipo de propiedad *</label>
+                                <div class="checkbox-group">
+                                    <label><input type="radio" name="tipo_propiedad" value="Casa habitación" required> Casa habitación</label>
+                                    <label><input type="radio" name="tipo_propiedad" value="Negocio pequeño"> Negocio pequeño</label>
+                                    <label><input type="radio" name="tipo_propiedad" value="Oficina"> Oficina</label>
+                                    <label><input type="radio" name="tipo_propiedad" value="Bodega"> Bodega</label>
+                                    <label><input type="radio" name="tipo_propiedad" value="Planta industrial"> Planta industrial</label>
+                                    <label><input type="radio" name="tipo_propiedad" value="Otro"> Otro:</label>
+                                    <input type="text" name="tipo_propiedad_otro" id="tipo_propiedad_otro" style="display: none;">
+                                </div>
+                            </div>
+                            <div class="form-navigation">
+                                <button type="button" class="btn btn-prev" onclick="prevSection(2)">Anterior</button>
+                                <button type="button" class="btn btn-next" onclick="nextSection(2)">Siguiente</button>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="form-section">
-                        <h2>3. Requerimientos Técnicos</h2>
-                        <div class="form-group">
-                            <label>¿Cuántas cámaras necesita? *</label>
-                            <div class="checkbox-group">
-                                <label><input type="radio" name="cantidad_camaras" value="1-4" required> 1-4</label>
-                                <label><input type="radio" name="cantidad_camaras" value="5-8"> 5-8</label>
-                                <label><input type="radio" name="cantidad_camaras" value="9-16"> 9-16</label>
-                                <label><input type="radio" name="cantidad_camaras" value="Más de 16"> Más de 16</label>
+                        <!-- Sección 3: Requerimientos Técnicos -->
+                        <div class="form-section" data-section="3">
+                            <h2>3. Requerimientos Técnicos</h2>
+                            <div class="form-group">
+                                <label>¿Cuántas cámaras necesita? *</label>
+                                <div class="checkbox-group">
+                                    <label><input type="radio" name="cantidad_camaras" value="1-4" required> 1-4</label>
+                                    <label><input type="radio" name="cantidad_camaras" value="5-8"> 5-8</label>
+                                    <label><input type="radio" name="cantidad_camaras" value="9-16"> 9-16</label>
+                                    <label><input type="radio" name="cantidad_camaras" value="Más de 16"> Más de 16</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>¿Qué tipo de cámaras prefiere? *</label>
+                                <div class="checkbox-group">
+                                    <label><input type="radio" name="tipo_camaras" value="Interior" required> Interior</label>
+                                    <label><input type="radio" name="tipo_camaras" value="Exterior"> Exterior</label>
+                                    <label><input type="radio" name="tipo_camaras" value="Ambas"> Ambas</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>¿Necesita visión nocturna? *</label>
+                                <div class="checkbox-group">
+                                    <label><input type="radio" name="vision_nocturna" value="Sí" required> Sí</label>
+                                    <label><input type="radio" name="vision_nocturna" value="No"> No</label>
+                                    <label><input type="radio" name="vision_nocturna" value="No estoy seguro"> No estoy seguro</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>¿Requiere visualización remota desde celular o computadora? *</label>
+                                <div class="checkbox-group">
+                                    <label><input type="radio" name="visualizacion_remota" value="Sí" required> Sí</label>
+                                    <label><input type="radio" name="visualizacion_remota" value="No"> No</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>¿Desea almacenamiento en? *</label>
+                                <div class="checkbox-group">
+                                    <label><input type="radio" name="almacenamiento" value="Disco duro (DVR/NVR)" required> Disco duro (DVR/NVR)</label>
+                                    <label><input type="radio" name="almacenamiento" value="Nube"> Nube</label>
+                                    <label><input type="radio" name="almacenamiento" value="Ambos"> Ambos</label>
+                                    <label><input type="radio" name="almacenamiento" value="No estoy seguro"> No estoy seguro</label>
+                                </div>
+                            </div>
+                            <div class="form-navigation">
+                                <button type="button" class="btn btn-prev" onclick="prevSection(3)">Anterior</button>
+                                <button type="button" class="btn btn-next" onclick="nextSection(3)">Siguiente</button>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label>¿Qué tipo de cámaras prefiere? *</label>
-                            <div class="checkbox-group">
-                                <label><input type="radio" name="tipo_camaras" value="Interior" required> Interior</label>
-                                <label><input type="radio" name="tipo_camaras" value="Exterior"> Exterior</label>
-                                <label><input type="radio" name="tipo_camaras" value="Ambas"> Ambas</label>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label>¿Necesita visión nocturna? *</label>
-                            <div class="checkbox-group">
-                                <label><input type="radio" name="vision_nocturna" value="Sí" required> Sí</label>
-                                <label><input type="radio" name="vision_nocturna" value="No"> No</label>
-                                <label><input type="radio" name="vision_nocturna" value="No estoy seguro"> No estoy seguro</label>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label>¿Requiere visualización remota desde celular o computadora? *</label>
-                            <div class="checkbox-group">
-                                <label><input type="radio" name="visualizacion_remota" value="Sí" required> Sí</label>
-                                <label><input type="radio" name="visualizacion_remota" value="No"> No</label>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label>¿Desea almacenamiento en? *</label>
-                            <div class="checkbox-group">
-                                <label><input type="radio" name="almacenamiento" value="Disco duro (DVR/NVR)" required> Disco duro (DVR/NVR)</label>
-                                <label><input type="radio" name="almacenamiento" value="Nube"> Nube</label>
-                                <label><input type="radio" name="almacenamiento" value="Ambos"> Ambos</label>
-                                <label><input type="radio" name="almacenamiento" value="No estoy seguro"> No estoy seguro</label>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="form-section">
-                        <h2>4. Condiciones del Sitio</h2>
-                        <div class="form-group">
-                            <label>¿Cuenta con red eléctrica cerca de donde irán las cámaras? *</label>
-                            <div class="checkbox-group">
-                                <label><input type="radio" name="red_electrica" value="Sí" required> Sí</label>
-                                <label><input type="radio" name="red_electrica" value="No"> No</label>
-                                <label><input type="radio" name="red_electrica" value="No estoy seguro"> No estoy seguro</label>
+                        <!-- Sección 4: Condiciones del Sitio -->
+                        <div class="form-section" data-section="4">
+                            <h2>4. Condiciones del Sitio</h2>
+                            <div class="form-group">
+                                <label>¿Cuenta con red eléctrica cerca de donde irán las cámaras? *</label>
+                                <div class="checkbox-group">
+                                    <label><input type="radio" name="red_electrica" value="Sí" required> Sí</label>
+                                    <label><input type="radio" name="red_electrica" value="No"> No</label>
+                                    <label><input type="radio" name="red_electrica" value="No estoy seguro"> No estoy seguro</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>¿Cuenta con red de internet/WiFi en el lugar? *</label>
+                                <div class="checkbox-group">
+                                    <label><input type="radio" name="red_internet" value="Sí" required> Sí</label>
+                                    <label><input type="radio" name="red_internet" value="No"> No</label>
+                                    <label><input type="radio" name="red_internet" value="No estoy seguro"> No estoy seguro</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>¿Hay infraestructura previa para CCTV (canaletas, cableado, etc.)? *</label>
+                                <div class="checkbox-group">
+                                    <label><input type="radio" name="infraestructura_previo" value="Sí" required> Sí</label>
+                                    <label><input type="radio" name="infraestructura_previo" value="No"> No</label>
+                                    <label><input type="radio" name="infraestructura_previo" value="Parcialmente"> Parcialmente</label>
+                                </div>
+                            </div>
+                            <div class="form-navigation">
+                                <button type="button" class="btn btn-prev" onclick="prevSection(4)">Anterior</button>
+                                <button type="button" class="btn btn-next" onclick="nextSection(4)">Siguiente</button>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label>¿Cuenta con red de internet/WiFi en el lugar? *</label>
-                            <div class="checkbox-group">
-                                <label><input type="radio" name="red_internet" value="Sí" required> Sí</label>
-                                <label><input type="radio" name="red_internet" value="No"> No</label>
-                                <label><input type="radio" name="red_internet" value="No estoy seguro"> No estoy seguro</label>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label>¿Hay infraestructura previa para CCTV (canaletas, cableado, etc.)? *</label>
-                            <div class="checkbox-group">
-                                <label><input type="radio" name="infraestructura_previo" value="Sí" required> Sí</label>
-                                <label><input type="radio" name="infraestructura_previo" value="No"> No</label>
-                                <label><input type="radio" name="infraestructura_previo" value="Parcialmente"> Parcialmente</label>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="form-section">
-                        <h2>5. Preferencias de Instalación</h2>
-                        <div class="form-group">
-                            <label>¿Qué tan pronto necesita la instalación? *</label>
-                            <div class="checkbox-group">
-                                <label><input type="radio" name="tiempo_instalacion" value="Urgente (1-3 días)" required> Urgente (1-3 días)</label>
-                                <label><input type="radio" name="tiempo_instalacion" value="En menos de una semana"> En menos de una semana</label>
-                                <label><input type="radio" name="tiempo_instalacion" value="Sin prisa, solo quiero cotizar"> Sin prisa, solo quiero cotizar</label>
+                        <!-- Sección 5: Preferencias de Instalación -->
+                        <div class="form-section" data-section="5">
+                            <h2>5. Preferencias de Instalación</h2>
+                            <div class="form-group">
+                                <label>¿Qué tan pronto necesita la instalación? *</label>
+                                <div class="checkbox-group">
+                                    <label><input type="radio" name="tiempo_instalacion" value="Urgente (1-3 días)" required> Urgente (1-3 días)</label>
+                                    <label><input type="radio" name="tiempo_instalacion" value="En menos de una semana"> En menos de una semana</label>
+                                    <label><input type="radio" name="tiempo_instalacion" value="Sin prisa, solo quiero cotizar"> Sin prisa, solo quiero cotizar</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>¿En qué horario podemos contactarlo? *</label>
+                                <div class="checkbox-group">
+                                    <label><input type="radio" name="horario_contacto" value="Mañana" required> Mañana</label>
+                                    <label><input type="radio" name="horario_contacto" value="Tarde"> Tarde</label>
+                                    <label><input type="radio" name="horario_contacto" value="Noche"> Noche</label>
+                                    <label><input type="radio" name="horario_contacto" value="Cualquier hora"> Cualquier hora</label>
+                                </div>
+                            </div>
+                            <div class="form-navigation">
+                                <button type="button" class="btn btn-prev" onclick="prevSection(5)">Anterior</button>
+                                <button type="button" class="btn btn-next" onclick="nextSection(5)">Siguiente</button>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label>¿En qué horario podemos contactarlo? *</label>
-                            <div class="checkbox-group">
-                                <label><input type="radio" name="horario_contacto" value="Mañana" required> Mañana</label>
-                                <label><input type="radio" name="horario_contacto" value="Tarde"> Tarde</label>
-                                <label><input type="radio" name="horario_contacto" value="Noche"> Noche</label>
-                                <label><input type="radio" name="horario_contacto" value="Cualquier hora"> Cualquier hora</label>
+
+                        <!-- Sección 6: Comentarios Adicionales -->
+                        <div class="form-section" data-section="6">
+                            <h2>6. Comentarios Adicionales</h2>
+                            <div class="form-group">
+                                <label for="comentarios">Comentarios o necesidades especiales</label>
+                                <textarea id="comentarios" name="comentarios" rows="4"></textarea>
+                            </div>
+                            <div class="form-navigation">
+                                <button type="button" class="btn btn-prev" onclick="prevSection(6)">Anterior</button>
+                                <button type="submit" class="btn btn-primary">Enviar Cotización</button>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="form-section">
-                        <h2>6. Comentarios adicionales</h2>
-                        <div class="form-group">
-                            <label for="comentarios">Comentarios o necesidades especiales</label>
-                            <textarea id="comentarios" name="comentarios" rows="4"></textarea>
-                        </div>
-                    </div>
-
-                    <div class="form-submit">
-                        <button type="submit" class="btn btn-primary">Enviar Cotización</button>
                     </div>
                 </form>
             </div>
@@ -279,20 +306,71 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
+        .form-sections {
+            position: relative;
+        }
+
         .form-section {
-            margin-bottom: 40px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid #eee;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
 
-        .form-section:last-child {
-            border-bottom: none;
+        .form-section.active {
+            display: block;
+            opacity: 1;
         }
 
-        .form-section h2 {
-            color: #00B4DB;
-            margin-bottom: 20px;
-            font-size: 1.5rem;
+        .form-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+        }
+
+        .btn-prev {
+            background-color: #6c757d;
+            color: white;
+        }
+
+        .btn-next {
+            background-color: #00B4DB;
+            color: white;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 5px;
+            background-color: #eee;
+            margin-bottom: 2rem;
+            border-radius: 5px;
+        }
+
+        .progress {
+            height: 100%;
+            background-color: #00B4DB;
+            border-radius: 5px;
+            transition: width 0.3s ease;
+        }
+
+        .section-indicator {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+            gap: 1rem;
+        }
+
+        .section-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #ddd;
+            cursor: pointer;
+        }
+
+        .section-dot.active {
+            background-color: #00B4DB;
         }
 
         .form-group {
@@ -402,6 +480,78 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     }
                 }
             });
+        });
+
+        // Navegación entre secciones
+        function nextSection(currentSection) {
+            const currentSectionElement = document.querySelector(`[data-section="${currentSection}"]`);
+            const nextSectionElement = document.querySelector(`[data-section="${currentSection + 1}"]`);
+            
+            if (validateSection(currentSection)) {
+                currentSectionElement.classList.remove('active');
+                nextSectionElement.classList.add('active');
+                updateProgress(currentSection + 1);
+            }
+        }
+
+        function prevSection(currentSection) {
+            const currentSectionElement = document.querySelector(`[data-section="${currentSection}"]`);
+            const prevSectionElement = document.querySelector(`[data-section="${currentSection - 1}"]`);
+            
+            currentSectionElement.classList.remove('active');
+            prevSectionElement.classList.add('active');
+            updateProgress(currentSection - 1);
+        }
+
+        function validateSection(sectionNumber) {
+            const section = document.querySelector(`[data-section="${sectionNumber}"]`);
+            const requiredInputs = section.querySelectorAll('[required]');
+            let isValid = true;
+
+            requiredInputs.forEach(input => {
+                if (!input.value) {
+                    isValid = false;
+                    input.classList.add('error');
+                } else {
+                    input.classList.remove('error');
+                }
+            });
+
+            if (!isValid) {
+                alert('Por favor complete todos los campos requeridos antes de continuar.');
+            }
+
+            return isValid;
+        }
+
+        function updateProgress(currentSection) {
+            const progress = (currentSection / 6) * 100;
+            document.querySelector('.progress').style.width = `${progress}%`;
+            
+            document.querySelectorAll('.section-dot').forEach((dot, index) => {
+                if (index < currentSection) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+        }
+
+        // Inicializar el progreso
+        document.addEventListener('DOMContentLoaded', function() {
+            const progressBar = document.createElement('div');
+            progressBar.className = 'progress-bar';
+            progressBar.innerHTML = '<div class="progress" style="width: 16.67%"></div>';
+            document.querySelector('.form-cotizacion').insertBefore(progressBar, document.querySelector('.form-sections'));
+
+            const sectionIndicator = document.createElement('div');
+            sectionIndicator.className = 'section-indicator';
+            for (let i = 0; i < 6; i++) {
+                const dot = document.createElement('div');
+                dot.className = 'section-dot' + (i === 0 ? ' active' : '');
+                sectionIndicator.appendChild(dot);
+            }
+            document.querySelector('.form-cotizacion').insertBefore(sectionIndicator, document.querySelector('.form-sections'));
         });
     </script>
 </body>
