@@ -15,6 +15,37 @@ include('includes/header.php');
     </div>
 </section>
 
+<section class="sobre-nosotros">
+    <div class="container">
+        <div class="grid-2-columns">
+            <div class="texto">
+                <h2>Nuestra Historia</h2>
+                <p><?php echo nl2br(htmlspecialchars($empresa['historia'] ?? '')); ?></p>
+            </div>
+            <div class="imagen">
+                <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Historia de Efecinco" loading="lazy">
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="mision-vision">
+    <div class="container">
+        <div class="grid-2-columns">
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1533750349088-cd871a92f312?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Misión Efecinco">
+                <h3>Misión</h3>
+                <p><?php echo nl2br(htmlspecialchars($empresa['mision'] ?? '')); ?></p>
+            </div>
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1533749871411-5e21e14bcc7d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80" alt="Visión Efecinco">
+                <h3>Visión</h3>
+                <p><?php echo nl2br(htmlspecialchars($empresa['vision'] ?? '')); ?></p>
+            </div>
+        </div>
+    </div>
+</section>
+
 <section class="servicios-destacados">
     <div class="container">
         <h2>Nuestros Servicios</h2>
@@ -726,6 +757,83 @@ include('includes/header.php');
     
     .certificacion-descripcion {
         font-size: 0.8rem;
+    }
+}
+
+.sobre-nosotros {
+    padding: 80px 0;
+}
+
+.grid-2-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+}
+
+.texto h2 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.texto p {
+    color: #666;
+    line-height: 1.6;
+}
+
+.imagen img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.mision-vision {
+    background-color: #f8f9fa;
+    padding: 80px 0;
+}
+
+.mision-vision .card {
+    text-align: center;
+    padding: 30px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.mision-vision .card img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 20px;
+}
+
+.mision-vision .card h3 {
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.mision-vision .card p {
+    color: #666;
+    line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+    .grid-2-columns {
+        grid-template-columns: 1fr;
+    }
+    
+    .imagen img {
+        height: 300px;
+    }
+    
+    .mision-vision .card {
+        padding: 20px;
     }
 }
 </style>
