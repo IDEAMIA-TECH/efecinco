@@ -26,6 +26,11 @@ $servicios = $resultado->fetch_all(MYSQLI_ASSOC);
                 <h1>Nuestros Servicios</h1>
                 <p>Soluciones integrales en seguridad y tecnología para tu empresa</p>
             </div>
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
+                     alt="Servicios de Seguridad" 
+                     loading="lazy">
+            </div>
         </section>
 
         <section class="servicios">
@@ -38,8 +43,27 @@ $servicios = $resultado->fetch_all(MYSQLI_ASSOC);
                     <div class="servicios-grid">
                         <?php foreach ($servicios as $servicio): ?>
                             <div class="servicio-card">
-                                <div class="servicio-icono">
-                                    <i class="<?php echo htmlspecialchars($servicio['icono']); ?>"></i>
+                                <div class="servicio-imagen">
+                                    <img src="<?php 
+                                        switch($servicio['id']) {
+                                            case 1:
+                                                echo 'https://images.unsplash.com/photo-1581094794329-c8112d9b1f3c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80';
+                                                break;
+                                            case 2:
+                                                echo 'https://images.unsplash.com/photo-1581094794329-c8112d9b1f3c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80';
+                                                break;
+                                            case 3:
+                                                echo 'https://images.unsplash.com/photo-1581094794329-c8112d9b1f3c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80';
+                                                break;
+                                            case 4:
+                                                echo 'https://images.unsplash.com/photo-1581094794329-c8112d9b1f3c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80';
+                                                break;
+                                            default:
+                                                echo 'https://images.unsplash.com/photo-1581094794329-c8112d9b1f3c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80';
+                                        }
+                                    ?>" 
+                                     alt="<?php echo htmlspecialchars($servicio['nombre']); ?>" 
+                                     loading="lazy">
                                 </div>
                                 <div class="servicio-contenido">
                                     <h3><?php echo htmlspecialchars($servicio['nombre']); ?></h3>
@@ -60,22 +84,38 @@ $servicios = $resultado->fetch_all(MYSQLI_ASSOC);
                 <h2>Beneficios de Nuestros Servicios</h2>
                 <div class="beneficios-grid">
                     <div class="beneficio-item">
-                        <i class="fas fa-shield-alt"></i>
+                        <div class="beneficio-imagen">
+                            <img src="https://images.unsplash.com/photo-1581094794329-c8112d9b1f3c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
+                                 alt="Seguridad Garantizada" 
+                                 loading="lazy">
+                        </div>
                         <h3>Seguridad Garantizada</h3>
                         <p>Soluciones de seguridad robustas y confiables para proteger tus activos.</p>
                     </div>
                     <div class="beneficio-item">
-                        <i class="fas fa-clock"></i>
+                        <div class="beneficio-imagen">
+                            <img src="https://images.unsplash.com/photo-1581094794329-c8112d9b1f3c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
+                                 alt="Disponibilidad 24/7" 
+                                 loading="lazy">
+                        </div>
                         <h3>Disponibilidad 24/7</h3>
                         <p>Soporte técnico y monitoreo continuo para garantizar el funcionamiento.</p>
                     </div>
                     <div class="beneficio-item">
-                        <i class="fas fa-cogs"></i>
+                        <div class="beneficio-imagen">
+                            <img src="https://images.unsplash.com/photo-1581094794329-c8112d9b1f3c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
+                                 alt="Mantenimiento Preventivo" 
+                                 loading="lazy">
+                        </div>
                         <h3>Mantenimiento Preventivo</h3>
                         <p>Programas de mantenimiento para optimizar el rendimiento de los sistemas.</p>
                     </div>
                     <div class="beneficio-item">
-                        <i class="fas fa-certificate"></i>
+                        <div class="beneficio-imagen">
+                            <img src="https://images.unsplash.com/photo-1581094794329-c8112d9b1f3c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
+                                 alt="Certificaciones" 
+                                 loading="lazy">
+                        </div>
                         <h3>Certificaciones</h3>
                         <p>Personal certificado y equipos de última generación.</p>
                     </div>
@@ -96,12 +136,27 @@ $servicios = $resultado->fetch_all(MYSQLI_ASSOC);
 
     <style>
         .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('assets/images/hero-servicios.jpg');
-            background-size: cover;
-            background-position: center;
+            position: relative;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
             color: white;
             text-align: center;
             padding: 100px 0;
+            overflow: hidden;
+        }
+
+        .hero-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .hero h1 {
@@ -134,19 +189,24 @@ $servicios = $resultado->fetch_all(MYSQLI_ASSOC);
             transition: transform 0.3s ease;
         }
 
+        .servicio-imagen {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .servicio-imagen img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
         .servicio-card:hover {
             transform: translateY(-5px);
         }
 
-        .servicio-icono {
-            background: #007bff;
-            color: white;
-            padding: 30px;
-            text-align: center;
-        }
-
-        .servicio-icono i {
-            font-size: 2.5rem;
+        .servicio-card:hover .servicio-imagen img {
+            transform: scale(1.1);
         }
 
         .servicio-contenido {
@@ -189,10 +249,22 @@ $servicios = $resultado->fetch_all(MYSQLI_ASSOC);
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
-        .beneficio-item i {
-            font-size: 2rem;
-            color: #007bff;
+        .beneficio-imagen {
+            height: 150px;
             margin-bottom: 20px;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+
+        .beneficio-imagen img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .beneficio-item:hover .beneficio-imagen img {
+            transform: scale(1.1);
         }
 
         .beneficio-item h3 {
@@ -231,6 +303,14 @@ $servicios = $resultado->fetch_all(MYSQLI_ASSOC);
             .servicios-grid,
             .beneficios-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .servicio-imagen {
+                height: 150px;
+            }
+
+            .beneficio-imagen {
+                height: 120px;
             }
         }
     </style>
