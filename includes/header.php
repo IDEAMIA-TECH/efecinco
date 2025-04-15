@@ -192,6 +192,7 @@ require_once __DIR__ . '/db.php';
                         <ul class="dropdown-menu">
                             <li><a href="cotizacion-camaras.php">Cámaras de Seguridad</a></li>
                             <li><a href="cotizacion-acceso.php">Control de Acceso</a></li>
+                            <li><a href="cotizacion-cableado.php">Cableado Estructurado</a></li>
                         </ul>
                     </li>
                     <li><a href="contacto.php">Contacto</a></li>
