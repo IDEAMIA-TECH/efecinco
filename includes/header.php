@@ -12,6 +12,8 @@ require_once __DIR__ . '/db.php';
     <link rel="stylesheet" href="assets/css/styles.css">
     <!-- Font Awesome para íconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- TinyMCE -->
+    <script src="https://cdn.tiny.cloud/1/4u89qw1ptzfqell0ybjhqth1cc16ilb1y0792h3momw4lk8l/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
     <style>
         .header {
             background-color: #fff;
@@ -243,6 +245,16 @@ require_once __DIR__ . '/db.php';
                     }
                 });
             });
+        });
+    </script>
+    <script>
+        tinymce.init({
+            selector: '.tinymce',
+            plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
+            toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
+            language: 'es',
+            height: 300,
+            branding: false
         });
     </script>
 </body>

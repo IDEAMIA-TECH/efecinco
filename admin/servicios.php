@@ -194,7 +194,7 @@ $servicios = $resultado->fetch_all(MYSQLI_ASSOC);
 <?php
 // Scripts adicionales para TinyMCE y manejo del formulario
 $scripts_adicionales = '
-<script src="https://cdn.tiny.cloud/1/tu-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+<script src="https://cdn.tiny.cloud/1/4u89qw1ptzfqell0ybjhqth1cc16ilb1y0792h3momw4lk8l/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 <script>
     // Inicializar TinyMCE
     function initTinyMCE() {
@@ -210,25 +210,28 @@ $scripts_adicionales = '
     function mostrarFormulario(accion, id = null) {
         const formulario = document.getElementById("formularioServicio");
         formulario.style.display = "block";
-        document.getElementById("accion").value = accion;
+        document.getElementById("formAction").value = accion;
         
         // Scroll suave al formulario
         formulario.scrollIntoView({ behavior: "smooth" });
 
         if (accion === "crear") {
             document.getElementById("formularioServicioTitulo").textContent = "Crear Nuevo Servicio";
-            document.getElementById("formularioServicios").reset();
+            document.getElementById("formServicio").reset();
             document.getElementById("activo").checked = true;
             tinymce.get("descripcion").setContent("");
         } else if (accion === "editar" && id) {
             document.getElementById("formularioServicioTitulo").textContent = "Editar Servicio";
-            document.getElementById("id_servicio").value = id;
+            document.getElementById("servicioId").value = id;
             
             // Cargar datos del servicio
             fetch(`get_servicio.php?id=${id}`)
                 .then(response => response.json())
                 .then(data => {
-                    document.getElementById("titulo").value = data.titulo;
+                    document.getElementById("nombre").value = data.nombre;
+                    document.getElementById("descripcion").value = data.descripcion;
+                    document.getElementById("icono").value = data.icono;
+                    document.getElementById("orden").value = data.orden;
                     document.getElementById("activo").checked = data.activo == 1;
                     tinymce.get("descripcion").setContent(data.descripcion);
                 })
@@ -237,6 +240,10 @@ $scripts_adicionales = '
                     alert("Error al cargar los datos del servicio");
                 });
         }
+    }
+
+    function ocultarFormulario() {
+        document.getElementById("formularioServicio").style.display = "none";
     }
 
     // Inicializar TinyMCE al cargar la página
