@@ -125,7 +125,9 @@ $servicios = $resultado->fetch_all(MYSQLI_ASSOC);
     <style>
         .hero {
             position: relative;
-            background: linear-gradient(135deg, #007bff, #0056b3);
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
             color: white;
             text-align: center;
             padding: 100px 0;
