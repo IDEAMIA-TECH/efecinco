@@ -41,8 +41,8 @@ $stats['certificaciones'] = $resultado->fetch_assoc()['total'];
 </head>
 <body class="modern-admin">
     <div class="admin-wrapper">
-        <aside class="admin-sidebar">
-            <div class="sidebar-header">
+        <header class="admin-header">
+            <div class="header-logo">
                 <img src="../assets/images/logo.png" alt="Efecinco Logo" class="logo">
                 <h2>Efecinco</h2>
             </div>
@@ -67,26 +67,14 @@ $stats['certificaciones'] = $resultado->fetch_assoc()['total'];
                     <i class="fas fa-certificate"></i>
                     <span>Certificaciones</span>
                 </a>
-            </nav>
-            <div class="sidebar-footer">
                 <a href="?logout=1" class="logout-btn">
                     <i class="fas fa-sign-out-alt"></i>
                     <span>Cerrar Sesión</span>
                 </a>
-            </div>
-        </aside>
+            </nav>
+        </header>
 
         <main class="admin-main">
-            <header class="main-header">
-                <div class="header-content">
-                    <h1>Dashboard</h1>
-                    <div class="user-info">
-                        <span class="user-name"><?php echo htmlspecialchars(getCurrentAdminName()); ?></span>
-                        <span class="user-role">Administrador</span>
-                    </div>
-                </div>
-            </header>
-
             <div class="main-content">
                 <div class="welcome-card">
                     <div class="welcome-text">
@@ -187,74 +175,66 @@ $stats['certificaciones'] = $resultado->fetch_assoc()['total'];
 
         .admin-wrapper {
             display: flex;
+            flex-direction: column;
             min-height: 100vh;
         }
 
-        .admin-sidebar {
-            width: 250px;
+        .admin-header {
             background: #fff;
-            border-right: 1px solid #e9ecef;
+            padding: 0.5rem 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
             display: flex;
-            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
             position: fixed;
-            left: 0;
             top: 0;
-            height: 100vh;
-            box-shadow: 2px 0 5px rgba(0,0,0,0.05);
+            left: 0;
+            right: 0;
             z-index: 1000;
-            transition: width 0.3s ease;
         }
 
-        .sidebar-header {
-            padding: 1.5rem;
-            text-align: center;
-            border-bottom: 1px solid #e9ecef;
-            background: #fff;
+        .header-logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
         }
 
-        .sidebar-header .logo {
-            width: 60px;
+        .header-logo .logo {
+            width: 40px;
             height: auto;
-            margin-bottom: 0.5rem;
         }
 
-        .sidebar-header h2 {
+        .header-logo h2 {
             margin: 0;
             color: #2c3e50;
             font-size: 1.2rem;
-            font-weight: 600;
         }
 
         .admin-nav {
-            padding: 1rem 0;
-            flex-grow: 1;
-            overflow-y: auto;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
         }
 
         .admin-nav a {
             display: flex;
             align-items: center;
-            padding: 0.8rem 1.5rem;
+            gap: 0.5rem;
             color: #6c757d;
             text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
             transition: all 0.3s ease;
-            border-left: 4px solid transparent;
-            margin: 0.2rem 0;
         }
 
         .admin-nav a:hover,
         .admin-nav a.active {
             background: #f8f9fa;
             color: #007bff;
-            border-left: 4px solid #007bff;
-            transform: translateX(5px);
         }
 
         .admin-nav a i {
-            width: 20px;
-            margin-right: 1rem;
             font-size: 1rem;
-            text-align: center;
         }
 
         .admin-nav a span {
@@ -262,72 +242,20 @@ $stats['certificaciones'] = $resultado->fetch_assoc()['total'];
             font-weight: 500;
         }
 
-        .sidebar-footer {
-            padding: 1rem 1.5rem;
-            border-top: 1px solid #e9ecef;
-            background: #fff;
-        }
-
         .logout-btn {
-            display: flex;
-            align-items: center;
             color: #dc3545;
-            text-decoration: none;
-            padding: 0.5rem 0;
-            transition: color 0.3s ease;
         }
 
         .logout-btn:hover {
+            background: #f8f9fa;
             color: #c82333;
         }
 
-        .logout-btn i {
-            margin-right: 1rem;
-            font-size: 1rem;
-        }
-
         .admin-main {
-            flex-grow: 1;
-            margin-left: 250px;
+            margin-top: 70px;
             padding: 2rem;
             min-height: 100vh;
             background: #f8f9fa;
-            transition: margin-left 0.3s ease;
-        }
-
-        .main-header {
-            background: #fff;
-            padding: 1.5rem 2rem;
-            border-radius: 10px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-            margin-bottom: 2rem;
-        }
-
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .header-content h1 {
-            margin: 0;
-            color: #2c3e50;
-            font-size: 1.8rem;
-        }
-
-        .user-info {
-            text-align: right;
-        }
-
-        .user-name {
-            display: block;
-            font-weight: 600;
-            color: #2c3e50;
-        }
-
-        .user-role {
-            color: #6c757d;
-            font-size: 0.9rem;
         }
 
         .welcome-card {
@@ -457,54 +385,34 @@ $stats['certificaciones'] = $resultado->fetch_assoc()['total'];
         }
 
         @media (max-width: 1024px) {
-            .admin-sidebar {
-                width: 200px;
-            }
-
-            .admin-main {
-                margin-left: 200px;
+            .admin-nav {
+                gap: 1rem;
             }
 
             .admin-nav a {
-                padding: 0.8rem 1rem;
+                padding: 0.5rem;
             }
         }
 
         @media (max-width: 768px) {
-            .admin-sidebar {
-                width: 60px;
+            .admin-header {
+                padding: 0.5rem 1rem;
             }
 
-            .admin-main {
-                margin-left: 60px;
-            }
-
-            .sidebar-header h2,
-            .admin-nav span,
-            .logout-btn span {
+            .header-logo h2 {
                 display: none;
             }
 
-            .admin-nav a {
-                justify-content: center;
-                padding: 1rem;
+            .admin-nav a span {
+                display: none;
             }
 
             .admin-nav a i {
-                margin: 0;
                 font-size: 1.2rem;
             }
 
-            .sidebar-footer {
-                padding: 1rem;
-            }
-
-            .logout-btn {
-                justify-content: center;
-            }
-
-            .logout-btn i {
-                margin: 0;
+            .admin-nav {
+                gap: 0.5rem;
             }
         }
     </style>
