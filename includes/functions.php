@@ -19,13 +19,106 @@ function limpiarDatos($data) {
  */
 function enviarCorreoCliente($email, $nombre) {
     $asunto = "Confirmación de Cotización - Efecinco";
-    $mensaje = "Estimado/a $nombre,\n\n";
-    $mensaje .= "Hemos recibido su solicitud de cotización para la instalación de cámaras de seguridad.\n";
-    $mensaje .= "Uno de nuestros asesores se pondrá en contacto con usted en breve.\n\n";
-    $mensaje .= "Saludos cordiales,\n";
-    $mensaje .= "Equipo Efecinco";
     
-    $headers = "From: cotizaciones@efecinco.com.mx\r\n";
+    // Contenido HTML del correo
+    $mensaje = '
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Confirmación de Cotización</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                line-height: 1.6;
+                color: #333;
+                margin: 0;
+                padding: 0;
+            }
+            .container {
+                max-width: 600px;
+                margin: 0 auto;
+                padding: 20px;
+            }
+            .header {
+                text-align: center;
+                padding: 20px 0;
+                background-color: #f8f9fa;
+                border-radius: 8px 8px 0 0;
+            }
+            .logo {
+                max-width: 200px;
+                height: auto;
+            }
+            .content {
+                padding: 30px;
+                background-color: #fff;
+                border-radius: 0 0 8px 8px;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+            .footer {
+                text-align: center;
+                padding: 20px;
+                font-size: 12px;
+                color: #666;
+            }
+            .button {
+                display: inline-block;
+                padding: 10px 20px;
+                background-color: #00B4DB;
+                color: white;
+                text-decoration: none;
+                border-radius: 4px;
+                margin: 20px 0;
+            }
+            .contact-info {
+                background-color: #f8f9fa;
+                padding: 15px;
+                border-radius: 4px;
+                margin: 20px 0;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">
+                <img src="https://efecinco.com.mx/assets/img/logof5.png" alt="Efecinco Logo" class="logo">
+            </div>
+            <div class="content">
+                <h2>¡Gracias por su interés en Efecinco!</h2>
+                <p>Estimado/a ' . htmlspecialchars($nombre) . ',</p>
+                <p>Hemos recibido su solicitud de cotización para la instalación de cámaras de seguridad. Nos complace informarle que uno de nuestros asesores especializados revisará su solicitud y se pondrá en contacto con usted en breve.</p>
+                
+                <div class="contact-info">
+                    <p><strong>¿Tiene alguna pregunta?</strong></p>
+                    <p>Puede contactarnos directamente:</p>
+                    <p>📞 Teléfono: (55) 1234-5678</p>
+                    <p>📧 Email: contacto@efecinco.com.mx</p>
+                </div>
+
+                <p>En Efecinco nos enorgullece ofrecer:</p>
+                <ul>
+                    <li>Soluciones personalizadas para sus necesidades</li>
+                    <li>Equipos de última generación</li>
+                    <li>Instalación profesional certificada</li>
+                    <li>Soporte técnico 24/7</li>
+                </ul>
+
+                <p>Gracias por confiar en nosotros.</p>
+                <p>Saludos cordiales,<br>Equipo Efecinco</p>
+            </div>
+            <div class="footer">
+                <p>Este es un correo automático, por favor no responda a este mensaje.</p>
+                <p>© ' . date('Y') . ' Efecinco. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </body>
+    </html>';
+
+    $headers = "MIME-Version: 1.0\r\n";
+    $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
+    $headers .= "From: Efecinco <cotizaciones@efecinco.com.mx>\r\n";
     $headers .= "Reply-To: cotizaciones@efecinco.com.mx\r\n";
     $headers .= "X-Mailer: PHP/" . phpversion();
     
@@ -40,14 +133,91 @@ function enviarCorreoCliente($email, $nombre) {
  * @return bool True si el correo se envió correctamente
  */
 function enviarCorreoAdmin($nombre, $telefono, $email) {
-    $asunto = "Nueva Cotización de Cámaras";
-    $mensaje = "Se ha recibido una nueva cotización:\n\n";
-    $mensaje .= "Nombre: $nombre\n";
-    $mensaje .= "Teléfono: $telefono\n";
-    $mensaje .= "Email: $email\n\n";
-    $mensaje .= "Por favor revise el panel de administración para más detalles.";
+    $asunto = "Nueva Cotización de Cámaras - Efecinco";
     
-    $headers = "From: sistema@efecinco.com.mx\r\n";
+    // Contenido HTML del correo
+    $mensaje = '
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Nueva Cotización de Cámaras</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                line-height: 1.6;
+                color: #333;
+                margin: 0;
+                padding: 0;
+            }
+            .container {
+                max-width: 600px;
+                margin: 0 auto;
+                padding: 20px;
+            }
+            .header {
+                text-align: center;
+                padding: 20px 0;
+                background-color: #f8f9fa;
+                border-radius: 8px 8px 0 0;
+            }
+            .logo {
+                max-width: 200px;
+                height: auto;
+            }
+            .content {
+                padding: 30px;
+                background-color: #fff;
+                border-radius: 0 0 8px 8px;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+            .info-box {
+                background-color: #f8f9fa;
+                padding: 15px;
+                border-radius: 4px;
+                margin: 20px 0;
+            }
+            .button {
+                display: inline-block;
+                padding: 10px 20px;
+                background-color: #00B4DB;
+                color: white;
+                text-decoration: none;
+                border-radius: 4px;
+                margin: 20px 0;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">
+                <img src="https://efecinco.com.mx/assets/img/logof5.png" alt="Efecinco Logo" class="logo">
+            </div>
+            <div class="content">
+                <h2>Nueva Solicitud de Cotización</h2>
+                <p>Se ha recibido una nueva solicitud de cotización para la instalación de cámaras de seguridad.</p>
+                
+                <div class="info-box">
+                    <h3>Información del Cliente</h3>
+                    <p><strong>Nombre:</strong> ' . htmlspecialchars($nombre) . '</p>
+                    <p><strong>Teléfono:</strong> ' . htmlspecialchars($telefono) . '</p>
+                    <p><strong>Email:</strong> ' . htmlspecialchars($email) . '</p>
+                </div>
+
+                <p>Por favor, revise el panel de administración para ver los detalles completos de la cotización y proceder con el seguimiento correspondiente.</p>
+                
+                <a href="https://efecinco.com.mx/admin/cotizaciones.php" class="button">Ver Cotización</a>
+                
+                <p>Saludos,<br>Sistema de Notificaciones Efecinco</p>
+            </div>
+        </div>
+    </body>
+    </html>';
+
+    $headers = "MIME-Version: 1.0\r\n";
+    $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
+    $headers .= "From: Sistema Efecinco <sistema@efecinco.com.mx>\r\n";
     $headers .= "Reply-To: sistema@efecinco.com.mx\r\n";
     $headers .= "X-Mailer: PHP/" . phpversion();
     
