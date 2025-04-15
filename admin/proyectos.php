@@ -336,17 +336,20 @@ include('includes/header.php');
                     </div>
 
                     <div class="form-group full-width">
-                        <label>Servicios Relacionados</label>
-                        <div class="servicios-grid">
-                            <?php foreach ($servicios as $servicio): ?>
-                                <div class="servicio-item">
-                                    <input type="checkbox" name="servicios[]" value="<?php echo $servicio['id']; ?>" 
-                                           id="servicio_<?php echo $servicio['id']; ?>">
-                                    <label for="servicio_<?php echo $servicio['id']; ?>">
-                                        <?php echo htmlspecialchars($servicio['nombre']); ?>
-                                    </label>
-                                </div>
-                            <?php endforeach; ?>
+                        <div class="servicios-section">
+                            <h3>Servicios Relacionados</h3>
+                            <div class="servicios-grid">
+                                <?php foreach ($servicios as $servicio): ?>
+                                    <div class="servicio-item">
+                                        <input type="checkbox" name="servicios[]" value="<?php echo $servicio['id']; ?>" 
+                                               id="servicio_<?php echo $servicio['id']; ?>">
+                                        <label for="servicio_<?php echo $servicio['id']; ?>">
+                                            <i class="fas fa-check-circle"></i>
+                                            <?php echo htmlspecialchars($servicio['nombre']); ?>
+                                        </label>
+                                    </div>
+                                <?php endforeach; ?>
+                            </div>
                         </div>
                     </div>
 
@@ -647,15 +650,84 @@ $scripts_adicionales = '
 
     .servicios-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
         gap: 1rem;
-        margin-top: 0.5rem;
+        margin-top: 1rem;
     }
 
     .servicio-item {
         display: flex;
         align-items: center;
-        gap: 0.5rem;
+        gap: 0.75rem;
+        padding: 0.75rem;
+        background: #f8f9fa;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+
+    .servicio-item:hover {
+        background: #e9ecef;
+        transform: translateY(-2px);
+    }
+
+    .servicio-item input[type="checkbox"] {
+        display: none;
+    }
+
+    .servicio-item label {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        width: 100%;
+        cursor: pointer;
+        margin: 0;
+        font-size: 0.95rem;
+        color: #495057;
+    }
+
+    .servicio-item label::before {
+        content: "";
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border: 2px solid #6c757d;
+        border-radius: 4px;
+        background-color: #fff;
+        transition: all 0.2s ease;
+    }
+
+    .servicio-item input[type="checkbox"]:checked + label::before {
+        background-color: #007bff;
+        border-color: #007bff;
+        content: "✓";
+        color: white;
+        text-align: center;
+        line-height: 16px;
+        font-size: 12px;
+    }
+
+    .servicio-item i {
+        color: #007bff;
+        font-size: 1.1rem;
+    }
+
+    .servicios-section {
+        background: #fff;
+        padding: 1.5rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    .servicios-section h3 {
+        margin-bottom: 1rem;
+        color: #2c3e50;
+        font-size: 1.1rem;
+        font-weight: 600;
+    }
+
+    .servicios-section .form-group {
+        margin-bottom: 0;
     }
 
     .checkbox-group {
@@ -687,6 +759,10 @@ $scripts_adicionales = '
         }
 
         .projects-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .servicios-grid {
             grid-template-columns: 1fr;
         }
     }
