@@ -91,6 +91,76 @@ $testimonios = $resultado->fetch_all(MYSQLI_ASSOC);
 include('includes/header.php');
 ?>
 
+<style>
+    /* Modal Styles */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        overflow-y: auto;
+    }
+
+    .modal-content {
+        background-color: #fff;
+        margin: 2rem auto;
+        padding: 2rem;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        max-width: 600px;
+        width: 90%;
+        position: relative;
+    }
+
+    .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid #e9ecef;
+    }
+
+    .modal-header h3 {
+        margin: 0;
+        color: #2c3e50;
+        font-size: 1.5rem;
+    }
+
+    .close {
+        color: #6c757d;
+        font-size: 1.5rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: color 0.3s ease;
+    }
+
+    .close:hover {
+        color: #343a40;
+    }
+
+    .form-actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 1rem;
+        margin-top: 1.5rem;
+        padding-top: 1rem;
+        border-top: 1px solid #e9ecef;
+    }
+
+    @media (max-width: 768px) {
+        .modal-content {
+            margin: 1rem auto;
+            padding: 1rem;
+            width: 95%;
+        }
+    }
+</style>
+
 <div class="container">
     <div class="header">
         <h1>Gestión de Testimonios</h1>
@@ -152,69 +222,80 @@ include('includes/header.php');
         </div>
     </div>
 
-    <!-- Formulario de creación/edición -->
-    <div id="formularioTestimonio" class="card" style="display: none;">
-        <div class="card-header">
-            <h3 id="tituloFormulario">Nuevo Testimonio</h3>
-            <button class="btn btn-secondary" onclick="ocultarFormulario()">Cancelar</button>
+    <!-- Modal de formulario -->
+    <div id="modalFormulario" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="tituloModal">Nuevo Testimonio</h3>
+                <span class="close" onclick="cerrarModal()">&times;</span>
+            </div>
+            <form id="formTestimonio" method="POST">
+                <input type="hidden" name="action" id="formAction" value="create">
+                <input type="hidden" name="id" id="testimonioId">
+                
+                <div class="form-group">
+                    <label for="cliente">Cliente</label>
+                    <input type="text" id="cliente" name="cliente" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="cargo">Cargo</label>
+                    <input type="text" id="cargo" name="cargo" class="form-control">
+                </div>
+                
+                <div class="form-group">
+                    <label for="empresa">Empresa</label>
+                    <input type="text" id="empresa" name="empresa" class="form-control">
+                </div>
+                
+                <div class="form-group">
+                    <label for="testimonio">Testimonio</label>
+                    <textarea id="testimonio" name="testimonio" rows="4" class="form-control" required></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="activo" name="activo" checked>
+                        <label for="activo">
+                            <i class="fas fa-check-circle"></i>
+                            Activo
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save"></i> Guardar
+                    </button>
+                    <button type="button" class="btn btn-outline" onclick="cerrarModal()">
+                        <i class="fas fa-times"></i> Cancelar
+                    </button>
+                </div>
+            </form>
         </div>
-        <form method="POST" id="formTestimonio">
-            <input type="hidden" name="action" id="formAction" value="create">
-            <input type="hidden" name="id" id="testimonioId">
-            
-            <div class="form-group">
-                <label for="cliente">Cliente</label>
-                <input type="text" id="cliente" name="cliente" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="cargo">Cargo</label>
-                <input type="text" id="cargo" name="cargo">
-            </div>
-            
-            <div class="form-group">
-                <label for="empresa">Empresa</label>
-                <input type="text" id="empresa" name="empresa">
-            </div>
-            
-            <div class="form-group">
-                <label for="testimonio">Testimonio</label>
-                <textarea id="testimonio" name="testimonio" rows="4" required></textarea>
-            </div>
-            
-            <div class="form-group">
-                <label>
-                    <input type="checkbox" id="activo" name="activo" checked>
-                    Activo
-                </label>
-            </div>
-            
-            <button type="submit" class="btn btn-primary">Guardar</button>
-        </form>
     </div>
 </div>
 
-<?php
-// Scripts adicionales para el manejo del formulario
-$scripts_adicionales = '
 <script>
     function mostrarFormulario(accion, id = null) {
-        const formulario = document.getElementById("formularioTestimonio");
-        const titulo = document.getElementById("tituloFormulario");
-        const formAction = document.getElementById("formAction");
+        const modal = document.getElementById("modalFormulario");
+        const form = document.getElementById("formTestimonio");
+        const titulo = document.getElementById("tituloModal");
+        const accionInput = document.getElementById("formAction");
         const testimonioId = document.getElementById("testimonioId");
-        
+
+        // Configurar el formulario según la acción
         if (accion === "crear") {
             titulo.textContent = "Nuevo Testimonio";
-            formAction.value = "create";
+            accionInput.value = "create";
+            form.reset();
             testimonioId.value = "";
-            document.getElementById("formTestimonio").reset();
             document.getElementById("activo").checked = true;
-        } else if (accion === "editar" && id) {
+        } else {
             titulo.textContent = "Editar Testimonio";
-            formAction.value = "update";
+            accionInput.value = "update";
             testimonioId.value = id;
-            
+
             // Cargar datos del testimonio
             fetch(`get_testimonio.php?id=${id}`)
                 .then(response => response.json())
@@ -230,13 +311,20 @@ $scripts_adicionales = '
                     alert("Error al cargar los datos del testimonio");
                 });
         }
-        
-        formulario.style.display = "block";
-        formulario.scrollIntoView({ behavior: "smooth" });
+
+        modal.style.display = "block";
     }
-    
-    function ocultarFormulario() {
-        document.getElementById("formularioTestimonio").style.display = "none";
+
+    function cerrarModal() {
+        document.getElementById("modalFormulario").style.display = "none";
+    }
+
+    // Cerrar modal al hacer clic fuera
+    window.onclick = function(event) {
+        const modal = document.getElementById("modalFormulario");
+        if (event.target == modal) {
+            cerrarModal();
+        }
     }
 
     // Cerrar alertas automáticamente después de 5 segundos
@@ -247,8 +335,8 @@ $scripts_adicionales = '
         }
     }, 5000);
 </script>
-';
 
+<?php
 // Incluir el footer
 include('includes/footer.php');
 ?> 
