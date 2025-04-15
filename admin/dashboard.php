@@ -7,7 +7,8 @@ $stats = [
     'servicios' => 0,
     'proyectos' => 0,
     'testimonios' => 0,
-    'certificaciones' => 0
+    'certificaciones' => 0,
+    'cotizaciones' => 0
 ];
 
 // Contar servicios
@@ -29,6 +30,15 @@ $stats['testimonios'] = $resultado->fetch_assoc()['total'];
 $sql = "SELECT COUNT(*) as total FROM certificaciones WHERE activo = 1";
 $resultado = $conexion->query($sql);
 $stats['certificaciones'] = $resultado->fetch_assoc()['total'];
+
+// Contar cotizaciones pendientes
+$sql = "SELECT COUNT(*) as total FROM cotizaciones_camaras WHERE estado = 'pendiente'";
+$resultado = $conexion->query($sql);
+$stats['cotizaciones'] = $resultado->fetch_assoc()['total'];
+
+// Obtener últimas cotizaciones
+$sql = "SELECT * FROM cotizaciones_camaras ORDER BY fecha_creacion DESC LIMIT 5";
+$ultimas_cotizaciones = $conexion->query($sql);
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -124,6 +134,16 @@ $stats['certificaciones'] = $resultado->fetch_assoc()['total'];
                         </div>
                         <a href="certificaciones.php" class="stat-link">Ver detalles <i class="fas fa-arrow-right"></i></a>
                     </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-camera"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>Cotizaciones Pendientes</h3>
+                            <p class="stat-number"><?php echo $stats['cotizaciones']; ?></p>
+                        </div>
+                        <a href="cotizaciones.php" class="stat-link">Ver detalles <i class="fas fa-arrow-right"></i></a>
+                    </div>
                 </div>
 
                 <div class="quick-actions-section">
@@ -157,6 +177,47 @@ $stats['certificaciones'] = $resultado->fetch_assoc()['total'];
                             <h3>Nueva Certificación</h3>
                             <p>Agregar una nueva certificación</p>
                         </a>
+                    </div>
+                </div>
+
+                <div class="recent-cotizaciones">
+                    <h2>Últimas Cotizaciones de Cámaras</h2>
+                    <div class="cotizaciones-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Fecha</th>
+                                    <th>Cliente</th>
+                                    <th>Teléfono</th>
+                                    <th>Email</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php while($cotizacion = $ultimas_cotizaciones->fetch_assoc()): ?>
+                                <tr>
+                                    <td><?php echo date('d/m/Y', strtotime($cotizacion['fecha_creacion'])); ?></td>
+                                    <td><?php echo htmlspecialchars($cotizacion['nombre']); ?></td>
+                                    <td><?php echo htmlspecialchars($cotizacion['telefono']); ?></td>
+                                    <td><?php echo htmlspecialchars($cotizacion['email']); ?></td>
+                                    <td>
+                                        <span class="status-badge status-<?php echo $cotizacion['estado']; ?>">
+                                            <?php echo ucfirst($cotizacion['estado']); ?>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <a href="cotizaciones.php?action=view&id=<?php echo $cotizacion['id']; ?>" class="action-btn view-btn">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                        <a href="cotizaciones.php?action=edit&id=<?php echo $cotizacion['id']; ?>" class="action-btn edit-btn">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <?php endwhile; ?>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -414,6 +475,104 @@ $stats['certificaciones'] = $resultado->fetch_assoc()['total'];
 
             .admin-nav {
                 gap: 0.5rem;
+            }
+        }
+
+        .recent-cotizaciones {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            margin-top: 2rem;
+        }
+
+        .recent-cotizaciones h2 {
+            margin: 0 0 1.5rem 0;
+            color: #2c3e50;
+        }
+
+        .cotizaciones-table {
+            overflow-x: auto;
+        }
+
+        .cotizaciones-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .cotizaciones-table th,
+        .cotizaciones-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .cotizaciones-table th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+            color: #495057;
+        }
+
+        .status-badge {
+            padding: 0.25rem 0.5rem;
+            border-radius: 3px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .status-pendiente {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+
+        .status-en_proceso {
+            background-color: #cce5ff;
+            color: #004085;
+        }
+
+        .status-completado {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .status-cancelado {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        .action-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            margin: 0 0.25rem;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .view-btn {
+            background-color: #17a2b8;
+        }
+
+        .edit-btn {
+            background-color: #28a745;
+        }
+
+        .action-btn:hover {
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 768px) {
+            .cotizaciones-table {
+                font-size: 0.875rem;
+            }
+
+            .cotizaciones-table th,
+            .cotizaciones-table td {
+                padding: 0.75rem;
             }
         }
     </style>
