@@ -334,7 +334,33 @@ include('includes/header.php');
             editor.on('change', function() {
                 editor.save();
             });
+            editor.on('init', function() {
+                // Remover el atributo required del textarea original
+                document.getElementById('testimonio').removeAttribute('required');
+            });
         }
+    });
+
+    // Validación del formulario
+    document.getElementById('formTestimonio').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Validar campos requeridos
+        const cliente = document.getElementById('cliente').value.trim();
+        const testimonio = tinymce.get('testimonio').getContent().trim();
+        
+        if (!cliente) {
+            alert('Por favor ingrese el nombre del cliente');
+            return;
+        }
+        
+        if (!testimonio) {
+            alert('Por favor ingrese el testimonio');
+            return;
+        }
+        
+        // Si todo está bien, enviar el formulario
+        this.submit();
     });
 
     function mostrarFormulario(accion, id = null) {
