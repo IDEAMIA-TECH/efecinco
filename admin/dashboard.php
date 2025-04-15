@@ -8,7 +8,9 @@ $stats = [
     'proyectos' => 0,
     'testimonios' => 0,
     'certificaciones' => 0,
-    'cotizaciones' => 0
+    'cotizaciones_camaras' => 0,
+    'cotizaciones_acceso' => 0,
+    'cotizaciones_cableado' => 0
 ];
 
 // Contar servicios
@@ -31,14 +33,32 @@ $sql = "SELECT COUNT(*) as total FROM certificaciones WHERE activo = 1";
 $resultado = $conexion->query($sql);
 $stats['certificaciones'] = $resultado->fetch_assoc()['total'];
 
-// Contar cotizaciones pendientes
+// Contar cotizaciones pendientes de cámaras
 $sql = "SELECT COUNT(*) as total FROM cotizaciones_camaras WHERE estado = 'pendiente'";
 $resultado = $conexion->query($sql);
-$stats['cotizaciones'] = $resultado->fetch_assoc()['total'];
+$stats['cotizaciones_camaras'] = $resultado->fetch_assoc()['total'];
 
-// Obtener últimas cotizaciones
+// Contar cotizaciones pendientes de control de acceso
+$sql = "SELECT COUNT(*) as total FROM cotizaciones_acceso WHERE estado = 'pendiente'";
+$resultado = $conexion->query($sql);
+$stats['cotizaciones_acceso'] = $resultado->fetch_assoc()['total'];
+
+// Contar cotizaciones pendientes de cableado
+$sql = "SELECT COUNT(*) as total FROM cotizaciones_cableado WHERE estado = 'pendiente'";
+$resultado = $conexion->query($sql);
+$stats['cotizaciones_cableado'] = $resultado->fetch_assoc()['total'];
+
+// Obtener últimas cotizaciones de cámaras
 $sql = "SELECT * FROM cotizaciones_camaras ORDER BY fecha_creacion DESC LIMIT 5";
-$ultimas_cotizaciones = $conexion->query($sql);
+$ultimas_cotizaciones_camaras = $conexion->query($sql);
+
+// Obtener últimas cotizaciones de control de acceso
+$sql = "SELECT * FROM cotizaciones_acceso ORDER BY fecha_creacion DESC LIMIT 5";
+$ultimas_cotizaciones_acceso = $conexion->query($sql);
+
+// Obtener últimas cotizaciones de cableado
+$sql = "SELECT * FROM cotizaciones_cableado ORDER BY fecha_creacion DESC LIMIT 5";
+$ultimas_cotizaciones_cableado = $conexion->query($sql);
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -139,10 +159,30 @@ $ultimas_cotizaciones = $conexion->query($sql);
                             <i class="fas fa-camera"></i>
                         </div>
                         <div class="stat-info">
-                            <h3>Cotizaciones Pendientes</h3>
-                            <p class="stat-number"><?php echo $stats['cotizaciones']; ?></p>
+                            <h3>Cotizaciones Cámaras</h3>
+                            <p class="stat-number"><?php echo $stats['cotizaciones_camaras']; ?></p>
                         </div>
-                        <a href="cotizaciones.php" class="stat-link">Ver detalles <i class="fas fa-arrow-right"></i></a>
+                        <a href="cotizaciones.php?tipo=camaras" class="stat-link">Ver detalles <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-door-closed"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>Cotizaciones Acceso</h3>
+                            <p class="stat-number"><?php echo $stats['cotizaciones_acceso']; ?></p>
+                        </div>
+                        <a href="cotizaciones.php?tipo=acceso" class="stat-link">Ver detalles <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-network-wired"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>Cotizaciones Cableado</h3>
+                            <p class="stat-number"><?php echo $stats['cotizaciones_cableado']; ?></p>
+                        </div>
+                        <a href="cotizaciones.php?tipo=cableado" class="stat-link">Ver detalles <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
 
@@ -195,7 +235,7 @@ $ultimas_cotizaciones = $conexion->query($sql);
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php while($cotizacion = $ultimas_cotizaciones->fetch_assoc()): ?>
+                                <?php while($cotizacion = $ultimas_cotizaciones_camaras->fetch_assoc()): ?>
                                 <tr>
                                     <td><?php echo date('d/m/Y', strtotime($cotizacion['fecha_creacion'])); ?></td>
                                     <td><?php echo htmlspecialchars($cotizacion['nombre']); ?></td>
@@ -207,10 +247,92 @@ $ultimas_cotizaciones = $conexion->query($sql);
                                         </span>
                                     </td>
                                     <td>
-                                        <a href="cotizaciones.php?action=view&id=<?php echo $cotizacion['id']; ?>" class="action-btn view-btn">
+                                        <a href="cotizaciones.php?action=view&id=<?php echo $cotizacion['id']; ?>&tipo=camaras" class="action-btn view-btn">
                                             <i class="fas fa-eye"></i>
                                         </a>
-                                        <a href="cotizaciones.php?action=edit&id=<?php echo $cotizacion['id']; ?>" class="action-btn edit-btn">
+                                        <a href="cotizaciones.php?action=edit&id=<?php echo $cotizacion['id']; ?>&tipo=camaras" class="action-btn edit-btn">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <?php endwhile; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="recent-cotizaciones">
+                    <h2>Últimas Cotizaciones de Control de Acceso</h2>
+                    <div class="cotizaciones-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Fecha</th>
+                                    <th>Cliente</th>
+                                    <th>Teléfono</th>
+                                    <th>Email</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php while($cotizacion = $ultimas_cotizaciones_acceso->fetch_assoc()): ?>
+                                <tr>
+                                    <td><?php echo date('d/m/Y', strtotime($cotizacion['fecha_creacion'])); ?></td>
+                                    <td><?php echo htmlspecialchars($cotizacion['nombre']); ?></td>
+                                    <td><?php echo htmlspecialchars($cotizacion['telefono']); ?></td>
+                                    <td><?php echo htmlspecialchars($cotizacion['email']); ?></td>
+                                    <td>
+                                        <span class="status-badge status-<?php echo $cotizacion['estado']; ?>">
+                                            <?php echo ucfirst($cotizacion['estado']); ?>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <a href="cotizaciones.php?action=view&id=<?php echo $cotizacion['id']; ?>&tipo=acceso" class="action-btn view-btn">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                        <a href="cotizaciones.php?action=edit&id=<?php echo $cotizacion['id']; ?>&tipo=acceso" class="action-btn edit-btn">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                <?php endwhile; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="recent-cotizaciones">
+                    <h2>Últimas Cotizaciones de Cableado</h2>
+                    <div class="cotizaciones-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Fecha</th>
+                                    <th>Cliente</th>
+                                    <th>Teléfono</th>
+                                    <th>Email</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php while($cotizacion = $ultimas_cotizaciones_cableado->fetch_assoc()): ?>
+                                <tr>
+                                    <td><?php echo date('d/m/Y', strtotime($cotizacion['fecha_creacion'])); ?></td>
+                                    <td><?php echo htmlspecialchars($cotizacion['nombre']); ?></td>
+                                    <td><?php echo htmlspecialchars($cotizacion['telefono']); ?></td>
+                                    <td><?php echo htmlspecialchars($cotizacion['email']); ?></td>
+                                    <td>
+                                        <span class="status-badge status-<?php echo $cotizacion['estado']; ?>">
+                                            <?php echo ucfirst($cotizacion['estado']); ?>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <a href="cotizaciones.php?action=view&id=<?php echo $cotizacion['id']; ?>&tipo=cableado" class="action-btn view-btn">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                        <a href="cotizaciones.php?action=edit&id=<?php echo $cotizacion['id']; ?>&tipo=cableado" class="action-btn edit-btn">
                                             <i class="fas fa-edit"></i>
                                         </a>
                                     </td>
