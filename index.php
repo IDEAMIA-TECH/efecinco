@@ -1,6 +1,409 @@
 <?php
-include('includes/header.php');
+require_once('includes/db.php');
+$conexion = conectarDB();
+
+// Obtener información de la empresa
+$sql = "SELECT * FROM empresa WHERE id = 1";
+$resultado = $conexion->query($sql);
+$empresa = $resultado->fetch_assoc();
+
+// Obtener clientes destacados
+$sql = "SELECT * FROM clientes WHERE destacado = 1 ORDER BY nombre";
+$resultado = $conexion->query($sql);
+$clientes = $resultado->fetch_all(MYSQLI_ASSOC);
 ?>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Efecinco - Soluciones en Seguridad y Tecnología</title>
+    <meta name="description" content="Efecinco ofrece soluciones integrales en seguridad y tecnología para empresas. Expertos en CCTV, control de acceso y más.">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <?php include('includes/header.php'); ?>
+
+    <main>
+        <section class="hero" style="background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1520869562399-e772f042f422?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80') no-repeat center center; background-size: cover;">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Soluciones en Seguridad y Tecnología</h1>
+                    <p>Expertos en implementación de sistemas de seguridad y tecnología para tu empresa</p>
+                    <div class="cta-buttons">
+                        <a href="contacto.php" class="btn btn-primary">Contáctanos</a>
+                        <a href="contacto.php" class="btn btn-secondary">Solicita una cotización</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="sobre-nosotros">
+            <div class="container">
+                <div class="grid-2-columns">
+                    <div class="texto">
+                        <h2>Nuestra Historia</h2>
+                        <p><?php echo nl2br(htmlspecialchars($empresa['historia'] ?? '')); ?></p>
+                    </div>
+                    <div class="imagen">
+                        <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Historia de Efecinco" loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mision-vision">
+            <div class="container">
+                <div class="grid-2-columns">
+                    <div class="card">
+                        <img src="https://images.unsplash.com/photo-1533750349088-cd871a92f312?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Misión Efecinco">
+                        <h3>Misión</h3>
+                        <p><?php echo nl2br(htmlspecialchars($empresa['mision'] ?? '')); ?></p>
+                    </div>
+                    <div class="card">
+                        <img src="https://images.unsplash.com/photo-1533749871411-5e21e14bcc7d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80" alt="Visión Efecinco">
+                        <h3>Visión</h3>
+                        <p><?php echo nl2br(htmlspecialchars($empresa['vision'] ?? '')); ?></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="servicios-destacados">
+            <div class="container">
+                <h2>Nuestros Servicios</h2>
+                <div class="servicios-grid">
+                    <div class="servicio-card">
+                        <div class="servicio-imagen">
+                            <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Cableado Estructurado">
+                        </div>
+                        <i class="fas fa-network-wired"></i>
+                        <h3>Cableado Estructurado</h3>
+                        <p>Soluciones de red profesional para tu empresa</p>
+                    </div>
+                    <div class="servicio-card">
+                        <div class="servicio-imagen">
+                            <img src="https://images.unsplash.com/photo-1577962917302-cd874c4e31d2?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="CCTV">
+                        </div>
+                        <i class="fas fa-video"></i>
+                        <h3>CCTV</h3>
+                        <p>Sistemas de videovigilancia de última generación</p>
+                    </div>
+                    <div class="servicio-card">
+                        <div class="servicio-imagen">
+                            <img src="https://images.unsplash.com/photo-1516992654410-9309d4587e94?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Control de Acceso">
+                        </div>
+                        <i class="fas fa-lock"></i>
+                        <h3>Control de Acceso</h3>
+                        <p>Gestión segura de accesos a tus instalaciones</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="proyectos-destacados">
+            <div class="container">
+                <h2>Proyectos Destacados</h2>
+                <div class="proyectos-grid">
+                    <?php
+                    require_once('includes/db.php');
+                    $conexion = conectarDB();
+                    
+                    // Verificar la conexión
+                    if (!$conexion) {
+                        echo '<div class="alert alert-danger">Error al conectar con la base de datos</div>';
+                    } else {
+                        $sql = "SELECT * FROM proyectos WHERE activo = 1 AND destacado = 1 ORDER BY fecha_creacion DESC LIMIT 3";
+                        $stmt = consultaSegura($conexion, $sql, []);
+                        
+                        if ($stmt) {
+                            $result = $stmt->get_result();
+                            $proyectos = $result->fetch_all(MYSQLI_ASSOC);
+                            
+                            if (empty($proyectos)) {
+                                echo '<div class="alert alert-info">No hay proyectos destacados disponibles</div>';
+                            } else {
+                                foreach ($proyectos as $proyecto):
+                                ?>
+                                <div class="proyecto-card">
+                                    <?php if ($proyecto['imagen']): ?>
+                                        <img src="<?php echo htmlspecialchars($proyecto['imagen']); ?>" 
+                                             alt="<?php echo htmlspecialchars($proyecto['cliente']); ?>"
+                                             class="proyecto-imagen">
+                                    <?php else: ?>
+                                        <div class="proyecto-imagen default">
+                                            <i class="fas fa-image"></i>
+                                        </div>
+                                    <?php endif; ?>
+                                    <div class="proyecto-info">
+                                        <h3><?php echo htmlspecialchars($proyecto['cliente']); ?></h3>
+                                        <p class="tipo-solucion"><?php echo htmlspecialchars($proyecto['tipo_solucion']); ?></p>
+                                        <p class="descripcion-corta"><?php echo htmlspecialchars($proyecto['descripcion_corta']); ?></p>
+                                    </div>
+                                </div>
+                                <?php 
+                                endforeach;
+                            }
+                        } else {
+                            echo '<div class="alert alert-danger">Error al ejecutar la consulta</div>';
+                        }
+                    }
+                    ?>
+                </div>
+            </div>
+        </section>
+
+        <section class="testimonios">
+            <div class="container">
+                <h2>Lo que dicen nuestros clientes</h2>
+                <div class="testimonios-carousel">
+                    <?php
+                    require_once('includes/db.php');
+                    $conexion = conectarDB();
+                    
+                    // Verificar la conexión
+                    if (!$conexion) {
+                        echo '<div class="alert alert-danger">Error al conectar con la base de datos</div>';
+                    } else {
+                        $sql = "SELECT * FROM testimonios WHERE activo = 1 AND destacado = 1 ORDER BY fecha_creacion DESC LIMIT 5";
+                        $stmt = consultaSegura($conexion, $sql, []);
+                        
+                        if ($stmt) {
+                            $result = $stmt->get_result();
+                            $testimonios = $result->fetch_all(MYSQLI_ASSOC);
+                            
+                            if (empty($testimonios)) {
+                                echo '<div class="alert alert-info">No hay testimonios destacados disponibles</div>';
+                            } else {
+                                foreach ($testimonios as $testimonio):
+                                ?>
+                                <div class="testimonio-card">
+                                    <div class="testimonio-content">
+                                        <div class="testimonio-text">
+                                            <i class="fas fa-quote-left"></i>
+                                            <div class="testimonio-contenido">
+                                                <?php echo $testimonio['testimonio']; ?>
+                                            </div>
+                                        </div>
+                                        <div class="testimonio-author">
+                                            <?php if ($testimonio['logo']): ?>
+                                                <img src="<?php echo str_replace('../', '', $testimonio['logo']); ?>" 
+                                                     alt="<?php echo htmlspecialchars($testimonio['empresa']); ?>" 
+                                                     class="author-logo">
+                                            <?php else: ?>
+                                                <div class="author-logo default">
+                                                    <i class="fas fa-building"></i>
+                                                </div>
+                                            <?php endif; ?>
+                                            <div class="author-info">
+                                                <h4><?php echo htmlspecialchars($testimonio['cliente']); ?></h4>
+                                                <?php if ($testimonio['cargo']): ?>
+                                                    <p class="cargo"><?php echo htmlspecialchars($testimonio['cargo']); ?></p>
+                                                <?php endif; ?>
+                                                <?php if ($testimonio['empresa']): ?>
+                                                    <p class="empresa"><?php echo htmlspecialchars($testimonio['empresa']); ?></p>
+                                                <?php endif; ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <?php 
+                                endforeach;
+                            }
+                        } else {
+                            echo '<div class="alert alert-danger">Error al ejecutar la consulta</div>';
+                        }
+                    }
+                    ?>
+                </div>
+                <div class="testimonios-controls">
+                    <button class="prev-testimonio"><i class="fas fa-chevron-left"></i></button>
+                    <button class="next-testimonio"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+        </section>
+
+        <section class="certificaciones">
+            <div class="container">
+                <h2>Nuestras Certificaciones</h2>
+                <div class="certificaciones-grid">
+                    <?php
+                    // Reutilizamos la conexión existente
+                    if (!$conexion) {
+                        echo '<div class="alert alert-danger">Error al conectar con la base de datos</div>';
+                    } else {
+                        $sql = "SELECT * FROM certificaciones WHERE activo = 1 ORDER BY orden ASC, fecha_creacion DESC";
+                        $stmt = consultaSegura($conexion, $sql, []);
+                        
+                        if ($stmt) {
+                            $result = $stmt->get_result();
+                            $certificaciones = $result->fetch_all(MYSQLI_ASSOC);
+                            
+                            if (empty($certificaciones)) {
+                                echo '<div class="alert alert-info">No hay certificaciones disponibles</div>';
+                            } else {
+                                foreach ($certificaciones as $certificacion):
+                                ?>
+                                <div class="certificacion-card">
+                                    <div class="certificacion-imagen">
+                                        <?php if ($certificacion['imagen']): ?>
+                                            <img src="<?php echo str_replace('../', '', $certificacion['imagen']); ?>" 
+                                                 alt="<?php echo htmlspecialchars($certificacion['titulo']); ?>"
+                                                 class="certificacion-img">
+                                        <?php else: ?>
+                                            <div class="imagen-default">
+                                                <i class="fas fa-certificate"></i>
+                                            </div>
+                                        <?php endif; ?>
+                                    </div>
+                                    <div class="certificacion-info">
+                                        <h3><?php echo htmlspecialchars($certificacion['titulo']); ?></h3>
+                                        <?php if ($certificacion['descripcion']): ?>
+                                            <div class="certificacion-descripcion">
+                                                <?php echo $certificacion['descripcion']; ?>
+                                            </div>
+                                        <?php endif; ?>
+                                        <?php if ($certificacion['fecha']): ?>
+                                            <span class="fecha">Obtenido: <?php echo date('d/m/Y', strtotime($certificacion['fecha'])); ?></span>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
+                                <?php 
+                                endforeach;
+                            }
+                        } else {
+                            echo '<div class="alert alert-danger">Error al cargar las certificaciones</div>';
+                        }
+                    }
+                    ?>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <style>
+    .hero {
+        color: white;
+        text-align: center;
+        padding: 200px 0;
+        margin-bottom: 60px;
+        position: relative;
+    }
+
+    .hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(45deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.4) 100%);
+        z-index: 1;
+    }
+
+    .hero-content {
+        position: relative;
+        z-index: 2;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .hero h1 {
+        font-size: 3.5rem;
+        margin-bottom: 20px;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+
+    .hero p {
+        font-size: 1.2rem;
+        margin-bottom: 30px;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+    }
+
+    .cta-buttons {
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+    }
+
+    .btn {
+        padding: 15px 30px;
+        border-radius: 5px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: all 0.3s ease;
+    }
+
+    .btn-primary {
+        background-color: #00B4DB;
+        color: white;
+    }
+
+    .btn-secondary {
+        background-color: transparent;
+        border: 2px solid white;
+        color: white;
+    }
+
+    .servicios-destacados, .proyectos-destacados {
+        padding: 80px 0;
+    }
+
+    .servicios-grid, .proyectos-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        margin-top: 40px;
+    }
+
+    .servicio-card {
+        text-align: center;
+        padding: 30px;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+    }
+
+    .servicio-card:hover {
+        transform: translateY(-10px);
+    }
+
+    .servicio-imagen {
+        margin-bottom: 20px;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    .servicio-imagen img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+    }
+
+    .servicio-card:hover .servicio-imagen img {
+        transform: scale(1.1);
+    }
+
+    .servicio-card i {
+        font-size: 2.5rem;
+        color: #00B4DB;
+        margin: 20px 0;
+    }
+
+    .proyecto-card {
+        position: relative;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+    }
+
+    .proyecto-card:hover {
+        transform: translateY(-5px);
+    }
 
 <section class="hero" style="background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1520869562399-e772f042f422?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80') no-repeat center center; background-size: cover;">
     <div class="container">
