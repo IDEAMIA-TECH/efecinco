@@ -118,6 +118,35 @@ $certificaciones = $resultado->fetch_all(MYSQLI_ASSOC);
 include('includes/header.php');
 ?>
 
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Certificaciones</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="../assets/css/admin.css">
+    <!-- TinyMCE -->
+    <script src="https://cdn.tiny.cloud/1/4u89qw1ptzfqell0ybjhqth1cc16ilb1y0792h3momw4lk8l/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            tinymce.init({
+                selector: '#descripcion',
+                plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
+                toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
+                height: 300,
+                menubar: false,
+                content_style: 'body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 14px; }',
+                setup: function(editor) {
+                    editor.on('change', function() {
+                        editor.save();
+                    });
+                }
+            });
+        });
+    </script>
+</head>
+
 <div class="container">
     <div class="card">
         <div class="card-header">
@@ -302,21 +331,6 @@ include('includes/header.php');
 </style>
 
 <script>
-    // Inicializar TinyMCE
-    tinymce.init({
-        selector: '#descripcion',
-        plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
-        toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
-        height: 300,
-        menubar: false,
-        content_style: 'body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 14px; }',
-        setup: function(editor) {
-            editor.on('change', function() {
-                editor.save();
-            });
-        }
-    });
-
     function mostrarFormulario(accion, id = null) {
         const modal = document.getElementById("modalFormulario");
         const form = document.getElementById("formCertificacion");
@@ -331,7 +345,9 @@ include('includes/header.php');
             form.reset();
             certificacionId.value = "";
             document.getElementById("activo").checked = true;
-            tinymce.get('descripcion').setContent('');
+            if (tinymce.get('descripcion')) {
+                tinymce.get('descripcion').setContent('');
+            }
         } else {
             titulo.textContent = "Editar Certificación";
             accionInput.value = "update";
