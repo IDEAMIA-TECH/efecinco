@@ -137,7 +137,13 @@ $servicios = $resultado->fetch_all(MYSQLI_ASSOC);
         .hero-icon {
             font-size: 4rem;
             margin-top: 20px;
-            color: rgba(255, 255, 255, 0.2);
+            color: rgba(52, 152, 219, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .hero:hover .hero-icon {
+            color: rgba(52, 152, 219, 0.5);
+            transform: scale(1.1);
         }
 
         .hero h1 {
@@ -172,10 +178,39 @@ $servicios = $resultado->fetch_all(MYSQLI_ASSOC);
         }
 
         .servicio-icono {
-            background: #007bff;
-            color: white;
+            background: #2c3e50;
+            color: #fff;
             padding: 30px;
             font-size: 2.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .servicio-icono::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #3498db, #2ecc71);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .servicio-icono i {
+            position: relative;
+            z-index: 1;
+            transition: transform 0.3s ease;
+        }
+
+        .servicio-card:hover .servicio-icono::before {
+            opacity: 1;
+        }
+
+        .servicio-card:hover .servicio-icono i {
+            transform: scale(1.2);
         }
 
         .servicio-card:hover {
@@ -224,8 +259,32 @@ $servicios = $resultado->fetch_all(MYSQLI_ASSOC);
 
         .beneficio-icono {
             font-size: 2.5rem;
-            color: #007bff;
+            color: #2c3e50;
             margin-bottom: 20px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .beneficio-icono::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 3px;
+            background: linear-gradient(90deg, #3498db, #2ecc71);
+            border-radius: 3px;
+            transition: width 0.3s ease;
+        }
+
+        .beneficio-item:hover .beneficio-icono {
+            color: #3498db;
+            transform: translateY(-5px);
+        }
+
+        .beneficio-item:hover .beneficio-icono::after {
+            width: 60px;
         }
 
         .beneficio-item h3 {
