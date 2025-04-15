@@ -627,33 +627,33 @@ include('includes/header.php');
 
 .certificaciones-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-    margin-top: 40px;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 30px;
 }
 
 .certificacion-card {
     background: white;
-    border-radius: 10px;
+    border-radius: 8px;
     overflow: hidden;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
 }
 
 .certificacion-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-3px);
 }
 
 .certificacion-imagen {
     width: 100%;
-    height: 200px;
+    height: 150px;
     overflow: hidden;
     position: relative;
     background-color: white;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 20px;
+    padding: 15px;
 }
 
 .certificacion-img {
@@ -674,29 +674,29 @@ include('includes/header.php');
 }
 
 .imagen-default i {
-    font-size: 4rem;
+    font-size: 3rem;
     color: #6c757d;
 }
 
 .certificacion-info {
-    padding: 20px;
+    padding: 15px;
 }
 
 .certificacion-info h3 {
-    margin: 0 0 10px 0;
-    font-size: 1.2rem;
+    margin: 0 0 8px 0;
+    font-size: 1.1rem;
     color: #333;
 }
 
 .certificacion-descripcion {
-    margin: 0 0 10px 0;
+    margin: 0 0 8px 0;
     color: #666;
-    font-size: 0.9rem;
-    line-height: 1.5;
+    font-size: 0.85rem;
+    line-height: 1.4;
 }
 
 .certificacion-descripcion p {
-    margin: 0 0 10px 0;
+    margin: 0 0 8px 0;
 }
 
 .certificacion-descripcion p:last-child {
@@ -706,25 +706,26 @@ include('includes/header.php');
 .certificacion-info .fecha {
     display: block;
     color: #6c757d;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     font-style: italic;
 }
 
 @media (max-width: 768px) {
     .certificaciones-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 15px;
     }
     
     .certificacion-imagen {
-        height: 180px;
+        height: 120px;
     }
     
     .certificacion-info h3 {
-        font-size: 1.1rem;
+        font-size: 1rem;
     }
     
     .certificacion-descripcion {
-        font-size: 0.85rem;
+        font-size: 0.8rem;
     }
 }
 </style>
