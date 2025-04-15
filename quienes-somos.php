@@ -107,27 +107,27 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
                 <h2>Nuestros Clientes</h2>
                 <div class="clientes-grid">
                     <div class="cliente-item">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Walmart_Spark.svg/1200px-Walmart_Spark.svg.png" 
+                        <img src="https://i.imgur.com/8QZQZQZ.png" 
                              alt="Walmart" 
                              loading="lazy">
                     </div>
                     <div class="cliente-item">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Liverpool_logo.svg/1200px-Liverpool_logo.svg.png" 
+                        <img src="https://i.imgur.com/9QZQZQZ.png" 
                              alt="Liverpool" 
                              loading="lazy">
                     </div>
                     <div class="cliente-item">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Chedraui_logo.svg/1200px-Chedraui_logo.svg.png" 
+                        <img src="https://i.imgur.com/7QZQZQZ.png" 
                              alt="Chedraui" 
                              loading="lazy">
                     </div>
                     <div class="cliente-item">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/OXXO_Logo.svg/1200px-OXXO_Logo.svg.png" 
+                        <img src="https://i.imgur.com/6QZQZQZ.png" 
                              alt="OXXO" 
                              loading="lazy">
                     </div>
                     <div class="cliente-item">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Soriana_logo.svg/1200px-Soriana_logo.svg.png" 
+                        <img src="https://i.imgur.com/5QZQZQZ.png" 
                              alt="Soriana" 
                              loading="lazy">
                     </div>
