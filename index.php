@@ -137,8 +137,8 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
                         <p>Gestión segura de accesos a tus instalaciones</p>
                     </div>
                 </div>
-                <div class="text-center mt-4">
-                    <a href="servicios.php" class="btn btn-primary">
+                <div class="text-center" style="margin-top: 60px; margin-bottom: 30px;">
+                    <a href="servicios.php" class="btn btn-primary" style="padding: 12px 30px; font-size: 1.1rem;">
                         <i class="fas fa-arrow-right"></i> Ver todos los servicios
                     </a>
                 </div>
