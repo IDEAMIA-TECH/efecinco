@@ -367,6 +367,84 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
                 </div>
             </div>
         </section>
+
+        <section class="nuestros-clientes">
+            <div class="container">
+                <h2>Nuestros Clientes</h2>
+                <p class="section-description">Empresas que confían en nuestros servicios</p>
+                <div class="clientes-grid">
+                    <div class="cliente-item">
+                        <img src="assets/images/clientes/client-a.png" alt="Cliente A" loading="lazy">
+                    </div>
+                    <div class="cliente-item">
+                        <img src="assets/images/clientes/client-b.png" alt="Cliente B" loading="lazy">
+                    </div>
+                    <div class="cliente-item">
+                        <img src="assets/images/clientes/client-c.png" alt="Cliente C" loading="lazy">
+                    </div>
+                    <div class="cliente-item">
+                        <img src="assets/images/clientes/client-d.png" alt="Cliente D" loading="lazy">
+                    </div>
+                    <div class="cliente-item">
+                        <img src="assets/images/clientes/client-e.png" alt="Cliente E" loading="lazy">
+                    </div>
+                    <div class="cliente-item">
+                        <img src="assets/images/clientes/client-f.png" alt="Cliente F" loading="lazy">
+                    </div>
+                    <div class="cliente-item">
+                        <img src="assets/images/clientes/client-g.png" alt="Cliente G" loading="lazy">
+                    </div>
+                    <div class="cliente-item">
+                        <img src="assets/images/clientes/client-h.png" alt="Cliente H" loading="lazy">
+                    </div>
+                    <div class="cliente-item">
+                        <img src="assets/images/clientes/client-i.png" alt="Cliente I" loading="lazy">
+                    </div>
+                    <div class="cliente-item">
+                        <img src="assets/images/clientes/client-j.png" alt="Cliente J" loading="lazy">
+                    </div>
+                    <div class="cliente-item">
+                        <img src="assets/images/clientes/client-k.png" alt="Cliente K" loading="lazy">
+                    </div>
+                    <div class="cliente-item">
+                        <img src="assets/images/clientes/client-l.png" alt="Cliente L" loading="lazy">
+                    </div>
+                    <div class="cliente-item">
+                        <img src="assets/images/clientes/client-m.png" alt="Cliente M" loading="lazy">
+                    </div>
+                    <div class="cliente-item">
+                        <img src="assets/images/clientes/client-n.png" alt="Cliente N" loading="lazy">
+                    </div>
+                    <div class="cliente-item">
+                        <img src="assets/images/clientes/client-o.png" alt="Cliente O" loading="lazy">
+                    </div>
+                    <div class="cliente-item">
+                        <img src="assets/images/clientes/client-p.png" alt="Cliente P" loading="lazy">
+                    </div>
+                    <div class="cliente-item">
+                        <img src="assets/images/clientes/client-q.png" alt="Cliente Q" loading="lazy">
+                    </div>
+                    <div class="cliente-item">
+                        <img src="assets/images/clientes/client-r.png" alt="Cliente R" loading="lazy">
+                    </div>
+                    <div class="cliente-item">
+                        <img src="assets/images/clientes/client-s.png" alt="Cliente S" loading="lazy">
+                    </div>
+                    <div class="cliente-item">
+                        <img src="assets/images/clientes/client-t.png" alt="Cliente T" loading="lazy">
+                    </div>
+                    <div class="cliente-item">
+                        <img src="assets/images/clientes/client-u.png" alt="Cliente U" loading="lazy">
+                    </div>
+                    <div class="cliente-item">
+                        <img src="assets/images/clientes/client-v.png" alt="Cliente V" loading="lazy">
+                    </div>
+                    <div class="cliente-item">
+                        <img src="assets/images/clientes/client-w.png" alt="Cliente W" loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 
     <style>
@@ -1137,6 +1215,87 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
         .mision-vision .card img {
             width: 100px;
             height: 100px;
+        }
+    }
+
+    .nuestros-clientes {
+        padding: 80px 0;
+        background-color: #fff;
+    }
+
+    .nuestros-clientes h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #333;
+        font-size: 2.5rem;
+    }
+
+    .section-description {
+        text-align: center;
+        color: #666;
+        margin-bottom: 50px;
+        font-size: 1.2rem;
+    }
+
+    .clientes-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 30px;
+        align-items: center;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+
+    .cliente-item {
+        text-align: center;
+        padding: 30px;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 120px;
+    }
+
+    .cliente-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .cliente-item img {
+        max-width: 100%;
+        height: auto;
+        max-height: 80px;
+        width: auto;
+        object-fit: contain;
+        filter: grayscale(100%);
+        transition: filter 0.3s ease;
+    }
+
+    .cliente-item:hover img {
+        filter: grayscale(0%);
+    }
+
+    @media (max-width: 768px) {
+        .clientes-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .cliente-item {
+            padding: 20px;
+            min-height: 100px;
+        }
+
+        .cliente-item img {
+            max-height: 60px;
+        }
+
+        .nuestros-clientes h2 {
+            font-size: 2rem;
         }
     }
     </style>
