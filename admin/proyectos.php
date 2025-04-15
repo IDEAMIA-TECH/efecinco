@@ -370,41 +370,41 @@ include('includes/header.php');
 $scripts_adicionales = '
 <script>
     function mostrarFormulario(accion, id = null) {
-        const modal = document.getElementById('modalFormulario');
-        const form = document.getElementById('formProyecto');
-        const titulo = document.getElementById('tituloModal');
-        const accionInput = document.getElementById('accion');
-        const proyectoId = document.getElementById('proyectoId');
+        const modal = document.getElementById("modalFormulario");
+        const form = document.getElementById("formProyecto");
+        const titulo = document.getElementById("tituloModal");
+        const accionInput = document.getElementById("accion");
+        const proyectoId = document.getElementById("proyectoId");
 
         // Configurar el formulario según la acción
-        if (accion === 'crear') {
-            titulo.textContent = 'Nuevo Proyecto';
-            accionInput.value = 'crear';
+        if (accion === "crear") {
+            titulo.textContent = "Nuevo Proyecto";
+            accionInput.value = "crear";
             form.reset();
-            proyectoId.value = '';
-            document.getElementById('previewImagen').innerHTML = '';
+            proyectoId.value = "";
+            document.getElementById("previewImagen").innerHTML = "";
         } else {
-            titulo.textContent = 'Editar Proyecto';
-            accionInput.value = 'actualizar';
+            titulo.textContent = "Editar Proyecto";
+            accionInput.value = "actualizar";
             proyectoId.value = id;
 
             // Cargar datos del proyecto
             fetch(`get_proyecto.php?id=${id}`)
                 .then(response => response.json())
                 .then(data => {
-                    document.getElementById('cliente').value = data.cliente;
-                    document.getElementById('tipo_solucion').value = data.tipo_solucion;
-                    document.getElementById('descripcion').value = data.descripcion;
-                    document.getElementById('descripcion_corta').value = data.descripcion_corta;
-                    document.getElementById('caracteristicas').value = data.caracteristicas;
-                    document.getElementById('fecha').value = data.fecha;
-                    document.getElementById('imagenActual').value = data.imagen;
-                    document.getElementById('destacado').checked = data.destacado == 1;
-                    document.getElementById('activo').checked = data.activo == 1;
+                    document.getElementById("cliente").value = data.cliente;
+                    document.getElementById("tipo_solucion").value = data.tipo_solucion;
+                    document.getElementById("descripcion").value = data.descripcion;
+                    document.getElementById("descripcion_corta").value = data.descripcion_corta;
+                    document.getElementById("caracteristicas").value = data.caracteristicas;
+                    document.getElementById("fecha").value = data.fecha;
+                    document.getElementById("imagenActual").value = data.imagen;
+                    document.getElementById("destacado").checked = data.destacado == 1;
+                    document.getElementById("activo").checked = data.activo == 1;
 
                     // Mostrar imagen actual
                     if (data.imagen) {
-                        document.getElementById('previewImagen').innerHTML = `
+                        document.getElementById("previewImagen").innerHTML = `
                             <img src="../${data.imagen}" alt="Imagen actual">
                         `;
                     }
@@ -417,17 +417,17 @@ $scripts_adicionales = '
                 });
         }
 
-        modal.style.display = 'block';
+        modal.style.display = "block";
     }
 
     function cerrarModal() {
-        document.getElementById('modalFormulario').style.display = 'none';
+        document.getElementById("modalFormulario").style.display = "none";
     }
 
     function eliminarProyecto(id) {
-        if (confirm('¿Estás seguro de que deseas eliminar este proyecto?')) {
-            const form = document.createElement('form');
-            form.method = 'POST';
+        if (confirm("¿Estás seguro de que deseas eliminar este proyecto?")) {
+            const form = document.createElement("form");
+            form.method = "POST";
             form.innerHTML = `
                 <input type="hidden" name="accion" value="eliminar">
                 <input type="hidden" name="id" value="${id}">
@@ -439,15 +439,15 @@ $scripts_adicionales = '
 
     // Cerrar modal al hacer clic fuera
     window.onclick = function(event) {
-        const modal = document.getElementById('modalFormulario');
+        const modal = document.getElementById("modalFormulario");
         if (event.target == modal) {
             cerrarModal();
         }
     }
 
     // Preview de imagen
-    document.getElementById('imagen').addEventListener('change', function(e) {
-        const preview = document.getElementById('previewImagen');
+    document.getElementById("imagen").addEventListener("change", function(e) {
+        const preview = document.getElementById("previewImagen");
         const file = e.target.files[0];
         
         if (file) {
