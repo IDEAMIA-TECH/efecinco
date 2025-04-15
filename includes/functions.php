@@ -55,26 +55,6 @@ function enviarCorreoAdmin($nombre, $telefono, $email) {
 }
 
 /**
- * Conecta a la base de datos
- * @return mysqli|false Objeto de conexión o false en caso de error
- */
-function conectarDB() {
-    $host = "localhost";
-    $usuario = "ideamiadev_efecinco";
-    $password = "TuContraseña"; // Reemplazar con la contraseña real
-    $base_datos = "ideamiadev_efecinco";
-
-    $conexion = new mysqli($host, $usuario, $password, $base_datos);
-
-    if ($conexion->connect_error) {
-        die("Error de conexión: " . $conexion->connect_error);
-    }
-
-    $conexion->set_charset("utf8mb4");
-    return $conexion;
-}
-
-/**
  * Valida un número de teléfono
  * @param string $telefono Número de teléfono a validar
  * @return bool True si el teléfono es válido
