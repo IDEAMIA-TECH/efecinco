@@ -323,12 +323,12 @@ include('includes/header.php');
 
                     <div class="form-group full-width">
                         <label for="descripcion_corta">Descripción Corta</label>
-                        <textarea class="form-control" id="descripcion_corta" name="descripcion_corta" required></textarea>
+                        <textarea class="form-control tinymce" id="descripcion_corta" name="descripcion_corta" required></textarea>
                     </div>
 
                     <div class="form-group full-width">
                         <label for="descripcion">Descripción Completa</label>
-                        <textarea class="form-control" id="descripcion" name="descripcion" required></textarea>
+                        <textarea class="form-control tinymce" id="descripcion" name="descripcion" required></textarea>
                     </div>
 
                     <div class="form-group full-width">
@@ -399,13 +399,37 @@ $scripts_adicionales = '
     // Inicializar TinyMCE
     function initTinyMCE() {
         tinymce.init({
-            selector: "#descripcion_corta, #descripcion",
+            selector: ".tinymce",
             plugins: "advlist autolink lists link image charmap preview anchor searchreplace visualblocks code fullscreen insertdatetime media table code help wordcount",
             toolbar: "undo redo | blocks | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media | forecolor backcolor emoticons",
             height: 300,
             language: "es",
-            branding: false
+            branding: false,
+            setup: function(editor) {
+                editor.on("change", function() {
+                    editor.save(); // Guarda el contenido en el textarea original
+                });
+            }
         });
+    }
+
+    // Función para validar el formulario antes de enviar
+    function validarFormulario() {
+        const form = document.getElementById("formProyecto");
+        const descripcionCorta = tinymce.get("descripcion_corta").getContent();
+        const descripcion = tinymce.get("descripcion").getContent();
+
+        if (!descripcionCorta.trim()) {
+            alert("Por favor, ingrese una descripción corta");
+            return false;
+        }
+
+        if (!descripcion.trim()) {
+            alert("Por favor, ingrese una descripción completa");
+            return false;
+        }
+
+        return true;
     }
 
     // Función para mostrar/ocultar formulario
@@ -465,6 +489,14 @@ $scripts_adicionales = '
     // Inicializar TinyMCE al cargar la página
     document.addEventListener("DOMContentLoaded", function() {
         initTinyMCE();
+        
+        // Agregar validación al formulario
+        const form = document.getElementById("formProyecto");
+        form.onsubmit = function(e) {
+            if (!validarFormulario()) {
+                e.preventDefault();
+            }
+        };
     });
 
     function cerrarModal() {
