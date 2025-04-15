@@ -129,6 +129,7 @@ $empresa = mysqli_fetch_assoc($resultado);
     font-size: 1.3rem;
     box-shadow: 0 2px 8px rgba(0,180,219,0.10);
     transition: all 0.3s;
+    text-decoration: none !important;
 }
 
 .social-links a:hover {
@@ -218,6 +219,7 @@ $empresa = mysqli_fetch_assoc($resultado);
     font-size: 2.2rem;
     box-shadow: 0 4px 16px rgba(0,0,0,0.18);
     transition: background 0.3s, transform 0.3s;
+    text-decoration: none !important;
 }
 .whatsapp-float:hover {
     background: #128C7E;
