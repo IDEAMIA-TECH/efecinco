@@ -23,11 +23,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $cargo = $_POST['cargo'] ?? '';
                 $empresa = $_POST['empresa'] ?? '';
                 $testimonio = $_POST['testimonio'] ?? '';
+                $logo = $_FILES['logo'] ?? null;
                 
                 if (!empty($cliente) && !empty($testimonio)) {
-                    $sql = "INSERT INTO testimonios (cliente, cargo, empresa, testimonio) 
-                            VALUES (?, ?, ?, ?)";
-                    $stmt = consultaSegura($conexion, $sql, [$cliente, $cargo, $empresa, $testimonio]);
+                    $ruta_logo = '';
+                    if ($logo && $logo['error'] === UPLOAD_ERR_OK) {
+                        $directorio = '../assets/images/testimonios/';
+                        if (!file_exists($directorio)) {
+                            mkdir($directorio, 0777, true);
+                        }
+                        $nombre_archivo = uniqid() . '_' . basename($logo['name']);
+                        $ruta_logo = $directorio . $nombre_archivo;
+                        move_uploaded_file($logo['tmp_name'], $ruta_logo);
+                    }
+                    
+                    $sql = "INSERT INTO testimonios (cliente, cargo, empresa, testimonio, logo) 
+                            VALUES (?, ?, ?, ?, ?)";
+                    $stmt = consultaSegura($conexion, $sql, [$cliente, $cargo, $empresa, $testimonio, $ruta_logo]);
                     
                     if ($stmt->affected_rows > 0) {
                         $mensaje = 'Testimonio creado exitosamente';
@@ -46,12 +58,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $empresa = $_POST['empresa'] ?? '';
                 $testimonio = $_POST['testimonio'] ?? '';
                 $activo = isset($_POST['activo']) ? 1 : 0;
+                $logo = $_FILES['logo'] ?? null;
                 
                 if ($id > 0 && !empty($cliente) && !empty($testimonio)) {
+                    $ruta_logo = $_POST['logo_actual'] ?? '';
+                    if ($logo && $logo['error'] === UPLOAD_ERR_OK) {
+                        $directorio = '../assets/images/testimonios/';
+                        if (!file_exists($directorio)) {
+                            mkdir($directorio, 0777, true);
+                        }
+                        $nombre_archivo = uniqid() . '_' . basename($logo['name']);
+                        $ruta_logo = $directorio . $nombre_archivo;
+                        move_uploaded_file($logo['tmp_name'], $ruta_logo);
+                    }
+                    
                     $sql = "UPDATE testimonios SET cliente = ?, cargo = ?, empresa = ?, 
-                            testimonio = ?, activo = ? WHERE id = ?";
+                            testimonio = ?, activo = ?, logo = ? WHERE id = ?";
                     $stmt = consultaSegura($conexion, $sql, [$cliente, $cargo, $empresa, 
-                            $testimonio, $activo, $id]);
+                            $testimonio, $activo, $ruta_logo, $id]);
                     
                     if ($stmt->affected_rows > 0) {
                         $mensaje = 'Testimonio actualizado exitosamente';
@@ -229,7 +253,7 @@ include('includes/header.php');
                 <h3 id="tituloModal">Nuevo Testimonio</h3>
                 <span class="close" onclick="cerrarModal()">&times;</span>
             </div>
-            <form id="formTestimonio" method="POST">
+            <form id="formTestimonio" method="POST" enctype="multipart/form-data">
                 <input type="hidden" name="action" id="formAction" value="create">
                 <input type="hidden" name="id" id="testimonioId">
                 
@@ -246,6 +270,13 @@ include('includes/header.php');
                 <div class="form-group">
                     <label for="empresa">Empresa</label>
                     <input type="text" id="empresa" name="empresa" class="form-control">
+                </div>
+                
+                <div class="form-group">
+                    <label for="logo">Logo de la Empresa</label>
+                    <input type="file" id="logo" name="logo" accept="image/*" class="form-control">
+                    <small class="form-text text-muted">Formatos aceptados: JPG, PNG, GIF. Tamaño máximo: 2MB</small>
+                    <input type="hidden" name="logo_actual" id="logoActual">
                 </div>
                 
                 <div class="form-group">
@@ -321,6 +352,7 @@ include('includes/header.php');
             testimonioId.value = "";
             document.getElementById("activo").checked = true;
             document.getElementById("destacado").checked = false;
+            document.getElementById("logoActual").value = "";
             tinymce.get('testimonio').setContent('');
         } else {
             titulo.textContent = "Editar Testimonio";
@@ -339,6 +371,7 @@ include('includes/header.php');
                     document.getElementById("cliente").value = data.cliente;
                     document.getElementById("cargo").value = data.cargo;
                     document.getElementById("empresa").value = data.empresa;
+                    document.getElementById("logoActual").value = data.logo;
                     tinymce.get('testimonio').setContent(data.testimonio);
                     document.getElementById("activo").checked = data.activo == 1;
                     document.getElementById("destacado").checked = data.destacado == 1;
