@@ -310,6 +310,7 @@ include('includes/header.php');
             form.reset();
             testimonioId.value = "";
             document.getElementById("activo").checked = true;
+            tinymce.get('testimonio').setContent('');
         } else {
             titulo.textContent = "Editar Testimonio";
             accionInput.value = "update";
@@ -317,12 +318,17 @@ include('includes/header.php');
 
             // Cargar datos del testimonio
             fetch(`get_testimonio.php?id=${id}`)
-                .then(response => response.json())
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Error en la respuesta del servidor');
+                    }
+                    return response.json();
+                })
                 .then(data => {
                     document.getElementById("cliente").value = data.cliente;
                     document.getElementById("cargo").value = data.cargo;
                     document.getElementById("empresa").value = data.empresa;
-                    document.getElementById("testimonio").value = data.testimonio;
+                    tinymce.get('testimonio').setContent(data.testimonio);
                     document.getElementById("activo").checked = data.activo == 1;
                 })
                 .catch(error => {
