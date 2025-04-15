@@ -43,7 +43,7 @@ $stats['certificaciones'] = $resultado->fetch_assoc()['total'];
     <div class="admin-wrapper">
         <header class="admin-header">
             <div class="header-logo">
-                <img src="../assets/images/logo.png" alt="Efecinco Logo" class="logo">
+                <img src="../assets/img/logof5.png" alt="Efecinco Logo" class="logo">
                 <h2>Efecinco</h2>
             </div>
             <nav class="admin-nav">
@@ -200,8 +200,9 @@ $stats['certificaciones'] = $resultado->fetch_assoc()['total'];
         }
 
         .header-logo .logo {
-            width: 40px;
+            width: 120px;
             height: auto;
+            padding: 10px 0;
         }
 
         .header-logo h2 {
