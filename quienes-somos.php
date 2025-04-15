@@ -107,27 +107,27 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
                 <h2>Nuestros Clientes</h2>
                 <div class="clientes-grid">
                     <div class="cliente-item">
-                        <img src="https://i.imgur.com/8QZQZQZ.png" 
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Walmart_Spark.svg/2560px-Walmart_Spark.svg.png" 
                              alt="Walmart" 
                              loading="lazy">
                     </div>
                     <div class="cliente-item">
-                        <img src="https://i.imgur.com/9QZQZQZ.png" 
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Liverpool_logo.svg/2560px-Liverpool_logo.svg.png" 
                              alt="Liverpool" 
                              loading="lazy">
                     </div>
                     <div class="cliente-item">
-                        <img src="https://i.imgur.com/7QZQZQZ.png" 
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Chedraui_logo.svg/2560px-Chedraui_logo.svg.png" 
                              alt="Chedraui" 
                              loading="lazy">
                     </div>
                     <div class="cliente-item">
-                        <img src="https://i.imgur.com/6QZQZQZ.png" 
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/OXXO_Logo.svg/2560px-OXXO_Logo.svg.png" 
                              alt="OXXO" 
                              loading="lazy">
                     </div>
                     <div class="cliente-item">
-                        <img src="https://i.imgur.com/5QZQZQZ.png" 
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Soriana_logo.svg/2560px-Soriana_logo.svg.png" 
                              alt="Soriana" 
                              loading="lazy">
                     </div>
@@ -317,6 +317,10 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 120px;
         }
 
         .cliente-item:hover {
@@ -328,6 +332,7 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
             max-width: 100%;
             height: auto;
             max-height: 80px;
+            width: auto;
             object-fit: contain;
             filter: grayscale(100%);
             transition: filter 0.3s ease;
@@ -380,6 +385,7 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
 
             .cliente-item {
                 padding: 20px;
+                min-height: 100px;
             }
 
             .cliente-item img {
