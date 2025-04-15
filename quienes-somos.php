@@ -102,34 +102,79 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
             </div>
         </section>
 
-        <section class="clientes">
+        <section class="nuestros-clientes">
             <div class="container">
                 <h2>Nuestros Clientes</h2>
+                <p class="section-description">Empresas que confían en nuestros servicios</p>
                 <div class="clientes-grid">
                     <div class="cliente-item">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Walmart_Spark.svg/2560px-Walmart_Spark.svg.png" 
-                             alt="Walmart" 
-                             loading="lazy">
+                        <img src="assets/images/clientes/client-a.png" alt="Cliente A" loading="lazy">
                     </div>
                     <div class="cliente-item">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Liverpool_logo.svg/2560px-Liverpool_logo.svg.png" 
-                             alt="Liverpool" 
-                             loading="lazy">
+                        <img src="assets/images/clientes/client-b.png" alt="Cliente B" loading="lazy">
                     </div>
                     <div class="cliente-item">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Chedraui_logo.svg/2560px-Chedraui_logo.svg.png" 
-                             alt="Chedraui" 
-                             loading="lazy">
+                        <img src="assets/images/clientes/client-c.png" alt="Cliente C" loading="lazy">
                     </div>
                     <div class="cliente-item">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/OXXO_Logo.svg/2560px-OXXO_Logo.svg.png" 
-                             alt="OXXO" 
-                             loading="lazy">
+                        <img src="assets/images/clientes/client-d.png" alt="Cliente D" loading="lazy">
                     </div>
                     <div class="cliente-item">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Soriana_logo.svg/2560px-Soriana_logo.svg.png" 
-                             alt="Soriana" 
-                             loading="lazy">
+                        <img src="assets/images/clientes/client-e.png" alt="Cliente E" loading="lazy">
+                    </div>
+                    <div class="cliente-item">
+                        <img src="assets/images/clientes/client-f.png" alt="Cliente F" loading="lazy">
+                    </div>
+                    <div class="cliente-item">
+                        <img src="assets/images/clientes/client-g.png" alt="Cliente G" loading="lazy">
+                    </div>
+                    <div class="cliente-item">
+                        <img src="assets/images/clientes/client-h.png" alt="Cliente H" loading="lazy">
+                    </div>
+                    <div class="cliente-item">
+                        <img src="assets/images/clientes/client-i.png" alt="Cliente I" loading="lazy">
+                    </div>
+                    <div class="cliente-item">
+                        <img src="assets/images/clientes/client-j.png" alt="Cliente J" loading="lazy">
+                    </div>
+                    <div class="cliente-item">
+                        <img src="assets/images/clientes/client-k.png" alt="Cliente K" loading="lazy">
+                    </div>
+                    <div class="cliente-item">
+                        <img src="assets/images/clientes/client-l.png" alt="Cliente L" loading="lazy">
+                    </div>
+                    <div class="cliente-item">
+                        <img src="assets/images/clientes/client-m.png" alt="Cliente M" loading="lazy">
+                    </div>
+                    <div class="cliente-item">
+                        <img src="assets/images/clientes/client-n.png" alt="Cliente N" loading="lazy">
+                    </div>
+                    <div class="cliente-item">
+                        <img src="assets/images/clientes/client-o.png" alt="Cliente O" loading="lazy">
+                    </div>
+                    <div class="cliente-item">
+                        <img src="assets/images/clientes/client-p.png" alt="Cliente P" loading="lazy">
+                    </div>
+                    <div class="cliente-item">
+                        <img src="assets/images/clientes/client-q.png" alt="Cliente Q" loading="lazy">
+                    </div>
+                    <div class="cliente-item">
+                        <img src="assets/images/clientes/client-r.png" alt="Cliente R" loading="lazy">
+                    </div>
+                    <div class="cliente-item">
+                        <img src="assets/images/clientes/client-s.png" alt="Cliente S" loading="lazy">
+                    </div>
+                    <div class="cliente-item">
+                        <img src="assets/images/clientes/client-t.png" alt="Cliente T" loading="lazy">
+                    </div>
+                    <div class="cliente-item">
+                        <img src="assets/images/clientes/client-u.png" alt="Cliente U" loading="lazy">
+                    </div>
+                    <div class="cliente-item">
+                        <img src="assets/images/clientes/client-v.png" alt="Cliente V" loading="lazy">
+                    </div>
+                    <div class="cliente-item">
+                        <img src="assets/images/clientes/client-w.png" alt="Cliente W" loading="lazy">
                     </div>
                 </div>
             </div>
