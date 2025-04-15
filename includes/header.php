@@ -69,6 +69,9 @@ require_once __DIR__ . '/db.php';
             .mobile-menu {
                 display: block;
             }
+            .header .container {
+                padding: 0 16px;
+            }
             nav {
                 display: none;
                 position: absolute;
@@ -109,7 +112,7 @@ require_once __DIR__ . '/db.php';
             top: 100%;
             left: 0;
             background: #fff;
-            min-width: 260px;
+            min-width: 290px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.08);
             border-radius: 8px;
             padding: 10px 0;
