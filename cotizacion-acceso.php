@@ -57,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             cantidad_usuarios, gestion_web, horarios_acceso,
             tiempo_instalacion, mantenimiento, horario_contacto, comentarios,
             fecha_creacion, estado
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), 'pendiente')";
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), 'pendiente')";
         
         $stmt = $conexion->prepare($sql);
         if (!$stmt) {
@@ -89,15 +89,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 'empresa' => $empresa,
                 'direccion' => $direccion,
                 'tipo_inmueble' => $tipo_inmueble,
-                'numero_empleados' => $numero_empleados,
-                'tipo_conexion' => $tipo_conexion,
-                'ancho_banda' => $ancho_banda,
-                'servicios_requeridos' => $servicios_requeridos,
-                'equipos_red' => $equipos_red,
-                'seguridad_red' => $seguridad_red,
-                'backup_internet' => $backup_internet,
-                'soporte_tecnico' => $soporte_tecnico,
-                'tiempo_implementacion' => $tiempo_implementacion,
+                'cantidad_accesos' => $cantidad_accesos,
+                'tipo_acceso' => $tipo_acceso,
+                'metodo_autenticacion' => $metodo_autenticacion,
+                'bitacora' => $bitacora,
+                'integracion_sistema' => $integracion_sistema,
+                'puertas_compatibles' => $puertas_compatibles,
+                'suministro_electrico' => $suministro_electrico,
+                'red_internet' => $red_internet,
+                'infraestructura_comunicaciones' => $infraestructura_comunicaciones,
+                'cantidad_usuarios' => $cantidad_usuarios,
+                'gestion_web' => $gestion_web,
+                'horarios_acceso' => $horarios_acceso,
+                'tiempo_instalacion' => $tiempo_instalacion,
+                'mantenimiento' => $mantenimiento,
                 'horario_contacto' => $horario_contacto,
                 'comentarios' => $comentarios
             ]
