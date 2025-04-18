@@ -43,18 +43,33 @@ $servicios = $resultado->fetch_all(MYSQLI_ASSOC);
                             <div class="servicio-card">
                                 <div class="servicio-icono">
                                     <i class="<?php 
-                                        switch($servicio['id']) {
-                                            case 1:
+                                        switch(strtolower($servicio['nombre'])) {
+                                            case 'cableado estructurado':
                                                 echo 'fas fa-network-wired';
                                                 break;
-                                            case 2:
+                                            case 'cctv':
+                                            case 'cámaras de seguridad':
                                                 echo 'fas fa-video';
                                                 break;
-                                            case 3:
+                                            case 'control de acceso':
                                                 echo 'fas fa-door-closed';
                                                 break;
-                                            case 4:
+                                            case 'redes inalámbricas':
+                                            case 'wifi':
                                                 echo 'fas fa-wifi';
+                                                break;
+                                            case 'telefonía ip':
+                                                echo 'fas fa-phone';
+                                                break;
+                                            case 'soporte técnico':
+                                                echo 'fas fa-headset';
+                                                break;
+                                            case 'servidores':
+                                                echo 'fas fa-server';
+                                                break;
+                                            case 'backup':
+                                            case 'respaldo':
+                                                echo 'fas fa-database';
                                                 break;
                                             default:
                                                 echo 'fas fa-cogs';
