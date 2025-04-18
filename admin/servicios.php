@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $nombre = $_POST['nombre'] ?? '';
                 $descripcion = $_POST['descripcion'] ?? '';
                 $icono = $_POST['icono'] ?? '';
-                $orden = $_POST['orden'] ?? 0;
+                $orden = intval($_POST['orden'] ?? 0);
                 $activo = isset($_POST['activo']) ? 1 : 0;
                 
                 if (!empty($nombre)) {
@@ -33,9 +33,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $stmt = consultaSegura($conexion, $sql, [$nombre, $descripcion, $icono, $orden, $activo]);
                     
                     if ($stmt->affected_rows > 0) {
-                        $mensaje = 'Servicio creado exitosamente';
-                        $tipo_mensaje = 'success';
-                        // Recargar la página para mostrar los cambios
                         header("Location: servicios.php?mensaje=creado&tipo=success");
                         exit;
                     } else {
@@ -46,11 +43,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 break;
                 
             case 'update':
-                $id = $_POST['id'] ?? 0;
+                $id = intval($_POST['id'] ?? 0);
                 $nombre = $_POST['nombre'] ?? '';
                 $descripcion = $_POST['descripcion'] ?? '';
                 $icono = $_POST['icono'] ?? '';
-                $orden = $_POST['orden'] ?? 0;
+                $orden = intval($_POST['orden'] ?? 0);
                 $activo = isset($_POST['activo']) ? 1 : 0;
                 
                 if ($id > 0 && !empty($nombre)) {
@@ -58,9 +55,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $stmt = consultaSegura($conexion, $sql, [$nombre, $descripcion, $icono, $orden, $activo, $id]);
                     
                     if ($stmt->affected_rows > 0) {
-                        $mensaje = 'Servicio actualizado exitosamente';
-                        $tipo_mensaje = 'success';
-                        // Recargar la página para mostrar los cambios
                         header("Location: servicios.php?mensaje=actualizado&tipo=success");
                         exit;
                     } else {
@@ -71,15 +65,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 break;
                 
             case 'delete':
-                $id = $_POST['id'] ?? 0;
+                $id = intval($_POST['id'] ?? 0);
                 if ($id > 0) {
                     $sql = "DELETE FROM servicios WHERE id = ?";
                     $stmt = consultaSegura($conexion, $sql, [$id]);
                     
                     if ($stmt->affected_rows > 0) {
-                        $mensaje = 'Servicio eliminado exitosamente';
-                        $tipo_mensaje = 'success';
-                        // Recargar la página para mostrar los cambios
                         header("Location: servicios.php?mensaje=eliminado&tipo=success");
                         exit;
                     } else {
@@ -251,12 +242,14 @@ $scripts_adicionales = '
             fetch(`get_servicio.php?id=${id}`)
                 .then(response => response.json())
                 .then(data => {
-                    document.getElementById("nombre").value = data.nombre;
-                    document.getElementById("descripcion").value = data.descripcion;
-                    document.getElementById("icono").value = data.icono;
-                    document.getElementById("orden").value = data.orden;
-                    document.getElementById("activo").checked = data.activo == 1;
-                    tinymce.get("descripcion").setContent(data.descripcion);
+                    if (data) {
+                        document.getElementById("nombre").value = data.nombre || '';
+                        document.getElementById("descripcion").value = data.descripcion || '';
+                        document.getElementById("icono").value = data.icono || '';
+                        document.getElementById("orden").value = data.orden || 0;
+                        document.getElementById("activo").checked = data.activo == 1;
+                        tinymce.get("descripcion").setContent(data.descripcion || '');
+                    }
                 })
                 .catch(error => {
                     console.error("Error:", error);
