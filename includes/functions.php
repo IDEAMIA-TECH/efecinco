@@ -141,6 +141,7 @@ function enviarCorreoAdmin($nombre, $telefono, $email, $tipo_cotizacion, $datos_
                     <p><span class='label'>Teléfono:</span> $telefono</p>
                     <p><span class='label'>Email:</span> $email</p>
                     <p><span class='label'>Empresa:</span> " . ($datos_cotizacion['empresa'] ?? 'No especificada') . "</p>
+                    <p><span class='label'>Dirección:</span> " . ($datos_cotizacion['direccion'] ?? '') . "</p>
                 </div>
                 
                 <div class='section'>
@@ -148,26 +149,54 @@ function enviarCorreoAdmin($nombre, $telefono, $email, $tipo_cotizacion, $datos_
     
     // Agregar detalles específicos según el tipo de cotización
     switch($tipo_cotizacion) {
-        case 'redes':
+        case 'cableado':
             $mensaje .= "
-                    <p><span class='label'>Tipo de Conexión:</span> " . ($datos_cotizacion['tipo_conexion'] ?? '') . "</p>
-                    <p><span class='label'>Ancho de Banda:</span> " . ($datos_cotizacion['ancho_banda'] ?? '') . "</p>
-                    <p><span class='label'>Servicios Requeridos:</span> " . ($datos_cotizacion['servicios_requeridos'] ?? '') . "</p>
-                    <p><span class='label'>Equipos de Red:</span> " . ($datos_cotizacion['equipos_red'] ?? '') . "</p>";
+                    <p><span class='label'>Tipo de Inmueble:</span> " . ($datos_cotizacion['tipo_inmueble'] ?? '') . "</p>
+                    <p><span class='label'>Puntos de Red:</span> " . ($datos_cotizacion['puntos_red'] ?? '') . "</p>
+                    <p><span class='label'>Puntos de Energía:</span> " . ($datos_cotizacion['puntos_energia'] ?? '') . "</p>
+                    <p><span class='label'>Tipo de Cableado:</span> " . ($datos_cotizacion['tipo_cableado'] ?? '') . "</p>
+                    <p><span class='label'>Instalación de Canaletas:</span> " . ($datos_cotizacion['instalacion_canaletas'] ?? '') . "</p>
+                    <p><span class='label'>Certificación:</span> " . ($datos_cotizacion['certificacion'] ?? '') . "</p>
+                    <p><span class='label'>Infraestructura Existente:</span> " . ($datos_cotizacion['infraestructura_comunicaciones'] ?? '') . "</p>
+                    <p><span class='label'>Rack Existente:</span> " . ($datos_cotizacion['rack_existente'] ?? '') . "</p>
+                    <p><span class='label'>Planos de Red:</span> " . ($datos_cotizacion['planos_red'] ?? '') . "</p>
+                    <p><span class='label'>Estado de Obra:</span> " . ($datos_cotizacion['estado_obra'] ?? '') . "</p>
+                    <p><span class='label'>Suministro de Materiales:</span> " . ($datos_cotizacion['suministro_materiales'] ?? '') . "</p>
+                    <p><span class='label'>Canalización:</span> " . ($datos_cotizacion['canalizacion'] ?? '') . "</p>
+                    <p><span class='label'>Configuración de Red:</span> " . ($datos_cotizacion['configuracion_red'] ?? '') . "</p>";
             break;
+            
         case 'acceso':
             $mensaje .= "
                     <p><span class='label'>Tipo de Inmueble:</span> " . ($datos_cotizacion['tipo_inmueble'] ?? '') . "</p>
-                    <p><span class='label'>Número de Empleados:</span> " . ($datos_cotizacion['numero_empleados'] ?? '') . "</p>
-                    <p><span class='label'>Tipo de Conexión:</span> " . ($datos_cotizacion['tipo_conexion'] ?? '') . "</p>
-                    <p><span class='label'>Ancho de Banda:</span> " . ($datos_cotizacion['ancho_banda'] ?? '') . "</p>";
+                    <p><span class='label'>Cantidad de Accesos:</span> " . ($datos_cotizacion['cantidad_accesos'] ?? '') . "</p>
+                    <p><span class='label'>Tipo de Acceso:</span> " . ($datos_cotizacion['tipo_acceso'] ?? '') . "</p>
+                    <p><span class='label'>Método de Autenticación:</span> " . ($datos_cotizacion['metodo_autenticacion'] ?? '') . "</p>
+                    <p><span class='label'>Bitácora:</span> " . ($datos_cotizacion['bitacora'] ?? '') . "</p>
+                    <p><span class='label'>Integración con Sistema:</span> " . ($datos_cotizacion['integracion_sistema'] ?? '') . "</p>
+                    <p><span class='label'>Puertas Compatibles:</span> " . ($datos_cotizacion['puertas_compatibles'] ?? '') . "</p>
+                    <p><span class='label'>Suministro Eléctrico:</span> " . ($datos_cotizacion['suministro_electrico'] ?? '') . "</p>
+                    <p><span class='label'>Red Internet:</span> " . ($datos_cotizacion['red_internet'] ?? '') . "</p>
+                    <p><span class='label'>Infraestructura Comunicaciones:</span> " . ($datos_cotizacion['infraestructura_comunicaciones'] ?? '') . "</p>
+                    <p><span class='label'>Cantidad de Usuarios:</span> " . ($datos_cotizacion['cantidad_usuarios'] ?? '') . "</p>
+                    <p><span class='label'>Gestión Web:</span> " . ($datos_cotizacion['gestion_web'] ?? '') . "</p>
+                    <p><span class='label'>Horarios de Acceso:</span> " . ($datos_cotizacion['horarios_acceso'] ?? '') . "</p>";
             break;
+            
         case 'seguridad':
             $mensaje .= "
                     <p><span class='label'>Tipo de Inmueble:</span> " . ($datos_cotizacion['tipo_inmueble'] ?? '') . "</p>
                     <p><span class='label'>Área Protegida:</span> " . ($datos_cotizacion['area_protegida'] ?? '') . "</p>
                     <p><span class='label'>Tipo de Sistema:</span> " . ($datos_cotizacion['tipo_sistema'] ?? '') . "</p>
-                    <p><span class='label'>Número de Cámaras:</span> " . ($datos_cotizacion['numero_camaras'] ?? '') . "</p>";
+                    <p><span class='label'>Número de Cámaras:</span> " . ($datos_cotizacion['numero_camaras'] ?? '') . "</p>
+                    <p><span class='label'>Tipo de Cámaras:</span> " . ($datos_cotizacion['tipo_camaras'] ?? '') . "</p>
+                    <p><span class='label'>Visión Nocturna:</span> " . ($datos_cotizacion['vision_nocturna'] ?? '') . "</p>
+                    <p><span class='label'>Visualización Remota:</span> " . ($datos_cotizacion['visualizacion_remota'] ?? '') . "</p>
+                    <p><span class='label'>Almacenamiento:</span> " . ($datos_cotizacion['almacenamiento'] ?? '') . "</p>
+                    <p><span class='label'>Red Eléctrica:</span> " . ($datos_cotizacion['red_electrica'] ?? '') . "</p>
+                    <p><span class='label'>Red Internet:</span> " . ($datos_cotizacion['red_internet'] ?? '') . "</p>
+                    <p><span class='label'>Infraestructura Comunicaciones:</span> " . ($datos_cotizacion['infraestructura_comunicaciones'] ?? '') . "</p>
+                    <p><span class='label'>Infraestructura Previa:</span> " . ($datos_cotizacion['infraestructura_previo'] ?? '') . "</p>";
             break;
     }
     
