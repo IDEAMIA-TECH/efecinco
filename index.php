@@ -866,6 +866,12 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
         height: auto;
         margin-bottom: 20px;
     }
+    .proyectos-destacados h2 {
+        text-align: center;
+        margin-bottom: 40px;
+        color: #0072ff;
+        font-weight: 700;
+    }
     </style>
 
     <script>
