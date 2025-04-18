@@ -147,41 +147,48 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
         <section class="proyectos-destacados">
             <div class="container">
                 <h2>Proyectos Destacados</h2>
-                <div class="row">
+                <div class="proyectos-grid">
                     <?php
-                    // Verificar la conexión a la base de datos
-                    if ($conexion->connect_error) {
-                        echo '<div class="alert alert-danger">Error de conexión a la base de datos</div>';
+                    require_once('includes/db.php');
+                    $conexion = conectarDB();
+                    
+                    // Verificar la conexión
+                    if (!$conexion) {
+                        echo '<div class="alert alert-danger">Error al conectar con la base de datos</div>';
                     } else {
-                        // Consulta para obtener los proyectos destacados
-                        $sql = "SELECT id, nombre, tipo_solucion, descripcion_corta, imagen FROM proyectos WHERE destacado = 1 AND activo = 1 ORDER BY orden LIMIT 3";
-                        $resultado = $conexion->query($sql);
-
-                        if ($resultado && $resultado->num_rows > 0) {
-                            while ($proyecto = $resultado->fetch_assoc()) {
+                        $sql = "SELECT * FROM proyectos WHERE activo = 1 AND destacado = 1 ORDER BY fecha_creacion DESC LIMIT 3";
+                        $stmt = consultaSegura($conexion, $sql, []);
+                        
+                        if ($stmt) {
+                            $result = $stmt->get_result();
+                            $proyectos = $result->fetch_all(MYSQLI_ASSOC);
+                            
+                            if (empty($proyectos)) {
+                                echo '<div class="alert alert-info">No hay proyectos destacados disponibles</div>';
+                            } else {
+                                foreach ($proyectos as $proyecto):
                                 ?>
-                                <div class="col-md-4 mb-4">
-                                    <a href="proyecto.php?id=<?php echo $proyecto['id']; ?>" class="text-decoration-none">
-                                        <div class="proyecto-card">
-                                            <?php if (!empty($proyecto['imagen']) && file_exists($proyecto['imagen'])) { ?>
-                                                <img src="<?php echo $proyecto['imagen']; ?>" alt="<?php echo htmlspecialchars($proyecto['nombre']); ?>" class="proyecto-imagen">
-                                            <?php } else { ?>
-                                                <div class="proyecto-imagen default">
-                                                    <i class="fas fa-project-diagram"></i>
-                                                </div>
-                                            <?php } ?>
-                                            <div class="proyecto-info">
-                                                <div class="tipo-solucion"><?php echo htmlspecialchars($proyecto['tipo_solucion']); ?></div>
-                                                <h3><?php echo htmlspecialchars($proyecto['nombre']); ?></h3>
-                                                <p class="descripcion-corta"><?php echo htmlspecialchars($proyecto['descripcion_corta']); ?></p>
-                                            </div>
+                                <div class="proyecto-card">
+                                    <?php if ($proyecto['imagen']): ?>
+                                        <img src="<?php echo htmlspecialchars($proyecto['imagen']); ?>" 
+                                             alt="<?php echo htmlspecialchars($proyecto['cliente']); ?>"
+                                             class="proyecto-imagen">
+                                    <?php else: ?>
+                                        <div class="proyecto-imagen default">
+                                            <i class="fas fa-image"></i>
                                         </div>
-                                    </a>
+                                    <?php endif; ?>
+                                    <div class="proyecto-info">
+                                        <h3><?php echo htmlspecialchars($proyecto['cliente']); ?></h3>
+                                        <p class="tipo-solucion"><?php echo htmlspecialchars($proyecto['tipo_solucion']); ?></p>
+                                        <p class="descripcion-corta"><?php echo htmlspecialchars($proyecto['descripcion_corta']); ?></p>
+                                    </div>
                                 </div>
                                 <?php
+                                endforeach;
                             }
                         } else {
-                            echo '<div class="col-12"><div class="alert alert-info">No hay proyectos destacados disponibles.</div></div>';
+                            echo '<div class="alert alert-danger">Error al ejecutar la consulta</div>';
                         }
                     }
                     ?>
