@@ -61,7 +61,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($stmt->execute()) {
             // Enviar correos
             enviarCorreoCliente($email, $nombre);
-            enviarCorreoAdmin($nombre, $telefono, $email);
+            enviarCorreoAdmin($nombre, $telefono, $email, 'seguridad', [
+                'empresa' => $empresa,
+                'direccion' => $direccion,
+                'tipo_inmueble' => $tipo_propiedad,
+                'area_protegida' => '',
+                'tipo_sistema' => '',
+                'numero_camaras' => $cantidad_camaras,
+                'tipo_camaras' => $tipo_camaras,
+                'vision_nocturna' => $vision_nocturna,
+                'visualizacion_remota' => $visualizacion_remota,
+                'almacenamiento' => $almacenamiento,
+                'red_electrica' => $red_electrica,
+                'red_internet' => $red_internet,
+                'infraestructura_comunicaciones' => $infraestructura_comunicaciones,
+                'infraestructura_previo' => $infraestructura_previo,
+                'tiempo_instalacion' => $tiempo_instalacion,
+                'horario_contacto' => $horario_contacto,
+                'comentarios' => $comentarios
+            ]);
             
             $mensaje = "¡Gracias por su cotización! Nos pondremos en contacto con usted pronto.";
         } else {
