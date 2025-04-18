@@ -243,12 +243,12 @@ $scripts_adicionales = '
                 .then(response => response.json())
                 .then(data => {
                     if (data) {
-                        document.getElementById("nombre").value = data.nombre || '';
-                        document.getElementById("descripcion").value = data.descripcion || '';
-                        document.getElementById("icono").value = data.icono || '';
+                        document.getElementById("nombre").value = data.nombre || "";
+                        document.getElementById("descripcion").value = data.descripcion || "";
+                        document.getElementById("icono").value = data.icono || "";
                         document.getElementById("orden").value = data.orden || 0;
                         document.getElementById("activo").checked = data.activo == 1;
-                        tinymce.get("descripcion").setContent(data.descripcion || '');
+                        tinymce.get("descripcion").setContent(data.descripcion || "");
                     }
                 })
                 .catch(error => {
