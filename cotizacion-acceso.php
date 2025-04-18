@@ -50,21 +50,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $sql = "INSERT INTO cotizaciones_acceso (
             nombre, telefono, email, empresa, referencia, referencia_otro,
             direccion, tipo_inmueble, tipo_inmueble_otro,
-            numero_empleados, tipo_conexion, ancho_banda,
-            servicios_requeridos, equipos_red, seguridad_red,
-            backup_internet, soporte_tecnico, tiempo_implementacion,
-            horario_contacto, comentarios,
+            cantidad_accesos, tipo_acceso, tipo_acceso_otro,
+            metodo_autenticacion, metodo_autenticacion_otro, bitacora, integracion_sistema,
+            puertas_compatibles, suministro_electrico, red_internet, infraestructura_comunicaciones,
+            cantidad_usuarios, gestion_web, horarios_acceso,
+            tiempo_instalacion, mantenimiento, horario_contacto, comentarios,
             fecha_creacion, estado
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), 'pendiente')";
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), 'pendiente')";
         
         $stmt = $conexion->prepare($sql);
-        $stmt->bind_param("ssssssssssssssssssss", 
+        $stmt->bind_param("ssssssssssssssssssssssssss", 
             $nombre, $telefono, $email, $empresa, $referencia, $referencia_otro,
             $direccion, $tipo_inmueble, $tipo_inmueble_otro,
-            $numero_empleados, $tipo_conexion, $ancho_banda,
-            $servicios_requeridos, $equipos_red, $seguridad_red,
-            $backup_internet, $soporte_tecnico, $tiempo_implementacion,
-            $horario_contacto, $comentarios
+            $cantidad_accesos, $tipo_acceso, $tipo_acceso_otro,
+            $metodo_autenticacion, $metodo_autenticacion_otro, $bitacora, $integracion_sistema,
+            $puertas_compatibles, $suministro_electrico, $red_internet, $infraestructura_comunicaciones,
+            $cantidad_usuarios, $gestion_web, $horarios_acceso,
+            $tiempo_instalacion, $mantenimiento, $horario_contacto, $comentarios
         );
         
         if ($stmt->execute()) {
