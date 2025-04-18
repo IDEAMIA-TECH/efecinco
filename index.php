@@ -199,66 +199,67 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
         <section class="testimonios">
             <div class="container">
                 <h2>Lo que dicen nuestros clientes</h2>
-                <div class="testimonios-carousel">
-                    <?php
-                    // No necesitamos crear una nueva conexión aquí ya que ya existe
-                    if (!$conexion) {
-                        echo '<div class="alert alert-danger">Error al conectar con la base de datos</div>';
-                    } else {
-                        $sql = "SELECT * FROM testimonios WHERE activo = 1 AND destacado = 1 ORDER BY fecha_creacion DESC LIMIT 5";
-                        $stmt = consultaSegura($conexion, $sql, []);
-                        
-                        if ($stmt) {
-                            $result = $stmt->get_result();
-                            $testimonios = $result->fetch_all(MYSQLI_ASSOC);
+                <div class="testimonios-wrapper">
+                    <div class="testimonios-carousel">
+                        <?php
+                        if (!$conexion) {
+                            echo '<div class="alert alert-danger">Error al conectar con la base de datos</div>';
+                        } else {
+                            $sql = "SELECT * FROM testimonios WHERE activo = 1 AND destacado = 1 ORDER BY fecha_creacion DESC LIMIT 5";
+                            $stmt = consultaSegura($conexion, $sql, []);
                             
-                            if (empty($testimonios)) {
-                                echo '<div class="alert alert-info">No hay testimonios destacados disponibles</div>';
-                            } else {
-                                foreach ($testimonios as $testimonio):
-                                ?>
-                                <div class="testimonio-card">
-                                    <div class="testimonio-content">
-                                        <div class="testimonio-text">
-                                            <i class="fas fa-quote-left"></i>
-                                            <div class="testimonio-contenido">
-                                                <?php echo nl2br(htmlspecialchars($testimonio['testimonio'])); ?>
-                                            </div>
-                                        </div>
-                                        <div class="testimonio-author">
-                                            <?php if (!empty($testimonio['logo'])): ?>
-                                                <img src="<?php echo str_replace('../', '', $testimonio['logo']); ?>" 
-                                                     alt="<?php echo htmlspecialchars($testimonio['empresa']); ?>" 
-                                                     class="author-logo">
-                                            <?php else: ?>
-                                                <div class="author-logo default">
-                                                    <i class="fas fa-building"></i>
+                            if ($stmt) {
+                                $result = $stmt->get_result();
+                                $testimonios = $result->fetch_all(MYSQLI_ASSOC);
+                                
+                                if (empty($testimonios)) {
+                                    echo '<div class="alert alert-info">No hay testimonios destacados disponibles</div>';
+                                } else {
+                                    foreach ($testimonios as $testimonio):
+                                    ?>
+                                    <div class="testimonio-card">
+                                        <div class="testimonio-content">
+                                            <div class="testimonio-text">
+                                                <i class="fas fa-quote-left"></i>
+                                                <div class="testimonio-contenido">
+                                                    <?php echo nl2br(htmlspecialchars($testimonio['testimonio'])); ?>
                                                 </div>
-                                            <?php endif; ?>
-                                            <div class="author-info">
-                                                <h4><?php echo htmlspecialchars($testimonio['cliente']); ?></h4>
-                                                <?php if (!empty($testimonio['cargo'])): ?>
-                                                    <p class="cargo"><?php echo htmlspecialchars($testimonio['cargo']); ?></p>
+                                            </div>
+                                            <div class="testimonio-author">
+                                                <?php if (!empty($testimonio['logo'])): ?>
+                                                    <img src="<?php echo str_replace('../', '', $testimonio['logo']); ?>" 
+                                                         alt="<?php echo htmlspecialchars($testimonio['empresa']); ?>" 
+                                                         class="author-logo">
+                                                <?php else: ?>
+                                                    <div class="author-logo default">
+                                                        <i class="fas fa-building"></i>
+                                                    </div>
                                                 <?php endif; ?>
-                                                <?php if (!empty($testimonio['empresa'])): ?>
-                                                    <p class="empresa"><?php echo htmlspecialchars($testimonio['empresa']); ?></p>
-                                                <?php endif; ?>
+                                                <div class="author-info">
+                                                    <h4><?php echo htmlspecialchars($testimonio['cliente']); ?></h4>
+                                                    <?php if (!empty($testimonio['cargo'])): ?>
+                                                        <p class="cargo"><?php echo htmlspecialchars($testimonio['cargo']); ?></p>
+                                                    <?php endif; ?>
+                                                    <?php if (!empty($testimonio['empresa'])): ?>
+                                                        <p class="empresa"><?php echo htmlspecialchars($testimonio['empresa']); ?></p>
+                                                    <?php endif; ?>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <?php 
-                                endforeach;
+                                    <?php 
+                                    endforeach;
+                                }
+                            } else {
+                                echo '<div class="alert alert-danger">Error al ejecutar la consulta</div>';
                             }
-                        } else {
-                            echo '<div class="alert alert-danger">Error al ejecutar la consulta</div>';
                         }
-                    }
-                    ?>
-                </div>
-                <div class="testimonios-controls">
-                    <button class="prev-testimonio"><i class="fas fa-chevron-left"></i></button>
-                    <button class="next-testimonio"><i class="fas fa-chevron-right"></i></button>
+                        ?>
+                    </div>
+                    <div class="testimonios-controls">
+                        <button class="prev-testimonio"><i class="fas fa-chevron-left"></i></button>
+                        <button class="next-testimonio"><i class="fas fa-chevron-right"></i></button>
+                    </div>
                 </div>
             </div>
         </section>
@@ -558,13 +559,24 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
         padding: 80px 0;
         background: linear-gradient(120deg, #f4f8fb 60%, #e3f0fa 100%);
         position: relative;
-        z-index: 1;
+        margin-top: 60px;
+        overflow: hidden;
+    }
+    .testimonios-wrapper {
+        position: relative;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+    .testimonios h2 {
+        text-align: center;
+        margin-bottom: 40px;
+        color: #0072ff;
+        font-weight: 700;
+        font-size: 2.5rem;
     }
     .testimonios-carousel {
         position: relative;
-        z-index: 2;
-        margin: 0 auto;
-        max-width: 800px;
+        width: 100%;
     }
     .testimonio-card {
         display: none;
@@ -575,10 +587,71 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
         margin: 0 auto;
         transition: transform 0.3s, box-shadow 0.3s;
         border: 1px solid #e3f0fa;
-        max-width: 700px;
     }
     .testimonio-card:first-child {
         display: block;
+    }
+    .testimonio-content {
+        text-align: center;
+    }
+    .testimonio-text {
+        margin-bottom: 20px;
+    }
+    .testimonio-text i {
+        color: #00B4DB;
+        font-size: 2rem;
+        margin-bottom: 15px;
+        display: block;
+    }
+    .testimonio-contenido {
+        font-size: 1.1rem;
+        line-height: 1.6;
+        color: #666;
+        font-style: italic;
+        margin: 20px 0;
+    }
+    .testimonio-author {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+        margin-top: 20px;
+    }
+    .author-logo {
+        width: 80px;
+        height: 80px;
+        object-fit: contain;
+        background-color: white;
+        padding: 10px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 180, 219, 0.08);
+    }
+    .author-logo.default {
+        background-color: #e3f0fa;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #6c757d;
+    }
+    .author-logo.default i {
+        font-size: 2rem;
+    }
+    .author-info h4 {
+        margin: 0;
+        color: #0072ff;
+        font-size: 1.1rem;
+        font-weight: 600;
+    }
+    .author-info .cargo {
+        margin: 5px 0;
+        color: #666;
+        font-size: 0.9rem;
+    }
+    .author-info .empresa {
+        margin: 0;
+        color: #00B4DB;
+        font-weight: 500;
+        font-size: 0.9rem;
     }
     .testimonios-controls {
         display: flex;
@@ -598,6 +671,7 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
         display: flex;
         align-items: center;
         justify-content: center;
+        z-index: 2;
     }
     .testimonios-controls button:hover {
         background: linear-gradient(90deg, #0072ff 0%, #00B4DB 100%);
@@ -622,6 +696,15 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
         margin-bottom: 40px;
         color: #0072ff;
         font-weight: 700;
+    }
+    .certificaciones-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 30px;
+        align-items: center;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
     }
     .certificacion-card {
         background: #fff;
@@ -959,7 +1042,6 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
                 showTestimonio(currentIndex);
             });
 
-            // Mostrar el primer testimonio inicialmente
             showTestimonio(currentIndex);
         }
     });
