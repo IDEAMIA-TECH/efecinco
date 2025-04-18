@@ -60,7 +60,7 @@ $imagenes = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
                     <div class="proyecto-info">
                         <h2>Descripción del Proyecto</h2>
                         <div class="proyecto-descripcion">
-                            <?php echo nl2br(htmlspecialchars($proyecto['descripcion'])); ?>
+                            <?php echo $proyecto['descripcion']; ?>
                         </div>
 
                         <?php if ($proyecto['caracteristicas']): ?>
@@ -77,17 +77,19 @@ $imagenes = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 
                         <?php if (!empty($servicios)): ?>
                             <h3>Servicios Implementados</h3>
-                            <div class="servicios-grid">
+                            <ul class="servicios-lista">
                                 <?php foreach ($servicios as $servicio): ?>
-                                    <div class="servicio-card">
+                                    <li>
                                         <div class="servicio-icono">
                                             <i class="<?php echo htmlspecialchars($servicio['icono']); ?>"></i>
                                         </div>
-                                        <h4><?php echo htmlspecialchars($servicio['nombre']); ?></h4>
-                                        <p><?php echo htmlspecialchars($servicio['descripcion_corta']); ?></p>
-                                    </div>
+                                        <div class="servicio-info">
+                                            <h4><?php echo htmlspecialchars($servicio['nombre']); ?></h4>
+                                            <p><?php echo htmlspecialchars($servicio['descripcion_corta']); ?></p>
+                                        </div>
+                                    </li>
                                 <?php endforeach; ?>
-                            </div>
+                            </ul>
                         <?php endif; ?>
                     </div>
 
@@ -193,42 +195,51 @@ $imagenes = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
             margin-right: 10px;
             margin-top: 5px;
         }
-        .servicios-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
+        .servicios-lista {
+            list-style: none;
+            padding: 0;
+            margin: 0;
         }
-        .servicio-card {
+        .servicios-lista li {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            padding: 15px;
             background: #f8f9fa;
-            padding: 20px;
             border-radius: 10px;
-            text-align: center;
             transition: transform 0.3s;
         }
-        .servicio-card:hover {
-            transform: translateY(-5px);
+        .servicios-lista li:hover {
+            transform: translateX(5px);
         }
-        .servicio-icono {
+        .servicios-lista .servicio-icono {
             background: #0072ff;
             color: white;
-            width: 60px;
-            height: 60px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 15px;
+            margin-right: 15px;
+            flex-shrink: 0;
         }
-        .servicio-icono i {
-            font-size: 1.5rem;
+        .servicios-lista .servicio-icono i {
+            font-size: 1.2rem;
         }
-        .servicio-card h4 {
-            margin-bottom: 10px;
+        .servicios-lista .servicio-info {
+            flex-grow: 1;
+        }
+        .servicios-lista .servicio-info h4 {
+            margin: 0 0 5px 0;
             color: #0072ff;
+            font-weight: 600;
         }
-        .servicio-card p {
+        .servicios-lista .servicio-info p {
+            margin: 0;
             color: #666;
             font-size: 0.9rem;
+            line-height: 1.4;
         }
         .proyecto-imagen-principal img {
             width: 100%;
@@ -309,7 +320,7 @@ $imagenes = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
             .hero h1 {
                 font-size: 2.5rem;
             }
-            .servicios-grid {
+            .servicios-lista {
                 grid-template-columns: 1fr;
             }
         }
