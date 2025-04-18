@@ -47,7 +47,7 @@ $imagenes = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     <?php include('includes/header.php'); ?>
 
     <main>
-        <section class="hero" style="background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://source.unsplash.com/random/1920x1080/?technology,office') no-repeat center center; background-size: cover;">
+        <section class="hero" style="background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('<?php echo htmlspecialchars($proyecto['imagen']); ?>') no-repeat center center; background-size: cover;">
             <div class="container">
                 <h1><?php echo htmlspecialchars($proyecto['cliente']); ?></h1>
                 <p><?php echo htmlspecialchars($proyecto['tipo_solucion']); ?></p>
