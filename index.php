@@ -146,7 +146,7 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
 
         <section class="proyectos-destacados">
             <div class="container">
-                <h2>Proyectos Destacados</h2>
+                <h2 class="text-center">Proyectos Destacados</h2>
                 <div class="proyectos-grid">
                     <?php
                     require_once('includes/db.php');
