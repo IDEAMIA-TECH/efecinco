@@ -62,6 +62,7 @@ $servicios = $resultado->fetch_all(MYSQLI_ASSOC);
                                                 echo 'fas fa-phone';
                                                 break;
                                             case 'soporte técnico':
+                                            case 'soporte ti':
                                                 echo 'fas fa-headset';
                                                 break;
                                             case 'servidores':
@@ -70,6 +71,15 @@ $servicios = $resultado->fetch_all(MYSQLI_ASSOC);
                                             case 'backup':
                                             case 'respaldo':
                                                 echo 'fas fa-database';
+                                                break;
+                                            case 'sistemas de audio ambiental':
+                                                echo 'fas fa-volume-up';
+                                                break;
+                                            case 'enlaces inalámbricos':
+                                                echo 'fas fa-wifi';
+                                                break;
+                                            case 'equipos y tecnología':
+                                                echo 'fas fa-laptop';
                                                 break;
                                             default:
                                                 echo 'fas fa-cogs';
