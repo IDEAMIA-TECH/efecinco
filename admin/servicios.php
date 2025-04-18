@@ -244,7 +244,7 @@ $servicios = $resultado->fetch_all(MYSQLI_ASSOC);
                             <tr>
                                 <td><?php echo htmlspecialchars($servicio['orden']); ?></td>
                                 <td><?php echo htmlspecialchars($servicio['nombre']); ?></td>
-                                <td><?php echo htmlspecialchars($servicio['descripcion']); ?></td>
+                                <td><?php echo strip_tags($servicio['descripcion']); ?></td>
                                 <td><i class="<?php echo htmlspecialchars($servicio['icono']); ?>"></i></td>
                                 <td>
                                     <span class="badge <?php echo $servicio['activo'] ? 'badge-success' : 'badge-danger'; ?>">

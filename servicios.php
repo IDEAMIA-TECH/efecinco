@@ -88,7 +88,7 @@ $servicios = $resultado->fetch_all(MYSQLI_ASSOC);
                                 </div>
                                 <div class="servicio-contenido">
                                     <h3><?php echo htmlspecialchars($servicio['nombre']); ?></h3>
-                                    <p><?php echo htmlspecialchars($servicio['descripcion']); ?></p>
+                                    <p><?php echo strip_tags($servicio['descripcion']); ?></p>
                                 </div>
                             </div>
                         <?php endforeach; ?>
