@@ -169,20 +169,22 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
                                 foreach ($proyectos as $proyecto):
                                 ?>
                                 <div class="proyecto-card">
-                                    <?php if ($proyecto['imagen']): ?>
-                                        <img src="<?php echo htmlspecialchars($proyecto['imagen']); ?>" 
-                                             alt="<?php echo htmlspecialchars($proyecto['cliente']); ?>"
-                                             class="proyecto-imagen">
-                                    <?php else: ?>
-                                        <div class="proyecto-imagen default">
-                                            <i class="fas fa-image"></i>
+                                    <a href="proyecto.php?id=<?php echo $proyecto['id']; ?>" class="proyecto-link">
+                                        <?php if ($proyecto['imagen']): ?>
+                                            <img src="<?php echo htmlspecialchars($proyecto['imagen']); ?>" 
+                                                 alt="<?php echo htmlspecialchars($proyecto['cliente']); ?>"
+                                                 class="proyecto-imagen">
+                                        <?php else: ?>
+                                            <div class="proyecto-imagen default">
+                                                <i class="fas fa-image"></i>
+                                            </div>
+                                        <?php endif; ?>
+                                        <div class="proyecto-info">
+                                            <h3><?php echo htmlspecialchars($proyecto['cliente']); ?></h3>
+                                            <p class="tipo-solucion"><?php echo htmlspecialchars($proyecto['tipo_solucion']); ?></p>
+                                            <p class="descripcion-corta"><?php echo htmlspecialchars($proyecto['descripcion_corta']); ?></p>
                                         </div>
-                                    <?php endif; ?>
-                                    <div class="proyecto-info">
-                                        <h3><?php echo htmlspecialchars($proyecto['cliente']); ?></h3>
-                                        <p class="tipo-solucion"><?php echo htmlspecialchars($proyecto['tipo_solucion']); ?></p>
-                                        <p class="descripcion-corta"><?php echo htmlspecialchars($proyecto['descripcion_corta']); ?></p>
-                                    </div>
+                                    </a>
                                 </div>
                                 <?php
                                 endforeach;
@@ -871,6 +873,15 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
         margin-bottom: 40px;
         color: #0072ff;
         font-weight: 700;
+    }
+    .proyecto-link {
+        display: block;
+        text-decoration: none;
+        color: inherit;
+        height: 100%;
+    }
+    .proyecto-link:hover {
+        text-decoration: none;
     }
     </style>
 
