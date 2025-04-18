@@ -76,10 +76,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         
                         if ($filas_afectadas > 0) {
                             error_log("Servicio creado exitosamente");
+                            // En lugar de redireccionar, actualizamos la página actual
                             $mensaje = 'Servicio creado exitosamente';
                             $tipo_mensaje = 'success';
-                            header("Location: servicios.php?mensaje=creado&tipo=success");
-                            exit;
+                            
+                            // Recargar la lista de servicios
+                            $sql = "SELECT * FROM servicios ORDER BY orden ASC, nombre ASC";
+                            $resultado = $conexion->query($sql);
+                            $servicios = $resultado->fetch_all(MYSQLI_ASSOC);
+                            
+                            // Ocultar el formulario
+                            $scripts_adicionales .= '
+                            <script>
+                                document.addEventListener("DOMContentLoaded", function() {
+                                    document.getElementById("formularioServicio").style.display = "none";
+                                });
+                            </script>';
                         } else {
                             throw new Exception("No se pudo crear el servicio - No se afectaron filas");
                         }
@@ -354,6 +366,16 @@ $scripts_adicionales .= '
         
         if (mensaje) {
             logToConsole("Mensaje del sistema: " + mensaje, tipoMensaje);
+            // Mostrar mensaje en la interfaz
+            const alertDiv = document.createElement("div");
+            alertDiv.className = `alert alert-${tipoMensaje} auto-dismiss`;
+            alertDiv.textContent = mensaje;
+            document.querySelector(".container").insertBefore(alertDiv, document.querySelector(".container").firstChild);
+            
+            // Ocultar mensaje después de 5 segundos
+            setTimeout(() => {
+                alertDiv.style.display = "none";
+            }, 5000);
         }
 
         // Agregar listener al formulario
