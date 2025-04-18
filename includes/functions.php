@@ -104,9 +104,11 @@ function enviarCorreoCliente($email, $nombre) {
  * @param string $nombre Nombre del cliente
  * @param string $telefono Teléfono del cliente
  * @param string $email Email del cliente
+ * @param string $tipo_cotizacion Tipo de cotización
+ * @param array $datos_cotizacion Datos de la cotización
  * @return bool True si el correo se envió correctamente
  */
-function enviarCorreoAdmin($nombre, $telefono, $email) {
+function enviarCorreoAdmin($nombre, $telefono, $email, $tipo_cotizacion, $datos_cotizacion) {
     $asunto = "Nueva Solicitud de Cotización - Efecinco";
     
     // Obtener la URL base del sitio
@@ -118,72 +120,108 @@ function enviarCorreoAdmin($nombre, $telefono, $email) {
     <head>
         <meta charset='UTF-8'>
         <style>
-            body {
-                font-family: Arial, sans-serif;
-                line-height: 1.6;
-                color: #333;
-                max-width: 600px;
-                margin: 0 auto;
-                padding: 20px;
-            }
-            .header {
-                text-align: center;
-                margin-bottom: 30px;
-            }
-            .logo {
-                max-width: 200px;
-                height: auto;
-            }
-            .content {
-                background-color: #f8f9fa;
-                padding: 20px;
-                border-radius: 5px;
-            }
-            .footer {
-                text-align: center;
-                margin-top: 30px;
-                font-size: 12px;
-                color: #666;
-            }
-            .button {
-                display: inline-block;
-                padding: 10px 20px;
-                background-color: #00B4DB;
-                color: white;
-                text-decoration: none;
-                border-radius: 5px;
-                margin-top: 20px;
-            }
+            body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+            .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+            .header { background-color: #0072ff; color: white; padding: 20px; text-align: center; }
+            .content { padding: 20px; background-color: #f9f9f9; }
+            .section { margin-bottom: 20px; }
+            .label { font-weight: bold; }
+            .footer { text-align: center; padding: 20px; font-size: 12px; color: #666; }
         </style>
     </head>
     <body>
-        <div class='header'>
-            <img src='{$url_base}/assets/images/logof5.png' alt='Efecinco Logo' class='logo'>
-        </div>
-        <div class='content'>
-            <h2>Nueva Solicitud de Cotización</h2>
-            <p>Se ha recibido una nueva solicitud de cotización con los siguientes detalles:</p>
-            <ul>
-                <li>Nombre: {$nombre}</li>
-                <li>Teléfono: {$telefono}</li>
-                <li>Email: {$email}</li>
-                <li>Fecha: " . date('d/m/Y H:i') . "</li>
-            </ul>
-            <p>Por favor, revise el panel de administración para más detalles.</p>
-        </div>
-        <div class='footer'>
-            <p>© " . date('Y') . " Efecinco. Todos los derechos reservados.</p>
+        <div class='container'>
+            <div class='header'>
+                <h1>Nueva Solicitud de Cotización</h1>
+            </div>
+            <div class='content'>
+                <div class='section'>
+                    <h2>Información del Cliente</h2>
+                    <p><span class='label'>Nombre:</span> $nombre</p>
+                    <p><span class='label'>Teléfono:</span> $telefono</p>
+                    <p><span class='label'>Email:</span> $email</p>
+                    <p><span class='label'>Empresa:</span> " . ($datos_cotizacion['empresa'] ?? 'No especificada') . "</p>
+                </div>
+                
+                <div class='section'>
+                    <h2>Detalles de la Cotización</h2>";
+    
+    // Agregar detalles específicos según el tipo de cotización
+    switch($tipo_cotizacion) {
+        case 'cableado':
+            $mensaje .= "
+                    <p><span class='label'>Dirección:</span> " . ($datos_cotizacion['direccion'] ?? '') . "</p>
+                    <p><span class='label'>Tipo de Inmueble:</span> " . ($datos_cotizacion['tipo_inmueble'] ?? '') . "</p>
+                    <p><span class='label'>Puntos de Red:</span> " . ($datos_cotizacion['puntos_red'] ?? '') . "</p>
+                    <p><span class='label'>Puntos de Energía:</span> " . ($datos_cotizacion['puntos_energia'] ?? '') . "</p>
+                    <p><span class='label'>Tipo de Cableado:</span> " . ($datos_cotizacion['tipo_cableado'] ?? '') . "</p>
+                    <p><span class='label'>Instalación de Canaletas:</span> " . ($datos_cotizacion['instalacion_canaletas'] ?? '') . "</p>
+                    <p><span class='label'>Certificación:</span> " . ($datos_cotizacion['certificacion'] ?? '') . "</p>
+                    <p><span class='label'>Infraestructura Existente:</span> " . ($datos_cotizacion['infraestructura_comunicaciones'] ?? '') . "</p>
+                    <p><span class='label'>Rack Existente:</span> " . ($datos_cotizacion['rack_existente'] ?? '') . "</p>
+                    <p><span class='label'>Planos de Red:</span> " . ($datos_cotizacion['planos_red'] ?? '') . "</p>
+                    <p><span class='label'>Estado de Obra:</span> " . ($datos_cotizacion['estado_obra'] ?? '') . "</p>
+                    <p><span class='label'>Suministro de Materiales:</span> " . ($datos_cotizacion['suministro_materiales'] ?? '') . "</p>
+                    <p><span class='label'>Canalización:</span> " . ($datos_cotizacion['canalizacion'] ?? '') . "</p>
+                    <p><span class='label'>Configuración de Red:</span> " . ($datos_cotizacion['configuracion_red'] ?? '') . "</p>";
+            break;
+            
+        case 'acceso':
+            $mensaje .= "
+                    <p><span class='label'>Dirección:</span> " . ($datos_cotizacion['direccion'] ?? '') . "</p>
+                    <p><span class='label'>Tipo de Inmueble:</span> " . ($datos_cotizacion['tipo_inmueble'] ?? '') . "</p>
+                    <p><span class='label'>Cantidad de Accesos:</span> " . ($datos_cotizacion['cantidad_accesos'] ?? '') . "</p>
+                    <p><span class='label'>Tipo de Acceso:</span> " . ($datos_cotizacion['tipo_acceso'] ?? '') . "</p>
+                    <p><span class='label'>Método de Autenticación:</span> " . ($datos_cotizacion['metodo_autenticacion'] ?? '') . "</p>
+                    <p><span class='label'>Bitácora:</span> " . ($datos_cotizacion['bitacora'] ?? '') . "</p>
+                    <p><span class='label'>Integración con Sistema:</span> " . ($datos_cotizacion['integracion_sistema'] ?? '') . "</p>
+                    <p><span class='label'>Puertas Compatibles:</span> " . ($datos_cotizacion['puertas_compatibles'] ?? '') . "</p>
+                    <p><span class='label'>Suministro Eléctrico:</span> " . ($datos_cotizacion['suministro_electrico'] ?? '') . "</p>
+                    <p><span class='label'>Red Internet:</span> " . ($datos_cotizacion['red_internet'] ?? '') . "</p>
+                    <p><span class='label'>Infraestructura Comunicaciones:</span> " . ($datos_cotizacion['infraestructura_comunicaciones'] ?? '') . "</p>
+                    <p><span class='label'>Cantidad de Usuarios:</span> " . ($datos_cotizacion['cantidad_usuarios'] ?? '') . "</p>
+                    <p><span class='label'>Gestión Web:</span> " . ($datos_cotizacion['gestion_web'] ?? '') . "</p>
+                    <p><span class='label'>Horarios de Acceso:</span> " . ($datos_cotizacion['horarios_acceso'] ?? '') . "</p>";
+            break;
+            
+        case 'camaras':
+            $mensaje .= "
+                    <p><span class='label'>Dirección:</span> " . ($datos_cotizacion['direccion'] ?? '') . "</p>
+                    <p><span class='label'>Tipo de Propiedad:</span> " . ($datos_cotizacion['tipo_propiedad'] ?? '') . "</p>
+                    <p><span class='label'>Cantidad de Cámaras:</span> " . ($datos_cotizacion['cantidad_camaras'] ?? '') . "</p>
+                    <p><span class='label'>Tipo de Cámaras:</span> " . ($datos_cotizacion['tipo_camaras'] ?? '') . "</p>
+                    <p><span class='label'>Visión Nocturna:</span> " . ($datos_cotizacion['vision_nocturna'] ?? '') . "</p>
+                    <p><span class='label'>Visualización Remota:</span> " . ($datos_cotizacion['visualizacion_remota'] ?? '') . "</p>
+                    <p><span class='label'>Almacenamiento:</span> " . ($datos_cotizacion['almacenamiento'] ?? '') . "</p>
+                    <p><span class='label'>Red Eléctrica:</span> " . ($datos_cotizacion['red_electrica'] ?? '') . "</p>
+                    <p><span class='label'>Red Internet:</span> " . ($datos_cotizacion['red_internet'] ?? '') . "</p>
+                    <p><span class='label'>Infraestructura Comunicaciones:</span> " . ($datos_cotizacion['infraestructura_comunicaciones'] ?? '') . "</p>
+                    <p><span class='label'>Infraestructura Previa:</span> " . ($datos_cotizacion['infraestructura_previo'] ?? '') . "</p>";
+            break;
+    }
+    
+    $mensaje .= "
+                </div>
+                
+                <div class='section'>
+                    <h2>Información Adicional</h2>
+                    <p><span class='label'>Tiempo de Instalación:</span> " . ($datos_cotizacion['tiempo_instalacion'] ?? '') . "</p>
+                    <p><span class='label'>Horario de Contacto:</span> " . ($datos_cotizacion['horario_contacto'] ?? '') . "</p>
+                    <p><span class='label'>Comentarios:</span> " . ($datos_cotizacion['comentarios'] ?? 'Sin comentarios') . "</p>
+                </div>
+            </div>
+            <div class='footer'>
+                <p>Este es un correo automático generado por el sistema de cotizaciones de Efecinco.</p>
+            </div>
         </div>
     </body>
-    </html>
-    ";
+    </html>";
     
     $headers = "MIME-Version: 1.0\r\n";
-    $headers .= "Content-type: text/html; charset=UTF-8\r\n";
-    $headers .= "From: Efecinco <info@efecinco.com>\r\n";
-    $headers .= "Reply-To: info@efecinco.com\r\n";
+    $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
+    $headers .= "From: Efecinco <no-reply@efecinco.com>\r\n";
+    $headers .= "Reply-To: $email\r\n";
     
-    // Enviar a la dirección de administración
     return mail("info@efecinco.com", $asunto, $mensaje, $headers);
 }
 

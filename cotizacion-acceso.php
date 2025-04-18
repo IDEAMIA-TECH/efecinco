@@ -56,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             cantidad_usuarios, gestion_web, horarios_acceso,
             tiempo_instalacion, mantenimiento, horario_contacto, comentarios,
             fecha_creacion, estado
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), 'pendiente')";
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), 'pendiente')";
         
         $stmt = $conexion->prepare($sql);
         $stmt->bind_param("ssssssssssssssssssssssssss", 
@@ -72,7 +72,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($stmt->execute()) {
             // Enviar correos
             enviarCorreoCliente($email, $nombre);
-            enviarCorreoAdmin($nombre, $telefono, $email);
+            enviarCorreoAdmin(
+                $nombre,
+                $telefono,
+                $email,
+                'acceso',
+                [
+                    'empresa' => $empresa,
+                    'direccion' => $direccion,
+                    'tipo_inmueble' => $tipo_inmueble,
+                    'numero_empleados' => $numero_empleados,
+                    'tipo_conexion' => $tipo_conexion,
+                    'ancho_banda' => $ancho_banda,
+                    'servicios_requeridos' => $servicios_requeridos,
+                    'equipos_red' => $equipos_red,
+                    'seguridad_red' => $seguridad_red,
+                    'backup_internet' => $backup_internet,
+                    'soporte_tecnico' => $soporte_tecnico,
+                    'tiempo_implementacion' => $tiempo_implementacion,
+                    'horario_contacto' => $horario_contacto,
+                    'comentarios' => $comentarios
+                ]
+            );
             
             $mensaje = "¡Gracias por su cotización! Nos pondremos en contacto con usted pronto.";
         } else {
