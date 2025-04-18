@@ -22,23 +22,41 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['action'])) {
         switch ($_POST['action']) {
             case 'create':
+                error_log("Iniciando proceso de creación de servicio");
                 $nombre = $_POST['nombre'] ?? '';
                 $descripcion = $_POST['descripcion'] ?? '';
                 $icono = $_POST['icono'] ?? '';
                 $orden = intval($_POST['orden'] ?? 0);
                 $activo = isset($_POST['activo']) ? 1 : 0;
                 
+                error_log("Datos recibidos - Nombre: $nombre, Icono: $icono, Orden: $orden, Activo: $activo");
+                
                 if (!empty($nombre)) {
-                    $sql = "INSERT INTO servicios (nombre, descripcion, icono, orden, activo) VALUES (?, ?, ?, ?, ?)";
-                    $stmt = consultaSegura($conexion, $sql, [$nombre, $descripcion, $icono, $orden, $activo]);
-                    
-                    if ($stmt->affected_rows > 0) {
-                        header("Location: servicios.php?mensaje=creado&tipo=success");
-                        exit;
-                    } else {
-                        $mensaje = 'Error al crear el servicio';
+                    try {
+                        $sql = "INSERT INTO servicios (nombre, descripcion, icono, orden, activo) VALUES (?, ?, ?, ?, ?)";
+                        error_log("SQL a ejecutar: $sql");
+                        
+                        $stmt = consultaSegura($conexion, $sql, [$nombre, $descripcion, $icono, $orden, $activo]);
+                        error_log("Consulta ejecutada, filas afectadas: " . $stmt->affected_rows);
+                        
+                        if ($stmt->affected_rows > 0) {
+                            error_log("Servicio creado exitosamente");
+                            header("Location: servicios.php?mensaje=creado&tipo=success");
+                            exit;
+                        } else {
+                            error_log("Error: No se pudo crear el servicio - No se afectaron filas");
+                            $mensaje = 'Error al crear el servicio';
+                            $tipo_mensaje = 'danger';
+                        }
+                    } catch (Exception $e) {
+                        error_log("Error al crear servicio: " . $e->getMessage());
+                        $mensaje = 'Error al crear el servicio: ' . $e->getMessage();
                         $tipo_mensaje = 'danger';
                     }
+                } else {
+                    error_log("Error: Nombre de servicio vacío");
+                    $mensaje = 'El nombre del servicio es requerido';
+                    $tipo_mensaje = 'danger';
                 }
                 break;
                 
