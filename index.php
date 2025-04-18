@@ -471,7 +471,7 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
         box-shadow: 0 4px 24px rgba(0,180,219,0.07);
         transition: transform 0.3s cubic-bezier(.4,0,.2,1), box-shadow 0.3s;
         border: 1px solid #e3f0fa;
-        height: 300px;
+        height: 400px;
     }
     .proyecto-card:hover {
         transform: translateY(-8px) scale(1.03);
@@ -479,7 +479,7 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
     }
     .proyecto-imagen {
         width: 100%;
-        height: 100%;
+        height: 200px;
         object-fit: cover;
     }
     .proyecto-imagen.default {
@@ -487,26 +487,21 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
         display: flex;
         align-items: center;
         justify-content: center;
-        height: 100%;
+        height: 200px;
     }
     .proyecto-imagen.default i {
         font-size: 3rem;
         color: #6c757d;
     }
     .proyecto-info {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
         padding: 20px;
-        background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
-        color: white;
-        border-radius: 0 0 16px 16px;
+        background: #fff;
+        color: #222;
     }
     .proyecto-info h3 {
         margin: 0 0 10px 0;
         font-size: 1.5rem;
-        color: #fff;
+        color: #0072ff;
         font-weight: 600;
     }
     .proyecto-info .tipo-solucion {
@@ -518,8 +513,7 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
     .proyecto-info .descripcion-corta {
         margin: 0;
         font-size: 0.9rem;
-        opacity: 0.9;
-        color: rgba(255, 255, 255, 0.9);
+        color: #444;
         line-height: 1.4;
     }
     .alert-danger {
@@ -553,19 +547,20 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
     }
     .certificacion-card {
         background: #fff;
-        border-radius: 8px;
+        border-radius: 16px;
         overflow: hidden;
-        box-shadow: 0 2px 8px rgba(0,180,219,0.08);
-        transition: transform 0.3s;
+        box-shadow: 0 4px 24px rgba(0,180,219,0.07);
+        transition: transform 0.3s cubic-bezier(.4,0,.2,1), box-shadow 0.3s;
         border: 1px solid #e3f0fa;
+        height: 400px;
     }
     .certificacion-card:hover {
-        transform: translateY(-3px);
+        transform: translateY(-8px) scale(1.03);
         box-shadow: 0 8px 32px rgba(0,114,255,0.13);
     }
     .certificacion-imagen {
         width: 100%;
-        height: 150px;
+        height: 200px;
         overflow: hidden;
         position: relative;
         background-color: #f4f8fb;
@@ -583,7 +578,7 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
     }
     .imagen-default {
         width: 100%;
-        height: 100%;
+        height: 200px;
         background-color: #e3f0fa;
         display: flex;
         align-items: center;
@@ -593,22 +588,27 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
         font-size: 3rem;
         color: #6c757d;
     }
+    .certificacion-info {
+        padding: 20px;
+        background: #fff;
+        color: #222;
+    }
     .certificacion-info h3 {
         margin: 0 0 8px 0;
-        font-size: 1.1rem;
+        font-size: 1.5rem;
         color: #0072ff;
         font-weight: 600;
     }
     .certificacion-descripcion {
         margin: 0 0 8px 0;
-        color: #666;
-        font-size: 0.85rem;
+        color: #444;
+        font-size: 0.9rem;
         line-height: 1.4;
     }
     .certificacion-info .fecha {
         display: block;
         color: #6c757d;
-        font-size: 0.75rem;
+        font-size: 0.8rem;
         font-style: italic;
     }
     .sobre-nosotros {
