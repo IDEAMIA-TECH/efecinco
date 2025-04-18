@@ -47,7 +47,6 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
             <div class="container">
                 <div class="texto">
                     <img src="assets/images/logof5.png" alt="Logo F5" class="about-logo">
-                    <h2>Somos F5</h2>
                     <p>Una empresa especialista en soluciones tecnológicas para tu hogar o empresa.</p>
                     <p>Llevamos más de 15 años trabajando con marcas reconocidas en el mercado que dan garantía a cada instalación que realizamos.</p>
                     <p>Contamos con expertos consultores e instaladores que acompañan paso a paso a cada uno de nuestros clientes o proyectos; ayudando siempre, a que cada instalación tenga siempre el mejor resultado.</p>
