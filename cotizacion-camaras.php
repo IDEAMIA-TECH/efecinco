@@ -28,6 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     $red_electrica = limpiarDatos($_POST['red_electrica'] ?? '');
     $red_internet = limpiarDatos($_POST['red_internet'] ?? '');
+    $infraestructura_comunicaciones = limpiarDatos($_POST['infraestructura_comunicaciones'] ?? '');
     $infraestructura_previo = limpiarDatos($_POST['infraestructura_previo'] ?? '');
     
     $tiempo_instalacion = limpiarDatos($_POST['tiempo_instalacion'] ?? '');
@@ -43,17 +44,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             nombre, telefono, email, empresa, referencia, referencia_otro,
             direccion, tipo_propiedad, tipo_propiedad_otro,
             cantidad_camaras, tipo_camaras, vision_nocturna, visualizacion_remota, almacenamiento,
-            red_electrica, red_internet, infraestructura_previo,
+            red_electrica, red_internet, infraestructura_comunicaciones, infraestructura_previo,
             tiempo_instalacion, horario_contacto, comentarios,
             fecha_creacion, estado
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), 'pendiente')";
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), 'pendiente')";
         
         $stmt = $conexion->prepare($sql);
-        $stmt->bind_param("ssssssssssssssssssss", 
+        $stmt->bind_param("sssssssssssssssssssss", 
             $nombre, $telefono, $email, $empresa, $referencia, $referencia_otro,
             $direccion, $tipo_propiedad, $tipo_propiedad_otro,
             $cantidad_camaras, $tipo_camaras, $vision_nocturna, $visualizacion_remota, $almacenamiento,
-            $red_electrica, $red_internet, $infraestructura_previo,
+            $red_electrica, $red_internet, $infraestructura_comunicaciones, $infraestructura_previo,
             $tiempo_instalacion, $horario_contacto, $comentarios
         );
         
@@ -222,6 +223,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     <label><input type="radio" name="red_internet" value="Sí" required> Sí</label>
                                     <label><input type="radio" name="red_internet" value="No"> No</label>
                                     <label><input type="radio" name="red_internet" value="No estoy seguro"> No estoy seguro</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>¿El lugar ya cuenta con un Site, rack, patch panel o gabinete de comunicaciones? *</label>
+                                <div class="checkbox-group">
+                                    <label><input type="radio" name="infraestructura_comunicaciones" value="Sí" required> Sí</label>
+                                    <label><input type="radio" name="infraestructura_comunicaciones" value="No"> No</label>
+                                    <label><input type="radio" name="infraestructura_comunicaciones" value="No estoy seguro"> No estoy seguro</label>
                                 </div>
                             </div>
                             <div class="form-group">

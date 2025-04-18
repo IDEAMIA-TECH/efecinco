@@ -216,7 +216,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <div class="form-section" data-section="4">
                             <h2>4. Infraestructura Actual</h2>
                             <div class="form-group">
-                                <label>¿El lugar ya cuenta con un rack, patch panel o gabinete de comunicaciones? *</label>
+                                <label>¿El lugar ya cuenta con un Site, rack, patch panel o gabinete de comunicaciones? *</label>
                                 <div class="checkbox-group">
                                     <label><input type="radio" name="rack_existente" value="Sí" required> Sí</label>
                                     <label><input type="radio" name="rack_existente" value="No"> No</label>

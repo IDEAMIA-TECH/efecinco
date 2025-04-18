@@ -31,6 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $puertas_compatibles = limpiarDatos($_POST['puertas_compatibles'] ?? '');
     $suministro_electrico = limpiarDatos($_POST['suministro_electrico'] ?? '');
     $red_internet = limpiarDatos($_POST['red_internet'] ?? '');
+    $infraestructura_comunicaciones = limpiarDatos($_POST['infraestructura_comunicaciones'] ?? '');
     
     $cantidad_usuarios = limpiarDatos($_POST['cantidad_usuarios'] ?? '');
     $gestion_web = limpiarDatos($_POST['gestion_web'] ?? '');
@@ -51,11 +52,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             direccion, tipo_inmueble, tipo_inmueble_otro,
             cantidad_accesos, tipo_acceso, tipo_acceso_otro,
             metodo_autenticacion, metodo_autenticacion_otro, bitacora, integracion_sistema,
-            puertas_compatibles, suministro_electrico, red_internet,
+            puertas_compatibles, suministro_electrico, red_internet, infraestructura_comunicaciones,
             cantidad_usuarios, gestion_web, horarios_acceso,
             tiempo_instalacion, mantenimiento, horario_contacto, comentarios,
             fecha_creacion, estado
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), 'pendiente')";
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), 'pendiente')";
         
         $stmt = $conexion->prepare($sql);
         $stmt->bind_param("ssssssssssssssssssssssssss", 
@@ -63,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $direccion, $tipo_inmueble, $tipo_inmueble_otro,
             $cantidad_accesos, $tipo_acceso, $tipo_acceso_otro,
             $metodo_autenticacion, $metodo_autenticacion_otro, $bitacora, $integracion_sistema,
-            $puertas_compatibles, $suministro_electrico, $red_internet,
+            $puertas_compatibles, $suministro_electrico, $red_internet, $infraestructura_comunicaciones,
             $cantidad_usuarios, $gestion_web, $horarios_acceso,
             $tiempo_instalacion, $mantenimiento, $horario_contacto, $comentarios
         );
@@ -224,6 +225,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <!-- Sección 4: Condiciones Técnicas del Sitio -->
                         <div class="form-section" data-section="4">
                             <h2>4. Condiciones Técnicas del Sitio</h2>
+                            <div class="form-group">
+                                <label>¿El lugar ya cuenta con un Site, rack, patch panel o gabinete de comunicaciones? *</label>
+                                <div class="checkbox-group">
+                                    <label><input type="radio" name="infraestructura_comunicaciones" value="Sí" required> Sí</label>
+                                    <label><input type="radio" name="infraestructura_comunicaciones" value="No"> No</label>
+                                    <label><input type="radio" name="infraestructura_comunicaciones" value="No estoy seguro"> No estoy seguro</label>
+                                </div>
+                            </div>
                             <div class="form-group">
                                 <label>¿Cuenta con puertas compatibles con control electrónico? *</label>
                                 <div class="checkbox-group">
