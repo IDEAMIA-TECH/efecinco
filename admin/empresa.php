@@ -81,6 +81,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 header('Location: empresa.php?mensaje=actualizado');
                 exit;
             }
+
+            // Actualizar el número de WhatsApp en la base de datos
+            $sql = "UPDATE empresa SET whatsapp = ? WHERE id = 1";
+            $stmt = consultaSegura($conexion, $sql, [$whatsapp]);
+            
+            if ($stmt->affected_rows > 0) {
+                $mensaje = 'Configuración actualizada correctamente';
+                $tipo_mensaje = 'success';
+            } else {
+                $mensaje = 'Error al actualizar la configuración';
+                $tipo_mensaje = 'danger';
+            }
             break;
     }
 }
@@ -200,7 +212,8 @@ include('includes/header.php');
             <div class="form-group">
                 <label for="whatsapp">WhatsApp</label>
                 <input type="text" class="form-control" id="whatsapp" name="whatsapp" 
-                       value="<?php echo htmlspecialchars($empresa['whatsapp'] ?? ''); ?>">
+                       value="523331462579" required>
+                <small class="form-text text-muted">Ingrese el número sin espacios ni caracteres especiales (ejemplo: 523331462579)</small>
             </div>
         </div>
 
