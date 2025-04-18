@@ -201,10 +201,7 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
                 <h2>Lo que dicen nuestros clientes</h2>
                 <div class="testimonios-carousel">
                     <?php
-                    require_once('includes/db.php');
-                    $conexion = conectarDB();
-                    
-                    // Verificar la conexión
+                    // No necesitamos crear una nueva conexión aquí ya que ya existe
                     if (!$conexion) {
                         echo '<div class="alert alert-danger">Error al conectar con la base de datos</div>';
                     } else {
@@ -225,11 +222,11 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
                                         <div class="testimonio-text">
                                             <i class="fas fa-quote-left"></i>
                                             <div class="testimonio-contenido">
-                                                <?php echo $testimonio['testimonio']; ?>
+                                                <?php echo nl2br(htmlspecialchars($testimonio['testimonio'])); ?>
                                             </div>
                                         </div>
                                         <div class="testimonio-author">
-                                            <?php if ($testimonio['logo']): ?>
+                                            <?php if (!empty($testimonio['logo'])): ?>
                                                 <img src="<?php echo str_replace('../', '', $testimonio['logo']); ?>" 
                                                      alt="<?php echo htmlspecialchars($testimonio['empresa']); ?>" 
                                                      class="author-logo">
@@ -240,10 +237,10 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
                                             <?php endif; ?>
                                             <div class="author-info">
                                                 <h4><?php echo htmlspecialchars($testimonio['cliente']); ?></h4>
-                                                <?php if ($testimonio['cargo']): ?>
+                                                <?php if (!empty($testimonio['cargo'])): ?>
                                                     <p class="cargo"><?php echo htmlspecialchars($testimonio['cargo']); ?></p>
                                                 <?php endif; ?>
-                                                <?php if ($testimonio['empresa']): ?>
+                                                <?php if (!empty($testimonio['empresa'])): ?>
                                                     <p class="empresa"><?php echo htmlspecialchars($testimonio['empresa']); ?></p>
                                                 <?php endif; ?>
                                             </div>
@@ -560,86 +557,34 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
     .testimonios {
         padding: 80px 0;
         background: linear-gradient(120deg, #f4f8fb 60%, #e3f0fa 100%);
+        position: relative;
+        z-index: 1;
     }
-    .testimonios h2 {
-        text-align: center;
-        margin-bottom: 40px;
-        color: #0072ff;
-        font-weight: 700;
+    .testimonios-carousel {
+        position: relative;
+        z-index: 2;
+        margin: 0 auto;
+        max-width: 800px;
     }
     .testimonio-card {
+        display: none;
         background: #fff;
         border-radius: 12px;
         padding: 30px;
         box-shadow: 0 4px 16px rgba(0,180,219,0.08);
-        margin: 0 15px;
+        margin: 0 auto;
         transition: transform 0.3s, box-shadow 0.3s;
         border: 1px solid #e3f0fa;
+        max-width: 700px;
     }
-    .testimonio-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 8px 32px rgba(0,114,255,0.13);
+    .testimonio-card:first-child {
+        display: block;
     }
-    .testimonio-content {
-        text-align: center;
-    }
-    .testimonio-text i {
-        color: #00B4DB;
-        font-size: 2rem;
-        margin-bottom: 15px;
-    }
-    .testimonio-text p {
-        font-size: 1.1rem;
-        line-height: 1.6;
-        color: #666;
-        font-style: italic;
-    }
-    .testimonio-author {
+    .testimonios-controls {
         display: flex;
-        align-items: center;
         justify-content: center;
-        gap: 15px;
-        margin-top: 20px;
-    }
-    .author-logo {
-        width: 80px;
-        height: 80px;
-        object-fit: contain;
-        background-color: white;
-        padding: 10px;
-        border-radius: 8px;
-        box-shadow: 0 2px 4px rgba(0, 180, 219, 0.08);
-    }
-    .author-logo.default {
-        width: 80px;
-        height: 80px;
-        background-color: #e3f0fa;
-        border-radius: 8px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #6c757d;
-        box-shadow: 0 2px 4px rgba(0, 180, 219, 0.08);
-    }
-    .author-logo.default i {
-        font-size: 2rem;
-    }
-    .author-info h4 {
-        margin: 0;
-        color: #0072ff;
-        font-size: 1.1rem;
-        font-weight: 600;
-    }
-    .author-info .cargo {
-        margin: 5px 0;
-        color: #666;
-        font-size: 0.9rem;
-    }
-    .author-info .empresa {
-        margin: 0;
-        color: #00B4DB;
-        font-weight: 500;
-        font-size: 0.9rem;
+        gap: 20px;
+        margin-top: 30px;
     }
     .testimonios-controls button {
         background: linear-gradient(90deg, #00B4DB 0%, #0072ff 100%);
@@ -650,6 +595,9 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
         border-radius: 50%;
         cursor: pointer;
         transition: all 0.3s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
     .testimonios-controls button:hover {
         background: linear-gradient(90deg, #0072ff 0%, #00B4DB 100%);
@@ -990,35 +938,29 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
 
     <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const carousel = document.querySelector('.testimonios-carousel');
-        const cards = document.querySelectorAll('.testimonio-card');
-        const prevBtn = document.querySelector('.prev-testimonio');
-        const nextBtn = document.querySelector('.next-testimonio');
-        
-        if (cards.length > 0) {
-            let currentIndex = 0;
-            
-            function showTestimonio(index) {
-                cards.forEach((card, i) => {
-                    card.style.display = i === index ? 'block' : 'none';
-                });
-            }
-            
-            prevBtn.addEventListener('click', () => {
-                currentIndex = (currentIndex - 1 + cards.length) % cards.length;
+        const testimonioCards = document.querySelectorAll('.testimonio-card');
+        const prevButton = document.querySelector('.prev-testimonio');
+        const nextButton = document.querySelector('.next-testimonio');
+        let currentIndex = 0;
+
+        function showTestimonio(index) {
+            testimonioCards.forEach(card => card.style.display = 'none');
+            testimonioCards[index].style.display = 'block';
+        }
+
+        if (prevButton && nextButton && testimonioCards.length > 0) {
+            prevButton.addEventListener('click', () => {
+                currentIndex = (currentIndex - 1 + testimonioCards.length) % testimonioCards.length;
                 showTestimonio(currentIndex);
             });
-            
-            nextBtn.addEventListener('click', () => {
-                currentIndex = (currentIndex + 1) % cards.length;
+
+            nextButton.addEventListener('click', () => {
+                currentIndex = (currentIndex + 1) % testimonioCards.length;
                 showTestimonio(currentIndex);
             });
-            
-            // Show first testimonio initially
+
+            // Mostrar el primer testimonio inicialmente
             showTestimonio(currentIndex);
-        } else {
-            // Hide controls if no testimonios
-            document.querySelector('.testimonios-controls').style.display = 'none';
         }
     });
     </script>
