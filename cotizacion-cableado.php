@@ -210,6 +210,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 <div class="checkbox-group">
                                     <label><input type="radio" name="tipo_cableado" value="Categoría 5e" required> Categoría 5e</label>
                                     <label><input type="radio" name="tipo_cableado" value="Categoría 6"> Categoría 6</label>
+                                    <label><input type="radio" name="tipo_cableado" value="Categoría 6a"> Categoría 6a</label>
                                     <label><input type="radio" name="tipo_cableado" value="Fibra óptica"> Fibra óptica</label>
                                     <label><input type="radio" name="tipo_cableado" value="No estoy seguro"> No estoy seguro, necesito asesoría</label>
                                 </div>
