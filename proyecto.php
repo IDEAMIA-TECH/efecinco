@@ -81,7 +81,19 @@ $imagenes = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
                                 <?php foreach ($servicios as $servicio): ?>
                                     <li>
                                         <div class="servicio-icono">
-                                            <i class="<?php echo htmlspecialchars($servicio['icono']); ?>"></i>
+                                            <?php 
+                                            // Mapeo de tipos de servicio a iconos de Font Awesome
+                                            $iconos = [
+                                                'CCTV' => 'fa-video',
+                                                'Control de Acceso' => 'fa-door-closed',
+                                                'Cableado Estructurado' => 'fa-network-wired',
+                                                'Sistemas de Alarma' => 'fa-bell',
+                                                'Automatización' => 'fa-robot',
+                                                'Sistemas de Audio' => 'fa-volume-up'
+                                            ];
+                                            $icono = $iconos[$servicio['nombre']] ?? 'fa-cog';
+                                            ?>
+                                            <i class="fas <?php echo $icono; ?>"></i>
                                         </div>
                                         <div class="servicio-info">
                                             <h4><?php echo htmlspecialchars($servicio['nombre']); ?></h4>
@@ -223,9 +235,11 @@ $imagenes = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
             justify-content: center;
             margin-right: 15px;
             flex-shrink: 0;
+            font-size: 1.2rem;
         }
         .servicios-lista .servicio-icono i {
             font-size: 1.2rem;
+            color: white;
         }
         .servicios-lista .servicio-info {
             flex-grow: 1;
