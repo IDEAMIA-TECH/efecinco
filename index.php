@@ -32,6 +32,7 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
         <section class="hero" style="background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1520869562399-e772f042f422?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80') no-repeat center center; background-size: cover;">
             <div class="container">
                 <div class="hero-content">
+                    <img src="assets/images/logof5.png" alt="Logo F5" class="hero-logo">
                     <h1>Soluciones en Seguridad y Tecnología</h1>
                     <p>Expertos en implementación de sistemas de seguridad y tecnología para tu empresa</p>
                     <div class="cta-buttons">
@@ -45,6 +46,7 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
         <section class="sobre-nosotros">
             <div class="container">
                 <div class="texto">
+                    <img src="assets/images/logof5.png" alt="Logo F5" class="about-logo">
                     <h2>Somos F5</h2>
                     <p>Una empresa especialista en soluciones tecnológicas para tu hogar o empresa.</p>
                     <p>Llevamos más de 15 años trabajando con marcas reconocidas en el mercado que dan garantía a cada instalación que realizamos.</p>
@@ -96,7 +98,6 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
                         <div class="servicio-imagen">
                             <img src="assets/images/project-1.png" alt="Cableado Estructurado">
                         </div>
-                        <i class="fas fa-network-wired"></i>
                         <h3>Cableado Estructurado</h3>
                         <p>Soluciones de red profesional para tu empresa</p>
                     </div>
@@ -104,7 +105,6 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
                         <div class="servicio-imagen">
                             <img src="assets/images/project-2.png" alt="CCTV">
                         </div>
-                        <i class="fas fa-video"></i>
                         <h3>CCTV</h3>
                         <p>Sistemas de videovigilancia de última generación</p>
                     </div>
@@ -112,7 +112,6 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
                         <div class="servicio-imagen">
                             <img src="assets/images/project-3.png" alt="Control de Acceso">
                         </div>
-                        <i class="fas fa-lock"></i>
                         <h3>Control de Acceso</h3>
                         <p>Gestión segura de accesos a tus instalaciones</p>
                     </div>
@@ -120,7 +119,6 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
                         <div class="servicio-imagen">
                             <img src="assets/images/project-4.png" alt="Sistemas de Alarma">
                         </div>
-                        <i class="fas fa-bell"></i>
                         <h3>Sistemas de Alarma</h3>
                         <p>Protección integral para tu hogar o negocio</p>
                     </div>
@@ -128,7 +126,6 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
                         <div class="servicio-imagen">
                             <img src="assets/images/project-5.png" alt="Automatización">
                         </div>
-                        <i class="fas fa-robot"></i>
                         <h3>Automatización</h3>
                         <p>Soluciones inteligentes para tu espacio</p>
                     </div>
@@ -136,7 +133,6 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
                         <div class="servicio-imagen">
                             <img src="assets/images/project-6.png" alt="Sistemas de Audio">
                         </div>
-                        <i class="fas fa-volume-up"></i>
                         <h3>Sistemas de Audio</h3>
                         <p>Experiencia sonora profesional</p>
                     </div>
@@ -498,20 +494,20 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
         gap: 30px;
         margin-top: 40px;
     }
-    .servicio-card, .proyecto-card {
+    .servicio-card {
         text-align: center;
-        padding: 30px;
+        padding: 20px;
         background: #fff;
         border-radius: 16px;
         box-shadow: 0 4px 24px rgba(0,180,219,0.07);
         transition: transform 0.3s cubic-bezier(.4,0,.2,1), box-shadow 0.3s;
         border: 1px solid #e3f0fa;
     }
-    .servicio-card:hover, .proyecto-card:hover {
+    .servicio-card:hover {
         transform: translateY(-8px) scale(1.03);
         box-shadow: 0 8px 32px rgba(0,114,255,0.13);
     }
-    .servicio-imagen, .proyecto-imagen {
+    .servicio-imagen {
         margin-bottom: 20px;
         border-radius: 10px;
         overflow: hidden;
@@ -521,24 +517,19 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
         justify-content: center;
         background: #f4f8fb;
     }
-    .servicio-imagen img, .proyecto-imagen img {
+    .servicio-imagen img {
         width: 100%;
         height: 100%;
         object-fit: cover;
         transition: transform 0.3s;
     }
-    .servicio-card i, .proyecto-card i {
-        font-size: 2.5rem;
-        color: #00B4DB;
-        margin: 20px 0;
-    }
-    .servicio-card h3, .proyecto-card h3 {
+    .servicio-card h3 {
         color: #0072ff;
-        margin-bottom: 15px;
+        margin: 15px 0;
         font-size: 1.5rem;
         font-weight: 700;
     }
-    .servicio-card p, .proyecto-card p {
+    .servicio-card p {
         color: #444;
         line-height: 1.6;
         margin: 0;
@@ -985,6 +976,16 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
         .nuestros-clientes h2 {
             font-size: 2rem;
         }
+    }
+    .hero-logo {
+        max-width: 200px;
+        height: auto;
+        margin-bottom: 30px;
+    }
+    .about-logo {
+        max-width: 150px;
+        height: auto;
+        margin-bottom: 20px;
     }
     </style>
 
