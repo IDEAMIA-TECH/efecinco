@@ -312,20 +312,70 @@ $scripts_adicionales .= '
         const formServicio = document.getElementById("formServicio");
         if (formServicio) {
             formServicio.addEventListener("submit", function(e) {
-                const nombre = document.getElementById("nombre").value;
+                e.preventDefault(); // Prevenir el envío por defecto
+                
+                // Obtener valores del formulario
+                const nombre = document.getElementById("nombre").value.trim();
+                const descripcion = tinymce.get("descripcion").getContent();
                 const icono = document.getElementById("icono").value;
                 const orden = document.getElementById("orden").value;
                 const activo = document.getElementById("activo").checked;
                 
-                logToConsole("Datos del formulario:", "info");
+                // Validar datos
+                let isValid = true;
+                
+                if (!nombre) {
+                    logToConsole("Error: El nombre es requerido", "error");
+                    isValid = false;
+                }
+                
+                if (!icono) {
+                    logToConsole("Error: El icono es requerido", "error");
+                    isValid = false;
+                }
+                
+                if (isNaN(orden) || orden < 0) {
+                    logToConsole("Error: El orden debe ser un número positivo", "error");
+                    isValid = false;
+                }
+                
+                // Mostrar datos en consola
+                logToConsole("=== Datos del Formulario ===", "info");
                 logToConsole(`Nombre: ${nombre}`, "info");
+                logToConsole(`Descripción: ${descripcion.substring(0, 50)}...`, "info");
                 logToConsole(`Icono: ${icono}`, "info");
                 logToConsole(`Orden: ${orden}`, "info");
                 logToConsole(`Activo: ${activo}`, "info");
                 
-                if (!nombre) {
-                    logToConsole("Error: El nombre es requerido", "error");
-                    e.preventDefault();
+                if (isValid) {
+                    logToConsole("Formulario válido, enviando datos...", "success");
+                    // Crear FormData y agregar todos los campos
+                    const formData = new FormData();
+                    formData.append("action", document.getElementById("formAction").value);
+                    formData.append("id", document.getElementById("servicioId").value);
+                    formData.append("nombre", nombre);
+                    formData.append("descripcion", descripcion);
+                    formData.append("icono", icono);
+                    formData.append("orden", orden);
+                    formData.append("activo", activo ? "1" : "0");
+                    
+                    // Enviar formulario
+                    fetch(window.location.href, {
+                        method: "POST",
+                        body: formData
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            window.location.reload();
+                        } else {
+                            throw new Error("Error en la respuesta del servidor");
+                        }
+                    })
+                    .catch(error => {
+                        logToConsole("Error al enviar el formulario: " + error.message, "error");
+                    });
+                } else {
+                    logToConsole("Formulario inválido, no se enviará", "error");
                 }
             });
         }
