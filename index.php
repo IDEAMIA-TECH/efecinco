@@ -422,6 +422,10 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         gap: 30px;
         margin-top: 40px;
+        max-width: 1200px;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 0 20px;
     }
     .servicio-card {
         text-align: center;
@@ -463,7 +467,7 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
         line-height: 1.6;
         margin: 0;
     }
-    .proyecto-card {
+    .proyecto-card, .certificacion-card {
         position: relative;
         background: #fff;
         border-radius: 16px;
@@ -472,8 +476,11 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
         transition: transform 0.3s cubic-bezier(.4,0,.2,1), box-shadow 0.3s;
         border: 1px solid #e3f0fa;
         height: 400px;
+        max-width: 350px;
+        margin: 0 auto;
+        width: 100%;
     }
-    .proyecto-card:hover {
+    .proyecto-card:hover, .certificacion-card:hover {
         transform: translateY(-8px) scale(1.03);
         box-shadow: 0 8px 32px rgba(0,114,255,0.13);
     }
@@ -538,11 +545,12 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
     }
     .certificaciones-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         gap: 30px;
-        align-items: center;
+        margin-top: 40px;
         max-width: 1200px;
-        margin: 0 auto;
+        margin-left: auto;
+        margin-right: auto;
         padding: 0 20px;
     }
     .certificacion-card {
@@ -553,6 +561,9 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
         transition: transform 0.3s cubic-bezier(.4,0,.2,1), box-shadow 0.3s;
         border: 1px solid #e3f0fa;
         height: 400px;
+        max-width: 350px;
+        margin: 0 auto;
+        width: 100%;
     }
     .certificacion-card:hover {
         transform: translateY(-8px) scale(1.03);
