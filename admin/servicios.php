@@ -26,14 +26,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $descripcion = $_POST['descripcion'] ?? '';
                 $icono = $_POST['icono'] ?? '';
                 $orden = $_POST['orden'] ?? 0;
+                $activo = isset($_POST['activo']) ? 1 : 0;
                 
                 if (!empty($nombre)) {
-                    $sql = "INSERT INTO servicios (nombre, descripcion, icono, orden) VALUES (?, ?, ?, ?)";
-                    $stmt = consultaSegura($conexion, $sql, [$nombre, $descripcion, $icono, $orden]);
+                    $sql = "INSERT INTO servicios (nombre, descripcion, icono, orden, activo) VALUES (?, ?, ?, ?, ?)";
+                    $stmt = consultaSegura($conexion, $sql, [$nombre, $descripcion, $icono, $orden, $activo]);
                     
                     if ($stmt->affected_rows > 0) {
                         $mensaje = 'Servicio creado exitosamente';
                         $tipo_mensaje = 'success';
+                        // Recargar la página para mostrar los cambios
+                        header("Location: servicios.php?mensaje=creado&tipo=success");
+                        exit;
                     } else {
                         $mensaje = 'Error al crear el servicio';
                         $tipo_mensaje = 'danger';
@@ -56,6 +60,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     if ($stmt->affected_rows > 0) {
                         $mensaje = 'Servicio actualizado exitosamente';
                         $tipo_mensaje = 'success';
+                        // Recargar la página para mostrar los cambios
+                        header("Location: servicios.php?mensaje=actualizado&tipo=success");
+                        exit;
                     } else {
                         $mensaje = 'Error al actualizar el servicio';
                         $tipo_mensaje = 'danger';
@@ -72,6 +79,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     if ($stmt->affected_rows > 0) {
                         $mensaje = 'Servicio eliminado exitosamente';
                         $tipo_mensaje = 'success';
+                        // Recargar la página para mostrar los cambios
+                        header("Location: servicios.php?mensaje=eliminado&tipo=success");
+                        exit;
                     } else {
                         $mensaje = 'Error al eliminar el servicio';
                         $tipo_mensaje = 'danger';
