@@ -22,39 +22,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['action'])) {
         switch ($_POST['action']) {
             case 'create':
-                error_log("Iniciando proceso de creación de servicio");
                 $nombre = $_POST['nombre'] ?? '';
                 $descripcion = $_POST['descripcion'] ?? '';
                 $icono = $_POST['icono'] ?? '';
                 $orden = intval($_POST['orden'] ?? 0);
                 $activo = isset($_POST['activo']) ? 1 : 0;
                 
-                error_log("Datos recibidos - Nombre: $nombre, Icono: $icono, Orden: $orden, Activo: $activo");
-                
                 if (!empty($nombre)) {
                     try {
                         $sql = "INSERT INTO servicios (nombre, descripcion, icono, orden, activo) VALUES (?, ?, ?, ?, ?)";
-                        error_log("SQL a ejecutar: $sql");
-                        
                         $stmt = consultaSegura($conexion, $sql, [$nombre, $descripcion, $icono, $orden, $activo]);
-                        error_log("Consulta ejecutada, filas afectadas: " . $stmt->affected_rows);
                         
                         if ($stmt->affected_rows > 0) {
-                            error_log("Servicio creado exitosamente");
                             header("Location: servicios.php?mensaje=creado&tipo=success");
                             exit;
                         } else {
-                            error_log("Error: No se pudo crear el servicio - No se afectaron filas");
                             $mensaje = 'Error al crear el servicio';
                             $tipo_mensaje = 'danger';
                         }
                     } catch (Exception $e) {
-                        error_log("Error al crear servicio: " . $e->getMessage());
                         $mensaje = 'Error al crear el servicio: ' . $e->getMessage();
                         $tipo_mensaje = 'danger';
                     }
                 } else {
-                    error_log("Error: Nombre de servicio vacío");
                     $mensaje = 'El nombre del servicio es requerido';
                     $tipo_mensaje = 'danger';
                 }
@@ -292,6 +282,54 @@ $scripts_adicionales = '
             alerta.style.display = "none";
         }
     }, 5000);
+</script>
+';
+
+// Agregar script para mostrar mensajes en consola
+$scripts_adicionales .= '
+<script>
+    // Función para mostrar mensajes en consola
+    function logToConsole(message, type = "info") {
+        const styles = {
+            info: "color: blue; font-weight: bold;",
+            success: "color: green; font-weight: bold;",
+            error: "color: red; font-weight: bold;",
+            warning: "color: orange; font-weight: bold;"
+        };
+        console.log(`%c${message}`, styles[type]);
+    }
+
+    // Mostrar mensajes de PHP en consola
+    document.addEventListener("DOMContentLoaded", function() {
+        const mensaje = "' . $mensaje . '";
+        const tipoMensaje = "' . $tipo_mensaje . '";
+        
+        if (mensaje) {
+            logToConsole("Mensaje del sistema: " + mensaje, tipoMensaje);
+        }
+
+        // Agregar listener al formulario
+        const formServicio = document.getElementById("formServicio");
+        if (formServicio) {
+            formServicio.addEventListener("submit", function(e) {
+                const nombre = document.getElementById("nombre").value;
+                const icono = document.getElementById("icono").value;
+                const orden = document.getElementById("orden").value;
+                const activo = document.getElementById("activo").checked;
+                
+                logToConsole("Datos del formulario:", "info");
+                logToConsole(`Nombre: ${nombre}`, "info");
+                logToConsole(`Icono: ${icono}`, "info");
+                logToConsole(`Orden: ${orden}`, "info");
+                logToConsole(`Activo: ${activo}`, "info");
+                
+                if (!nombre) {
+                    logToConsole("Error: El nombre es requerido", "error");
+                    e.preventDefault();
+                }
+            });
+        }
+    });
 </script>
 ';
 
