@@ -168,6 +168,19 @@ $captcha_respuesta = $num1 + $num2;
                             </div>
                         </div>
 
+                        <div class="contacto-item">
+                            <div class="contacto-icono">
+                                <i class="fab fa-whatsapp"></i>
+                            </div>
+                            <div class="contacto-info">
+                                <h3>WhatsApp</h3>
+                                <p>+52 33 3146 2579</p>
+                                <a href="https://wa.me/523331462579" target="_blank" class="btn btn-whatsapp">
+                                    <i class="fab fa-whatsapp"></i> Enviar mensaje
+                                </a>
+                            </div>
+                        </div>
+
                         <div class="mapa">
                             <iframe 
                                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12345.678901234567!2d-123.456789!3d12.345678!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTLCsDIwJzQ0LjQiTiAxMjPCsDI3JzI0LjQiVw!5e0!3m2!1ses!2smx!4v1234567890"
@@ -281,6 +294,48 @@ $captcha_respuesta = $num1 + $num2;
         .info-item p {
             color: #666;
             margin: 0;
+        }
+
+        .contacto-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .contacto-icono {
+            background: #007bff;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+        }
+
+        .contacto-info {
+            flex: 1;
+        }
+
+        .contacto-info h3 {
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .contacto-info p {
+            color: #666;
+            margin: 0;
+        }
+
+        .btn-whatsapp {
+            background: #25d366;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 10px;
         }
 
         .mapa {
