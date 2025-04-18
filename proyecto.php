@@ -39,12 +39,15 @@ $imagenes = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <?php include('header.php'); ?>
+    <?php include('includes/header.php'); ?>
 
     <main>
-        <section class="hero">
+        <section class="hero" style="background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://source.unsplash.com/random/1920x1080/?technology,office') no-repeat center center; background-size: cover;">
             <div class="container">
                 <h1><?php echo htmlspecialchars($proyecto['cliente']); ?></h1>
                 <p><?php echo htmlspecialchars($proyecto['tipo_solucion']); ?></p>
@@ -125,36 +128,30 @@ $imagenes = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
         </section>
     </main>
 
-    <?php include('footer.php'); ?>
+    <?php include('includes/footer.php'); ?>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
     <style>
         .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://source.unsplash.com/random/1920x1080/?technology,office');
-            background-size: cover;
-            background-position: center;
             color: white;
             text-align: center;
             padding: 100px 0;
+            position: relative;
         }
-
         .hero h1 {
             font-size: 3rem;
             margin-bottom: 1rem;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
-
         .hero p {
             font-size: 1.2rem;
             max-width: 600px;
             margin: 0 auto;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
         }
-
         .proyecto-detalle {
             padding: 80px 0;
         }
-
         .grid-2-columns {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -162,61 +159,57 @@ $imagenes = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
             align-items: start;
             margin-bottom: 60px;
         }
-
         .proyecto-info {
             padding-right: 20px;
         }
-
         .proyecto-info h2 {
             margin-bottom: 20px;
-            color: #333;
+            color: #0072ff;
+            font-weight: 700;
         }
-
         .proyecto-descripcion {
             color: #666;
             line-height: 1.6;
             margin-bottom: 30px;
         }
-
         .proyecto-info h3 {
             margin: 30px 0 15px;
-            color: #333;
+            color: #0072ff;
+            font-weight: 600;
         }
-
         .caracteristicas {
             list-style: none;
             padding: 0;
             margin: 0;
         }
-
         .caracteristicas li {
             margin-bottom: 10px;
             color: #666;
             display: flex;
             align-items: flex-start;
         }
-
         .caracteristicas li i {
-            color: #007bff;
+            color: #0072ff;
             margin-right: 10px;
             margin-top: 5px;
         }
-
         .servicios-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 20px;
         }
-
         .servicio-card {
             background: #f8f9fa;
             padding: 20px;
             border-radius: 10px;
             text-align: center;
+            transition: transform 0.3s;
         }
-
+        .servicio-card:hover {
+            transform: translateY(-5px);
+        }
         .servicio-icono {
-            background: #007bff;
+            background: #0072ff;
             color: white;
             width: 60px;
             height: 60px;
@@ -226,93 +219,96 @@ $imagenes = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
             justify-content: center;
             margin: 0 auto 15px;
         }
-
         .servicio-icono i {
             font-size: 1.5rem;
         }
-
         .servicio-card h4 {
             margin-bottom: 10px;
-            color: #333;
+            color: #0072ff;
         }
-
         .servicio-card p {
             color: #666;
             font-size: 0.9rem;
         }
-
         .proyecto-imagen-principal img {
             width: 100%;
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
-
         .galeria-proyecto {
             margin-top: 60px;
         }
-
         .galeria-proyecto h3 {
             text-align: center;
             margin-bottom: 30px;
-            color: #333;
+            color: #0072ff;
+            font-weight: 700;
         }
-
         .galeria-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 20px;
         }
-
         .galeria-grid a {
             display: block;
             overflow: hidden;
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
+            transition: transform 0.3s;
         }
-
         .galeria-grid a:hover {
             transform: scale(1.05);
         }
-
         .galeria-grid img {
             width: 100%;
             height: 200px;
             object-fit: cover;
         }
-
         .cta {
             padding: 60px 0;
             text-align: center;
-            background-color: #f8f9fa;
+            background: linear-gradient(120deg, #f4f8fb 60%, #e3f0fa 100%);
         }
-
         .cta h2 {
             margin-bottom: 1rem;
+            color: #0072ff;
+            font-weight: 700;
         }
-
         .cta p {
             margin-bottom: 2rem;
             color: #666;
         }
-
+        .btn {
+            padding: 15px 35px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+        .btn-primary {
+            background: linear-gradient(90deg, #00B4DB 0%, #0072ff 100%);
+            color: #fff;
+            box-shadow: 0 4px 16px rgba(0,180,219,0.08);
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(0,114,255,0.18);
+        }
         @media (max-width: 768px) {
             .grid-2-columns {
                 grid-template-columns: 1fr;
             }
-
             .proyecto-info {
                 padding-right: 0;
             }
-
             .hero {
                 padding: 60px 0;
             }
-
             .hero h1 {
                 font-size: 2.5rem;
             }
-
             .servicios-grid {
                 grid-template-columns: 1fr;
             }
