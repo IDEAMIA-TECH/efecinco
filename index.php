@@ -147,48 +147,41 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
         <section class="proyectos-destacados">
             <div class="container">
                 <h2>Proyectos Destacados</h2>
-                <div class="proyectos-grid">
+                <div class="row">
                     <?php
-                    require_once('includes/db.php');
-                    $conexion = conectarDB();
-                    
-                    // Verificar la conexión
-                    if (!$conexion) {
-                        echo '<div class="alert alert-danger">Error al conectar con la base de datos</div>';
+                    // Verificar la conexión a la base de datos
+                    if ($conexion->connect_error) {
+                        echo '<div class="alert alert-danger">Error de conexión a la base de datos</div>';
                     } else {
-                        $sql = "SELECT * FROM proyectos WHERE activo = 1 AND destacado = 1 ORDER BY fecha_creacion DESC LIMIT 3";
-                        $stmt = consultaSegura($conexion, $sql, []);
-                        
-                        if ($stmt) {
-                            $result = $stmt->get_result();
-                            $proyectos = $result->fetch_all(MYSQLI_ASSOC);
-                            
-                            if (empty($proyectos)) {
-                                echo '<div class="alert alert-info">No hay proyectos destacados disponibles</div>';
-                            } else {
-                                foreach ($proyectos as $proyecto):
+                        // Consulta para obtener los proyectos destacados
+                        $sql = "SELECT id, nombre, tipo_solucion, descripcion_corta, imagen FROM proyectos WHERE destacado = 1 AND activo = 1 ORDER BY orden LIMIT 3";
+                        $resultado = $conexion->query($sql);
+
+                        if ($resultado && $resultado->num_rows > 0) {
+                            while ($proyecto = $resultado->fetch_assoc()) {
                                 ?>
-                                <div class="proyecto-card">
-                                    <?php if ($proyecto['imagen']): ?>
-                                        <img src="<?php echo htmlspecialchars($proyecto['imagen']); ?>" 
-                                             alt="<?php echo htmlspecialchars($proyecto['cliente']); ?>"
-                                             class="proyecto-imagen">
-                                    <?php else: ?>
-                                        <div class="proyecto-imagen default">
-                                            <i class="fas fa-image"></i>
+                                <div class="col-md-4 mb-4">
+                                    <a href="proyecto.php?id=<?php echo $proyecto['id']; ?>" class="text-decoration-none">
+                                        <div class="proyecto-card">
+                                            <?php if (!empty($proyecto['imagen']) && file_exists($proyecto['imagen'])) { ?>
+                                                <img src="<?php echo $proyecto['imagen']; ?>" alt="<?php echo htmlspecialchars($proyecto['nombre']); ?>" class="proyecto-imagen">
+                                            <?php } else { ?>
+                                                <div class="proyecto-imagen default">
+                                                    <i class="fas fa-project-diagram"></i>
+                                                </div>
+                                            <?php } ?>
+                                            <div class="proyecto-info">
+                                                <div class="tipo-solucion"><?php echo htmlspecialchars($proyecto['tipo_solucion']); ?></div>
+                                                <h3><?php echo htmlspecialchars($proyecto['nombre']); ?></h3>
+                                                <p class="descripcion-corta"><?php echo htmlspecialchars($proyecto['descripcion_corta']); ?></p>
+                                            </div>
                                         </div>
-                                    <?php endif; ?>
-                                    <div class="proyecto-info">
-                                        <h3><?php echo htmlspecialchars($proyecto['cliente']); ?></h3>
-                                        <p class="tipo-solucion"><?php echo htmlspecialchars($proyecto['tipo_solucion']); ?></p>
-                                        <p class="descripcion-corta"><?php echo htmlspecialchars($proyecto['descripcion_corta']); ?></p>
-                                    </div>
+                                    </a>
                                 </div>
-                                <?php 
-                                endforeach;
+                                <?php
                             }
                         } else {
-                            echo '<div class="alert alert-danger">Error al ejecutar la consulta</div>';
+                            echo '<div class="col-12"><div class="alert alert-info">No hay proyectos destacados disponibles.</div></div>';
                         }
                     }
                     ?>
@@ -463,29 +456,64 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
         line-height: 1.6;
         margin: 0;
     }
+    .proyecto-card {
+        position: relative;
+        background: #fff;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 4px 24px rgba(0,180,219,0.07);
+        transition: transform 0.3s cubic-bezier(.4,0,.2,1), box-shadow 0.3s;
+        border: 1px solid #e3f0fa;
+        height: 300px;
+    }
+    .proyecto-card:hover {
+        transform: translateY(-8px) scale(1.03);
+        box-shadow: 0 8px 32px rgba(0,114,255,0.13);
+    }
+    .proyecto-imagen {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    .proyecto-imagen.default {
+        background: #f4f8fb;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+    }
+    .proyecto-imagen.default i {
+        font-size: 3rem;
+        color: #6c757d;
+    }
     .proyecto-info {
         position: absolute;
         bottom: 0;
         left: 0;
         right: 0;
         padding: 20px;
-        background: linear-gradient(transparent, rgba(0, 114, 255, 0.85));
+        background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
         color: white;
         border-radius: 0 0 16px 16px;
     }
     .proyecto-info h3 {
         margin: 0 0 10px 0;
         font-size: 1.5rem;
+        color: #fff;
+        font-weight: 600;
     }
     .proyecto-info .tipo-solucion {
         margin: 0 0 5px 0;
         font-size: 1.1rem;
         font-weight: 500;
+        color: #00B4DB;
     }
     .proyecto-info .descripcion-corta {
         margin: 0;
         font-size: 0.9rem;
         opacity: 0.9;
+        color: rgba(255, 255, 255, 0.9);
+        line-height: 1.4;
     }
     .alert-danger {
         background-color: #ffe5e9;
@@ -746,8 +774,8 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
         .servicios-grid, .proyectos-grid {
             grid-template-columns: 1fr;
         }
-        .proyecto-imagen {
-            height: 200px;
+        .proyecto-card {
+            height: 250px;
         }
         .proyecto-info h3 {
             font-size: 1.2rem;
