@@ -30,16 +30,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 
                 if (!empty($nombre)) {
                     try {
+                        // Preparar la consulta SQL
                         $sql = "INSERT INTO servicios (nombre, descripcion, icono, orden, activo) VALUES (?, ?, ?, ?, ?)";
-                        $stmt = consultaSegura($conexion, $sql, [$nombre, $descripcion, $icono, $orden, $activo]);
                         
+                        // Preparar la declaración
+                        $stmt = $conexion->prepare($sql);
+                        if (!$stmt) {
+                            throw new Exception("Error al preparar la consulta: " . $conexion->error);
+                        }
+                        
+                        // Vincular parámetros
+                        $stmt->bind_param("sssii", $nombre, $descripcion, $icono, $orden, $activo);
+                        
+                        // Ejecutar la consulta
+                        if (!$stmt->execute()) {
+                            throw new Exception("Error al ejecutar la consulta: " . $stmt->error);
+                        }
+                        
+                        // Verificar si se insertó correctamente
                         if ($stmt->affected_rows > 0) {
+                            $mensaje = 'Servicio creado exitosamente';
+                            $tipo_mensaje = 'success';
                             header("Location: servicios.php?mensaje=creado&tipo=success");
                             exit;
                         } else {
-                            $mensaje = 'Error al crear el servicio';
-                            $tipo_mensaje = 'danger';
+                            throw new Exception("No se pudo crear el servicio");
                         }
+                        
+                        // Cerrar la declaración
+                        $stmt->close();
                     } catch (Exception $e) {
                         $mensaje = 'Error al crear el servicio: ' . $e->getMessage();
                         $tipo_mensaje = 'danger';
@@ -312,7 +331,7 @@ $scripts_adicionales .= '
         const formServicio = document.getElementById("formServicio");
         if (formServicio) {
             formServicio.addEventListener("submit", function(e) {
-                e.preventDefault(); // Prevenir el envío por defecto
+                e.preventDefault();
                 
                 // Obtener valores del formulario
                 const nombre = document.getElementById("nombre").value.trim();
@@ -349,31 +368,9 @@ $scripts_adicionales .= '
                 
                 if (isValid) {
                     logToConsole("Formulario válido, enviando datos...", "success");
-                    // Crear FormData y agregar todos los campos
-                    const formData = new FormData();
-                    formData.append("action", document.getElementById("formAction").value);
-                    formData.append("id", document.getElementById("servicioId").value);
-                    formData.append("nombre", nombre);
-                    formData.append("descripcion", descripcion);
-                    formData.append("icono", icono);
-                    formData.append("orden", orden);
-                    formData.append("activo", activo ? "1" : "0");
                     
-                    // Enviar formulario
-                    fetch(window.location.href, {
-                        method: "POST",
-                        body: formData
-                    })
-                    .then(response => {
-                        if (response.ok) {
-                            window.location.reload();
-                        } else {
-                            throw new Error("Error en la respuesta del servidor");
-                        }
-                    })
-                    .catch(error => {
-                        logToConsole("Error al enviar el formulario: " + error.message, "error");
-                    });
+                    // Enviar formulario de manera tradicional
+                    formServicio.submit();
                 } else {
                     logToConsole("Formulario inválido, no se enviará", "error");
                 }
