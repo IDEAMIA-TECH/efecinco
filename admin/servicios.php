@@ -19,19 +19,39 @@ $tipo_mensaje = '';
 
 // Procesar acciones
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    error_log("POST request recibido");
+    error_log("Datos POST: " . print_r($_POST, true));
+    
     if (isset($_POST['action'])) {
+        error_log("Acción: " . $_POST['action']);
+        
         switch ($_POST['action']) {
             case 'create':
+                error_log("Iniciando creación de servicio");
+                
                 $nombre = $_POST['nombre'] ?? '';
                 $descripcion = $_POST['descripcion'] ?? '';
                 $icono = $_POST['icono'] ?? '';
                 $orden = intval($_POST['orden'] ?? 0);
                 $activo = isset($_POST['activo']) ? 1 : 0;
                 
+                error_log("Datos recibidos:");
+                error_log("Nombre: " . $nombre);
+                error_log("Descripción: " . $descripcion);
+                error_log("Icono: " . $icono);
+                error_log("Orden: " . $orden);
+                error_log("Activo: " . $activo);
+                
                 if (!empty($nombre)) {
                     try {
+                        // Verificar conexión
+                        if (!$conexion) {
+                            throw new Exception("No hay conexión a la base de datos");
+                        }
+                        
                         // Preparar la consulta SQL
                         $sql = "INSERT INTO servicios (nombre, descripcion, icono, orden, activo) VALUES (?, ?, ?, ?, ?)";
+                        error_log("SQL a ejecutar: " . $sql);
                         
                         // Preparar la declaración
                         $stmt = $conexion->prepare($sql);
@@ -43,27 +63,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         $stmt->bind_param("sssii", $nombre, $descripcion, $icono, $orden, $activo);
                         
                         // Ejecutar la consulta
-                        if (!$stmt->execute()) {
+                        $resultado = $stmt->execute();
+                        error_log("Resultado de execute: " . ($resultado ? "true" : "false"));
+                        
+                        if (!$resultado) {
                             throw new Exception("Error al ejecutar la consulta: " . $stmt->error);
                         }
                         
                         // Verificar si se insertó correctamente
-                        if ($stmt->affected_rows > 0) {
+                        $filas_afectadas = $stmt->affected_rows;
+                        error_log("Filas afectadas: " . $filas_afectadas);
+                        
+                        if ($filas_afectadas > 0) {
+                            error_log("Servicio creado exitosamente");
                             $mensaje = 'Servicio creado exitosamente';
                             $tipo_mensaje = 'success';
                             header("Location: servicios.php?mensaje=creado&tipo=success");
                             exit;
                         } else {
-                            throw new Exception("No se pudo crear el servicio");
+                            throw new Exception("No se pudo crear el servicio - No se afectaron filas");
                         }
                         
                         // Cerrar la declaración
                         $stmt->close();
                     } catch (Exception $e) {
+                        error_log("Error al crear servicio: " . $e->getMessage());
                         $mensaje = 'Error al crear el servicio: ' . $e->getMessage();
                         $tipo_mensaje = 'danger';
                     }
                 } else {
+                    error_log("Error: Nombre de servicio vacío");
                     $mensaje = 'El nombre del servicio es requerido';
                     $tipo_mensaje = 'danger';
                 }
@@ -369,7 +398,14 @@ $scripts_adicionales .= '
                 if (isValid) {
                     logToConsole("Formulario válido, enviando datos...", "success");
                     
-                    // Enviar formulario de manera tradicional
+                    // Asegurar que todos los campos necesarios estén en el formulario
+                    const actionInput = document.createElement("input");
+                    actionInput.type = "hidden";
+                    actionInput.name = "action";
+                    actionInput.value = "create";
+                    formServicio.appendChild(actionInput);
+                    
+                    // Enviar formulario
                     formServicio.submit();
                 } else {
                     logToConsole("Formulario inválido, no se enviará", "error");
