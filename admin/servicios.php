@@ -134,12 +134,24 @@ $servicios = $resultado->fetch_all(MYSQLI_ASSOC);
             
             <div class="form-group">
                 <label for="icono">Icono (Font Awesome)</label>
-                <input type="text" id="icono" name="icono" placeholder="fa-icon-name">
+                <select id="icono" name="icono" class="form-control">
+                    <option value="fas fa-network-wired">Cableado Estructurado</option>
+                    <option value="fas fa-video">CCTV / Cámaras</option>
+                    <option value="fas fa-door-closed">Control de Acceso</option>
+                    <option value="fas fa-wifi">Redes Inalámbricas</option>
+                    <option value="fas fa-phone">Telefonía IP</option>
+                    <option value="fas fa-headset">Soporte Técnico</option>
+                    <option value="fas fa-server">Servidores</option>
+                    <option value="fas fa-database">Backup</option>
+                    <option value="fas fa-volume-up">Audio Ambiental</option>
+                    <option value="fas fa-laptop">Equipos y Tecnología</option>
+                    <option value="fas fa-cogs">Otros</option>
+                </select>
             </div>
             
             <div class="form-group">
                 <label for="orden">Orden</label>
-                <input type="number" id="orden" name="orden" value="0">
+                <input type="number" id="orden" name="orden" class="form-control" min="0" value="0" required>
             </div>
             
             <div class="form-group">
@@ -229,6 +241,7 @@ $scripts_adicionales = '
             document.getElementById("formularioServicioTitulo").textContent = "Crear Nuevo Servicio";
             document.getElementById("formServicio").reset();
             document.getElementById("activo").checked = true;
+            document.getElementById("orden").value = "0";
             tinymce.get("descripcion").setContent("");
         } else if (accion === "editar" && id) {
             document.getElementById("formularioServicioTitulo").textContent = "Editar Servicio";
