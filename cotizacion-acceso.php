@@ -57,14 +57,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             cantidad_usuarios, gestion_web, horarios_acceso,
             tiempo_instalacion, mantenimiento, horario_contacto, comentarios,
             fecha_creacion, estado
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), 'pendiente')";
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), 'pendiente')";
         
         $stmt = $conexion->prepare($sql);
         if (!$stmt) {
             die("Error en la preparación de la consulta: " . $conexion->error);
         }
         
-        $stmt->bind_param("ssssssssssssssssssssssssss", 
+        $stmt->bind_param("sssssssssssssssssssssssssss", 
             $nombre, $telefono, $email, $empresa, $referencia, $referencia_otro,
             $direccion, $tipo_inmueble, $tipo_inmueble_otro,
             $cantidad_accesos, $tipo_acceso, $tipo_acceso_otro,
