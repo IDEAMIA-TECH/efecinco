@@ -56,6 +56,8 @@ $servicios = $resultado->fetch_all(MYSQLI_ASSOC);
                                         <img src="assets/images/soporte.jpg" alt="Soporte TI">
                                     <?php elseif (strtolower($servicio['nombre']) === 'desarrollo'): ?>
                                         <img src="assets/images/desarrollo.png" alt="Desarrollo">
+                                    <?php elseif (strtolower($servicio['nombre']) === 'equipos y tecnología'): ?>
+                                        <img src="assets/images/equipo.png" alt="Equipos y Tecnología">
                                     <?php else: ?>
                                         <i class="<?php 
                                             switch(strtolower($servicio['nombre'])) {
