@@ -42,49 +42,53 @@ $servicios = $resultado->fetch_all(MYSQLI_ASSOC);
                         <?php foreach ($servicios as $servicio): ?>
                             <div class="servicio-card">
                                 <div class="servicio-icono">
-                                    <i class="<?php 
-                                        switch(strtolower($servicio['nombre'])) {
-                                            case 'cableado estructurado':
-                                                echo 'fas fa-network-wired';
-                                                break;
-                                            case 'cctv':
-                                            case 'cámaras de seguridad':
-                                                echo 'fas fa-video';
-                                                break;
-                                            case 'control de acceso':
-                                                echo 'fas fa-door-closed';
-                                                break;
-                                            case 'redes inalámbricas':
-                                            case 'wifi':
-                                                echo 'fas fa-wifi';
-                                                break;
-                                            case 'telefonía ip':
-                                                echo 'fas fa-phone';
-                                                break;
-                                            case 'soporte técnico':
-                                            case 'soporte ti':
-                                                echo 'fas fa-headset';
-                                                break;
-                                            case 'servidores':
-                                                echo 'fas fa-server';
-                                                break;
-                                            case 'backup':
-                                            case 'respaldo':
-                                                echo 'fas fa-database';
-                                                break;
-                                            case 'sistemas de audio ambiental':
-                                                echo 'fas fa-volume-up';
-                                                break;
-                                            case 'enlaces inalámbricos':
-                                                echo 'fas fa-wifi';
-                                                break;
-                                            case 'equipos y tecnología':
-                                                echo 'fas fa-laptop';
-                                                break;
-                                            default:
-                                                echo 'fas fa-cogs';
-                                        }
-                                    ?>"></i>
+                                    <?php if (strtolower($servicio['nombre']) === 'cableado estructurado'): ?>
+                                        <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=400&q=80" alt="Cableado Estructurado" style="width: 70px; height: 70px; object-fit: cover; border-radius: 10px;">
+                                    <?php else: ?>
+                                        <i class="<?php 
+                                            switch(strtolower($servicio['nombre'])) {
+                                                case 'cableado estructurado':
+                                                    echo 'fas fa-network-wired';
+                                                    break;
+                                                case 'cctv':
+                                                case 'cámaras de seguridad':
+                                                    echo 'fas fa-video';
+                                                    break;
+                                                case 'control de acceso':
+                                                    echo 'fas fa-door-closed';
+                                                    break;
+                                                case 'redes inalámbricas':
+                                                case 'wifi':
+                                                    echo 'fas fa-wifi';
+                                                    break;
+                                                case 'telefonía ip':
+                                                    echo 'fas fa-phone';
+                                                    break;
+                                                case 'soporte técnico':
+                                                case 'soporte ti':
+                                                    echo 'fas fa-headset';
+                                                    break;
+                                                case 'servidores':
+                                                    echo 'fas fa-server';
+                                                    break;
+                                                case 'backup':
+                                                case 'respaldo':
+                                                    echo 'fas fa-database';
+                                                    break;
+                                                case 'sistemas de audio ambiental':
+                                                    echo 'fas fa-volume-up';
+                                                    break;
+                                                case 'enlaces inalámbricos':
+                                                    echo 'fas fa-wifi';
+                                                    break;
+                                                case 'equipos y tecnología':
+                                                    echo 'fas fa-laptop';
+                                                    break;
+                                                default:
+                                                    echo 'fas fa-cogs';
+                                            }
+                                        ?>"></i>
+                                    <?php endif; ?>
                                 </div>
                                 <div class="servicio-contenido">
                                     <h3><?php echo htmlspecialchars($servicio['nombre']); ?></h3>
