@@ -859,9 +859,24 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
         }
     }
     .hero-logo {
-        max-width: 200px;
+        max-width: 260px;
         height: auto;
         margin-bottom: 30px;
+        background: rgba(255,255,255,0.95);
+        border-radius: 50%;
+        padding: 30px;
+        box-shadow: 0 8px 32px rgba(0,114,255,0.25), 0 2px 8px rgba(0,180,219,0.15);
+        border: 4px solid #00B4DB;
+        transition: transform 0.3s, box-shadow 0.3s;
+        animation: logo-glow 2s infinite alternate;
+    }
+    @keyframes logo-glow {
+        from {
+            box-shadow: 0 8px 32px rgba(0,114,255,0.25), 0 2px 8px rgba(0,180,219,0.15);
+        }
+        to {
+            box-shadow: 0 0 40px 10px #00B4DB, 0 2px 8px rgba(0,180,219,0.25);
+        }
     }
     .about-logo {
         max-width: 150px;
