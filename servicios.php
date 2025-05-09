@@ -21,18 +21,24 @@ $servicios = $resultado->fetch_all(MYSQLI_ASSOC);
     <?php include('includes/header.php'); ?>
 
     <main>
-        <section class="hero">
+       
+
+        <section class="hero" style="background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1520869562399-e772f042f422?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80') no-repeat center center; background-size: cover;">
             <div class="container">
-                <div class="hero-logo-wrapper">
-                    <img src="assets/images/logof5.png" alt="Logo F5" class="hero-logo">
+                <div class="hero-content">
+                    <div class="hero-logo-wrapper">
+                        <img src="assets/images/logof5.png" alt="Logo F5" class="hero-logo">
+                    </div>
+                    <h1>Nuestros Servicios</h1>
+                    <p>Soluciones integrales en seguridad y tecnología para tu empresa</p>
+                    <div class="cta-buttons">
+                        <a href="contacto.php" class="btn btn-primary">Contáctanos</a>
+                        <a href="contacto.php" class="btn btn-secondary">Solicita una cotización</a>
+                    </div>
                 </div>
-                <h1>Nuestros Servicios</h1>
-                <p>Soluciones integrales en seguridad y tecnología para tu empresa</p>
-            </div>
-            <div class="hero-icon">
-                <!-- Logo reemplaza el icono -->
             </div>
         </section>
+
 
         <section class="servicios">
             <div class="container">
@@ -178,12 +184,39 @@ $servicios = $resultado->fetch_all(MYSQLI_ASSOC);
         }
 
         .hero-logo-wrapper {
-            margin-bottom: 20px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255,255,255,0.95);
+            border-radius: 50%;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0,114,255,0.25), 0 2px 8px rgba(0,180,219,0.15);
+            border: 4px solid #00B4DB;
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: logo-glow 2s infinite alternate;
+            max-width: 320px;
+            margin: 0 auto 30px auto;
         }
 
         .hero-logo {
-            width: 100px;
+            max-width: 180px;
+            max-height: 180px;
+            width: auto;
             height: auto;
+            display: block;
+            border-radius: 0;
+            box-shadow: none;
+            background: none;
+            padding: 0;
+        }
+
+        @keyframes logo-glow {
+            from {
+                box-shadow: 0 8px 32px rgba(0,114,255,0.25), 0 2px 8px rgba(0,180,219,0.15);
+            }
+            to {
+                box-shadow: 0 0 40px 10px #00B4DB, 0 2px 8px rgba(0,180,219,0.25);
+            }
         }
 
         .hero-icon {
