@@ -95,7 +95,7 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
         <section class="hikvision-promo">
             <div class="container hikvision-flex">
                 <div class="hikvision-img-col">
-                    <img src="assets/images/certificaciones/681e74a379243_hik.png" alt="Distribuidor Autorizado Hikvision" class="hikvision-img">
+                    <img src="assets/images/681e74a379243_hik.png" alt="Distribuidor Autorizado Hikvision" class="hikvision-img">
                 </div>
                 <div class="hikvision-content-col">
                     <h2 class="hikvision-title"><span class="hikvision-highlight">Efecinco</span> es Distribuidor Autorizado de <span class="hikvision-hik">Hikvision</span></h2>
