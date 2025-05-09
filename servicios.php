@@ -43,19 +43,19 @@ $servicios = $resultado->fetch_all(MYSQLI_ASSOC);
                             <div class="servicio-card">
                                 <div class="servicio-icono">
                                     <?php if (strtolower($servicio['nombre']) === 'cableado estructurado'): ?>
-                                        <img src="assets/images/cableado.jpg" alt="Cableado Estructurado" style="width: 70px; height: 70px; object-fit: cover; border-radius: 10px;">
+                                        <img src="assets/images/cableado.jpg" alt="Cableado Estructurado">
                                     <?php elseif (strtolower($servicio['nombre']) === 'sistemas de audio ambiental'): ?>
-                                        <img src="assets/images/amniental.jpg" alt="Sistemas de Audio Ambiental" style="width: 70px; height: 70px; object-fit: cover; border-radius: 10px;">
+                                        <img src="assets/images/amniental.jpg" alt="Sistemas de Audio Ambiental">
                                     <?php elseif (strtolower($servicio['nombre']) === 'cctv' || strtolower($servicio['nombre']) === 'cámaras de seguridad'): ?>
-                                        <img src="assets/images/cctv.jpg" alt="CCTV" style="width: 70px; height: 70px; object-fit: cover; border-radius: 10px;">
+                                        <img src="assets/images/cctv.jpg" alt="CCTV">
                                     <?php elseif (strtolower($servicio['nombre']) === 'control de acceso'): ?>
-                                        <img src="assets/images/control.jpg" alt="Control de Acceso" style="width: 70px; height: 70px; object-fit: cover; border-radius: 10px;">
+                                        <img src="assets/images/control.jpg" alt="Control de Acceso">
                                     <?php elseif (strtolower($servicio['nombre']) === 'enlaces inalámbricos'): ?>
-                                        <img src="assets/images/enlaces.jpg" alt="Enlaces Inalámbricos" style="width: 70px; height: 70px; object-fit: cover; border-radius: 10px;">
+                                        <img src="assets/images/enlaces.jpg" alt="Enlaces Inalámbricos">
                                     <?php elseif (strtolower($servicio['nombre']) === 'soporte ti' || strtolower($servicio['nombre']) === 'soporte técnico'): ?>
-                                        <img src="assets/images/soporte.jpg" alt="Soporte TI" style="width: 70px; height: 70px; object-fit: cover; border-radius: 10px;">
+                                        <img src="assets/images/soporte.jpg" alt="Soporte TI">
                                     <?php elseif (strtolower($servicio['nombre']) === 'desarrollo'): ?>
-                                        <img src="assets/images/desarrollo.png" alt="Desarrollo" style="width: 70px; height: 70px; object-fit: cover; border-radius: 10px;">
+                                        <img src="assets/images/desarrollo.png" alt="Desarrollo">
                                     <?php else: ?>
                                         <i class="<?php 
                                             switch(strtolower($servicio['nombre'])) {
