@@ -218,7 +218,7 @@ $servicios = $resultado->fetch_all(MYSQLI_ASSOC);
         .servicio-icono {
             background: #2c3e50;
             color: #fff;
-            padding: 30px;
+            
             font-size: 2.5rem;
             transition: all 0.3s ease;
             position: relative;
@@ -233,7 +233,7 @@ $servicios = $resultado->fetch_all(MYSQLI_ASSOC);
             width: 100%;
             height: 100%;
             object-fit: contain;
-            border-radius: 10px;
+            border-radius: 0px;
             background: #fff;
             box-shadow: 0 2px 8px rgba(44,62,80,0.08);
             display: block;
