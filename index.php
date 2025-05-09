@@ -564,10 +564,11 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
         box-shadow: 0 4px 24px rgba(0,180,219,0.07);
         transition: transform 0.3s cubic-bezier(.4,0,.2,1), box-shadow 0.3s;
         border: 1px solid #e3f0fa;
-        height: 400px;
         max-width: 350px;
         margin: 0 auto;
         width: 100%;
+        min-height: 400px;
+        height: auto;
     }
     .certificacion-card:hover {
         transform: translateY(-8px) scale(1.03);
