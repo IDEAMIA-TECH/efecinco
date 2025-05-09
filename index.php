@@ -56,7 +56,7 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
                 
                 <div class="caracteristicas">
                     <div class="caracteristica-item">
-                        <i class="fas fa-flag"></i>
+                        <img src="assets/images/bandera-mexico.png" alt="Bandera de México" style="width:48px; height:auto; margin-bottom:20px;">
                         <h3>Una empresa 100% mexicana</h3>
                         <p>Nos enfocamos a dar siempre los mejores resultados, con soluciones que generen la seguridad que necesitas.</p>
                     </div>
