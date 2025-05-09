@@ -59,10 +59,18 @@ include('includes/header.php');
 </head>
 <body>
     <main>
-        <section class="hero">
+      
+
+        <section class="hero" style="background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1520869562399-e772f042f422?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80') no-repeat center center; background-size: cover;">
             <div class="container">
-                <h1>Nuestros Proyectos</h1>
+                <div class="hero-content">
+                    <div class="hero-logo-wrapper">
+                        <img src="assets/images/logof5.png" alt="Logo F5" class="hero-logo">
+                    </div>
+                    <h1>Nuestros Proyectos</h1>
                 <p>Conoce nuestros casos de éxito en seguridad y tecnología</p>
+                   
+                </div>
             </div>
         </section>
 
