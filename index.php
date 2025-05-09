@@ -56,12 +56,12 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
                 
                 <div class="caracteristicas">
                     <div class="caracteristica-item">
-                        <img src="assets/images/bandera-mexico.png" alt="Bandera de México" style="width:48px; height:auto; margin-bottom:20px;">
+                        <i class="fas fa-flag"></i>
                         <h3>Una empresa 100% mexicana</h3>
                         <p>Nos enfocamos a dar siempre los mejores resultados, con soluciones que generen la seguridad que necesitas.</p>
                     </div>
                     <div class="caracteristica-item">
-                        <img src="assets/images/confianza.png" alt="Confianza y Seguridad" style="width:48px; height:auto; margin-bottom:20px;">
+                        <i class="fas fa-shield-alt"></i>
                         <h3>Confianza y Seguridad</h3>
                         <p>Buscamos que siempre te sientas seguro de vivir o trabajar con instalaciones eficientes con profesionalismo.</p>
                     </div>
