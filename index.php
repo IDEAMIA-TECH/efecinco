@@ -32,7 +32,9 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
         <section class="hero" style="background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1520869562399-e772f042f422?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80') no-repeat center center; background-size: cover;">
             <div class="container">
                 <div class="hero-content">
-                    <img src="assets/images/logof5.png" alt="Logo F5" class="hero-logo">
+                    <div class="hero-logo-wrapper">
+                        <img src="assets/images/logof5.png" alt="Logo F5" class="hero-logo">
+                    </div>
                     <h1>Soluciones en Seguridad y Tecnología</h1>
                     <p>Expertos en implementación de sistemas de seguridad y tecnología para tu empresa</p>
                     <div class="cta-buttons">
@@ -858,10 +860,10 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
             font-size: 2rem;
         }
     }
-    .hero-logo {
-        max-width: 260px;
-        height: auto;
-        margin-bottom: 30px;
+    .hero-logo-wrapper {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
         background: rgba(255,255,255,0.95);
         border-radius: 50%;
         padding: 30px;
@@ -869,6 +871,19 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
         border: 4px solid #00B4DB;
         transition: transform 0.3s, box-shadow 0.3s;
         animation: logo-glow 2s infinite alternate;
+        max-width: 320px;
+        margin: 0 auto 30px auto;
+    }
+    .hero-logo {
+        max-width: 180px;
+        max-height: 180px;
+        width: auto;
+        height: auto;
+        display: block;
+        border-radius: 0;
+        box-shadow: none;
+        background: none;
+        padding: 0;
     }
     @keyframes logo-glow {
         from {
