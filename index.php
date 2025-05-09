@@ -91,6 +91,27 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
             </div>
         </section>
 
+        <!-- Sección Promocional Hikvision -->
+        <section class="hikvision-promo">
+            <div class="container hikvision-flex">
+                <div class="hikvision-img-col">
+                    <img src="assets/images/certificaciones/681e74a379243_hik.png" alt="Distribuidor Autorizado Hikvision" class="hikvision-img">
+                </div>
+                <div class="hikvision-content-col">
+                    <h2 class="hikvision-title"><span class="hikvision-highlight">Efecinco</span> es Distribuidor Autorizado de <span class="hikvision-hik">Hikvision</span></h2>
+                    <p class="hikvision-desc">En Efecinco, seguimos comprometidos con tu seguridad y tranquilidad. Por eso, nos enorgullece anunciar que somos <b>Distribuidores Autorizados de Hikvision</b>, líder mundial en soluciones de videovigilancia y sistemas de seguridad inteligente.</p>
+                    <ul class="hikvision-list">
+                        <li>Cámaras de alta definición</li>
+                        <li>Sistemas de control de acceso</li>
+                        <li>Videograbadoras NVR/DVR</li>
+                        <li>Soluciones térmicas e inteligentes</li>
+                        <li>Asesoría, instalación y soporte técnico especializado</li>
+                    </ul>
+                    <div class="hikvision-confia">Confía en los expertos. Confía en <b>Efecinco</b> y en la calidad que solo <b>Hikvision</b> puede ofrecer.</div>
+                </div>
+            </div>
+        </section>
+
         <section class="servicios-destacados">
             <div class="container">
                 <h2>Nuestros Servicios</h2>
@@ -253,27 +274,6 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
                         }
                     }
                     ?>
-                </div>
-            </div>
-        </section>
-
-        <!-- Sección Promocional Hikvision -->
-        <section class="hikvision-promo">
-            <div class="container hikvision-flex">
-                <div class="hikvision-img-col">
-                    <img src="assets/images/certificaciones/681e74a379243_hik.png" alt="Distribuidor Autorizado Hikvision" class="hikvision-img">
-                </div>
-                <div class="hikvision-content-col">
-                    <h2 class="hikvision-title"><span class="hikvision-highlight">Efecinco</span> es Distribuidor Autorizado de <span class="hikvision-hik">Hikvision</span></h2>
-                    <p class="hikvision-desc">En Efecinco, seguimos comprometidos con tu seguridad y tranquilidad. Por eso, nos enorgullece anunciar que somos <b>Distribuidores Autorizados de Hikvision</b>, líder mundial en soluciones de videovigilancia y sistemas de seguridad inteligente.</p>
-                    <ul class="hikvision-list">
-                        <li>Cámaras de alta definición</li>
-                        <li>Sistemas de control de acceso</li>
-                        <li>Videograbadoras NVR/DVR</li>
-                        <li>Soluciones térmicas e inteligentes</li>
-                        <li>Asesoría, instalación y soporte técnico especializado</li>
-                    </ul>
-                    <div class="hikvision-confia">Confía en los expertos. Confía en <b>Efecinco</b> y en la calidad que solo <b>Hikvision</b> puede ofrecer.</div>
                 </div>
             </div>
         </section>
