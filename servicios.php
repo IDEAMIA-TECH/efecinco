@@ -31,10 +31,7 @@ $servicios = $resultado->fetch_all(MYSQLI_ASSOC);
                     </div>
                     <h1>Nuestros Servicios</h1>
                     <p>Soluciones integrales en seguridad y tecnología para tu empresa</p>
-                    <div class="cta-buttons">
-                        <a href="contacto.php" class="btn btn-primary">Contáctanos</a>
-                        <a href="contacto.php" class="btn btn-secondary">Solicita una cotización</a>
-                    </div>
+                   
                 </div>
             </div>
         </section>
