@@ -147,7 +147,7 @@ $captcha_respuesta = $num1 + $num2;
                             <i class="fas fa-map-marker-alt"></i>
                             <div>
                                 <h3>Dirección</h3>
-                                <p>Av. Principal #123, Ciudad</p>
+                                <p>Sandías 1153B, La Tuzania, 44150 Zapopan, Jal.</p>
                             </div>
                         </div>
 
@@ -155,7 +155,7 @@ $captcha_respuesta = $num1 + $num2;
                             <i class="fas fa-phone"></i>
                             <div>
                                 <h3>Teléfono</h3>
-                                <p>+123 456 7890</p>
+                                <p>+52 33 3146 2579</p>
                             </div>
                         </div>
 
@@ -163,7 +163,7 @@ $captcha_respuesta = $num1 + $num2;
                             <i class="fas fa-envelope"></i>
                             <div>
                                 <h3>Email</h3>
-                                <p>contacto@efecinco.com</p>
+                                <p>ventas@efecinco.com</p>
                             </div>
                         </div>
 
@@ -172,7 +172,7 @@ $captcha_respuesta = $num1 + $num2;
                             <div>
                                 <h3>Horario de atención</h3>
                                 <p>Lunes a Viernes: 9:00 - 18:00</p>
-                                <p>Sábados: 9:00 - 13:00</p>
+                                <p>Sábados: 9:00 - 12:00</p>
                             </div>
                         </div>
 
