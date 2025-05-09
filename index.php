@@ -61,7 +61,7 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
                         <p>Nos enfocamos a dar siempre los mejores resultados, con soluciones que generen la seguridad que necesitas.</p>
                     </div>
                     <div class="caracteristica-item">
-                        <i class="fas fa-shield-alt"></i>
+                        <img src="assets/images/confianza.png" alt="Confianza y Seguridad" style="width:48px; height:auto; margin-bottom:20px;">
                         <h3>Confianza y Seguridad</h3>
                         <p>Buscamos que siempre te sientas seguro de vivir o trabajar con instalaciones eficientes con profesionalismo.</p>
                     </div>
