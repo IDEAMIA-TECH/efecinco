@@ -350,6 +350,40 @@ include('includes/header.php');
                 grid-template-columns: 1fr;
             }
         }
+
+        .hero-logo-wrapper {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255,255,255,0.95);
+            border-radius: 50%;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0,114,255,0.25), 0 2px 8px rgba(0,180,219,0.15);
+            border: 4px solid #00B4DB;
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: logo-glow 2s infinite alternate;
+            max-width: 320px;
+            margin: 0 auto 30px auto;
+        }
+        .hero-logo {
+            max-width: 180px;
+            max-height: 180px;
+            width: auto;
+            height: auto;
+            display: block;
+            border-radius: 0;
+            box-shadow: none;
+            background: none;
+            padding: 0;
+        }
+        @keyframes logo-glow {
+            from {
+                box-shadow: 0 8px 32px rgba(0,114,255,0.25), 0 2px 8px rgba(0,180,219,0.15);
+            }
+            to {
+                box-shadow: 0 0 40px 10px #00B4DB, 0 2px 8px rgba(0,180,219,0.25);
+            }
+        }
     </style>
 </body>
 </html> 
