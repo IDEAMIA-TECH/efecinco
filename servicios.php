@@ -223,6 +223,20 @@ $servicios = $resultado->fetch_all(MYSQLI_ASSOC);
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .servicio-icono img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 10px;
+            background: #fff;
+            box-shadow: 0 2px 8px rgba(44,62,80,0.08);
+            display: block;
         }
 
         .servicio-icono::before {
