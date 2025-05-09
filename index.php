@@ -257,6 +257,27 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
             </div>
         </section>
 
+        <!-- Sección Promocional Hikvision -->
+        <section class="hikvision-promo">
+            <div class="container hikvision-flex">
+                <div class="hikvision-img-col">
+                    <img src="assets/images/certificaciones/681e74a379243_hik.png" alt="Distribuidor Autorizado Hikvision" class="hikvision-img">
+                </div>
+                <div class="hikvision-content-col">
+                    <h2 class="hikvision-title"><span class="hikvision-highlight">Efecinco</span> es Distribuidor Autorizado de <span class="hikvision-hik">Hikvision</span></h2>
+                    <p class="hikvision-desc">En Efecinco, seguimos comprometidos con tu seguridad y tranquilidad. Por eso, nos enorgullece anunciar que somos <b>Distribuidores Autorizados de Hikvision</b>, líder mundial en soluciones de videovigilancia y sistemas de seguridad inteligente.</p>
+                    <ul class="hikvision-list">
+                        <li>Cámaras de alta definición</li>
+                        <li>Sistemas de control de acceso</li>
+                        <li>Videograbadoras NVR/DVR</li>
+                        <li>Soluciones térmicas e inteligentes</li>
+                        <li>Asesoría, instalación y soporte técnico especializado</li>
+                    </ul>
+                    <div class="hikvision-confia">Confía en los expertos. Confía en <b>Efecinco</b> y en la calidad que solo <b>Hikvision</b> puede ofrecer.</div>
+                </div>
+            </div>
+        </section>
+
         <section class="nuestros-clientes">
             <div class="container">
                 <h2>Nuestros Clientes</h2>
@@ -913,6 +934,104 @@ $clientes = $resultado->fetch_all(MYSQLI_ASSOC);
     }
     .proyecto-link:hover {
         text-decoration: none;
+    }
+    .hikvision-promo {
+        background: linear-gradient(90deg, #fff 60%, #e3f0fa 100%);
+        padding: 70px 0 70px 0;
+        margin: 60px 0 0 0;
+        box-shadow: 0 8px 32px rgba(0,114,255,0.08);
+        position: relative;
+        z-index: 2;
+    }
+    .hikvision-flex {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        gap: 50px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    .hikvision-img-col {
+        flex: 1 1 320px;
+        text-align: center;
+    }
+    .hikvision-img {
+        max-width: 320px;
+        width: 100%;
+        height: auto;
+        filter: drop-shadow(0 8px 32px rgba(0,114,255,0.13));
+        transition: transform 0.3s;
+    }
+    .hikvision-img:hover {
+        transform: scale(1.05) rotate(-2deg);
+    }
+    .hikvision-content-col {
+        flex: 2 1 400px;
+        color: #222;
+    }
+    .hikvision-title {
+        font-size: 2.3rem;
+        font-weight: 800;
+        color: #d32f2f;
+        margin-bottom: 18px;
+        letter-spacing: 1px;
+        text-shadow: 0 2px 8px rgba(0,114,255,0.08);
+    }
+    .hikvision-highlight {
+        color: #0072ff;
+        font-weight: 900;
+    }
+    .hikvision-hik {
+        color: #d32f2f;
+        font-weight: 900;
+    }
+    .hikvision-desc {
+        font-size: 1.15rem;
+        margin-bottom: 18px;
+        color: #333;
+    }
+    .hikvision-list {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 18px 0;
+    }
+    .hikvision-list li {
+        font-size: 1.1rem;
+        margin-bottom: 8px;
+        padding-left: 1.5em;
+        position: relative;
+    }
+    .hikvision-list li::before {
+        content: '\f058';
+        font-family: 'Font Awesome 6 Free';
+        font-weight: 900;
+        color: #00B4DB;
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+    .hikvision-confia {
+        margin-top: 20px;
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: #0072ff;
+        background: #e3f0fa;
+        padding: 18px 24px;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0,114,255,0.08);
+    }
+    @media (max-width: 900px) {
+        .hikvision-flex {
+            flex-direction: column;
+            gap: 30px;
+        }
+        .hikvision-img-col, .hikvision-content-col {
+            flex: 1 1 100%;
+        }
+        .hikvision-title {
+            font-size: 1.5rem;
+        }
     }
     </style>
 
