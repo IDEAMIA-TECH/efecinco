@@ -77,10 +77,18 @@ $captcha_respuesta = $num1 + $num2;
     <?php include('includes/header.php'); ?>
 
     <main>
-        <section class="hero">
+       
+
+        <section class="hero" style="background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1520869562399-e772f042f422?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80') no-repeat center center; background-size: cover;">
             <div class="container">
-                <h1>Contacto</h1>
+                <div class="hero-content">
+                    <div class="hero-logo-wrapper">
+                        <img src="assets/images/logof5.png" alt="Logo F5" class="hero-logo">
+                    </div>
+                    <h1>Contacto</h1>
                 <p>Estamos aquí para ayudarte. Envíanos un mensaje y nos pondremos en contacto contigo.</p>
+                   
+                </div>
             </div>
         </section>
 
@@ -355,6 +363,39 @@ $captcha_respuesta = $num1 + $num2;
 
             .hero h1 {
                 font-size: 2.5rem;
+            }
+        }
+        .hero-logo-wrapper {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255,255,255,0.95);
+            border-radius: 50%;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0,114,255,0.25), 0 2px 8px rgba(0,180,219,0.15);
+            border: 4px solid #00B4DB;
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: logo-glow 2s infinite alternate;
+            max-width: 320px;
+            margin: 0 auto 30px auto;
+        }
+        .hero-logo {
+            max-width: 180px;
+            max-height: 180px;
+            width: auto;
+            height: auto;
+            display: block;
+            border-radius: 0;
+            box-shadow: none;
+            background: none;
+            padding: 0;
+        }
+        @keyframes logo-glow {
+            from {
+                box-shadow: 0 8px 32px rgba(0,114,255,0.25), 0 2px 8px rgba(0,180,219,0.15);
+            }
+            to {
+                box-shadow: 0 0 40px 10px #00B4DB, 0 2px 8px rgba(0,180,219,0.25);
             }
         }
     </style>
