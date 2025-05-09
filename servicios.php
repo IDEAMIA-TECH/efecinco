@@ -23,11 +23,14 @@ $servicios = $resultado->fetch_all(MYSQLI_ASSOC);
     <main>
         <section class="hero">
             <div class="container">
+                <div class="hero-logo-wrapper">
+                    <img src="assets/images/logof5.png" alt="Logo F5" class="hero-logo">
+                </div>
                 <h1>Nuestros Servicios</h1>
                 <p>Soluciones integrales en seguridad y tecnología para tu empresa</p>
             </div>
             <div class="hero-icon">
-                <i class="fas fa-shield-alt"></i>
+                <!-- Logo reemplaza el icono -->
             </div>
         </section>
 
@@ -172,6 +175,15 @@ $servicios = $resultado->fetch_all(MYSQLI_ASSOC);
             text-align: center;
             padding: 100px 0;
             overflow: hidden;
+        }
+
+        .hero-logo-wrapper {
+            margin-bottom: 20px;
+        }
+
+        .hero-logo {
+            width: 100px;
+            height: auto;
         }
 
         .hero-icon {
